@@ -3,8 +3,8 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>MHI PAPER — Laporan Harian Produksi · Kepala Produksi · Admin · Operator</title>
-<meta name="description" content="Laporan harian produksi kertas ECG/EKG dengan tiga hak akses dan diagnosa login Supabase built-in.">
+<title>MHI PAPER — Laporan Harian Produksi · Kepala · Admin · Operator</title>
+<meta name="description" content="Laporan harian produksi kertas ECG/EKG dengan tiga hak akses, manajemen pengguna tanpa CLI, dan diagnosa Supabase built-in.">
 <meta name="theme-color" content="#D6403C">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23D6403C'/%3E%3Cpolyline points='4 12 8 12 10 6 13 18 15 12 20 12' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -48,7 +48,7 @@ input,select,textarea{font-family:inherit}
 .ic{display:inline-block;vertical-align:-2px;flex:none}
 .wrap{max-width:1300px;margin:0 auto;padding:0 20px}
 b,strong{font-weight:600}
-/* ===== LOGIN ===== */
+code{font-family:var(--font-mono);font-size:.92em;background:rgba(35,39,51,.06);padding:1px 5px;border-radius:4px}
 #loginScreen{display:none;min-height:100vh;grid-template-columns:1.05fr .95fr}
 body[data-view="login"] #loginScreen{display:grid}
 .lg-monitor{position:relative;background:linear-gradient(155deg,#1B1F29 0%,#15181F 45%,#221A1E 100%);color:#F3E9DC;overflow:hidden;display:flex}
@@ -95,7 +95,7 @@ body[data-view="login"] #loginScreen{display:grid}
 .conn-strip .cs-t{flex:1;min-width:0;line-height:1.35}
 .conn-strip .cs-t b{display:block;font:600 11.5px var(--font-body)}
 .conn-strip .cs-t small{font:500 9.5px var(--font-mono);color:var(--ink-2);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.conn-strip button{font:600 10px var(--font-mono);letter-spacing:.06em;padding:5px 9px;border-radius:7px;border:1.5px solid var(--line-strong);background:#fff;color:var(--ink-2);flex:none}
+.conn-strip button{font:600 10px var(--font-mono);padding:5px 9px;border-radius:7px;border:1.5px solid var(--line-strong);background:#fff;color:var(--ink-2);flex:none}
 .conn-strip button:hover{border-color:var(--red);color:var(--red-deep)}
 .lg-modes{display:flex;gap:4px;background:var(--surface-2);border:1px solid var(--line-strong);border-radius:10px;padding:3px;margin-bottom:13px}
 .lg-modes button{flex:1;padding:7px 10px;border-radius:7px;font:600 11.5px var(--font-body);color:var(--ink-2);transition:.15s}
@@ -111,7 +111,6 @@ body[data-view="login"] #loginScreen{display:grid}
 .email-preview b{font-family:var(--font-mono);font-size:11.5px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .email-preview small{font:500 9px var(--font-mono);letter-spacing:.08em;color:#4A7FC4}
 .email-preview button{flex:none;font:600 9.5px var(--font-mono);padding:4px 8px;border-radius:6px;border:1px solid #C6DAF4;background:#fff;color:#1D539E}
-.email-preview button:hover{background:#F2F7FD}
 .dom-chips{display:flex;gap:5px;flex-wrap:wrap;margin-top:-4px}
 .dom-chips button{font:500 10px var(--font-mono);padding:4px 9px;border-radius:99px;border:1px dashed var(--line-strong);background:#fff;color:var(--ink-2)}
 .dom-chips button:hover{border-color:var(--blue);color:#1D539E;border-style:solid}
@@ -127,8 +126,8 @@ body[data-view="login"] #loginScreen{display:grid}
 .diag-head{display:flex;align-items:center;gap:8px;padding:9px 12px;border-bottom:1px dashed var(--line-strong);font:600 10px var(--font-mono);letter-spacing:.12em;color:var(--ink-2)}
 .diag-head .ic{color:var(--plum)}
 .diag-head button{margin-left:auto;font:600 10px var(--font-mono);color:var(--ink-3)}
-.diag-body{padding:10px 12px;display:flex;flex-direction:column;gap:7px;max-height:290px;overflow-y:auto}
-.dg{display:flex;gap:9px;align-items:flex-start;font-size:11.5px;padding:7px 9px;border-radius:8px;background:#fff;border:1px solid var(--line)}
+.diag-body{padding:10px 12px;display:flex;flex-direction:column;gap:7px;max-height:340px;overflow-y:auto}
+.dg{display:flex;gap:9px;align-items:flex-start;font-size:11.5px;padding:8px 10px;border-radius:8px;background:#fff;border:1px solid var(--line)}
 .dg .dg-ic{width:20px;height:20px;border-radius:6px;display:grid;place-items:center;flex:none;margin-top:1px}
 .dg.ok .dg-ic{background:var(--green-soft);color:var(--green)}
 .dg.bad .dg-ic{background:var(--red-soft);color:var(--red-deep)}
@@ -139,8 +138,12 @@ body[data-view="login"] #loginScreen{display:grid}
 .dg-t{flex:1;min-width:0;line-height:1.45}
 .dg-t b{display:block;font-size:11.5px}
 .dg-t small{display:block;font:500 10px var(--font-mono);color:var(--ink-3);margin-top:2px;word-break:break-word}
-.dg-t .fix{display:block;font-size:11px;color:#1D539E;background:var(--blue-soft);border:1px solid #C6DAF4;border-radius:6px;padding:6px 8px;margin-top:6px;line-height:1.5}
-.dg-t .fix code{font-family:var(--font-mono);font-size:10.5px;background:#fff;padding:1px 4px;border-radius:3px}
+.dg-t .fix{display:block;font-size:11px;color:#1D539E;background:var(--blue-soft);border:1px solid #C6DAF4;border-radius:6px;padding:7px 9px;margin-top:6px;line-height:1.55}
+.sqlbox{margin-top:7px;border:1px solid var(--line-strong);border-radius:8px;overflow:hidden;background:#1B1F29}
+.sqlbox .sb-head{display:flex;align-items:center;gap:7px;padding:6px 9px;background:#242A35;font:600 9px var(--font-mono);letter-spacing:.1em;color:#9BA1B0}
+.sqlbox .sb-head button{margin-left:auto;font:600 9.5px var(--font-mono);color:#FFD9D6;background:rgba(255,255,255,.12);padding:3px 9px;border-radius:6px}
+.sqlbox .sb-head button:hover{background:rgba(255,255,255,.22)}
+.sqlbox pre{margin:0;padding:9px 10px;font:500 10.5px/1.6 var(--font-mono);color:#D8E2F0;white-space:pre-wrap;word-break:break-word;max-height:190px;overflow:auto}
 .lg-quick{margin-top:15px;padding-top:14px;border-top:1px dashed var(--line-strong)}
 .lgq-title{font:600 9px var(--font-mono);letter-spacing:.15em;color:var(--ink-3);margin-bottom:8px}
 .lgq-row{display:flex;gap:6px;flex-wrap:wrap}
@@ -153,7 +156,6 @@ body[data-view="login"] #loginScreen{display:grid}
 .lg-fallback{display:flex;gap:7px;margin-top:14px;flex-wrap:wrap}
 .lg-fallback .btn{flex:1 1 auto}
 .lg-foot{margin-top:12px;text-align:center;font:500 9px var(--font-mono);letter-spacing:.14em;color:var(--ink-3);text-transform:uppercase}
-/* ===== TOPBAR ===== */
 .topbar{position:fixed;top:0;left:0;right:0;height:var(--topbar-h);z-index:50;background:rgba(255,252,247,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-strong);box-shadow:0 1px 0 rgba(214,64,60,.15),0 6px 20px rgba(80,55,25,.07)}
 .topbar::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--amber) 35%,var(--blue) 70%,var(--plum))}
 .topbar-in{height:100%;display:flex;align-items:center;gap:14px}
@@ -181,7 +183,7 @@ body[data-view="login"] #loginScreen{display:grid}
 .ub-t{text-align:left;line-height:1.15}
 .ub-t b{font-size:12.5px;display:block}
 .ub-t small{font:600 9px var(--font-mono);letter-spacing:.08em;text-transform:uppercase}
-.user-menu{position:absolute;top:calc(100% + 9px);right:0;width:250px;background:var(--surface);border:1px solid var(--line-strong);border-radius:12px;box-shadow:0 18px 44px rgba(35,30,25,.22);padding:7px;z-index:60;animation:slideIn .18s ease}
+.user-menu{position:absolute;top:calc(100% + 9px);right:0;width:252px;background:var(--surface);border:1px solid var(--line-strong);border-radius:12px;box-shadow:0 18px 44px rgba(35,30,25,.22);padding:7px;z-index:60;animation:slideIn .18s ease}
 .ume-head{padding:9px 11px 11px;border-bottom:1px dashed var(--line);margin-bottom:5px}
 .ume-head b{display:block;font-size:13.5px}
 .ume-head small{font:500 10px var(--font-mono);color:var(--ink-3);display:block;margin-top:2px}
@@ -437,6 +439,7 @@ input[type="checkbox"]{width:16px;height:16px;accent-color:var(--red);cursor:poi
 .question-card small{color:var(--ink-3);font-size:12px}
 #agendaSeg button.active{color:var(--plum)}
 .d-note{display:flex;gap:9px;align-items:flex-start;padding:13px 15px;border-radius:10px;background:var(--blue-soft);border:1px solid #C6DAF4;color:#1D539E;font-size:12.5px;line-height:1.5}
+.d-note.warn{background:var(--amber-soft);border-color:#EFD3A0;color:#8A5A08}
 .badge{display:inline-flex;align-items:center;gap:5px;font:600 10.5px var(--font-body);padding:3px 9px;border-radius:99px;white-space:nowrap}
 .b-pack{background:var(--red-soft);color:var(--red-deep);border:1px solid #F0C9C5}
 .b-roll{background:var(--blue-soft);color:#1D539E;border:1px solid #C6DAF4}
@@ -517,6 +520,10 @@ input[type="checkbox"]{width:16px;height:16px;accent-color:var(--red);cursor:poi
 .chip-x{display:inline-grid;place-items:center;width:16px;height:16px;border-radius:50%;margin-left:2px;color:inherit;opacity:.6}
 .chip-x:hover{opacity:1;background:rgba(0,0,0,.12)}
 .tb-spacer{flex:1}
+.prov-chip{display:inline-flex;align-items:center;gap:6px;font:600 9.5px var(--font-mono);letter-spacing:.08em;padding:5px 10px;border-radius:99px;border:1.5px solid var(--pv-b);background:var(--pv-s);color:var(--pv-c)}
+.prov-chip.fn{--pv-b:#BFE6D6;--pv-s:var(--green-soft);--pv-c:#0B6E50}
+.prov-chip.direct{--pv-b:#C6DAF4;--pv-s:var(--blue-soft);--pv-c:#1D539E}
+.prov-chip.unknown{--pv-b:#EFD3A0;--pv-s:var(--amber-soft);--pv-c:#B26F05}
 .bulk-bar{display:flex;align-items:center;gap:12px;flex-wrap:wrap;margin-top:14px;padding:10px 15px;background:var(--blue-soft);border:1.5px solid #C6DAF4;border-radius:11px;font-size:13px;color:#1D539E;animation:slideIn .25s ease}
 .bb-actions{display:flex;gap:8px;margin-left:auto;flex-wrap:wrap}
 .table-card{margin-top:14px;padding:0;overflow:auto;animation:fadeUp .5s .2s ease both}
@@ -555,7 +562,7 @@ input[type="checkbox"]{width:16px;height:16px;accent-color:var(--red);cursor:poi
 .empty{padding:56px 20px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:10px}
 .empty .flatline{width:min(320px,80%);height:44px}
 .empty h3{font:700 16px var(--font-body)}
-.empty p{color:var(--ink-3);font-size:12.5px;max-width:400px}
+.empty p{color:var(--ink-3);font-size:12.5px;max-width:420px}
 .empty-btns{display:flex;gap:9px;margin-top:8px;flex-wrap:wrap;justify-content:center}
 .v-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(340px,1fr));gap:14px;margin-top:14px}
 .v-card{background:var(--surface);border:1.5px solid var(--line);border-left:4px solid var(--vc,var(--amber));border-radius:12px;padding:15px;box-shadow:var(--shadow);animation:fadeUp .4s ease both;display:flex;flex-direction:column;gap:11px;transition:.15s}
@@ -768,15 +775,16 @@ input[type="checkbox"]{width:16px;height:16px;accent-color:var(--red);cursor:poi
 .modal-wrap{position:fixed;inset:0;z-index:110;display:none;align-items:center;justify-content:center;background:rgba(35,30,25,.5);backdrop-filter:blur(3px);padding:20px;overflow-y:auto}
 .modal-wrap.show{display:flex}
 .modal{width:440px;max-width:100%;background:var(--surface);border-radius:14px;padding:22px;box-shadow:0 24px 64px rgba(35,30,25,.4);animation:pop .22s cubic-bezier(.2,.8,.2,1);border-top:4px solid var(--red);max-height:92vh;overflow-y:auto}
-.modal-wide{width:580px;border-top-color:var(--blue)}
+.modal-wide{width:600px;border-top-color:var(--blue)}
 .modal h3{font:700 16.5px var(--font-body);margin-bottom:7px}
 .modal p{font-size:12.5px;color:var(--ink-2);line-height:1.55}
 .modal-input{margin-top:13px}
 .modal-input label{display:block;margin-bottom:5px}
 .modal-btns{display:flex;gap:9px;justify-content:flex-end;margin-top:20px;flex-wrap:wrap}
-.setup-msg{margin-top:13px;padding:10px 12px;border-radius:9px;font-size:12px;line-height:1.5;background:var(--blue-soft);border:1px solid #C6DAF4;color:#1D539E}
+.setup-msg{margin-top:13px;padding:10px 12px;border-radius:9px;font-size:12px;line-height:1.55;background:var(--blue-soft);border:1px solid #C6DAF4;color:#1D539E}
 .setup-msg.err{background:var(--red-soft);border-color:#F0C9C5;color:var(--red-deep)}
 .setup-msg.ok{background:var(--green-soft);border-color:#BFE6D6;color:#0B6E50}
+.setup-msg .raw{display:block;margin-top:7px;font:500 10.5px var(--font-mono);background:rgba(35,39,51,.06);border-radius:6px;padding:6px 8px;word-break:break-word;color:var(--ink-2)}
 .role-pick{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:6px}
 .role-pick button{border:1.5px solid var(--line-strong);background:#fff;border-radius:10px;padding:10px 8px;text-align:center;transition:.15s}
 .role-pick button:hover{border-color:var(--rp)}
@@ -950,7 +958,7 @@ html{scroll-behavior:auto}}
         <div><b>MHI PAPER</b><small>PRODUKSI KERTAS ECG / EKG &amp; PLAIN</small></div>
       </div>
       <h1 class="mon-title">TIGA PERAN,<br>SATU <em>DATA PABRIK</em></h1>
-      <p class="mon-sub">Gagal masuk? Aplikasi ini menampilkan email persis yang dikirim ke Supabase dan menjalankan diagnosa langkah demi langkah — jadi penyebabnya terlihat, bukan ditebak.</p>
+      <p class="mon-sub">Kepala produksi menambah pengguna langsung dari aplikasi — tanpa CLI. Bila Edge Function belum ada, aplikasi memakai jalur RLS dan menampilkan error Supabase apa adanya.</p>
       <svg class="mon-ecg" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
         <path id="ecgLoginBase" class="base" fill="none" d="M0 60 L1200 60"/>
         <path id="ecgLoginRun" class="run" fill="none" pathLength="1000" d="M0 60 L1200 60"/>
@@ -962,7 +970,7 @@ html{scroll-behavior:auto}}
       </div>
       <div class="mon-foot">
         <span class="mode-chip" id="lgMode">MODE LOKAL</span>
-        <span class="mono sm">FORM LH-ECG-01 · REV. 09 · DIAGNOSA LOGIN</span>
+        <span class="mono sm">FORM LH-ECG-01 · REV. 10 · PROVISIONING</span>
       </div>
     </div>
   </div>
@@ -972,18 +980,15 @@ html{scroll-behavior:auto}}
         <span class="step">01</span>
         <div><h2>Masuk ke Sistem</h2><p>Menu menyesuaikan hak akses akun Anda.</p></div>
       </div>
-
       <div class="conn-strip local" id="connStrip">
         <span data-ic="building" data-sz="15"></span>
         <div class="cs-t"><b id="csTitle">Mode Lokal</b><small id="csSub">Data di perangkat ini saja</small></div>
         <button type="button" data-act="open-setup">Ubah</button>
       </div>
-
       <div class="lg-modes" id="lgModes" hidden>
         <button type="button" class="on" data-act="login-mode" data-mode="kode">Kode Akun</button>
         <button type="button" data-act="login-mode" data-mode="email">Email Lengkap</button>
       </div>
-
       <form id="loginForm" novalidate autocomplete="off">
         <div class="field" id="lgKodeField">
           <label for="lgKode">Akun Pengguna <b class="req">*</b></label>
@@ -1011,18 +1016,16 @@ html{scroll-behavior:auto}}
         <div class="lg-err" id="lgErr" hidden>
           <b id="lgErrTitle">Gagal masuk</b><span id="lgErrMsg"></span>
           <div class="err-acts">
-            <button type="button" data-act="diag-run"><span data-ic="activity" data-sz="12"></span> Diagnosa Sekarang</button>
+            <button type="button" data-act="diag-run"><span data-ic="activity" data-sz="12"></span> Diagnosa Login</button>
             <button type="button" data-act="trim-pass"><span data-ic="rotate" data-sz="12"></span> Hapus Spasi Sandi</button>
           </div>
         </div>
         <button type="submit" class="btn btn-primary btn-block" id="lgSubmit">Masuk <span data-ic="arrowRight" data-sz="15"></span></button>
       </form>
-
       <div class="diag" id="lgDiag" hidden>
         <div class="diag-head"><span data-ic="activity" data-sz="13"></span> DIAGNOSA LOGIN<button type="button" data-act="diag-close">Tutup</button></div>
         <div class="diag-body" id="lgDiagBody"></div>
       </div>
-
       <div class="lg-quick" id="lgQuick">
         <div class="lgq-title">COBA TIAP PERAN · SATU KLIK</div>
         <div class="lgq-row">
@@ -1032,7 +1035,6 @@ html{scroll-behavior:auto}}
         </div>
         <p class="lgq-note">Sandi demo <b>mhi2026</b>. Mode lokal selalu bisa dipakai walau Supabase belum siap.</p>
       </div>
-
       <div class="lg-fallback">
         <button class="btn btn-ghost btn-sm" data-act="use-local" id="lgLocalBtn"><span data-ic="undo" data-sz="13"></span> Pakai Mode Lokal</button>
         <button class="btn btn-ghost btn-sm" data-act="open-setup"><span data-ic="building" data-sz="13"></span> Koneksi Cloud</button>
@@ -1063,6 +1065,7 @@ html{scroll-behavior:auto}}
           <div class="ume-head"><b id="umeName">—</b><small id="umeMeta">—</small><div id="umeBadge" style="margin-top:7px"></div></div>
           <button class="ume-item" data-act="nav" data-nav="history"><span data-ic="barChart" data-sz="15"></span> Riwayat &amp; Rekap</button>
           <button class="ume-item" data-act="nav" data-nav="users" id="umeUsers"><span data-ic="userPlus" data-sz="15"></span> Manajemen Pengguna</button>
+          <button class="ume-item" data-act="my-pass"><span data-ic="key" data-sz="15"></span> Ganti Sandi Saya</button>
           <button class="ume-item" data-act="open-setup"><span data-ic="building" data-sz="15"></span> Koneksi Data</button>
           <button class="ume-item danger" data-act="logout"><span data-ic="logout" data-sz="15"></span> Keluar</button>
         </div>
@@ -1075,7 +1078,7 @@ html{scroll-behavior:auto}}
 
 <section id="view-form" class="view" aria-label="Identitas laporan">
   <div class="hero">
-    <div class="hero-top"><span>FORM LH-ECG-01 · REV. 09</span><span class="live"><i class="dot"></i><span id="shiftLive">SHIFT BERJALAN</span></span></div>
+    <div class="hero-top"><span>FORM LH-ECG-01 · REV. 10</span><span class="live"><i class="dot"></i><span id="shiftLive">SHIFT BERJALAN</span></span></div>
     <h1 class="hero-title">Laporan Harian <em>Produksi</em></h1>
     <svg class="ecg" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true"><path id="ecgBaseF" class="base" fill="none" d="M0 32 L1200 32"/><path id="ecgRunF" class="run" fill="none" pathLength="1000" d="M0 32 L1200 32"/></svg>
   </div>
@@ -1317,17 +1320,29 @@ html{scroll-behavior:auto}}
     <svg class="ecg" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true"><path id="ecgBaseU" class="base" fill="none" d="M0 32 L1200 32"/><path id="ecgRunU" class="run" fill="none" pathLength="1000" d="M0 32 L1200 32"/></svg>
   </div>
   <div class="stats-grid" id="usersStats"></div>
-  <div class="card toolbar"><div class="tb-row">
-    <div class="chips" id="uTabs"><button class="chip active" data-act="utab" data-tab="pengguna">Daftar Pengguna <span class="cnt" id="uCnt">0</span></button><button class="chip" data-act="utab" data-tab="akses"><span data-ic="shield" data-sz="11"></span> Matriks Hak Akses</button><button class="chip" data-act="utab" data-tab="audit">Audit Log</button></div>
-    <span class="tb-spacer"></span>
-    <div class="search-wrap" id="uSearchWrap" style="max-width:250px"><span data-ic="search" data-sz="15"></span><input id="u-q" class="inp" type="search" placeholder="Cari nama / kode / mesin…" aria-label="Cari pengguna"></div>
-    <button class="btn btn-primary btn-sm" data-act="user-add" id="uAddBtn"><span data-ic="userPlus" data-sz="14"></span> Tambah Pengguna</button>
-  </div></div>
+  <div class="card toolbar">
+    <div class="tb-row">
+      <div class="chips" id="uTabs">
+        <button class="chip active" data-act="utab" data-tab="pengguna">Daftar Pengguna <span class="cnt" id="uCnt">0</span></button>
+        <button class="chip" data-act="utab" data-tab="akses"><span data-ic="shield" data-sz="11"></span> Matriks Hak Akses</button>
+        <button class="chip" data-act="utab" data-tab="diagnosa"><span data-ic="activity" data-sz="11"></span> Diagnosa</button>
+        <button class="chip" data-act="utab" data-tab="audit">Audit Log</button>
+      </div>
+      <span class="tb-spacer"></span>
+      <span class="prov-chip unknown" id="provChip"><span data-ic="info" data-sz="11"></span> <span id="provLbl">MEMERIKSA…</span></span>
+      <div class="search-wrap" id="uSearchWrap" style="max-width:230px"><span data-ic="search" data-sz="15"></span><input id="u-q" class="inp" type="search" placeholder="Cari nama / kode / mesin…" aria-label="Cari pengguna"></div>
+      <button class="btn btn-primary btn-sm" data-act="user-add" id="uAddBtn"><span data-ic="userPlus" data-sz="14"></span> Tambah Pengguna</button>
+    </div>
+  </div>
   <div id="uPaneUsers" class="u-grid"></div>
   <div id="uEmpty" class="card empty" hidden></div>
   <div id="uPaneAkses" class="card sect" hidden>
     <header class="card-head"><span class="step" style="background:var(--red-deep)"><span data-ic="shield" data-sz="15"></span></span><div><h2>Matriks Hak Akses</h2><p>Ditegakkan di tampilan dan di lapisan data.</p></div></header>
     <div class="card-body" id="mxBody"></div>
+  </div>
+  <div id="uPaneDiag" class="card sect" hidden>
+    <header class="card-head"><span class="step" style="background:var(--plum)"><span data-ic="activity" data-sz="15"></span></span><div><h2>Diagnosa Sistem Akun</h2><p>Memeriksa Edge Function, policy RLS, dan pengaturan Auth — menampilkan pesan Supabase asli.</p></div><button class="btn btn-primary btn-sm" data-act="acct-diag" id="acctDiagBtn" style="margin-left:auto"><span data-ic="rotate" data-sz="14"></span> Jalankan Diagnosa</button></header>
+    <div class="card-body"><div class="diag-body" id="acctDiagBody" style="max-height:none;padding:0"></div></div>
   </div>
   <div id="uPaneAudit" class="card sect" hidden>
     <header class="card-head"><span class="step" style="background:var(--ink-2)">A</span><div><h2>Audit Log</h2><p>Rekam jejak perubahan — siapa, kapan, dan apa.</p></div></header>
@@ -1378,15 +1393,80 @@ html{scroll-behavior:auto}}
   <div class="modal-btns"><button class="btn btn-ghost" data-act="user-cancel">Batal</button><button class="btn btn-primary" data-act="user-save" id="uuSave">Simpan Pengguna</button></div>
 </div></div>
 
+<div class="modal-wrap" id="passWrap"><div class="modal" role="dialog" aria-modal="true">
+  <h3 id="pwTitle">Reset Kata Sandi</h3>
+  <p id="pwSub"></p>
+  <div class="modal-input" id="pwOldWrap" hidden><label for="pwOld">Sandi Saat Ini <span class="opt">DIBUTUHKAN TANPA EDGE FUNCTION</span></label><input id="pwOld" type="password" class="inp mono" placeholder="sandi lama akun ini"></div>
+  <div class="modal-input"><label for="pwNew">Kata Sandi Baru <b class="req">*</b></label><input id="pwNew" type="text" class="inp mono" placeholder="min. 6 karakter"></div>
+  <div class="setup-msg" id="pwMsg" hidden></div>
+  <div class="modal-btns"><button class="btn btn-ghost" data-act="pass-cancel">Batal</button><button class="btn btn-primary" data-act="pass-save" id="pwSave">Simpan Sandi</button></div>
+</div></div>
+
 <div id="printArea"></div>
 
 <script>
 'use strict';
 /* ══════════════════════════════════════════════════════════════
-   KONFIGURASI CLOUD — kosongkan = mode lokal (10 akun demo siap pakai)
+   KONFIGURASI CLOUD — kosongkan = mode lokal (10 akun demo)
    ══════════════════════════════════════════════════════════════ */
 const CONFIG={SUPABASE_URL:'https://ooqnifjwbglmpmmpinmo.supabase.co',SUPABASE_ANON_KEY:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9vcW5pZmp3YmdsbXBtbXBpbm1vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTUxNjA1MjgsImV4cCI6MjExMDczNjUyOH0.rbP3cyaJxSbyC-pjALn3vlxXzUB6WIphtP15aZ71ves',EMAIL_DOMAIN:'mhi.local',DEMO_PASSWORD:'mhi2026'};
 const KET_MAX=300;
+
+const SQL_INSERT_POLICY=`-- Jalankan di Supabase → SQL Editor → Run
+-- Mengizinkan kepala produksi membuat baris profil untuk akun baru.
+drop policy if exists profiles_insert on public.profiles;
+create policy profiles_insert on public.profiles
+  for insert to authenticated
+  with check (public.auth_role() = 'kepala');`;
+const SQL_FULL_ACCESS=`-- Paket lengkap: policy tulis profil untuk kepala produksi
+drop policy if exists profiles_insert on public.profiles;
+create policy profiles_insert on public.profiles
+  for insert to authenticated
+  with check (public.auth_role() = 'kepala');
+
+drop policy if exists profiles_update on public.profiles;
+create policy profiles_update on public.profiles
+  for update to authenticated
+  using (public.auth_role() = 'kepala')
+  with check (public.auth_role() = 'kepala');
+
+drop policy if exists profiles_delete on public.profiles;
+create policy profiles_delete on public.profiles
+  for delete to authenticated
+  using (public.auth_role() = 'kepala');`;
+const EDGE_FN_CODE=`// supabase/functions/manage-user/index.ts
+import { createClient } from 'jsr:@supabase/supabase-js@2';
+const cors={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'authorization, x-client-info, apikey, content-type','Access-Control-Allow-Methods':'POST, OPTIONS'};
+const json=(b,s=200)=>new Response(JSON.stringify(b),{status:s,headers:{...cors,'Content-Type':'application/json'}});
+Deno.serve(async(req)=>{
+  if(req.method==='OPTIONS')return new Response('ok',{headers:cors});
+  const adm=createClient(Deno.env.get('SUPABASE_URL')!,Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!,{auth:{autoRefreshToken:false,persistSession:false}});
+  const jwt=(req.headers.get('Authorization')||'').replace('Bearer ','');
+  const {data:{user}}=await adm.auth.getUser(jwt);
+  if(!user)return json({error:'Tidak terautentikasi'},401);
+  const {data:me}=await adm.from('profiles').select('role,aktif').eq('id',user.id).single();
+  if(!me||me.role!=='kepala'||!me.aktif)return json({error:'Hanya kepala produksi'},403);
+  const p=await req.json();
+  if(p.action==='ping')return json({ok:true});
+  if(p.action==='create'){
+    const kode=String(p.kode||'').toLowerCase().trim();
+    const {data,error}=await adm.auth.admin.createUser({email:p.email,password:p.password,email_confirm:true});
+    if(error)return json({error:error.message},400);
+    const {error:e2}=await adm.from('profiles').insert({id:data.user!.id,kode,nama:p.nama,role:p.role,jabatan:p.jabatan||null,mesin:p.mesin||null,warna:p.warna||'#5C6270',aktif:true});
+    if(e2){await adm.auth.admin.deleteUser(data.user!.id);return json({error:e2.message},400)}
+    return json({ok:true,id:data.user!.id});
+  }
+  if(p.action==='reset'){
+    const {error}=await adm.auth.admin.updateUserById(p.id,{password:p.password});
+    return error?json({error:error.message},400):json({ok:true});
+  }
+  if(p.action==='delete'){
+    if(p.id===user.id)return json({error:'Tidak dapat menghapus akun sendiri'},400);
+    const {error}=await adm.auth.admin.deleteUser(p.id);
+    return error?json({error:error.message},400):json({ok:true});
+  }
+  return json({error:'Aksi tidak dikenal'},400);
+});`;
 
 const I={
 activity:'<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>',
@@ -1430,7 +1510,7 @@ shield:'<path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><polyline points=
 lock:'<rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/>',
 logout:'<path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/><polyline points="16 17 21 12 16 7"/><line x1="21" y1="12" x2="9" y2="12"/>',
 sigma:'<path d="M18 7V4H6l6 8-6 8h12v-3"/>',
-wifi:'<path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" y1="20" x2="12.01" y2="20"/>',
+zap:'<polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/>',
 database:'<ellipse cx="12" cy="5" rx="9" ry="3"/><path d="M21 12c0 1.66-4 3-9 3s-9-1.34-9-3"/><path d="M3 5v14c0 1.66 4 3 9 3s9-1.34 9-3V5"/>'
 };
 const icon=(n,s=16)=>`<svg class="ic" width="${s}" height="${s}" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">${I[n]||''}</svg>`;
@@ -1456,6 +1536,7 @@ const autoShift=()=>{const h=new Date().getHours();return h>=8&&h<17?'N1':h>=17&
 const sleep=ms=>new Promise(r=>setTimeout(r,ms));
 const pct=(p,t)=>t>0?Math.round(p/t*100):0;
 const clip=(s,n)=>{s=String(s||'');return s.length>n?s.slice(0,n-1)+'…':s};
+const randUuid=()=>uid().length===36?uid():'00000000-0000-4000-8000-'+String(Math.floor(Math.random()*1e12)).padStart(12,'0');
 
 const JENIS={
 pack:{label:'Produksi Paper Pack',short:'Paper Pack',unit:'pack',icon:'package',cls:'pack',example:'ENDO Paper Pack 210 x 140/180_EIECG12CH'},
@@ -1484,7 +1565,7 @@ const PACK_SEED=['ENDO Paper Pack 210 x 140/180_EIECG12CH','ENDO Paper Pack 210 
 const ROLL_SEED=['ENDO Paper Roll 210 x 25m_Var 12 Ch','ENDO Paper Roll 110 x 20m_Var 3 Ch','Nihon Kohden Paper Roll 210 x 30m_NKECG12CH','Schiller Paper Roll 112 x 20m_SCECG3CH','GE Marquette Paper Roll 210 x 25m_GEECG12CH','Fukuda Paper Roll 110 x 20m_FDECG3CH','Contec Paper Roll 110 x 20m_CTECG3CH'];
 const PEOPLE=[
 {kode:'kepala',nama:'Rajiv',role:'kepala',jabatan:'Kepala Divisi Konversi',mesin:'Manajemen',warna:'#B22F2C'},
-{kode:'admin',nama:'Ratna',role:'admin',jabatan:'Admin Produksi',mesin:'Administrasi',warna:'#236FD6'},
+{kode:'admin',nama:'Nurhayati',role:'admin',jabatan:'Admin Produksi',mesin:'Administrasi',warna:'#236FD6'},
 {kode:'yanto',nama:'Yanto',role:'operator',jabatan:'Operator Mesin Flexo',mesin:'Flexo',warna:'#D6403C'},
 {kode:'sofa',nama:'Sofa',role:'operator',jabatan:'Operator Mesin Slitter 2',mesin:'Slitter 2',warna:'#236FD6'},
 {kode:'dian',nama:'Dian',role:'operator',jabatan:'Operator Mesin Slitter 1',mesin:'Slitter 1',warna:'#129D72'},
@@ -1510,7 +1591,7 @@ const blankAgenda=()=>({key:uid(),kategori:'',deskripsi:'',waktu:''});
 const blankExtra=()=>({key:uid(),waktu:'',keterangan:''});
 const blankForm=()=>({mode:'create',editId:null,operatorId:(S.me&&S.me.role==='operator')?S.me.kode:'',date:todayStr(),shift:autoShift(),jenis:'pack',multi:false,items:[blankItem()],hasAgenda:'ya',agenda:[blankAgenda()],hasExtra:'tidak',extra:[blankExtra()]});
 let S={mode:'local',me:null,view:'login',profiles:[],products:[],reports:[],audit:[],savedViews:[],sound:true,uq:'',
-loginMode:'kode',loginEmail:'',diag:[],diagRunning:false,
+loginMode:'kode',loginEmail:'',diag:[],diagRunning:false,acctDiag:[],acctRunning:false,provMode:'unknown',lastRawError:'',
 filters:{q:'',operator:'all',jenis:'all',status:'all',period:'all',sort:'dateDesc',archived:false},
 selection:new Set(),vSel:new Set(),vTab:'submit',uTab:'pengguna',drawerId:null,highlightId:null,form:null,lastSync:null};
 S.form=blankForm();
@@ -1664,6 +1745,8 @@ const Local={
     this.data.profiles=this.data.profiles.filter(x=>x.id!==id);this.log('DELETE',`Akun @${p.kode} dihapus`);this.save();
   },
   async resetDemo(){this.guard();this.data=this.seed();this.save()},
+  async probeFunction(){return {ok:false,reason:'Mode lokal — Edge Function tidak dipakai.'}},
+  async probeInsertPolicy(){return {ok:true,reason:'Mode lokal — RLS tidak dipakai.'}},
   exportAll(){return this.data}
 };
 
@@ -1671,39 +1754,45 @@ function loadSDK(){
   if(window.supabase&&window.supabase.createClient)return Promise.resolve();
   return new Promise((res,rej)=>{const s=document.createElement('script');
     s.src='https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/dist/umd/supabase.js';
-    s.async=true;s.onload=()=>res();s.onerror=()=>rej(new Error('Gagal memuat Supabase SDK dari CDN. Periksa koneksi internet atau blokir iklan.'));
+    s.async=true;s.onload=()=>res();s.onerror=()=>rej(new Error('Gagal memuat Supabase SDK dari CDN. Periksa koneksi internet atau pemblokir skrip.'));
     document.head.appendChild(s)});
 }
 function mapAuthError(raw,email){
   const m=String((raw&&raw.message)||raw||'');
   if(/invalid login credentials/i.test(m))return{title:'Email atau kata sandi tidak cocok',
-    msg:`Supabase menolak <b>${esc(email)}</b>. Tiga kemungkinan: (1) akun belum dibuat di Authentication, (2) email aslinya berbeda — domain salah, (3) sandi keliru. Supabase sengaja memakai pesan yang sama untuk ketiganya.`,
-    fix:`Buka Supabase → Authentication → Users, cari <code>${esc(email)}</code>. Bila tidak ada, buat user dengan email persis itu + Auto Confirm. Bila ada, reset passwordnya. Atau tekan tab <b>Email Lengkap</b> dan masukkan email aslinya.`};
-  if(/email not confirmed/i.test(m))return{title:'Email belum dikonfirmasi',
-    msg:`Akun <b>${esc(email)}</b> ada, tetapi belum di-confirm.`,
-    fix:`Supabase → Authentication → Providers → Email → matikan <b>Confirm email</b>, lalu di Users klik user → <b>Confirm email</b>. Atau buat ulang user dengan centang Auto Confirm.`};
-  if(/email logins are disabled|provider is not enabled/i.test(m))return{title:'Login Email dimatikan',
-    msg:'Provider Email tidak aktif di proyek Supabase ini.',
-    fix:'Authentication → Providers → Email → aktifkan toggle <b>Enable Email provider</b> → Save.'};
-  if(/signup.*disabled|signups not allowed/i.test(m))return{title:'Pendaftaran ditutup',msg:'Ini normal — akun dibuat manual oleh kepala produksi.',fix:'Buat user lewat Authentication → Users → Add user.'};
-  if(/rate limit|too many requests|429/i.test(m))return{title:'Terlalu banyak percobaan',msg:'Supabase membatasi percobaan login beruntun.',fix:'Tunggu ±60 detik lalu coba lagi, atau reset sandi dari dashboard.'};
-  if(/failed to fetch|networkerror|load failed|err_name/i.test(m))return{title:'Proyek tidak terjangkau',msg:'URL salah, proyek di-pause, atau internet terputus.',fix:'Cek Project URL di Settings → Data API. Proyek free yang tidur perlu di-restore dari dashboard.'};
-  if(/invalid api key|apikey/i.test(m))return{title:'Anon key tidak valid',msg:'Kunci yang ditempel bukan anon public key proyek ini.',fix:'Settings → API Keys → salin <b>anon public</b> (bukan service_role) secara utuh.'};
-  return{title:'Gagal masuk',msg:esc(m||'Kesalahan tidak dikenal.'),fix:'Tekan Diagnosa Sekarang untuk memeriksa konfigurasi, jaringan, tabel, dan akun.'};
+    msg:`Supabase menolak <b>${esc(email)}</b>. Tiga kemungkinan: akun belum dibuat di Authentication, email aslinya berbeda (domain salah), atau sandi keliru. Supabase memakai pesan sama untuk ketiganya.`,
+    fix:`Buka Supabase → Authentication → Users, cari <code>${esc(email)}</code>. Bila tidak ada, buat user dengan email persis itu + Auto Confirm. Bila ada, reset passwordnya. Atau pakai tab <b>Email Lengkap</b>.`};
+  if(/email not confirmed/i.test(m))return{title:'Email belum dikonfirmasi',msg:`Akun <b>${esc(email)}</b> ada tetapi belum di-confirm.`,fix:'Authentication → Providers → Email → matikan <b>Confirm email</b>, lalu Users → klik user → Confirm email.'};
+  if(/email logins are disabled|provider is not enabled/i.test(m))return{title:'Login Email dimatikan',msg:'Provider Email tidak aktif.',fix:'Authentication → Providers → Email → aktifkan <b>Enable Email provider</b>.'};
+  if(/rate limit|too many requests|429/i.test(m))return{title:'Terlalu banyak percobaan',msg:'Supabase membatasi percobaan beruntun.',fix:'Tunggu ±60 detik lalu coba lagi.'};
+  if(/failed to fetch|networkerror|load failed/i.test(m))return{title:'Proyek tidak terjangkau',msg:'URL salah, proyek di-pause, atau internet terputus.',fix:'Cek Project URL di Settings → Data API. Proyek free yang tidur perlu di-restore.'};
+  if(/invalid api key|apikey/i.test(m))return{title:'Anon key tidak valid',msg:'Kunci bukan anon public key proyek ini.',fix:'Settings → API Keys → salin <b>anon public</b> utuh.'};
+  return{title:'Gagal masuk',msg:esc(m||'Kesalahan tidak dikenal.'),fix:'Tekan Diagnosa Login untuk memeriksa konfigurasi, jaringan, tabel, dan akun.'};
+}
+function mapSignupError(raw,email){
+  const m=String((raw&&raw.message)||raw||'');
+  if(/already registered|already been registered|user already/i.test(m))return `Email <b>${esc(email)}</b> sudah terdaftar di Authentication. Pakai kode lain, atau hapus user lama di dashboard.`;
+  if(/signups not allowed|signup is disabled|signup_disabled/i.test(m))return `Pendaftaran ditutup. Buka <b>Authentication → Providers → Email</b> dan aktifkan <b>Allow new users to sign up</b>.`;
+  if(/email address.*invalid|invalid email|unable to validate email/i.test(m))return `Supabase menolak format email <b>${esc(email)}</b>. Ganti domain lewat chip @ di halaman login (mis. <code>@gmail.com</code> atau <code>@example.com</code>), lalu samakan dengan user yang sudah ada.`;
+  if(/password should be|weak password|password.*at least/i.test(m))return 'Kata sandi ditolak: minimal 6 karakter.';
+  if(/rate limit|too many|429/i.test(m))return 'Batas pembuatan akun per jam tercapai. Tunggu beberapa menit lalu ulangi.';
+  if(/database error saving new user/i.test(m))return 'Trigger pada <code>auth.users</code> gagal. Periksa SQL Editor → triggers, atau deploy Edge Function agar memakai service_role.';
+  if(/confirm/i.test(m)&&/email/i.test(m))return 'Confirm email masih aktif — akun dibuat tetapi belum bisa login. Matikan <b>Confirm email</b> di Authentication → Providers → Email.';
+  return m||'Gagal membuat akun auth.';
 }
 const Cloud={
-  sb:null,cfg:null,map:{},rmap:{},
+  sb:null,cfg:null,map:{},rmap:{},fnAvailable:null,
   async init(cfg){await loadSDK();this.cfg=cfg;this.sb=window.supabase.createClient(cfg.url,cfg.key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}})},
   email(k){return k+'@'+((this.cfg&&this.cfg.domain)||'mhi.local')},
+  iso(){return window.supabase.createClient(this.cfg.url,this.cfg.key,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false,storageKey:'mhi-iso-'+Math.random().toString(36).slice(2)}})},
   pFrom:d=>({id:d.id,kode:d.kode,nama:d.nama,role:d.role,jabatan:d.jabatan||'',mesin:d.mesin||'',warna:d.warna||'#5C6270',aktif:d.aktif!==false}),
-  async signInRaw(email,pass){return this.sb.auth.signInWithPassword({email,password:pass})},
   async signIn(kode,pass){
     const email=S.loginMode==='email'?(S.loginEmail||'').trim():this.email(kode);
-    const{error}=await this.signInRaw(email,pass);
-    if(error){const e=mapAuthError(error,email);throw Object.assign(new Error(e.msg),{kind:'auth',diag:e,email})}
+    const{error}=await this.sb.auth.signInWithPassword({email,password:pass});
+    if(error){const e=mapAuthError(error,email);throw Object.assign(new Error(e.msg),{kind:'auth',diag:e,email,raw:error.message})}
     const{data:{user}}=await this.sb.auth.getUser();
     const{data,error:e2}=await this.sb.from('profiles').select('*').eq('id',user.id).single();
-    if(e2||!data)throw Object.assign(new Error(`Login berhasil, tetapi baris <b>profiles</b> untuk akun ini belum ada.`),{kind:'noprofile',email,uid:user.id,
+    if(e2||!data)throw Object.assign(new Error('Login berhasil, tetapi baris <b>profiles</b> untuk akun ini belum ada.'),{kind:'noprofile',email,raw:e2?e2.message:'no rows',
       diag:{title:'Profil belum dibuat',msg:`Auth lolos untuk <b>${esc(email)}</b>, tapi tabel <code>profiles</code> kosong untuk UUID ini.`,
       fix:`Jalankan di SQL Editor:<br><code>insert into profiles (id,kode,nama,role,jabatan,mesin,warna) values ('${user.id}','${esc(kode||'kepala')}','${esc(kode||'Kepala')}','kepala','Kepala Divisi Konversi','Manajemen','#B22F2C');</code>`}});
     if(!data.aktif)throw Object.assign(new Error('Akun dinonaktifkan oleh kepala produksi.'),{kind:'inactive',email});
@@ -1745,15 +1834,94 @@ const Cloud={
   async addProduct(jenis,nama){const{data,error}=await this.sb.from('products').insert({jenis,nama,aktif:true}).select().single();if(error)throw new Error(error.message);return{id:data.id,jenis:data.jenis,nama:data.nama,aktif:data.aktif}},
   async updProduct(id,patch){const{error}=await this.sb.from('products').update(patch).eq('id',id);if(error)throw new Error(error.message)},
   async delProduct(id){const{error}=await this.sb.from('products').delete().eq('id',id);if(error)throw new Error(error.message)},
-  async invoke(body){
-    const{data,error}=await this.sb.functions.invoke('manage-user',{body});
-    if(error)throw new Error('Edge Function manage-user belum ter-deploy. Jalankan: supabase functions deploy manage-user');
-    if(data&&data.error)throw new Error(data.error);return data;
+  async rawInvoke(body){
+    const res=await this.sb.functions.invoke('manage-user',{body});
+    return res;
   },
-  async addUser(u){await this.invoke({action:'create',...u,email:this.email(u.kode)})},
-  async updUser(id,patch){const{error}=await this.sb.from('profiles').update(patch).eq('id',id);if(error)throw new Error(error.message)},
-  async resetPass(id,pass){await this.invoke({action:'reset',id,password:pass})},
-  async delUser(id){await this.invoke({action:'delete',id})},
+  async probeFunction(){
+    try{
+      const{data,error}=await this.rawInvoke({action:'ping'});
+      if(error){
+        const st=error.context&&error.context.status;
+        if(st===404||/not found|404/i.test(error.message||''))return{ok:false,reason:'404 — fungsi manage-user belum ter-deploy',raw:error.message};
+        if(st===401||st===403)return{ok:true,reason:'Fungsi ada (menolak ping tanpa peran) — '+st,raw:error.message};
+        return{ok:false,reason:'Fungsi menolak: '+(error.message||'unknown'),raw:error.message,status:st};
+      }
+      if(data&&data.error&&/tidak dikenal/i.test(data.error))return{ok:true,reason:'Fungsi aktif (versi tanpa aksi ping)'};
+      return{ok:true,reason:'Fungsi aktif dan merespons ping'};
+    }catch(e){return{ok:false,reason:e.message||String(e),raw:e.message}}
+  },
+  async probeInsertPolicy(){
+    const probeId=randUuid();
+    const{error}=await this.sb.from('profiles').insert({id:probeId,kode:'__probe__'+Date.now(),nama:'probe',role:'operator'});
+    if(!error){await this.sb.from('profiles').delete().eq('id',probeId);return{ok:true,reason:'Insert diizinkan (baris uji sudah dibersihkan)'}}
+    if(error.code==='42501'||/row-level security|violates row-level/i.test(error.message||''))return{ok:false,reason:'42501 — policy profiles_insert belum ada',raw:error.message,code:error.code};
+    if(error.code==='23503'||/foreign key/i.test(error.message||''))return{ok:true,reason:'Policy ada — insert lolos RLS, ditolak FK (sesuai harapan)'};
+    if(error.code==='23505'||/duplicate key/i.test(error.message||''))return{ok:true,reason:'Policy ada — ditolak unique (uji aman)'};
+    return{ok:false,reason:error.message||'unknown',raw:error.message,code:error.code};
+  },
+  async fnCall(body){
+    const{data,error}=await this.rawInvoke(body);
+    if(error){
+      const st=error.context&&error.context.status;
+      const nf=(st===404||/not found|404|Failed to send/i.test(error.message||''));
+      throw Object.assign(new Error(nf?'FN_MISSING':(error.message||'Edge Function gagal')),{fnMissing:nf,raw:error.message,status:st});
+    }
+    if(data&&data.error)throw Object.assign(new Error(data.error),{raw:data.error});
+    return data;
+  },
+  async addUser(u){
+    const email=this.email(u.kode);
+    try{
+      const r=await this.fnCall({action:'create',...u,email});
+      this.fnAvailable=true;S.provMode='fn';
+      return{via:'function',data:r};
+    }catch(e){
+      if(!e.fnMissing){S.lastRawError=e.raw||e.message;throw new Error(e.message)}
+      this.fnAvailable=false;S.provMode='direct';
+    }
+    const iso=this.iso();
+    const{data,error}=await iso.auth.signUp({email,password:u.password,options:{data:{kode:u.kode,nama:u.nama,role:u.role}}});
+    if(error){S.lastRawError=error.message;throw new Error(mapSignupError(error,email))}
+    const nu=data&&data.user;
+    if(!nu||!nu.id){S.lastRawError='signUp returned no user';throw new Error(`Supabase tidak mengembalikan ID user untuk <b>${esc(email)}</b>. Biasanya pendaftaran dinonaktifkan atau email sudah ada.`)}
+    if(Array.isArray(nu.identities)&&nu.identities.length===0){
+      S.lastRawError='identities empty → email already registered';
+      throw new Error(`Email <b>${esc(email)}</b> sudah terdaftar di Authentication. Gunakan kode lain, atau hapus user lama di dashboard Supabase.`);
+    }
+    const{error:pErr}=await this.sb.from('profiles').insert({id:nu.id,kode:u.kode,nama:u.nama,role:u.role,jabatan:u.jabatan||null,mesin:u.mesin||null,warna:u.warna||'#5C6270',aktif:true});
+    if(pErr){
+      S.lastRawError=pErr.message;
+      if(pErr.code==='42501'||/row-level security/i.test(pErr.message||''))
+        throw new Error(`Akun auth <b>${esc(email)}</b> berhasil dibuat, tetapi RLS menolak pembuatan profil (42501). Buka tab <b>Diagnosa</b> dan jalankan SQL <code>profiles_insert</code>, lalu tekan Ubah pada akun ini untuk melengkapi profilnya.`);
+      throw new Error(`Akun auth dibuat, profil gagal: ${esc(pErr.message)}`);
+    }
+    try{await iso.auth.signOut()}catch(e){}
+    return{via:'direct',id:nu.id};
+  },
+  async updUser(id,patch){const{error}=await this.sb.from('profiles').update(patch).eq('id',id);if(error){S.lastRawError=error.message;throw new Error(error.code==='42501'?'RLS menolak update profiles (42501). Jalankan SQL policy profiles_update di tab Diagnosa.':error.message)}},
+  async resetPass(id,newPass,oldPass){
+    try{await this.fnCall({action:'reset',id,password:newPass});S.provMode='fn';return{via:'function'}}
+    catch(e){if(!e.fnMissing){S.lastRawError=e.raw||e.message;throw new Error(e.message)}S.provMode='direct'}
+    const p=S.profiles.find(x=>x.id===id);
+    if(!p)throw new Error('Profil tidak ditemukan.');
+    if(!oldPass)throw new Error('Tanpa Edge Function, reset sandi akun lain memerlukan <b>sandi lamanya</b>. Isi kolom Sandi Saat Ini, atau deploy Edge Function (kode tersedia di tab Diagnosa).');
+    const iso=this.iso();
+    const{error:e1}=await iso.auth.signInWithPassword({email:this.email(p.kode),password:oldPass});
+    if(e1){S.lastRawError=e1.message;throw new Error('Sandi lama salah atau email berbeda: '+esc(e1.message))}
+    const{error:e2}=await iso.auth.updateUser({password:newPass});
+    if(e2){S.lastRawError=e2.message;throw new Error(esc(e2.message))}
+    try{await iso.auth.signOut()}catch(e){}
+    return{via:'direct'};
+  },
+  async myPass(newPass){const{error}=await this.sb.auth.updateUser({password:newPass});if(error){S.lastRawError=error.message;throw new Error(esc(error.message))}},
+  async delUser(id){
+    try{await this.fnCall({action:'delete',id});S.provMode='fn';return{via:'function'}}
+    catch(e){if(!e.fnMissing){S.lastRawError=e.raw||e.message;throw new Error(e.message)}S.provMode='direct'}
+    const{error}=await this.sb.from('profiles').delete().eq('id',id);
+    if(error){S.lastRawError=error.message;throw new Error(error.code==='42501'?'RLS menolak hapus profiles (42501). Jalankan SQL profiles_delete di tab Diagnosa.':esc(error.message))}
+    return{via:'profile-only'};
+  },
   async resetDemo(){throw new Error('Reset data demo hanya tersedia di mode lokal.')},
   exportAll(){return{profiles:S.profiles,products:S.products,reports:S.reports,audit:S.audit}}
 };
@@ -1812,7 +1980,6 @@ function ecgD(w,h,n){
   return d;
 }
 
-/* ================= LOGIN + DIAGNOSA ================= */
 function currentEmail(){
   const cfg=readCfg();
   if(S.loginMode==='email')return ($('#lgEmail').value||'').trim();
@@ -1841,60 +2008,53 @@ function renderLoginScreen(){
   if(!$('#lgKode').value)$('#lgKode').value='kepala';
   if(cloud&&S.loginMode==='email'&&!$('#lgEmail').value)$('#lgEmail').value=S.loginEmail||currentEmail();
   if(!cloud)$('#lgPass').value=DEMO_PASS;
-  if(cloud){
-    const dom=(cfg.domain||'mhi.local');
-    $('#lgDomChips').innerHTML=DOMAIN_SUGGEST.map(d=>`<button type="button" data-act="set-domain" data-dom="${esc(d)}" class="${d===dom?'on':''}">@${esc(d)}</button>`).join('');
-  }
+  if(cloud){const dom=cfg.domain||'mhi.local';
+    $('#lgDomChips').innerHTML=DOMAIN_SUGGEST.map(d=>`<button type="button" data-act="set-domain" data-dom="${esc(d)}" class="${d===dom?'on':''}">@${esc(d)}</button>`).join('')}
   syncEmailPreview();
 }
-function syncEmailPreview(){
-  if(!readCfg())return;
-  const e=currentEmail()||'—';
-  $('#lgEmailShown').textContent=e;
-  S.loginEmail=S.loginMode==='email'?e:S.loginEmail;
-}
+function syncEmailPreview(){if(!readCfg())return;const e=currentEmail()||'—';$('#lgEmailShown').textContent=e;if(S.loginMode==='email')S.loginEmail=e}
 function loginError(err){
   const box=$('#lgErr');
   const d=err&&err.diag?err.diag:{title:'Gagal masuk',msg:esc((err&&err.message)||String(err)),fix:''};
   $('#lgErrTitle').textContent=d.title;
-  $('#lgErrMsg').innerHTML=d.msg+(d.fix?`<br><br><b>Perbaikan:</b> ${d.fix}`:'');
-  box.hidden=false;box.classList.remove('shake');void box.offsetWidth;box.classList.add('shake');
-  sfx.error();
+  $('#lgErrMsg').innerHTML=d.msg+(d.fix?`<br><br><b>Perbaikan:</b> ${d.fix}`:'')+(err&&err.raw?`<span class="raw">Supabase: ${esc(err.raw)}</span>`:'');
+  box.hidden=false;box.classList.remove('shake');void box.offsetWidth;box.classList.add('shake');sfx.error();
 }
 async function doLogin(kode,pass){
   const btn=$('#lgSubmit');btn.disabled=true;btn.innerHTML='Memeriksa…';$('#lgErr').hidden=true;
-  try{
-    const me=await DB.signIn(kode,pass);S.me=me;await bootApp();sfx.ok();
-    toast(`Masuk sebagai <b>${esc(me.nama)}</b> — ${ROLES[me.role].label}.`,{icon:ROLES[me.role].icon,duration:4200});
-  }catch(err){loginError(err)}
+  try{const me=await DB.signIn(kode,pass);S.me=me;await bootApp();sfx.ok();
+    toast(`Masuk sebagai <b>${esc(me.nama)}</b> — ${ROLES[me.role].label}.`,{icon:ROLES[me.role].icon,duration:4200})}
+  catch(err){loginError(err)}
   finally{btn.disabled=false;btn.innerHTML='Masuk '+icon('arrowRight',15)}
 }
 async function doLogout(){
   try{await DB.signOut()}catch(e){}
-  S.me=null;S.reports=[];S.profiles=[];S.selection.clear();S.vSel.clear();S.uq='';closeDrawer();
+  S.me=null;S.reports=[];S.profiles=[];S.selection.clear();S.vSel.clear();S.uq='';S.provMode='unknown';closeDrawer();
   $('#topbar').hidden=true;$('#appMain').hidden=true;
   document.body.dataset.view='login';S.view='login';
   try{history.replaceState(null,'',location.pathname)}catch(e){}
   renderLoginScreen();toast('Anda telah keluar dari sistem.',{type:'info',icon:'logout'});
 }
 async function useLocalMode(){
-  writeCfg(null);DB=Local;S.mode='local';S.loginMode='kode';S.diag=[];
-  Local.load();$('#lgDiag').hidden=true;$('#lgErr').hidden=true;
-  $('#lgPass').value=DEMO_PASS;
+  writeCfg(null);DB=Local;S.mode='local';S.loginMode='kode';S.diag=[];S.provMode='unknown';
+  Local.load();$('#lgDiag').hidden=true;$('#lgErr').hidden=true;$('#lgPass').value=DEMO_PASS;
   renderLoginScreen();
   toast('Beralih ke <b>Mode Lokal</b> — 10 akun demo siap dipakai.',{icon:'undo',duration:4200});
   const me=await Local.session();if(me){S.me=me;await bootApp()}
 }
-function diagRender(){
-  $('#lgDiag').hidden=false;
-  $('#lgDiagBody').innerHTML=S.diag.map(d=>{
-    const ic=d.state==='ok'?'check':d.state==='bad'?'x':d.state==='warn'?'alert':'rotate';
-    return `<div class="dg ${d.state}"><span class="dg-ic">${icon(ic,12)}</span><div class="dg-t"><b>${esc(d.title)}</b>${d.detail?`<small>${d.detail}</small>`:''}${d.fix?`<span class="fix">${d.fix}</span>`:''}</div></div>`;
-  }).join('');
-  $('#lgDiagBody').scrollTop=$('#lgDiagBody').scrollHeight;
+function sqlBox(id,label,code){
+  return `<div class="sqlbox"><div class="sb-head">${icon('database',11)} ${esc(label)}<button type="button" data-act="copy-sql" data-sql="${id}">Salin SQL</button></div><pre>${esc(code)}</pre></div>`;
 }
+function diagRenderInto(bodySel,arr){
+  const body=$(bodySel);if(!body)return;
+  body.innerHTML=arr.map(d=>{
+    const ic=d.state==='ok'?'check':d.state==='bad'?'x':d.state==='warn'?'alert':'rotate';
+    return `<div class="dg ${d.state}"><span class="dg-ic">${icon(ic,12)}</span><div class="dg-t"><b>${esc(d.title)}</b>${d.detail?`<small>${d.detail}</small>`:''}${d.fix?`<span class="fix">${d.fix}</span>`:''}${d.sql?sqlBox(d.sqlId,d.sqlLabel,d.sql):''}</div></div>`;
+  }).join('');
+}
+function diagRender(){$('#lgDiag').hidden=false;diagRenderInto('#lgDiagBody',S.diag);const b=$('#lgDiagBody');b.scrollTop=b.scrollHeight}
 function diagPush(d){S.diag.push(d);diagRender()}
-function diagLast(patch){Object.assign(S.diag[S.diag.length-1],patch);diagRender()}
+function diagLast(p){Object.assign(S.diag[S.diag.length-1],p);diagRender()}
 async function runDiag(){
   if(S.diagRunning)return;
   const cfg=readCfg();
@@ -1904,51 +2064,92 @@ async function runDiag(){
   try{
     diagPush({state:'run',title:'Memeriksa konfigurasi…'});
     const urlOk=/^https:\/\/[a-z0-9-]+\.supabase\.(co|in)$/i.test(cfg.url);
-    diagLast({state:urlOk&&cfg.key.length>40?'ok':'bad',title:'Konfigurasi proyek',
-      detail:`URL: ${esc(cfg.url)}<br>Domain email: @${esc(cfg.domain)}<br>Anon key: ${cfg.key.length} karakter`,
-      fix:urlOk?'':'Format URL harus <code>https://xxxx.supabase.co</code>. Buka Settings → Data API.'});
+    diagLast({state:urlOk&&cfg.key.length>40?'ok':'bad',title:'Konfigurasi proyek',detail:`URL: ${esc(cfg.url)}<br>Domain: @${esc(cfg.domain)}<br>Anon key: ${cfg.key.length} karakter`,fix:urlOk?'':'Format URL harus <code>https://xxxx.supabase.co</code>.'});
     if(!urlOk)return;
-
     diagPush({state:'run',title:'Memuat Supabase SDK…'});
-    try{await loadSDK();diagLast({state:'ok',title:'Supabase SDK siap',detail:'supabase-js v2 dimuat dari CDN'})}
-    catch(e){diagLast({state:'bad',title:'SDK gagal dimuat',detail:esc(e.message),fix:'Periksa internet, atau matikan pemblokir iklan/skrip untuk domain ini.'});return}
-
+    try{await loadSDK();diagLast({state:'ok',title:'Supabase SDK siap'})}catch(e){diagLast({state:'bad',title:'SDK gagal dimuat',detail:esc(e.message)});return}
     diagPush({state:'run',title:'Menghubungi server Auth…'});
-    try{
-      const r=await fetch(cfg.url+'/auth/v1/health',{headers:{apikey:cfg.key}});
-      if(r.ok){const j=await r.json().catch(()=>({}));diagLast({state:'ok',title:'Server Auth terjangkau',detail:'Versi GoTrue: '+esc(j.version||'tidak dilaporkan')})}
-      else if(r.status===401||r.status===403)diagLast({state:'bad',title:'Anon key ditolak',detail:'HTTP '+r.status,fix:'Salin ulang <b>anon public key</b> dari Settings → API Keys secara utuh.'});
-      else diagLast({state:'warn',title:'Server menjawab tidak normal',detail:'HTTP '+r.status,fix:'Proyek mungkin di-pause. Buka dashboard Supabase dan restore.'});
-    }catch(e){diagLast({state:'bad',title:'Proyek tidak terjangkau',detail:esc(e.message),fix:'URL salah, proyek tidur, atau internet terputus. Cek Settings → Data API.'});return}
-
+    try{const r=await fetch(cfg.url+'/auth/v1/health',{headers:{apikey:cfg.key}});
+      if(r.ok)diagLast({state:'ok',title:'Server Auth terjangkau'});
+      else diagLast({state:r.status===401||r.status===403?'bad':'warn',title:'Server menjawab '+r.status,fix:r.status===401?'Salin ulang anon public key.':'Proyek mungkin di-pause — restore dari dashboard.'});
+    }catch(e){diagLast({state:'bad',title:'Proyek tidak terjangkau',detail:esc(e.message)});return}
     diagPush({state:'run',title:'Memeriksa tabel database…'});
     const probe=window.supabase.createClient(cfg.url,cfg.key,{auth:{persistSession:false}});
     const{error:tErr}=await probe.from('products').select('id').limit(1);
-    if(tErr){diagLast({state:'bad',title:'Tabel belum siap',detail:esc(tErr.message),fix:'Jalankan seluruh isi <code>schema.sql</code> di SQL Editor Supabase, lalu ulangi diagnosa.'});return}
-    diagLast({state:'ok',title:'Tabel products terbaca',detail:'Skema dasar sudah terpasang'});
-
+    if(tErr){diagLast({state:'bad',title:'Tabel belum siap',detail:esc(tErr.message),fix:'Jalankan seluruh <code>schema.sql</code> di SQL Editor.'});return}
+    diagLast({state:'ok',title:'Tabel products terbaca'});
     diagPush({state:'run',title:'Mencoba login ke Auth…',detail:esc(email)});
-    if(!pass){diagLast({state:'warn',title:'Kata sandi kosong',detail:'Isi kolom sandi lalu jalankan diagnosa lagi.'});return}
-    if(pass!==pass.trim())diagPush({state:'warn',title:'Sandi punya spasi di tepi',detail:'Sering terjadi saat copy-paste.',fix:'Tekan tombol <b>Hapus Spasi Sandi</b> di kotak error.'});
+    if(!pass){diagLast({state:'warn',title:'Kata sandi kosong'});return}
     const{data:aData,error:aErr}=await probe.auth.signInWithPassword({email,password:pass});
-    if(aErr){const m=mapAuthError(aErr,email);
-      diagLast({state:'bad',title:m.title,detail:esc(email)+' → '+esc(aErr.message),fix:m.fix});
-      diagPush({state:'warn',title:'Yang perlu dicek di dashboard',detail:'Authentication → Users',
-        fix:`Cari email <code>${esc(email)}</code>. <b>Tidak ada?</b> Buat user dengan email itu + Auto Confirm, lalu jalankan SQL insert profiles. <b>Ada?</b> Klik user → Reset password. <b>Email beda?</b> Pakai tab <b>Email Lengkap</b> di form login, atau ganti domain lewat chip @di atas.`});
-      return}
+    if(aErr){const m=mapAuthError(aErr,email);diagLast({state:'bad',title:m.title,detail:esc(email)+' → '+esc(aErr.message),fix:m.fix});return}
     diagLast({state:'ok',title:'Auth berhasil',detail:'UUID: '+esc(aData.user.id)});
-
     diagPush({state:'run',title:'Memeriksa baris profiles…'});
     const{data:pf,error:pErr}=await probe.from('profiles').select('*').eq('id',aData.user.id).single();
-    if(pErr||!pf){diagLast({state:'bad',title:'Profil belum dibuat',detail:pErr?esc(pErr.message):'Baris tidak ditemukan',
-      fix:`Jalankan di SQL Editor:<br><code>insert into profiles (id,kode,nama,role,jabatan,mesin,warna) values ('${aData.user.id}','kepala','Rajiv','kepala','Kepala Divisi Konversi','Manajemen','#B22F2C');</code>`});return}
+    if(pErr||!pf){diagLast({state:'bad',title:'Profil belum dibuat',detail:pErr?esc(pErr.message):'Tidak ditemukan',
+      fix:'Jalankan SQL berikut di Supabase SQL Editor:',sqlId:'bootstrap',sqlLabel:'insert profiles',
+      sql:`insert into profiles (id,kode,nama,role,jabatan,mesin,warna)\nvalues ('${aData.user.id}','kepala','Rajiv','kepala','Kepala Divisi Konversi','Manajemen','#B22F2C')\non conflict (id) do nothing;`});return}
     diagLast({state:'ok',title:'Profil ditemukan',detail:`@${esc(pf.kode)} · ${esc((ROLES[pf.role]||{}).label||pf.role)}`});
-
-    if(pf.aktif===false){diagPush({state:'bad',title:'Akun dinonaktifkan',detail:'Kolom aktif = false',fix:'Kepala produksi lain harus mengaktifkan akun ini dari menu Pengguna.'});return}
-    diagPush({state:'ok',title:'Semua pemeriksaan lolos',detail:'Tekan Masuk untuk membuka aplikasi.'});
-    sfx.ok();
+    if(pf.aktif===false){diagPush({state:'bad',title:'Akun dinonaktifkan',fix:'Kepala produksi lain harus mengaktifkan akun ini.'});return}
+    diagPush({state:'ok',title:'Semua pemeriksaan lolos',detail:'Tekan Masuk untuk membuka aplikasi.'});sfx.ok();
   }catch(e){diagPush({state:'bad',title:'Diagnosa terhenti',detail:esc(e.message||String(e))})}
   finally{S.diagRunning=false}
+}
+function acctRender(){diagRenderInto('#acctDiagBody',S.acctDiag)}
+function acctPush(d){S.acctDiag.push(d);acctRender()}
+function acctLast(p){Object.assign(S.acctDiag[S.acctDiag.length-1],p);acctRender()}
+function updateProvChip(){
+  const c=$('#provChip');if(!c)return;
+  const map={fn:['fn','EDGE FUNCTION'],direct:['direct','LANGSUNG · RLS'],unknown:['unknown','MEMERIKSA…'],local:['direct','MODE LOKAL']};
+  const m=map[S.provMode]||map.unknown;
+  c.className='prov-chip '+m[0];
+  c.innerHTML=icon(S.provMode==='fn'?'zap':S.provMode==='direct'?'database':'info',11)+' <span id="provLbl">'+m[1]+'</span>';
+  c.title=S.provMode==='fn'?'Pengelolaan akun lewat Edge Function (service_role)':S.provMode==='direct'?'Pengelolaan akun langsung lewat signUp + RLS — tanpa CLI':'Jalankan Diagnosa untuk mengetahui jalur yang dipakai';
+}
+async function detectProv(){
+  if(S.mode!=='cloud'){S.provMode='local';updateProvChip();return}
+  S.provMode='unknown';updateProvChip();
+  const r=await DB.probeFunction();
+  S.provMode=r.ok?'fn':'direct';updateProvChip();
+}
+async function runAcctDiag(){
+  if(S.acctRunning)return;
+  if(S.mode!=='cloud'){S.acctDiag=[{state:'ok',title:'Mode lokal aktif',detail:'Semua operasi akun berjalan di perangkat ini. Tidak ada Edge Function atau RLS yang diperlukan.'}];acctRender();return}
+  S.acctRunning=true;S.acctDiag=[];acctRender();
+  const btn=$('#acctDiagBtn');if(btn){btn.disabled=true;btn.innerHTML='Memeriksa…'}
+  try{
+    acctPush({state:'ok',title:'Peran Anda: '+ROLES[S.me.role].label,detail:'Kode @'+esc(S.me.kode)+' · UUID '+esc(S.me.id)});
+    acctPush({state:'run',title:'Memeriksa Edge Function manage-user…'});
+    const fn=await DB.probeFunction();
+    if(fn.ok){acctLast({state:'ok',title:'Edge Function tersedia',detail:esc(fn.reason)});S.provMode='fn'}
+    else{
+      acctLast({state:'warn',title:'Edge Function tidak tersedia',detail:esc(fn.reason),
+        fix:'Ini <b>bukan masalah fatal</b> — aplikasi otomatis memakai jalur langsung (signUp + RLS). Bila ingin reset sandi orang lain tanpa sandi lama, deploy fungsi berikut:',
+        sqlId:'edge',sqlLabel:'manage-user/index.ts',sql:EDGE_FN_CODE});
+      S.provMode='direct';
+    }
+    updateProvChip();
+    acctPush({state:'run',title:'Menguji policy INSERT pada profiles…'});
+    const ins=await DB.probeInsertPolicy();
+    if(ins.ok)acctLast({state:'ok',title:'Policy insert profil siap',detail:esc(ins.reason)});
+    else acctLast({state:'bad',title:'Policy insert profil belum ada',detail:esc(ins.reason),
+      fix:'Tanpa policy ini, akun auth berhasil dibuat tetapi profilnya ditolak. Jalankan SQL ini di <b>Supabase → SQL Editor → Run</b>:',
+      sqlId:'insert',sqlLabel:'profiles_insert',sql:SQL_INSERT_POLICY});
+    acctPush({state:'run',title:'Menguji policy UPDATE pada profiles…'});
+    const{error:uErr}=await DB.sb.from('profiles').update({nama:S.me.nama}).eq('id',S.me.id);
+    if(!uErr)acctLast({state:'ok',title:'Policy update profil siap',detail:'Ubah peran / nonaktifkan akun dapat dilakukan.'});
+    else acctLast({state:'bad',title:'Policy update profil bermasalah',detail:esc(uErr.message),fix:'Jalankan paket policy lengkap:',sqlId:'full',sqlLabel:'profiles policies',sql:SQL_FULL_ACCESS});
+    const cfg=readCfg();
+    acctPush({state:/\.(local|internal)$/i.test(cfg.domain)?'warn':'ok',title:'Domain email: @'+esc(cfg.domain),
+      detail:'Akun baru akan dibuat sebagai kode@'+esc(cfg.domain),
+      fix:/\.(local|internal)$/i.test(cfg.domain)?'Domain <code>.local</code> kadang ditolak validator email Supabase. Bila muncul error "invalid email", ganti ke <code>@example.com</code> atau <code>@gmail.com</code> lewat menu Koneksi Data — lalu samakan untuk semua akun.':'Format domain umum, aman untuk signUp.'});
+    acctPush({state:'warn',title:'Dua pengaturan Auth wajib diperiksa manual',
+      detail:'Authentication → Providers → Email',
+      fix:'1) Matikan <b>Confirm email</b> — agar akun baru langsung bisa login.<br>2) Aktifkan <b>Allow new users to sign up</b> — diperlukan jalur langsung. Bila Anda memakai Edge Function, poin 2 boleh tetap mati.'});
+    if(S.lastRawError)acctPush({state:'bad',title:'Error Supabase terakhir',detail:esc(S.lastRawError)});
+    acctPush({state:'ok',title:'Diagnosa selesai',detail:S.provMode==='fn'?'Jalur: Edge Function. Semua fitur akun tersedia.':'Jalur: langsung (RLS). Tambah akun, ubah peran, nonaktifkan, dan hapus profil tersedia. Reset sandi orang lain butuh sandi lamanya.'});
+    sfx.tick();
+  }catch(e){acctPush({state:'bad',title:'Diagnosa terhenti',detail:esc(e.message||String(e))})}
+  finally{S.acctRunning=false;if(btn){btn.disabled=false;btn.innerHTML=icon('rotate',14)+' Jalankan Diagnosa'}}
 }
 
 async function reloadAll(){
@@ -1960,10 +2161,11 @@ async function bootApp(){
   if(S.me.role==='operator'){S.filters.operator=S.me.kode;S.filters.archived=false}
   S.form=blankForm();
   $('#topbar').hidden=false;$('#appMain').hidden=false;
-  buildTabs();buildSelects();applyRoleUI();syncIdentity();syncToolbar();updateSyncChip();
+  buildTabs();buildSelects();applyRoleUI();syncIdentity();syncToolbar();updateSyncChip();updateProvChip();
   renderFormDynamic();renderOtherDynamic();
   const hashV=Object.keys(ROUTES).find(k=>ROUTES[k]===location.hash);
   setView(hashV&&ACCESS[hashV].includes(S.me.role)?hashV:'history',true);
+  if(isKepala())detectProv();
 }
 function buildTabs(){
   const pending=S.reports.filter(r=>r.status==='submit'&&!r.deletedAt).length;
@@ -2168,7 +2370,6 @@ function renderOtherDynamic(){
   $('#saveBtnO').innerHTML=icon('save',15)+' '+(f.mode==='edit'?'Simpan Perubahan':'Simpan Laporan Kegiatan');
   $('#saveBtnOM').innerHTML=icon('save',15)+' Simpan';
 }
-
 function markInvalid(el,msg,bad){if(!el)return;el.classList.add('invalid');const fl=el.closest('.field'),er=fl&&fl.querySelector('.err');if(er){er.textContent=msg;er.classList.add('show')}bad.push(el)}
 function clearInvalid(el){el.classList.remove('invalid');const fl=el.closest('.field'),er=fl&&fl.querySelector('.err');if(er)er.classList.remove('show')}
 function finishValidate(bad){
@@ -2288,7 +2489,6 @@ function getFiltered(){
   return arr.sort(CMP[f.sort]||CMP.dateDesc);
 }
 function syncToolbar(){$('#fl-q').value=S.filters.q;$('#fl-operator').value=S.filters.operator;$('#fl-jenis').value=S.filters.jenis;$('#fl-status').value=S.filters.status;$('#fl-sort').value=S.filters.sort}
-
 function summaryText(r){
   if(r.jenis==='lainnya'){
     if(r.agenda&&r.agenda.length){const a=r.agenda[0];return `<b>${r.agenda.length} agenda</b> · ${esc(a.kategori)}${r.agenda.length>1?` <span class="more">+${r.agenda.length-1}</span>`:''}`}
@@ -2387,7 +2587,7 @@ function renderHistory(){
   const none=all.length===0,noRes=!none&&rows.length===0,hide=none||noRes;
   $('#histTable').style.display=hide?'none':'';$('#histCards').style.display=hide?'none':'';$('#histEmpty').hidden=!hide;
   if(hide)$('#histEmpty').innerHTML=none?
-    `<svg class="flatline" viewBox="0 0 320 44"><path d="M0 22 L120 22 L128 14 L136 30 L142 22 L320 22" fill="none" stroke="#D8C9B2" stroke-width="2" stroke-linecap="round"/></svg><h3>${S.filters.archived?'Arsip kosong':'Belum ada laporan'}</h3><p>${S.filters.archived?'Laporan yang diarsipkan muncul di sini dan dapat dipulihkan.':'Mulai laporan harian pertama untuk shift ini.'}</p><div class="empty-btns"><button class="btn btn-primary" data-act="empty-create">${icon('plus',14)} Buat Laporan</button></div>`
+    `<svg class="flatline" viewBox="0 0 320 44"><path d="M0 22 L120 22 L128 14 L136 30 L142 22 L320 22" fill="none" stroke="#D8C9B2" stroke-width="2" stroke-linecap="round"/></svg><h3>${S.filters.archived?'Arsip kosong':'Belum ada laporan'}</h3><p>${S.filters.archived?'Laporan yang diarsipkan muncul di sini dan dapat dipulihkan.':(S.profiles.filter(p=>p.role==='operator').length?'Mulai laporan harian pertama untuk shift ini.':'Belum ada akun operator. Kepala produksi perlu menambahkannya dulu di menu Pengguna.')}</p><div class="empty-btns"><button class="btn btn-primary" data-act="empty-create">${icon('plus',14)} Buat Laporan</button>${isKepala()&&!S.profiles.filter(p=>p.role==='operator').length?`<button class="btn btn-ghost" data-act="nav" data-nav="users">${icon('userPlus',14)} Tambah Operator</button>`:''}</div>`
     :`<svg class="flatline" viewBox="0 0 320 44"><path d="M0 22 L320 22" fill="none" stroke="#D8C9B2" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 6"/></svg><h3>Tidak ada hasil untuk filter ini</h3><p>Coba ubah kata kunci, operator, jenis, status, atau periode.</p><div class="empty-btns"><button class="btn btn-ghost" data-act="filter-reset">${icon('rotate',14)} Reset Filter</button></div>`;
   const sel=S.selection,bb=$('#bulkBar');
   bb.hidden=sel.size===0;
@@ -2494,7 +2694,7 @@ function renderMaster(){
     $('#sysPanel').innerHTML=`<div class="sys-grid">
 <div class="sys-cell"><h4>${icon('building',15)} Koneksi Data</h4><p>${cloud?'Terhubung ke Supabase — seluruh perangkat memakai data bersama dengan RLS.':'Mode lokal — data hanya di perangkat ini.'}</p><button class="btn btn-ghost btn-sm" data-act="open-setup">${cloud?'Ubah Koneksi':'Hubungkan Supabase'}</button></div>
 <div class="sys-cell"><h4>${icon('download',15)} Cadangan Data</h4><p>Unduh laporan, pengguna, dan produk sebagai JSON.</p><button class="btn btn-ghost btn-sm" data-act="backup-json">Unduh Cadangan JSON</button></div>
-<div class="sys-cell"><h4>${icon('userPlus',15)} Manajemen Pengguna</h4><p>Tambah akun, ubah peran, reset sandi, nonaktifkan.</p><button class="btn btn-ghost btn-sm" data-act="nav" data-nav="users">Buka Menu Pengguna</button></div>
+<div class="sys-cell"><h4>${icon('activity',15)} Diagnosa Sistem Akun</h4><p>Periksa Edge Function, policy RLS, dan pengaturan Auth.</p><button class="btn btn-ghost btn-sm" data-act="goto-diag">Buka Diagnosa</button></div>
 ${cloud?'':`<div class="sys-cell"><h4>${icon('alert',15)} Reset Data Demo</h4><p>Kembalikan data lokal ke contoh bawaan.</p><button class="btn btn-danger btn-sm" data-act="reset-demo">Reset Data Demo</button></div>`}
 </div>`;
   }
@@ -2519,9 +2719,11 @@ function renderUsers(){
   $('#uPaneUsers').hidden=S.uTab!=='pengguna';
   $('#uEmpty').hidden=true;
   $('#uPaneAkses').hidden=S.uTab!=='akses';
+  $('#uPaneDiag').hidden=S.uTab!=='diagnosa';
   $('#uPaneAudit').hidden=S.uTab!=='audit';
   $('#uSearchWrap').hidden=S.uTab!=='pengguna';
   $('#uAddBtn').hidden=S.uTab!=='pengguna';
+  updateProvChip();
   if(S.uTab==='pengguna'){
     const q=S.uq.toLowerCase();
     const list=all.filter(u=>!q||[u.nama,u.kode,u.mesin,u.jabatan,ROLES[u.role].label].join(' ').toLowerCase().includes(q));
@@ -2530,6 +2732,7 @@ function renderUsers(){
     if(!list.length){$('#uPaneUsers').innerHTML='';$('#uEmpty').hidden=false;
       $('#uEmpty').innerHTML=`<svg class="flatline" viewBox="0 0 320 44"><path d="M0 22 L320 22" fill="none" stroke="#D8C9B2" stroke-width="2" stroke-dasharray="4 6"/></svg><h3>Tidak ada akun cocok</h3><p>Ubah kata kunci pencarian, atau tambah pengguna baru.</p><div class="empty-btns"><button class="btn btn-ghost" data-act="u-clear">Reset Pencarian</button><button class="btn btn-primary" data-act="user-add">${icon('userPlus',14)} Tambah Pengguna</button></div>`}
   }else if(S.uTab==='akses'){renderMatrix()}
+  else if(S.uTab==='diagnosa'){if(!S.acctDiag.length)runAcctDiag();else acctRender()}
   else{
     $('#auditBody').innerHTML=S.audit.length?S.audit.slice(0,150).map(a=>{
       const who=profByKode(a.actor)||{nama:a.actor},cls=a.aksi==='INSERT'?'ins':a.aksi==='DELETE'?'del':'upd';
@@ -2561,8 +2764,7 @@ function setPickedRole(r){
   pickedRole=r;
   $$('#uuRolePick button').forEach(b=>b.classList.toggle('on',b.dataset.role===r));
   $('#uuRoleHint').textContent=ROLES[r].hint;
-  const cfg=readCfg();
-  const kode=($('#uuKode').value||'kode').toLowerCase();
+  const cfg=readCfg(),kode=($('#uuKode').value||'kode').toLowerCase();
   $('#uuEmailHint').innerHTML=cfg?`Akun akan login sebagai <b>${esc(kode+'@'+cfg.domain)}</b>`:'Mode lokal — login cukup pakai kode akun.';
 }
 function openUserModal(id){
@@ -2570,17 +2772,17 @@ function openUserModal(id){
   editingUserId=id||null;
   const u=id?S.profiles.find(x=>x.id===id):null;
   $('#userModalTitle').textContent=u?'Ubah Pengguna':'Tambah Pengguna';
-  $('#userModalSub').textContent=u?`Mengubah akun @${u.kode}. Kosongkan sandi bila tidak ingin mengganti.`:'Akun baru langsung aktif dan dapat digunakan untuk masuk.';
+  $('#userModalSub').innerHTML=u?`Mengubah akun @${esc(u.kode)}. Kosongkan sandi bila tidak ingin mengganti.`:(S.mode==='cloud'?`Akun dibuat di Supabase Auth lalu profilnya di tabel <code>profiles</code>. Jalur: <b>${S.provMode==='fn'?'Edge Function':'langsung (signUp + RLS)'}</b>.`:'Akun baru langsung aktif di perangkat ini.');
   $('#uuKode').value=u?u.kode:'';$('#uuKode').disabled=!!u;
   $('#uuNama').value=u?u.nama:'';
   $('#uuMesin').value=u?u.mesin:'';$('#uuJabatan').value=u?u.jabatan:'';
   $('#uuWarna').value=u?u.warna:'#0FA3A3';$('#uuPass').value='';
-  $('#uuPassWrap').hidden=!!u&&S.mode==='cloud';
+  $('#uuPassWrap').hidden=!!u;
   setPickedRole(u?u.role:'operator');
   $('#uuMsg').hidden=true;$('#userWrap').classList.add('show');
   setTimeout(()=>$(u?'#uuNama':'#uuKode').focus(),40);
 }
-function userMsg(m,cls){const e=$('#uuMsg');e.className='setup-msg'+(cls?' '+cls:'');e.innerHTML=m;e.hidden=false}
+function userMsg(m,cls,raw){const e=$('#uuMsg');e.className='setup-msg'+(cls?' '+cls:'');e.innerHTML=m+(raw?`<span class="raw">Supabase: ${esc(raw)}</span>`:'');e.hidden=false}
 async function saveUser(){
   if(!canManageUsers())return userMsg('Hanya kepala produksi yang boleh mengelola pengguna.','err');
   const kode=$('#uuKode').value.trim().toLowerCase().replace(/[^a-z0-9._-]/g,''),nama=$('#uuNama').value.trim();
@@ -2594,16 +2796,53 @@ async function saveUser(){
   try{
     if(editingUserId){
       await DB.updUser(editingUserId,{nama,role:pickedRole,mesin,jabatan,warna});
-      if(pass)await DB.resetPass(editingUserId,pass);
+      if(pass){
+        if(S.mode==='cloud'&&editingUserId!==S.me.id){
+          openPassModal(editingUserId);
+          toast('Profil diperbarui. Untuk mengganti sandi akun lain, lengkapi dialog sandi.',{type:'info',icon:'key',duration:5000});
+        }else if(S.mode==='cloud'){await DB.myPass(pass)}
+        else await DB.resetPass(editingUserId,pass);
+      }
       toast(`Pengguna <b>${esc(nama)}</b> diperbarui — ${ROLES[pickedRole].label}.`,{icon:'checkCircle'});
     }else{
-      await DB.addUser({kode,nama,role:pickedRole,mesin,jabatan,warna,password:pass});
-      toast(`Akun <b>@${esc(kode)}</b> dibuat sebagai ${ROLES[pickedRole].label}.`,{icon:'userPlus',duration:4600});
+      const res=await DB.addUser({kode,nama,role:pickedRole,mesin,jabatan,warna,password:pass});
+      const via=res&&res.via==='function'?'Edge Function':res&&res.via==='direct'?'langsung (RLS)':'lokal';
+      toast(`Akun <b>@${esc(kode)}</b> dibuat sebagai ${ROLES[pickedRole].label} · via ${via}.`,{icon:'userPlus',duration:5000});
     }
     $('#userWrap').classList.remove('show');
-    await reloadAll();buildSelects();buildTabs();renderUsers();refreshDataViews();sfx.ok();
-  }catch(err){userMsg(esc(err.message),'err');sfx.error()}
+    await reloadAll();buildSelects();buildTabs();renderUsers();refreshDataViews();updateProvChip();sfx.ok();
+  }catch(err){userMsg(esc(err.message),'err',S.lastRawError);S.lastRawError='';sfx.error()}
   finally{btn.disabled=false;btn.textContent='Simpan Pengguna'}
+}
+let passTargetId=null;
+function openPassModal(id){
+  passTargetId=id;
+  const self=id===S.me.id;
+  const u=self?S.me:S.profiles.find(x=>x.id===id);
+  $('#pwTitle').textContent=self?'Ganti Sandi Saya':'Reset Sandi — '+(u?u.nama:'');
+  $('#pwSub').innerHTML=self?'Sandi akun Anda sendiri diperbarui langsung ke Supabase Auth.':(S.provMode==='fn'?'Edge Function tersedia — sandi dapat diganti tanpa sandi lama.':'Tanpa Edge Function, masukkan <b>sandi lama</b> akun ini agar Supabase mengizinkan penggantian.');
+  $('#pwOldWrap').hidden=self||S.provMode==='fn'||S.mode!=='cloud';
+  $('#pwOld').value='';$('#pwNew').value='';$('#pwMsg').hidden=true;
+  $('#passWrap').classList.add('show');
+  setTimeout(()=>$('#pwNew').focus(),40);
+}
+function pwMsg(m,cls,raw){const e=$('#pwMsg');e.className='setup-msg'+(cls?' '+cls:'');e.innerHTML=m+(raw?`<span class="raw">Supabase: ${esc(raw)}</span>`:'');e.hidden=false}
+async function savePass(){
+  const np=$('#pwNew').value,op=$('#pwOld').value;
+  if(np.length<6)return pwMsg('Kata sandi baru minimal 6 karakter.','err');
+  const btn=$('#pwSave');btn.disabled=true;btn.textContent='Menyimpan…';
+  try{
+    if(passTargetId===S.me.id){
+      if(S.mode==='cloud')await DB.myPass(np);else await DB.resetPass(passTargetId,np);
+    }else{
+      const r=await DB.resetPass(passTargetId,np,op);
+      if(r&&r.via==='direct')toast('Sandi diganti lewat jalur langsung (sandi lama terverifikasi).',{type:'info',icon:'key',duration:4200});
+    }
+    $('#passWrap').classList.remove('show');
+    toast('Kata sandi berhasil diperbarui.',{icon:'key'});sfx.ok();
+    if(S.view==='users')renderUsers();
+  }catch(err){pwMsg(esc(err.message),'err',S.lastRawError);S.lastRawError='';sfx.error()}
+  finally{btn.disabled=false;btn.textContent='Simpan Sandi'}
 }
 const metaCell=(l,v)=>`<div class="dm-cell"><label>${l}</label><div>${v}</div></div>`;
 function timeRowHTML(total,share,calcText,segs,plum){
@@ -2705,7 +2944,7 @@ function exportCSV(rows){
   downloadBlob(csv,'text/csv;charset=utf-8','laporan-produksi-ecg_'+todayStr()+'.csv');
   toast(`${rows.length} laporan diexport (${lines.length-1} baris data).`,{icon:'download'});sfx.tick();
 }
-const printHead=(t,s)=>`<div class="p-head"><div class="p-brand"><div class="p-logo">M</div><div><b>MHI PAPER</b><small>Produksi Kertas ECG/EKG dan Plain</small></div></div><div class="p-doc">FORM LH-ECG-01<br>REV. 09</div></div><div class="p-title">${t}</div><p class="p-sub">${s}</p>`;
+const printHead=(t,s)=>`<div class="p-head"><div class="p-brand"><div class="p-logo">M</div><div><b>MHI PAPER</b><small>Produksi Kertas ECG/EKG dan Plain</small></div></div><div class="p-doc">FORM LH-ECG-01<br>REV. 10</div></div><div class="p-title">${t}</div><p class="p-sub">${s}</p>`;
 const printFoot=()=>`<div class="p-foot">Dicetak: ${new Date().toLocaleString('id-ID')} · ${S.me?esc(S.me.nama)+' ('+ROLES[S.me.role].label+')':''} · Bersih = hasil − reject · MHI PAPER.</div>`;
 const signBlock=(o,v)=>`<table class="p-sign"><tr><td>Dibuat oleh,<br><br><br><br><u>&nbsp;&nbsp;${esc(o||'________________')}&nbsp;&nbsp;</u><br><small>Operator</small></td><td>Diperiksa oleh,<br><br><br><br><u>&nbsp;&nbsp;${esc(v||'________________')}&nbsp;&nbsp;</u><br><small>Admin Produksi</small></td><td>Disetujui oleh,<br><br><br><br><u>&nbsp;&nbsp;________________&nbsp;&nbsp;</u><br><small>Kepala Produksi</small></td></tr></table>`;
 function printRecap(){
@@ -2753,7 +2992,7 @@ function printSingle(id){
 }
 function doPrint(){toast('Menyiapkan halaman cetak…',{type:'info',icon:'printer',duration:2200});setTimeout(()=>{try{window.print()}catch(e){}},80)}
 function backupJSON(){
-  downloadBlob(JSON.stringify({app:'MHI PAPER',version:9,mode:S.mode,exportedAt:new Date().toISOString(),...DB.exportAll()},null,2),'application/json','mhi-paper-backup_'+todayStr()+'.json');
+  downloadBlob(JSON.stringify({app:'MHI PAPER',version:10,mode:S.mode,exportedAt:new Date().toISOString(),...DB.exportAll()},null,2),'application/json','mhi-paper-backup_'+todayStr()+'.json');
   toast('Cadangan JSON diunduh.',{icon:'download'});sfx.tick();
 }
 function openSetup(){
@@ -2778,9 +3017,11 @@ async function saveSetup(){
     DB=Object.create(Cloud);await DB.init({url,key,domain});S.mode='cloud';
     setupMsg('Terhubung. Silakan masuk dengan akun Supabase Anda.','ok');
     $('#setupWrap').classList.remove('show');
-    $('#lgErr').hidden=true;$('#lgDiag').hidden=true;$('#lgPass').value='';
+    $('#lgErr').hidden=true;$('#lgDiag').hidden=true;
+    if(!S.me)$('#lgPass').value='';
     renderLoginScreen();sfx.ok();
     toast('Supabase terhubung — <b>@'+esc(domain)+'</b>.',{icon:'building',duration:4200});
+    if(S.me){await reloadAll();buildSelects();buildTabs();refreshDataViews();detectProv()}
   }catch(err){setupMsg(esc(err.message),'err');sfx.error()}
   finally{btn.disabled=false;btn.textContent='Simpan & Hubungkan'}
 }
@@ -2816,10 +3057,7 @@ function bindGlobal(){
   $('#lgKode').addEventListener('change',()=>{syncEmailPreview();$('#lgErr').hidden=true});
   $('#lgEmail').addEventListener('input',()=>{syncEmailPreview();$('#lgErr').hidden=true});
   $('#lgPass').addEventListener('input',()=>{$('#lgErr').hidden=true});
-  $('#lgPass').addEventListener('keyup',e=>{
-    const on=e.getModifierState&&e.getModifierState('CapsLock');
-    $('#lgCaps').hidden=!on;
-  });
+  $('#lgPass').addEventListener('keyup',e=>{const on=e.getModifierState&&e.getModifierState('CapsLock');$('#lgCaps').hidden=!on});
   $('#suDomain').addEventListener('input',()=>{$('#suPreview').textContent='kepala@'+($('#suDomain').value.replace(/^@/,'')||'mhi.local')});
   $('#uuKode').addEventListener('input',()=>setPickedRole(pickedRole));
   document.addEventListener('input',e=>{
@@ -2879,6 +3117,7 @@ function bindGlobal(){
   });
   document.addEventListener('keydown',e=>{
     if(e.key==='Escape'){
+      if($('#passWrap').classList.contains('show')){$('#passWrap').classList.remove('show');return}
       if($('#userWrap').classList.contains('show')){$('#userWrap').classList.remove('show');return}
       if($('#setupWrap').classList.contains('show')){$('#setupWrap').classList.remove('show');return}
       if($('#modalWrap').classList.contains('show')){closeModal(modalIsPrompt?null:false);return}
@@ -2894,6 +3133,7 @@ function bindGlobal(){
   $('#modalWrap').addEventListener('click',e=>{if(e.target.id==='modalWrap')closeModal(modalIsPrompt?null:false)});
   $('#setupWrap').addEventListener('click',e=>{if(e.target.id==='setupWrap')$('#setupWrap').classList.remove('show')});
   $('#userWrap').addEventListener('click',e=>{if(e.target.id==='userWrap')$('#userWrap').classList.remove('show')});
+  $('#passWrap').addEventListener('click',e=>{if(e.target.id==='passWrap')$('#passWrap').classList.remove('show')});
   $('#reportForm').addEventListener('submit',e=>{e.preventDefault();goToDetail()});
   $('#detailForm').addEventListener('submit',e=>{e.preventDefault();saveProduction()});
   $('#otherForm').addEventListener('submit',e=>{e.preventDefault();saveOther()});
@@ -2905,21 +3145,31 @@ async function handleAction(t,e){
   case 'quick-login':await doLogin(t.dataset.kode,DEMO_PASS);break;
   case 'login-mode':S.loginMode=t.dataset.mode;$('#lgErr').hidden=true;renderLoginScreen();sfx.tick();break;
   case 'set-domain':{const c=readCfg();if(!c)break;c.domain=t.dataset.dom;writeCfg(c);
-    if(DB===Cloud||S.mode==='cloud'){DB.cfg=c}
+    if(S.mode==='cloud'&&DB.cfg)DB.cfg=c;
     $('#lgErr').hidden=true;renderLoginScreen();sfx.tick();
     toast(`Domain email diubah ke <b>@${esc(t.dataset.dom)}</b>.`,{type:'info',icon:'building',duration:2800});break}
   case 'copy-email':{const em=currentEmail();
     try{await navigator.clipboard.writeText(em);toast('Email disalin: <b>'+esc(em)+'</b>',{icon:'copy',duration:2600})}
     catch(err){toast('Salin manual: <b>'+esc(em)+'</b>',{type:'info',icon:'info',duration:5000})}break}
+  case 'copy-sql':{const id=t.dataset.sql;
+    const map={insert:SQL_INSERT_POLICY,full:SQL_FULL_ACCESS,edge:EDGE_FN_CODE,bootstrap:(S.diag.find(d=>d.sqlId==='bootstrap')||{}).sql||''};
+    const txt=map[id]||'';
+    try{await navigator.clipboard.writeText(txt);toast('Disalin ke clipboard — tempel di Supabase SQL Editor.',{icon:'copy',duration:3200})}
+    catch(err){toast('Clipboard diblokir. Blok teks lalu salin manual.',{type:'info',icon:'info',duration:4000})}break}
   case 'trim-pass':{const p=$('#lgPass');p.value=p.value.trim();$('#lgErr').hidden=true;toast('Spasi di tepi sandi dihapus.',{icon:'rotate',duration:2400});break}
   case 'diag-run':await runDiag();break;
   case 'diag-close':$('#lgDiag').hidden=true;break;
+  case 'acct-diag':await runAcctDiag();break;
+  case 'goto-diag':S.uTab='diagnosa';setView('users');break;
   case 'use-local':await useLocalMode();break;
   case 'open-setup':openSetup();break;
   case 'setup-close':$('#setupWrap').classList.remove('show');break;
   case 'setup-save':await saveSetup();break;
   case 'setup-local':$('#setupWrap').classList.remove('show');await useLocalMode();break;
   case 'logout':await doLogout();break;
+  case 'my-pass':$('#userMenu').hidden=true;openPassModal(S.me.id);break;
+  case 'pass-cancel':$('#passWrap').classList.remove('show');break;
+  case 'pass-save':await savePass();break;
   case 'user-menu':{const m=$('#userMenu');m.hidden=!m.hidden;t.setAttribute('aria-expanded',String(!m.hidden));break}
   case 'nav':{const v=t.dataset.nav;
     if(v==='form'&&S.form.jenis==='lainnya')S.form.jenis='pack';
@@ -3012,13 +3262,11 @@ async function handleAction(t,e){
     if(u.id===S.me.id){toast('Tidak dapat menghapus akun sendiri.',{type:'warn',icon:'lock'});break}
     const laps=S.reports.filter(r=>r.operatorId===u.kode).length;
     if(laps>0){toast(`Akun <b>${esc(u.nama)}</b> punya ${laps} laporan. Nonaktifkan saja agar arsip tetap utuh.`,{type:'warn',icon:'lock',duration:5200});break}
-    const ok=await openConfirm({title:`Hapus akun @${esc(u.kode)}?`,msg:`<b>${esc(u.nama)}</b> — ${ROLES[u.role].label}. Akun belum punya laporan, jadi dapat dihapus.`,ok:'Hapus Akun'});
-    if(ok){try{await DB.delUser(u.id);await reloadAll();buildSelects();buildTabs();renderUsers();sfx.del();toast(`Akun <b>${esc(u.nama)}</b> dihapus.`,{type:'warn',icon:'trash'})}catch(err){toast(esc(err.message),{type:'error',icon:'lock'});sfx.error()}}break}
-  case 'user-pass':{const u=S.profiles.find(x=>x.id===t.dataset.id);if(!u)break;
-    const pass=await openPrompt({title:`Reset sandi ${u.nama}`,msg:'Berikan kata sandi baru kepada yang bersangkutan secara langsung.',label:'Kata sandi baru (min. 6 karakter)',placeholder:'••••••',ok:'Reset Sandi'});
-    if(pass&&pass.length>=6){try{await DB.resetPass(u.id,pass);toast(`Sandi <b>${esc(u.nama)}</b> diperbarui.`,{icon:'key'});sfx.ok()}catch(err){toast(esc(err.message),{type:'error',icon:'lock'})}}
-    else if(pass)toast('Kata sandi minimal 6 karakter.',{type:'warn',icon:'alert'});
-    break}
+    const ok=await openConfirm({title:`Hapus akun @${esc(u.kode)}?`,msg:`<b>${esc(u.nama)}</b> — ${ROLES[u.role].label}.${S.mode==='cloud'&&S.provMode!=='fn'?'<br><br>Tanpa Edge Function, yang dihapus adalah <b>profilnya</b> (akses aplikasi dicabut). Akun Auth tetap ada di dashboard Supabase.':'<br>Akun dihapus permanen.'}`,ok:'Hapus Akun'});
+    if(ok){try{const r=await DB.delUser(u.id);await reloadAll();buildSelects();buildTabs();renderUsers();sfx.del();
+      toast(r&&r.via==='profile-only'?`Profil <b>${esc(u.nama)}</b> dihapus — akses aplikasi dicabut. Akun Auth masih ada di dashboard.`:`Akun <b>${esc(u.nama)}</b> dihapus.`,{type:'warn',icon:'trash',duration:5200})}
+      catch(err){toast(esc(err.message),{type:'error',icon:'lock'});sfx.error()}}break}
+  case 'user-pass':openPassModal(t.dataset.id);break;
   case 'modal-ok':closeModal(modalIsPrompt?($('#modalInput').value.trim()||null):true);break;
   case 'modal-cancel':closeModal(modalIsPrompt?null:false);break;
   }
