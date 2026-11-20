@@ -1,0 +1,9 @@
+{
+  "name": "mhi-paper",
+  "version": "7.0.0",
+  "private": true,
+  "scripts": {
+    "dev": "npx --yes serve public -l 5173",
+    "fn:deploy": "supabase functions deploy manage-user"
+  }
+}
