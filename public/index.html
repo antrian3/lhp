@@ -958,19 +958,19 @@ html{scroll-behavior:auto}}
         <div><b>MHI PAPER</b><small>PRODUKSI KERTAS ECG / EKG &amp; PLAIN</small></div>
       </div>
       <h1 class="mon-title">TIGA PERAN,<br>SATU <em>DATA PABRIK</em></h1>
-      <p class="mon-sub">Kepala produksi menambah pengguna langsung dari aplikasi — tanpa CLI. Bila Edge Function belum ada, aplikasi memakai jalur RLS dan menampilkan error Supabase apa adanya.</p>
+      <p class="mon-sub">Tampilan menyesuaikan hak akses: operator hanya melihat laporannya sendiri tanpa alat ekspor, admin memverifikasi, kepala produksi memegang kendali penuh.</p>
       <svg class="mon-ecg" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
         <path id="ecgLoginBase" class="base" fill="none" d="M0 60 L1200 60"/>
         <path id="ecgLoginRun" class="run" fill="none" pathLength="1000" d="M0 60 L1200 60"/>
       </svg>
       <div class="role-cards">
         <div class="rc-role k"><span class="rr-tag">FULL</span><span class="rr-ic"><span data-ic="shield" data-sz="15"></span></span><div><b>Kepala Produksi</b><small>Semua laporan · verifikasi · hapus permanen · <b>kelola pengguna</b> · audit</small></div></div>
-        <div class="rc-role a"><span class="rr-tag">SEBAGIAN</span><span class="rr-ic"><span data-ic="checkCircle" data-sz="15"></span></span><div><b>Admin Produksi</b><small>Verifikasi &amp; master produk. <b>Tanpa menu Pengguna.</b></small></div></div>
-        <div class="rc-role o"><span class="rr-tag">TERBATAS</span><span class="rr-ic"><span data-ic="package" data-sz="15"></span></span><div><b>Operator</b><small>Hanya laporan sendiri, sebelum diverifikasi.</small></div></div>
+        <div class="rc-role a"><span class="rr-tag">SEBAGIAN</span><span class="rr-ic"><span data-ic="checkCircle" data-sz="15"></span></span><div><b>Admin Produksi</b><small>Verifikasi, master, export &amp; cetak. <b>Tanpa menu Pengguna.</b></small></div></div>
+        <div class="rc-role o"><span class="rr-tag">TERBATAS</span><span class="rr-ic"><span data-ic="package" data-sz="15"></span></span><div><b>Operator</b><small>Hanya laporan sendiri. Tanpa export, cetak rekap, atau info koneksi.</small></div></div>
       </div>
       <div class="mon-foot">
         <span class="mode-chip" id="lgMode">MODE LOKAL</span>
-        <span class="mono sm">FORM LH-ECG-01 · REV. 10 · PROVISIONING</span>
+        <span class="mono sm">FORM LH-ECG-01 · REV. 11 · TAMPILAN PER PERAN</span>
       </div>
     </div>
   </div>
@@ -1066,7 +1066,7 @@ html{scroll-behavior:auto}}
           <button class="ume-item" data-act="nav" data-nav="history"><span data-ic="barChart" data-sz="15"></span> Riwayat &amp; Rekap</button>
           <button class="ume-item" data-act="nav" data-nav="users" id="umeUsers"><span data-ic="userPlus" data-sz="15"></span> Manajemen Pengguna</button>
           <button class="ume-item" data-act="my-pass"><span data-ic="key" data-sz="15"></span> Ganti Sandi Saya</button>
-          <button class="ume-item" data-act="open-setup"><span data-ic="building" data-sz="15"></span> Koneksi Data</button>
+          <button class="ume-item" data-act="open-setup" id="umeSetup"><span data-ic="building" data-sz="15"></span> Koneksi Data</button>
           <button class="ume-item danger" data-act="logout"><span data-ic="logout" data-sz="15"></span> Keluar</button>
         </div>
       </div>
@@ -1078,7 +1078,7 @@ html{scroll-behavior:auto}}
 
 <section id="view-form" class="view" aria-label="Identitas laporan">
   <div class="hero">
-    <div class="hero-top"><span>FORM LH-ECG-01 · REV. 10</span><span class="live"><i class="dot"></i><span id="shiftLive">SHIFT BERJALAN</span></span></div>
+    <div class="hero-top"><span>FORM LH-ECG-01 · REV. 11</span><span class="live"><i class="dot"></i><span id="shiftLive">SHIFT BERJALAN</span></span></div>
     <h1 class="hero-title">Laporan Harian <em>Produksi</em></h1>
     <svg class="ecg" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true"><path id="ecgBaseF" class="base" fill="none" d="M0 32 L1200 32"/><path id="ecgRunF" class="run" fill="none" pathLength="1000" d="M0 32 L1200 32"/></svg>
   </div>
@@ -1265,9 +1265,9 @@ html{scroll-behavior:auto}}
       <div class="chips" id="savedChips"></div>
       <button class="chip" data-act="view-save"><span data-ic="bookmark" data-sz="11"></span> Simpan Tampilan</button>
       <span class="tb-spacer"></span>
-      <button class="btn btn-ghost btn-sm" data-act="reload-data"><span data-ic="rotate" data-sz="14"></span> Muat Ulang</button>
-      <button class="btn btn-ghost btn-sm" data-act="export-csv"><span data-ic="download" data-sz="14"></span> Export CSV</button>
-      <button class="btn btn-ghost btn-sm" data-act="print-recap"><span data-ic="printer" data-sz="14"></span> Cetak Rekap</button>
+      <button class="btn btn-ghost btn-sm" id="btnReload" data-act="reload-data"><span data-ic="rotate" data-sz="14"></span> Muat Ulang</button>
+      <button class="btn btn-ghost btn-sm" id="btnExport" data-act="export-csv"><span data-ic="download" data-sz="14"></span> Export CSV</button>
+      <button class="btn btn-ghost btn-sm" id="btnPrint" data-act="print-recap"><span data-ic="printer" data-sz="14"></span> Cetak Rekap</button>
     </div>
   </div>
   <div class="bulk-bar" id="bulkBar" hidden></div>
@@ -1413,7 +1413,6 @@ const CONFIG={SUPABASE_URL:'https://ooqnifjwbglmpmmpinmo.supabase.co',SUPABASE_A
 const KET_MAX=300;
 
 const SQL_INSERT_POLICY=`-- Jalankan di Supabase → SQL Editor → Run
--- Mengizinkan kepala produksi membuat baris profil untuk akun baru.
 drop policy if exists profiles_insert on public.profiles;
 create policy profiles_insert on public.profiles
   for insert to authenticated
@@ -1552,14 +1551,14 @@ const shiftLabel=s=>SHIFTS[s]||SHIFTS.N1;
 const shiftShort=s=>SHIFT_SHORT[s]||'S1';
 const ROLES={
 kepala:{label:'Kepala Produksi',short:'KEPALA',cls:'b-kepala',icon:'shield',color:'#B22F2C',hint:'Akses penuh: semua laporan, verifikasi, hapus permanen, master, sistem, audit, dan manajemen pengguna.'},
-admin:{label:'Admin Produksi',short:'ADMIN',cls:'b-admin',icon:'checkCircle',color:'#236FD6',hint:'Semua laporan, verifikasi & revisi, arsip, master produk. Tidak dapat melihat atau menambah pengguna.'},
-operator:{label:'Operator',short:'OPERATOR',cls:'b-operator',icon:'package',color:'#0FA3A3',hint:'Hanya laporan miliknya. Mengisi dan mengedit selama belum diverifikasi.'}};
+admin:{label:'Admin Produksi',short:'ADMIN',cls:'b-admin',icon:'checkCircle',color:'#236FD6',hint:'Semua laporan, verifikasi & revisi, arsip, master produk, export & cetak. Tidak dapat melihat atau menambah pengguna.'},
+operator:{label:'Operator',short:'OPERATOR',cls:'b-operator',icon:'package',color:'#0FA3A3',hint:'Hanya laporan miliknya. Mengisi dan mengedit selama belum diverifikasi. Tanpa export, cetak rekap, atau info koneksi.'}};
 const STATUS={submit:{label:'Menunggu Verifikasi',short:'MENUNGGU',cls:'b-submit',icon:'clock'},revisi:{label:'Perlu Revisi',short:'REVISI',cls:'b-revisi',icon:'alert'},verified:{label:'Terverifikasi',short:'VERIFIED',cls:'b-verified',icon:'checkCircle'}};
 const ACCESS={form:['kepala','admin','operator'],detail:['kepala','admin','operator'],other:['kepala','admin','operator'],history:['kepala','admin','operator'],verify:['kepala','admin'],master:['kepala','admin'],users:['kepala']};
 const ROUTES={form:'#/laporan',detail:'#/detail-produksi',other:'#/kegiatan-lain',history:'#/riwayat',verify:'#/verifikasi',master:'#/master-produk',users:'#/pengguna'};
 const MATRIX=[
-{g:'LAPORAN HARIAN',rows:[['Buat laporan untuk diri sendiri',1,1,1],['Lihat laporan seluruh divisi',1,1,'own'],['Edit laporan sendiri · belum diverifikasi',1,1,1],['Edit laporan operator lain',1,1,0],['Verifikasi & kembalikan untuk revisi',1,1,0],['Batalkan verifikasi',1,1,0],['Arsipkan & pulihkan laporan',1,1,0],['Hapus permanen dari arsip',1,0,0],['Export CSV & cetak rekap',1,1,'own']]},
-{g:'MASTER & SISTEM',rows:[['Kelola master produk Pack / Roll',1,1,0],['Koneksi cloud & cadangan data',1,0,0],['Lihat audit log',1,0,0]]},
+{g:'LAPORAN HARIAN',rows:[['Buat laporan untuk diri sendiri',1,1,1],['Lihat laporan seluruh divisi',1,1,'own'],['Edit laporan sendiri · belum diverifikasi',1,1,1],['Edit laporan operator lain',1,1,0],['Verifikasi & kembalikan untuk revisi',1,1,0],['Batalkan verifikasi',1,1,0],['Arsipkan & pulihkan laporan',1,1,0],['Hapus permanen dari arsip',1,0,0],['Muat ulang data dari server',1,1,0],['Export CSV',1,1,0],['Cetak rekap',1,1,0]]},
+{g:'MASTER & SISTEM',rows:[['Kelola master produk Pack / Roll',1,1,0],['Info koneksi cloud (chip CLOUD)',1,0,0],['Ubah koneksi & cadangan data',1,0,0],['Lihat audit log',1,0,0]]},
 {g:'MANAJEMEN PENGGUNA',rows:[['Melihat menu Pengguna',1,0,0],['Menambah pengguna baru',1,0,0],['Mengubah peran & data pengguna',1,0,0],['Reset kata sandi pengguna',1,0,0],['Nonaktifkan akun',1,0,0],['Hapus akun tanpa laporan',1,0,0]]}];
 const PACK_SEED=['ENDO Paper Pack 210 x 140/180_EIECG12CH','ENDO Paper Pack 210 x 140/150_EIECG3CH','ENDO Paper Pack 210 x 140/180_EIECG6CH','Fukuda Paper Pack 210 x 140/150_FDECG3CH','Nihon Kohden Paper Pack 210 x 140/180_NKECG12CH','Schiller Paper Pack 210 x 140/140_SCECG12CH','GE Marquette Paper Pack 210 x 140/180_GEECG12CH','Bistos Paper Pack 210 x 140/145_BTECG3CH'];
 const ROLL_SEED=['ENDO Paper Roll 210 x 25m_Var 12 Ch','ENDO Paper Roll 110 x 20m_Var 3 Ch','Nihon Kohden Paper Roll 210 x 30m_NKECG12CH','Schiller Paper Roll 112 x 20m_SCECG3CH','GE Marquette Paper Roll 210 x 25m_GEECG12CH','Fukuda Paper Roll 110 x 20m_FDECG3CH','Contec Paper Roll 110 x 20m_CTECG3CH'];
@@ -1604,6 +1603,9 @@ const canMaster=()=>!!S.me&&S.me.role!=='operator';
 const canArchive=()=>canVerify();
 const canPurge=()=>isKepala();
 const canManageUsers=()=>isKepala();
+const canExport=()=>!!S.me&&S.me.role!=='operator';
+const canReload=()=>!!S.me&&S.me.role!=='operator';
+const canSeeConnection=()=>isKepala();
 const canEdit=r=>{if(!S.me||r.deletedAt)return false;if(canVerify())return true;return r.operatorId===S.me.kode&&r.status!=='verified'};
 const itemWaktu=it=>num(it.prep)+num(it.setting)+num(it.ops);
 const itemNet=it=>num(it.hasil)-num(it.reject);
@@ -1834,10 +1836,7 @@ const Cloud={
   async addProduct(jenis,nama){const{data,error}=await this.sb.from('products').insert({jenis,nama,aktif:true}).select().single();if(error)throw new Error(error.message);return{id:data.id,jenis:data.jenis,nama:data.nama,aktif:data.aktif}},
   async updProduct(id,patch){const{error}=await this.sb.from('products').update(patch).eq('id',id);if(error)throw new Error(error.message)},
   async delProduct(id){const{error}=await this.sb.from('products').delete().eq('id',id);if(error)throw new Error(error.message)},
-  async rawInvoke(body){
-    const res=await this.sb.functions.invoke('manage-user',{body});
-    return res;
-  },
+  async rawInvoke(body){return this.sb.functions.invoke('manage-user',{body})},
   async probeFunction(){
     try{
       const{data,error}=await this.rawInvoke({action:'ping'});
@@ -2103,7 +2102,6 @@ function updateProvChip(){
   const m=map[S.provMode]||map.unknown;
   c.className='prov-chip '+m[0];
   c.innerHTML=icon(S.provMode==='fn'?'zap':S.provMode==='direct'?'database':'info',11)+' <span id="provLbl">'+m[1]+'</span>';
-  c.title=S.provMode==='fn'?'Pengelolaan akun lewat Edge Function (service_role)':S.provMode==='direct'?'Pengelolaan akun langsung lewat signUp + RLS — tanpa CLI':'Jalankan Diagnosa untuk mengetahui jalur yang dipakai';
 }
 async function detectProv(){
   if(S.mode!=='cloud'){S.provMode='local';updateProvChip();return}
@@ -2185,6 +2183,11 @@ function applyRoleUI(){
   $('#umeName').textContent=S.me.nama;$('#umeMeta').textContent=`@${S.me.kode} · ${S.me.jabatan||S.me.mesin||''}`;
   $('#umeBadge').innerHTML=roleBadge(S.me.role);
   $('#umeUsers').hidden=!k;
+  /*_chip CLOUD / LOKAL hanya untuk kepala produksi_*/
+  $('#syncChip').hidden=!canSeeConnection();
+  $('#umeSetup').hidden=!canSeeConnection();
+  /*_Muat Ulang · Export CSV · Cetak Rekap disembunyikan untuk operator_*/
+  ['btnReload','btnExport','btnPrint'].forEach(id=>{const el=document.getElementById(id);if(el)el.hidden=op});
   ['#f-operator','#o-operator'].forEach(s=>{const el=$(s);if(el)el.disabled=op});
   $('#identHint').textContent=op?'Operator terkunci pada akun Anda sendiri.':'Pilih operator — nama & jabatan terisi otomatis.';
   $('#fl-operator').disabled=op;$('#archChip').hidden=op;
@@ -2193,9 +2196,11 @@ function applyRoleUI(){
   $('#sysCard').hidden=!k;
 }
 function updateSyncChip(){
-  $('#syncChip').classList.toggle('cloud',S.mode==='cloud');
+  const chip=$('#syncChip');
+  chip.classList.toggle('cloud',S.mode==='cloud');
   $('#syncLbl').textContent=S.mode==='cloud'?'CLOUD':'LOKAL';
-  $('#syncChip').title=S.mode==='cloud'?`Supabase terhubung · sinkron ${fmtTS(S.lastSync)}`:'Mode lokal — data di perangkat ini saja';
+  chip.title=S.mode==='cloud'?`Supabase terhubung · sinkron ${fmtTS(S.lastSync)}`:'Mode lokal — data di perangkat ini saja';
+  chip.hidden=!canSeeConnection();
 }
 function buildSelects(){
   const ops=S.profiles.filter(p=>p.aktif);
@@ -2302,7 +2307,7 @@ function updateItemCalc(key){
   if(ki)ki.classList.toggle('has-val',!!ket);
   if(kh){
     if(r>0&&!ket){kh.textContent=`Ada ${fmtNum(r)} ${j.unit} reject — tuliskan penyebabnya agar tidak dikembalikan saat verifikasi.`;kh.className='help warn'}
-    else if(ket){kh.textContent='Keterangan tercatat — ikut tampil di detail, CSV, dan cetakan.';kh.className='help ok'}
+    else if(ket){kh.textContent='Keterangan tercatat — ikut tampil di detail dan cetakan.';kh.className='help ok'}
     else{kh.textContent='Catatan penyebab reject, kendala mesin, atau kondisi bahan.';kh.className='help'}
   }
 }
@@ -2593,7 +2598,7 @@ function renderHistory(){
   bb.hidden=sel.size===0;
   if(sel.size){const arch=S.filters.archived,selRows=S.reports.filter(r=>sel.has(r.id));
     bb.innerHTML=`${icon('check',15)} <b>${sel.size} dipilih</b> · bersih <b>${fmtNum(sum(selRows,rNet))}</b> unit · waktu <b>${fmtMin(sum(selRows,rWaktu))}</b><span class="bb-actions">
-    <button class="btn btn-ghost btn-sm" data-act="bulk-export">${icon('download',13)} Export CSV</button>
+    ${canExport()?`<button class="btn btn-ghost btn-sm" data-act="bulk-export">${icon('download',13)} Export CSV</button>`:''}
     ${canVerify()&&!arch?`<button class="btn btn-green btn-sm" data-act="bulk-verify">${icon('checkCircle',13)} Verifikasi</button>`:''}
     ${canArchive()?`<button class="btn ${arch?'btn-ghost':'btn-danger'} btn-sm" data-act="bulk-delete">${icon(arch?'undo':'trash',13)} ${arch?'Pulihkan':'Arsipkan'}</button>`:''}
     ${canPurge()&&arch?`<button class="btn btn-danger btn-sm" data-act="bulk-purge">${icon('trash',13)} Hapus Permanen</button>`:''}
@@ -2700,9 +2705,9 @@ ${cloud?'':`<div class="sys-cell"><h4>${icon('alert',15)} Reset Data Demo</h4><p
   }
 }
 const PERM_CHIPS={
-kepala:[['Semua laporan',1],['Verifikasi',1],['Hapus permanen',1],['Master',1],['Kelola pengguna',1],['Audit',1]],
-admin:[['Semua laporan',1],['Verifikasi',1],['Master',1],['Hapus permanen',0],['Kelola pengguna',0],['Audit',0]],
-operator:[['Laporan sendiri',1],['Edit belum verified',1],['Verifikasi',0],['Master',0],['Kelola pengguna',0],['Hapus',0]]};
+kepala:[['Semua laporan',1],['Verifikasi',1],['Hapus permanen',1],['Master',1],['Export & cetak',1],['Info cloud',1],['Kelola pengguna',1]],
+admin:[['Semua laporan',1],['Verifikasi',1],['Master',1],['Export & cetak',1],['Hapus permanen',0],['Info cloud',0],['Kelola pengguna',0]],
+operator:[['Laporan sendiri',1],['Edit belum verified',1],['Verifikasi',0],['Master',0],['Export & cetak',0],['Info cloud',0],['Kelola pengguna',0]]};
 function renderUsers(){
   if(!canManageUsers()){$('#uPaneUsers').innerHTML='';return}
   const all=S.profiles,c={kepala:0,admin:0,operator:0};
@@ -2754,8 +2759,8 @@ function renderMatrix(){
   const cell=v=>v===1?`<span class="mx-yes" title="Diizinkan">${icon('check',13)}</span>`:v==='own'?`<span class="mx-own">MILIK SENDIRI</span>`:`<span class="mx-no" title="Ditolak">${icon('x',13)}</span>`;
   const legend=`<div class="mx-legend">
   <div class="mx-lg k"><span class="avatar" style="--av:#B22F2C">${icon('shield',13)}</span><div><b>Kepala Produksi</b><small>AKSES PENUH + KELOLA USER</small></div></div>
-  <div class="mx-lg a"><span class="avatar" style="--av:#236FD6">${icon('checkCircle',13)}</span><div><b>Admin Produksi</b><small>TANPA MENU PENGGUNA</small></div></div>
-  <div class="mx-lg o"><span class="avatar" style="--av:#0FA3A3">${icon('package',13)}</span><div><b>Operator</b><small>HANYA LAPORAN SENDIRI</small></div></div></div>`;
+  <div class="mx-lg a"><span class="avatar" style="--av:#236FD6">${icon('checkCircle',13)}</span><div><b>Admin Produksi</b><small>TANPA PENGGUNA &amp; INFO CLOUD</small></div></div>
+  <div class="mx-lg o"><span class="avatar" style="--av:#0FA3A3">${icon('package',13)}</span><div><b>Operator</b><small>TANPA EXPORT · CETAK · CLOUD</small></div></div></div>`;
   const groups=MATRIX.map(g=>`<div class="mx-group"><div class="mx-gtitle">${esc(g.g)}</div><div class="mx-scroll"><table class="mx-tbl"><thead><tr><th>Kemampuan</th><th class="k">Kepala</th><th class="a">Admin</th><th class="o">Operator</th></tr></thead><tbody>${g.rows.map(r=>`<tr><td>${esc(r[0])}</td><td>${cell(r[1])}</td><td>${cell(r[2])}</td><td>${cell(r[3])}</td></tr>`).join('')}</tbody></table></div></div>`).join('');
   $('#mxBody').innerHTML=legend+groups+`<div class="d-note" style="margin-top:18px">${icon('lock',15)}<span><b>Ditegakkan di dua lapis.</b> Tampilan menyembunyikan menu yang bukan haknya, dan lapisan data menolak perintah yang lolos — operator tidak bisa memverifikasi laporannya sendiri, admin tidak bisa membuat akun, meski lewat konsol browser.</span></div>`;
 }
@@ -2810,7 +2815,7 @@ async function saveUser(){
       toast(`Akun <b>@${esc(kode)}</b> dibuat sebagai ${ROLES[pickedRole].label} · via ${via}.`,{icon:'userPlus',duration:5000});
     }
     $('#userWrap').classList.remove('show');
-    await reloadAll();buildSelects();buildTabs();renderUsers();refreshDataViews();updateProvChip();sfx.ok();
+    await reloadAll();buildSelects();buildTabs();applyRoleUI();renderUsers();refreshDataViews();updateProvChip();sfx.ok();
   }catch(err){userMsg(esc(err.message),'err',S.lastRawError);S.lastRawError='';sfx.error()}
   finally{btn.disabled=false;btn.textContent='Simpan Pengguna'}
 }
@@ -2926,6 +2931,7 @@ function downloadBlob(content,type,filename){
   catch(e){toast('Unduhan gagal di perangkat ini.',{type:'error',icon:'alert'})}
 }
 function exportCSV(rows){
+  if(!canExport()){toast('Export CSV tidak tersedia untuk operator.',{type:'warn',icon:'lock'});return}
   if(!rows.length){toast('Tidak ada data untuk diexport.',{type:'warn',icon:'alert'});return}
   const head=['Kode Laporan','Tanggal','Shift','Nama Operator','Jabatan','Jenis Kegiatan','Status','Verifikator','Item / Kegiatan','Nomor PO','Nomor SPK','Persiapan (mnt)','Setting (mnt)','Operasional (mnt)','Total Waktu Kegiatan (mnt)','Waktu Kegiatan Lain (mnt)','Total Waktu Laporan (mnt)','Hasil','Satuan','Reject','Hasil Bersih','Keterangan'];
   const lines=[head];
@@ -2944,10 +2950,11 @@ function exportCSV(rows){
   downloadBlob(csv,'text/csv;charset=utf-8','laporan-produksi-ecg_'+todayStr()+'.csv');
   toast(`${rows.length} laporan diexport (${lines.length-1} baris data).`,{icon:'download'});sfx.tick();
 }
-const printHead=(t,s)=>`<div class="p-head"><div class="p-brand"><div class="p-logo">M</div><div><b>MHI PAPER</b><small>Produksi Kertas ECG/EKG dan Plain</small></div></div><div class="p-doc">FORM LH-ECG-01<br>REV. 10</div></div><div class="p-title">${t}</div><p class="p-sub">${s}</p>`;
+const printHead=(t,s)=>`<div class="p-head"><div class="p-brand"><div class="p-logo">M</div><div><b>MHI PAPER</b><small>Produksi Kertas ECG/EKG dan Plain</small></div></div><div class="p-doc">FORM LH-ECG-01<br>REV. 11</div></div><div class="p-title">${t}</div><p class="p-sub">${s}</p>`;
 const printFoot=()=>`<div class="p-foot">Dicetak: ${new Date().toLocaleString('id-ID')} · ${S.me?esc(S.me.nama)+' ('+ROLES[S.me.role].label+')':''} · Bersih = hasil − reject · MHI PAPER.</div>`;
 const signBlock=(o,v)=>`<table class="p-sign"><tr><td>Dibuat oleh,<br><br><br><br><u>&nbsp;&nbsp;${esc(o||'________________')}&nbsp;&nbsp;</u><br><small>Operator</small></td><td>Diperiksa oleh,<br><br><br><br><u>&nbsp;&nbsp;${esc(v||'________________')}&nbsp;&nbsp;</u><br><small>Admin Produksi</small></td><td>Disetujui oleh,<br><br><br><br><u>&nbsp;&nbsp;________________&nbsp;&nbsp;</u><br><small>Kepala Produksi</small></td></tr></table>`;
 function printRecap(){
+  if(!canExport()){toast('Cetak rekap tidak tersedia untuk operator.',{type:'warn',icon:'lock'});return}
   const rows=getFiltered();
   if(!rows.length){toast('Tidak ada data untuk dicetak.',{type:'warn',icon:'alert'});return}
   const periode={all:'Semua Periode',today:'Hari Ini ('+fmtDate(todayStr())+')','7':'7 Hari Terakhir','30':'30 Hari Terakhir'}[S.filters.period]||'Semua Periode';
@@ -2992,10 +2999,12 @@ function printSingle(id){
 }
 function doPrint(){toast('Menyiapkan halaman cetak…',{type:'info',icon:'printer',duration:2200});setTimeout(()=>{try{window.print()}catch(e){}},80)}
 function backupJSON(){
-  downloadBlob(JSON.stringify({app:'MHI PAPER',version:10,mode:S.mode,exportedAt:new Date().toISOString(),...DB.exportAll()},null,2),'application/json','mhi-paper-backup_'+todayStr()+'.json');
+  if(!isKepala()){toast('Hanya kepala produksi.',{type:'warn',icon:'lock'});return}
+  downloadBlob(JSON.stringify({app:'MHI PAPER',version:11,mode:S.mode,exportedAt:new Date().toISOString(),...DB.exportAll()},null,2),'application/json','mhi-paper-backup_'+todayStr()+'.json');
   toast('Cadangan JSON diunduh.',{icon:'download'});sfx.tick();
 }
 function openSetup(){
+  if(S.me&&!canSeeConnection()){toast('Info &amp; pengaturan koneksi hanya untuk kepala produksi.',{type:'warn',icon:'lock',duration:4200});return}
   const c=readCfg();
   $('#suUrl').value=c?c.url:'';$('#suKey').value=c?c.key:'';$('#suDomain').value=c?c.domain:'mhi.local';
   $('#suPreview').textContent='kepala@'+($('#suDomain').value||'mhi.local');
@@ -3021,7 +3030,7 @@ async function saveSetup(){
     if(!S.me)$('#lgPass').value='';
     renderLoginScreen();sfx.ok();
     toast('Supabase terhubung — <b>@'+esc(domain)+'</b>.',{icon:'building',duration:4200});
-    if(S.me){await reloadAll();buildSelects();buildTabs();refreshDataViews();detectProv()}
+    if(S.me){await reloadAll();buildSelects();buildTabs();applyRoleUI();refreshDataViews();detectProv()}
   }catch(err){setupMsg(esc(err.message),'err');sfx.error()}
   finally{btn.disabled=false;btn.textContent='Simpan & Hubungkan'}
 }
@@ -3214,7 +3223,8 @@ async function handleAction(t,e){
   case 'export-csv':exportCSV(getFiltered());break;
   case 'print-recap':printRecap();break;
   case 'backup-json':backupJSON();break;
-  case 'reload-data':{t.disabled=true;try{await reloadAll();buildSelects();buildTabs();refreshDataViews();updateSyncChip();toast('Data disinkronkan.',{icon:'rotate',duration:2200});sfx.tick()}catch(err){toast('Gagal memuat: '+esc(err.message),{type:'error',icon:'alert'})}t.disabled=false;break}
+  case 'reload-data':{if(!canReload()){toast('Muat ulang data tidak tersedia untuk operator.',{type:'warn',icon:'lock'});break}
+    t.disabled=true;try{await reloadAll();buildSelects();buildTabs();refreshDataViews();updateSyncChip();toast('Data disinkronkan.',{icon:'rotate',duration:2200});sfx.tick()}catch(err){toast('Gagal memuat: '+esc(err.message),{type:'error',icon:'alert'})}t.disabled=false;break}
   case 'reset-demo':{if(!isKepala()){toast('Hanya kepala produksi.',{type:'warn',icon:'lock'});break}
     const ok=await openConfirm({title:'Reset seluruh data lokal?',msg:'Semua laporan, pengguna, dan produk di perangkat ini kembali ke contoh bawaan.',ok:'Reset Data'});
     if(ok){try{await DB.resetDemo();await reloadAll();buildSelects();buildTabs();refreshDataViews();renderMaster();toast('Data demo dikembalikan.',{type:'warn',icon:'rotate'})}catch(err){toast(esc(err.message),{type:'error',icon:'lock'})}}break}
@@ -3255,7 +3265,7 @@ async function handleAction(t,e){
   case 'user-save':await saveUser();break;
   case 'user-toggle':{const u=S.profiles.find(x=>x.id===t.dataset.id);if(!u)break;
     if(u.id===S.me.id){toast('Tidak dapat menonaktifkan akun sendiri.',{type:'warn',icon:'lock'});break}
-    try{await DB.updUser(u.id,{aktif:!u.aktif});await reloadAll();buildSelects();buildTabs();renderUsers();sfx.tick();
+    try{await DB.updUser(u.id,{aktif:!u.aktif});await reloadAll();buildSelects();buildTabs();applyRoleUI();renderUsers();sfx.tick();
       toast(`Akun <b>${esc(u.nama)}</b> ${!u.aktif?'diaktifkan':'dinonaktifkan'}.`,{type:!u.aktif?'success':'warn',icon:'shield'})}
     catch(err){toast(esc(err.message),{type:'error',icon:'lock'});sfx.error()}break}
   case 'user-del':{const u=S.profiles.find(x=>x.id===t.dataset.id);if(!u)break;
@@ -3263,7 +3273,7 @@ async function handleAction(t,e){
     const laps=S.reports.filter(r=>r.operatorId===u.kode).length;
     if(laps>0){toast(`Akun <b>${esc(u.nama)}</b> punya ${laps} laporan. Nonaktifkan saja agar arsip tetap utuh.`,{type:'warn',icon:'lock',duration:5200});break}
     const ok=await openConfirm({title:`Hapus akun @${esc(u.kode)}?`,msg:`<b>${esc(u.nama)}</b> — ${ROLES[u.role].label}.${S.mode==='cloud'&&S.provMode!=='fn'?'<br><br>Tanpa Edge Function, yang dihapus adalah <b>profilnya</b> (akses aplikasi dicabut). Akun Auth tetap ada di dashboard Supabase.':'<br>Akun dihapus permanen.'}`,ok:'Hapus Akun'});
-    if(ok){try{const r=await DB.delUser(u.id);await reloadAll();buildSelects();buildTabs();renderUsers();sfx.del();
+    if(ok){try{const r=await DB.delUser(u.id);await reloadAll();buildSelects();buildTabs();applyRoleUI();renderUsers();sfx.del();
       toast(r&&r.via==='profile-only'?`Profil <b>${esc(u.nama)}</b> dihapus — akses aplikasi dicabut. Akun Auth masih ada di dashboard.`:`Akun <b>${esc(u.nama)}</b> dihapus.`,{type:'warn',icon:'trash',duration:5200})}
       catch(err){toast(esc(err.message),{type:'error',icon:'lock'});sfx.error()}}break}
   case 'user-pass':openPassModal(t.dataset.id);break;
