@@ -9,7 +9,7 @@
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23D6403C'/%3E%3Cpolyline points='4 12 8 12 10 6 13 18 15 12 20 12' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&family=IBM+Plex+Mono:wght@400;500;600&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wght@400;500;600;700&family=Archivo+Black&family=Roboto+Mono:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
 :root{
 --paper:#FAF4EC;--surface:#FFFCF7;--surface-2:#F5EDE1;--surface-3:#EFE4D3;
@@ -22,8 +22,11 @@
 --plum:#7B4FC0;--plum-soft:#F0E9F9;
 --teal:#0FA3A3;--teal-soft:#E1F5F5;
 --font-display:'Archivo Black','Archivo',sans-serif;
+--font-brand:'Space Grotesk','Archivo',system-ui,sans-serif;
 --font-body:'Archivo',system-ui,sans-serif;
---font-mono:'IBM Plex Mono',ui-monospace,Menlo,monospace;
+--font-mono:'Roboto Mono',ui-monospace,Menlo,monospace;
+--font-num:'Space Grotesk','Roboto Mono',system-ui,sans-serif;
+--num-feat:'tnum' 1,'lnum' 1;
 --shadow:0 1px 2px rgba(80,55,25,.06),0 10px 28px rgba(80,55,25,.08);
 --topbar-h:66px;--hero-gap:30px}
 *{margin:0;padding:0;box-sizing:border-box}
@@ -43,7 +46,7 @@ body.locked{overflow:hidden}
 button{font-family:inherit;cursor:pointer;border:none;background:none;color:inherit}
 input,select,textarea{font-family:inherit}
 :focus-visible{outline:2px solid var(--blue);outline-offset:2px;border-radius:4px}
-.mono{font-family:var(--font-mono)}.muted{color:var(--ink-3)}.sm{font-size:11px}.ta-r{text-align:right}.ta-c{text-align:center}
+.mono{font-family:var(--font-mono);font-variant-numeric:tabular-nums lining-nums}.muted{color:var(--ink-3)}.sm{font-size:11px}.ta-r{text-align:right}.ta-c{text-align:center}
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .ic{display:inline-block;vertical-align:-2px;flex:none}
 .wrap{max-width:1300px;margin:0 auto;padding:0 20px}
@@ -55,29 +58,30 @@ body[data-view="login"] #loginScreen{display:grid}
 .mon-grid{position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(214,64,60,.16) 0 1px,transparent 1px 9px),repeating-linear-gradient(90deg,rgba(214,64,60,.16) 0 1px,transparent 1px 9px),repeating-linear-gradient(0deg,rgba(214,64,60,.3) 0 1px,transparent 1px 45px),repeating-linear-gradient(90deg,rgba(214,64,60,.3) 0 1px,transparent 1px 45px);-webkit-mask-image:radial-gradient(120% 90% at 30% 20%,#000 20%,transparent 78%);mask-image:radial-gradient(120% 90% at 30% 20%,#000 20%,transparent 78%)}
 .lg-monitor::after{content:'';position:absolute;width:620px;height:620px;right:-180px;bottom:-260px;border-radius:50%;background:radial-gradient(circle,rgba(123,79,192,.35),transparent 65%);filter:blur(20px);animation:drift 16s ease-in-out infinite alternate}
 @keyframes drift{to{transform:translate(-70px,-50px) scale(1.15)}}
-.mon-inner{position:relative;z-index:2;padding:42px 44px;display:flex;flex-direction:column;gap:17px;width:100%;max-width:700px}
-.mon-brand{display:flex;align-items:center;gap:12px}
-.mon-brand b{font:900 17px var(--font-display);letter-spacing:.02em;display:block}
-.mon-brand small{font:500 9.5px var(--font-mono);letter-spacing:.16em;color:#B9A99A}
-.brand-mark{width:36px;height:36px;border-radius:9px;background:linear-gradient(160deg,#E14B47,var(--red-deep));color:#fff;display:grid;place-items:center;box-shadow:0 4px 12px rgba(178,47,44,.35),inset 0 1px 0 rgba(255,255,255,.3);flex:none}
-.brand-mark.lg{width:46px;height:46px;border-radius:12px}
-.mon-title{font:400 clamp(28px,4vw,50px)/1.14 var(--font-display);letter-spacing:-.015em;text-transform:uppercase;padding:.1em 0 .06em;overflow:visible}
-.mon-title em{font-style:normal;background:linear-gradient(96deg,#FF6B63 10%,#E8940F 55%,#B98CF0);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block;line-height:inherit;padding:.12em 0 .1em}
-.mon-sub{color:#C6B7A8;font-size:13.5px;max-width:520px;line-height:1.6}
-.mon-ecg{width:100%;height:74px;display:block;overflow:visible}
+.mon-inner{position:relative;z-index:2;padding:44px 46px;display:flex;flex-direction:column;gap:20px;width:100%;max-width:720px}
+.mon-brand{display:flex;align-items:center;gap:13px}
+.mon-brand b{font:700 19px/1.2 var(--font-brand);letter-spacing:.085em;display:block;color:#FFF6EC}
+.mon-brand small{font:500 9.5px var(--font-mono);letter-spacing:.17em;color:#B9A99A;display:block;margin-top:3px}
+.brand-mark{width:38px;height:38px;border-radius:10px;background:linear-gradient(160deg,#E14B47,var(--red-deep));color:#fff;display:grid;place-items:center;box-shadow:0 4px 12px rgba(178,47,44,.35),inset 0 1px 0 rgba(255,255,255,.3);flex:none}
+.brand-mark.lg{width:48px;height:48px;border-radius:13px}
+.mon-title{font:400 clamp(30px,4.6vw,54px)/1.1 var(--font-display);letter-spacing:-.012em;text-transform:uppercase;padding:.1em 0 .06em;overflow:visible}
+.mon-title em{font-style:normal;background:linear-gradient(96deg,#FF6B63 8%,#E8940F 52%,#B98CF0);-webkit-background-clip:text;background-clip:text;color:transparent;display:inline-block;line-height:inherit;padding:.12em 0 .1em}
+.mon-ecg{width:100%;height:88px;display:block;overflow:visible}
 .mon-ecg .base{stroke:rgba(214,64,60,.28);stroke-width:1.5;fill:none}
 .mon-ecg .run{stroke:#FF5F57;stroke-width:2.6;fill:none;stroke-linecap:round;stroke-linejoin:round;stroke-dasharray:150 850;animation:ecgmove 3.4s linear infinite;filter:drop-shadow(0 0 8px rgba(255,95,87,.85))}
 @keyframes ecgmove{from{stroke-dashoffset:1000}to{stroke-dashoffset:0}}
-.role-cards{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}
-.rc-role{background:rgba(255,252,247,.05);border:1px solid var(--rc-b);border-radius:12px;padding:12px 13px;position:relative;overflow:hidden}
-.rc-role::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:var(--rc)}
-.rc-role .rr-ic{width:27px;height:27px;border-radius:8px;display:grid;place-items:center;background:var(--rc-s);color:var(--rc);margin-bottom:7px}
-.rc-role b{font:700 12px var(--font-body);color:#F6EDE2;display:block;line-height:1.25}
-.rc-role small{font:500 9.5px var(--font-mono);color:#A9998A;display:block;margin-top:4px;line-height:1.5}
-.rc-role .rr-tag{position:absolute;top:10px;right:10px;font:600 8px var(--font-mono);letter-spacing:.1em;color:var(--rc);background:var(--rc-s);border-radius:99px;padding:2px 7px}
-.rc-role.k{--rc:#FF8A82;--rc-s:rgba(214,64,60,.2);--rc-b:rgba(214,64,60,.4)}
-.rc-role.a{--rc:#7FB0F5;--rc-s:rgba(35,111,214,.2);--rc-b:rgba(35,111,214,.4)}
-.rc-role.o{--rc:#4FD6A8;--rc-s:rgba(18,157,114,.2);--rc-b:rgba(18,157,114,.4)}
+.mon-stats{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
+.ms-cell{background:rgba(255,252,247,.05);border:1px solid rgba(232,148,15,.22);border-radius:12px;padding:13px 15px}
+.ms-cell label{font:600 8.5px var(--font-mono);letter-spacing:.14em;color:#A9998A;display:block}
+.ms-cell b{font:600 22px var(--font-mono);color:#F6EDE2;display:block;margin-top:5px;letter-spacing:-.02em}
+.ms-cell.g b{color:#4FD6A8}.ms-cell.a b{color:#F5B94E}.ms-cell.b b{color:#7FB0F5}
+.mon-feed{background:rgba(0,0,0,.26);border:1px solid rgba(214,64,60,.22);border-radius:13px;padding:13px 15px}
+.mf-head{display:flex;align-items:center;gap:8px;font:600 9px var(--font-mono);letter-spacing:.15em;color:#A9998A;margin-bottom:9px}
+.mf-row{display:flex;align-items:center;gap:10px;padding:6px 8px;border-radius:8px;font:500 11px var(--font-mono);color:#C6B7A8;transition:.35s}
+.mf-row.on{background:rgba(214,64,60,.17);color:#FFE9E4}
+.mf-row .c{color:#FF8A82;flex:none}
+.mf-row .n{flex:1;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.mf-row .v{color:#4FD6A8;flex:none}
 .mon-foot{margin-top:auto;display:flex;align-items:center;gap:12px;flex-wrap:wrap;color:#8C7F73;padding-top:6px}
 .mode-chip{font:600 9px var(--font-mono);letter-spacing:.13em;padding:5px 11px;border-radius:99px;background:rgba(232,148,15,.16);border:1px solid rgba(232,148,15,.45);color:#F5B94E}
 .mode-chip.cloud{background:rgba(18,157,114,.16);border-color:rgba(18,157,114,.5);color:#4FD6A8}
@@ -159,9 +163,9 @@ body[data-view="login"] #loginScreen{display:grid}
 .topbar{position:fixed;top:0;left:0;right:0;height:var(--topbar-h);z-index:50;background:rgba(255,252,247,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-strong);box-shadow:0 1px 0 rgba(214,64,60,.15),0 6px 20px rgba(80,55,25,.07)}
 .topbar::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--amber) 35%,var(--blue) 70%,var(--plum))}
 .topbar-in{height:100%;display:flex;align-items:center;gap:14px}
-.brand{display:flex;align-items:center;gap:10px;flex:none}
-.brand-t b{font:900 15px var(--font-display);letter-spacing:.02em;display:block;line-height:1.3;padding-top:.06em}
-.brand-t small{font:500 9px var(--font-mono);color:var(--ink-3);letter-spacing:.08em;text-transform:uppercase}
+.brand{display:flex;align-items:center;gap:11px;flex:none}
+.brand-t b{font:700 16.5px/1.2 var(--font-brand);letter-spacing:.075em;display:block;color:var(--ink)}
+.brand-t small{font:500 9px var(--font-mono);color:var(--ink-3);letter-spacing:.13em;text-transform:uppercase;display:block;margin-top:2px}
 .tabs{display:flex;gap:4px;margin-left:4px;overflow-x:auto;scrollbar-width:none}
 .tabs::-webkit-scrollbar{display:none}
 .tab{display:flex;align-items:center;gap:7px;padding:8px 13px;border-radius:9px;font:600 13px var(--font-body);color:var(--ink-2);transition:.15s;white-space:nowrap}
@@ -231,6 +235,8 @@ main{padding-top:calc(var(--topbar-h) + var(--hero-gap));padding-bottom:60px}
 .opt{font:600 8.5px var(--font-mono);letter-spacing:.1em;color:var(--ink-3);background:var(--surface-2);border:1px solid var(--line);border-radius:99px;padding:2px 7px;margin-left:6px;vertical-align:1px}
 .inp{width:100%;padding:10px 12px;border:1.5px solid var(--line-strong);border-radius:8px;background:#fff;font:500 14px var(--font-body);color:var(--ink);transition:border-color .15s,box-shadow .15s;appearance:none}
 select.inp{background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='14' height='14' viewBox='0 0 24 24' fill='none' stroke='%235C6270' stroke-width='2.4' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpolyline points='6 9 12 15 18 9'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 11px center;padding-right:34px;cursor:pointer}
+select.inp optgroup{font:700 12px var(--font-body);color:var(--ink)}
+select.inp option{font:500 13.5px var(--font-body);color:var(--ink-2);padding:4px}
 textarea.inp{resize:vertical;min-height:70px;line-height:1.5}
 .inp:focus{outline:none;border-color:var(--red);box-shadow:0 0 0 3px rgba(214,64,60,.14)}
 .inp.invalid{border-color:var(--red-deep);background:#FFF7F6}
@@ -797,6 +803,46 @@ input[type="checkbox"]{width:16px;height:16px;accent-color:var(--red);cursor:poi
 .role-pick .rp-o{--rp:#0A7373;--rps:var(--teal-soft)}
 .app-foot{margin-top:44px;text-align:center;font:500 9.5px var(--font-mono);letter-spacing:.1em;color:var(--ink-3);text-transform:uppercase}
 #printArea{display:none}
+
+/* ══════════════════════════════════════════════════════════════
+   NUMERIK — angka memakai Space Grotesk (nol polos, tanpa titik),
+   kode & label tetap Roboto Mono (nol polos juga). Semua tabular.
+   ══════════════════════════════════════════════════════════════ */
+.st-val,.sum-num,.net-num,.dt-num,.dt-net-num,.dt-time-num,.ms-cell b,.oc-val,
+.mono.big,.net-pill,.rc-net b,.rc-stat b,.v-num b,.item-net b,.item-time b,
+.d-netline b,.d-timeline b,.d-cell b,.si-val,.si-time,.ket-count,.chip-calc,
+.rate,.tab-badge,.chip .cnt,.bd-legend .bl b,.um-cell b,.dt-break .br b,
+.mb-sum,.inp.num,.seg-shift button,.chart-svg .cv,.chart-svg .gt,
+.mf-row .v,.clock,.hist-foot,.au-time,.d-timeline .share,.mx-own,
+.net-calc,.dt-net-calc,.item-net .calc,.item-time .calc,.d-netline .calc,
+.d-timeline .calc,.time-split,.dt-time-split,.sum-nums small,.oc-val small{
+font-family:var(--font-num);
+font-variant-numeric:tabular-nums lining-nums;
+font-feature-settings:var(--num-feat)}
+.st-val{letter-spacing:-.018em;font-weight:700}
+.sum-num,.net-num,.dt-net-num{letter-spacing:-.022em;font-weight:700}
+.dt-num,.dt-time-num,.ms-cell b{letter-spacing:-.014em;font-weight:700}
+.mono.big,.net-pill,.oc-val{font-weight:700;letter-spacing:-.005em}
+.rc-net b{font-weight:700;letter-spacing:-.014em}
+.rc-stat b,.v-num b,.d-cell b,.item-net b,.item-time b,.d-netline b,.d-timeline b{font-weight:700}
+.si-val,.si-time,.chip-calc,.rate,.ket-count,.tab-badge,.chip .cnt{font-weight:600}
+.inp.num{font-size:14px;font-weight:500;letter-spacing:.005em}
+.seg-shift button{font-size:11.5px;font-weight:600;letter-spacing:.015em;padding:8px 10px}
+.clock{font-weight:500;letter-spacing:.01em}
+.mb-sum{font-weight:500}
+.hist-foot{letter-spacing:.055em}
+.chart-svg .cv{font-weight:700}
+.chart-svg .gt{font-weight:500}
+.net-calc,.dt-net-calc,.item-net .calc,.item-time .calc,.d-netline .calc,.d-timeline .calc,.time-split,.dt-time-split{font-weight:500}
+.bd-legend .bl b{font-weight:600}
+.dt-break .br{font-family:var(--font-num);font-variant-numeric:tabular-nums lining-nums;font-feature-settings:var(--num-feat)}
+.mf-row{font-family:var(--font-num);font-variant-numeric:tabular-nums lining-nums;font-feature-settings:var(--num-feat)}
+.mf-row .c{font-family:var(--font-mono);font-size:10.5px}
+.st-sub b,.hist-foot b,.sum-net small,.oc-val small{font-family:var(--font-num);font-variant-numeric:tabular-nums lining-nums}
+.tbl td .mono{font-family:var(--font-num);font-variant-numeric:tabular-nums lining-nums;font-feature-settings:var(--num-feat);font-weight:600}
+.tbl td .mono.big{font-weight:700}
+.cell-date .code,.u-t small,.prod-row .pn small,.au-t small,.ume-head small,.d-stamps,.drawer-head .mono{font-variant-numeric:tabular-nums lining-nums}
+
 @media print{
 @page{size:A4 landscape;margin:12mm}
 body{background:#fff!important}
@@ -806,36 +852,36 @@ body>*:not(#printArea){display:none!important}
 .p-head{display:flex;justify-content:space-between;align-items:flex-start;border-bottom:2.5px solid #000;padding-bottom:8px;margin-bottom:10px}
 .p-brand{display:flex;align-items:center;gap:9px}
 .p-logo{width:32px;height:32px;background:#D6403C;color:#fff;border-radius:7px;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:15px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.p-brand b{font-size:14px;display:block}
+.p-brand b{font:700 15px 'Space Grotesk','Archivo',sans-serif;letter-spacing:.07em;display:block}
 .p-brand small{display:block;color:#333;font-size:10px}
-.p-doc{font:600 9px 'IBM Plex Mono',monospace;color:#333;text-align:right}
+.p-doc{font:600 9px 'Roboto Mono',monospace;color:#333;text-align:right}
 .p-title{font:900 16px 'Archivo Black','Archivo',sans-serif;margin:8px 0 2px;text-transform:uppercase}
 .p-sub{color:#333;margin:0 0 11px;font-size:11px}
-.p-tbl{width:100%;border-collapse:collapse;font-size:10px;margin-bottom:12px}
+.p-tbl{width:100%;border-collapse:collapse;font-size:10px;margin-bottom:12px;font-variant-numeric:tabular-nums lining-nums}
 .p-tbl th,.p-tbl td{border:1px solid #555;padding:5px 7px;text-align:left;vertical-align:top}
 .p-tbl th{background:#eee!important;-webkit-print-color-adjust:exact;print-color-adjust:exact;font-size:9px;text-transform:uppercase}
-.p-tbl .r{text-align:right}
+.p-tbl .r{text-align:right;font-family:'Space Grotesk','Roboto Mono',sans-serif;font-variant-numeric:tabular-nums lining-nums}
 .p-tbl .netcol{background:#EAFBF3!important;font-weight:700;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .p-tbl .timecol{background:#FDF4E3!important;font-weight:700;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .p-id{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:12px}
 .p-id td{border:1px solid #555;padding:5px 8px}
 .p-id td:first-child{background:#f2f2f2!important;font-weight:600;width:150px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .p-netbox{border:2px solid #0B6E50;border-radius:8px;padding:9px 12px;margin:0 0 12px;background:#EAFBF3!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.p-netbox label{font:600 8.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#0B6E50;display:block}
-.p-netbox b{font:900 22px 'IBM Plex Mono',monospace;color:#0B6E50;display:block;margin-top:2px}
-.p-netbox span{font:500 10px 'IBM Plex Mono',monospace;color:#3C7A63}
+.p-netbox label{font:600 8.5px 'Roboto Mono',monospace;letter-spacing:.12em;color:#0B6E50;display:block}
+.p-netbox b{font:700 23px 'Space Grotesk','Roboto Mono',sans-serif;font-variant-numeric:tabular-nums lining-nums;color:#0B6E50;display:block;margin-top:2px;letter-spacing:-.02em}
+.p-netbox span{font:500 10px 'Space Grotesk','Roboto Mono',sans-serif;font-variant-numeric:tabular-nums lining-nums;color:#3C7A63}
 .p-timebox{border:1.5px solid #6438A8;border-radius:8px;padding:8px 12px;margin:0 0 12px;background:#F3EDFB!important;-webkit-print-color-adjust:exact;print-color-adjust:exact}
-.p-timebox label{font:600 8.5px 'IBM Plex Mono',monospace;letter-spacing:.12em;color:#6438A8;display:block}
-.p-timebox b{font:700 16px 'IBM Plex Mono',monospace;color:#4A2585;display:block;margin-top:2px}
-.p-timebox span{font:500 10px 'IBM Plex Mono',monospace;color:#6B4C9E}
-.p-itemline{font:600 10px 'IBM Plex Mono',monospace;color:#7A4E06;margin:-8px 0 8px}
+.p-timebox label{font:600 8.5px 'Roboto Mono',monospace;letter-spacing:.12em;color:#6438A8;display:block}
+.p-timebox b{font:700 17px 'Space Grotesk','Roboto Mono',sans-serif;font-variant-numeric:tabular-nums lining-nums;color:#4A2585;display:block;margin-top:2px}
+.p-timebox span{font:500 10px 'Space Grotesk','Roboto Mono',sans-serif;font-variant-numeric:tabular-nums lining-nums;color:#6B4C9E}
+.p-itemline{font:600 10px 'Space Grotesk','Roboto Mono',sans-serif;font-variant-numeric:tabular-nums lining-nums;color:#7A4E06;margin:-8px 0 8px}
 .p-ket{border-left:3px solid #7B4FC0;padding:5px 9px;margin:0 0 12px;background:#F8F4FD!important;font-size:10px;line-height:1.5;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .p-ket b{color:#4A2585}
 .p-sign{width:100%;margin-top:26px;font-size:11px;text-align:center;border:none}
 .p-sign td{width:33%;padding:6px;vertical-align:top}
 .p-foot{margin-top:14px;font-size:9px;color:#444;border-top:1px solid #999;padding-top:6px}
 .p-sec-title{font:700 12px 'Archivo',sans-serif;margin:12px 0 5px;text-transform:uppercase}
-.p-stamp{display:inline-block;border:2px solid #0B6E50;color:#0B6E50;padding:4px 10px;border-radius:6px;font:700 10px 'IBM Plex Mono',monospace;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.p-stamp{display:inline-block;border:2px solid #0B6E50;color:#0B6E50;padding:4px 10px;border-radius:6px;font:700 10px 'Roboto Mono',monospace;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 }
 @media (max-width:1240px){
 .form-layout{grid-template-columns:1fr}
@@ -848,9 +894,9 @@ body[data-view="other"] #mobileBarO{display:flex}
 .master-grid{grid-template-columns:1fr}}
 @media (max-width:1080px){
 #loginScreen{grid-template-columns:1fr}
-.mon-inner{padding:28px 22px;gap:14px;max-width:none}
-.mon-title{font-size:clamp(26px,6.4vw,38px)}
-.mon-ecg{height:56px}
+.mon-inner{padding:30px 24px;gap:16px;max-width:none}
+.mon-title{font-size:clamp(28px,7vw,42px)}
+.mon-ecg{height:62px}
 .lg-panel{padding:22px 18px 36px}}
 @media (max-width:980px){
 .stats-grid{grid-template-columns:1fr 1fr}
@@ -909,10 +955,9 @@ body[data-view="other"] #mobileBarO{display:flex}
 #drawer{width:100vw;max-width:100vw}
 .ub-t{display:none}
 .user-btn{padding:5px}
-.role-cards{grid-template-columns:1fr}
-.rc-role{display:flex;align-items:center;gap:11px;padding:10px 12px}
-.rc-role .rr-ic{margin-bottom:0}
-.rc-role>div{flex:1}
+.mon-stats{grid-template-columns:1fr;gap:8px}
+.ms-cell{display:flex;align-items:baseline;justify-content:space-between}
+.ms-cell b{margin-top:0;font-size:18px}
 .v-grid,.u-grid{grid-template-columns:1fr}
 .v-nums{grid-template-columns:repeat(2,1fr)}
 .dt-net-calc,.net-calc{margin-left:0;text-align:left;width:100%}
@@ -927,19 +972,21 @@ body[data-view="other"] #mobileBarO{display:flex}
 .wrap{padding:0 14px}
 .multi-row{flex-direction:column;align-items:flex-start}
 .stats-grid{gap:10px}
-.st-val{font-size:22px}
+.st-val{font-size:23px}
 .sync-chip span{display:none}
 .sync-chip{padding:7px}
 .modal{padding:18px}
 .modal-btns .btn{flex:1 1 auto}
 .dt-nums{grid-template-columns:1fr 1fr;gap:9px}
-.dt-num{font-size:17px}
+.dt-num{font-size:18px}
 .drawer-body{padding:15px}
 .drawer-foot{padding:10px 12px;gap:6px}
 .drawer-foot .btn{padding:9px 11px;font-size:12.5px}
 .ket-field{padding:10px}
 .role-pick{grid-template-columns:1fr}
-.lg-card{padding:19px}}
+.lg-card{padding:19px}
+.mon-brand b{font-size:17px}
+.seg-shift button{font-size:11px;padding:8px 8px}}
 @media (prefers-reduced-motion:reduce){
 *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 .ecg .run,.mon-ecg .run{stroke-dasharray:none;animation:none}
@@ -954,23 +1001,22 @@ html{scroll-behavior:auto}}
     <div class="mon-grid"></div>
     <div class="mon-inner">
       <div class="mon-brand">
-        <span class="brand-mark lg"><span data-ic="activity" data-sz="24"></span></span>
+        <span class="brand-mark lg"><span data-ic="activity" data-sz="25"></span></span>
         <div><b>MHI PAPER</b><small>PRODUKSI KERTAS ECG / EKG &amp; PLAIN</small></div>
       </div>
-      <h1 class="mon-title">TIGA PERAN,<br>SATU <em>DATA PABRIK</em></h1>
-      <p class="mon-sub">Tampilan menyesuaikan hak akses: operator hanya melihat laporannya sendiri tanpa alat ekspor, admin memverifikasi, kepala produksi memegang kendali penuh.</p>
+      <h1 class="mon-title">LAPORAN<br>HARIAN <em>PRODUKSI</em></h1>
       <svg class="mon-ecg" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
         <path id="ecgLoginBase" class="base" fill="none" d="M0 60 L1200 60"/>
         <path id="ecgLoginRun" class="run" fill="none" pathLength="1000" d="M0 60 L1200 60"/>
       </svg>
-      <div class="role-cards">
-        <div class="rc-role k"><span class="rr-tag">FULL</span><span class="rr-ic"><span data-ic="shield" data-sz="15"></span></span><div><b>Kepala Produksi</b><small>Semua laporan · verifikasi · hapus permanen · <b>kelola pengguna</b> · audit</small></div></div>
-        <div class="rc-role a"><span class="rr-tag">SEBAGIAN</span><span class="rr-ic"><span data-ic="checkCircle" data-sz="15"></span></span><div><b>Admin Produksi</b><small>Verifikasi, master, export &amp; cetak. <b>Tanpa menu Pengguna.</b></small></div></div>
-        <div class="rc-role o"><span class="rr-tag">TERBATAS</span><span class="rr-ic"><span data-ic="package" data-sz="15"></span></span><div><b>Operator</b><small>Hanya laporan sendiri. Tanpa export, cetak rekap, atau info koneksi.</small></div></div>
+      <div class="mon-stats" id="monStats"></div>
+      <div class="mon-feed">
+        <div class="mf-head"><i class="dot"></i> HASIL BERSIH TERAKHIR · HASIL − REJECT</div>
+        <div id="monTicker"></div>
       </div>
       <div class="mon-foot">
         <span class="mode-chip" id="lgMode">MODE LOKAL</span>
-        <span class="mono sm">FORM LH-ECG-01 · REV. 11 · TAMPILAN PER PERAN</span>
+        <span class="mono sm">FORM LH-ECG-01 · REV. 13</span>
       </div>
     </div>
   </div>
@@ -996,7 +1042,7 @@ html{scroll-behavior:auto}}
         </div>
         <div class="field" id="lgEmailField" hidden>
           <label for="lgEmail">Email Terdaftar di Supabase <b class="req">*</b></label>
-          <input id="lgEmail" class="inp mono" type="email" placeholder="kepala@mhi.local" autocomplete="username">
+          <input id="lgEmail" class="inp mono" type="email" placeholder="kepala@mhi.local" autocomplete="off">
           <div class="help">Pakai ini bila email akun Anda berbeda dari pola kode@domain.</div>
         </div>
         <div class="email-preview" id="lgEmailPreview" hidden>
@@ -1008,7 +1054,7 @@ html{scroll-behavior:auto}}
         <div class="field">
           <label for="lgPass">Kata Sandi <b class="req">*</b></label>
           <div class="pass-wrap">
-            <input type="password" id="lgPass" class="inp" placeholder="••••••••" autocomplete="current-password">
+            <input type="password" id="lgPass" class="inp" placeholder="••••••••" autocomplete="new-password">
             <button type="button" class="pass-eye" id="lgEye" aria-label="Tampilkan kata sandi"><span data-ic="eye" data-sz="16"></span></button>
           </div>
         </div>
@@ -1078,7 +1124,7 @@ html{scroll-behavior:auto}}
 
 <section id="view-form" class="view" aria-label="Identitas laporan">
   <div class="hero">
-    <div class="hero-top"><span>FORM LH-ECG-01 · REV. 11</span><span class="live"><i class="dot"></i><span id="shiftLive">SHIFT BERJALAN</span></span></div>
+    <div class="hero-top"><span>FORM LH-ECG-01 · REV. 13</span><span class="live"><i class="dot"></i><span id="shiftLive">SHIFT BERJALAN</span></span></div>
     <h1 class="hero-title">Laporan Harian <em>Produksi</em></h1>
     <svg class="ecg" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true"><path id="ecgBaseF" class="base" fill="none" d="M0 32 L1200 32"/><path id="ecgRunF" class="run" fill="none" pathLength="1000" d="M0 32 L1200 32"/></svg>
   </div>
@@ -1381,14 +1427,14 @@ html{scroll-behavior:auto}}
   <div class="modal-input"><label>Hak Akses <b class="req">*</b></label>
     <div class="role-pick" id="uuRolePick">
       <button type="button" class="rp-o on" data-act="pick-role" data-role="operator"><span class="rp-ic"><span data-ic="package" data-sz="14"></span></span><b>Operator</b><small>LAPORAN SENDIRI</small></button>
-      <button type="button" class="rp-a" data-act="pick-role" data-role="admin"><span class="rp-ic"><span data-ic="checkCircle" data-sz="14"></span></span><b>Admin</b><small>TANPA KELOLA USER</small></button>
+      <button type="button" class="rp-a" data-act="pick-role" data-role="admin"><span class="rp-ic"><span data-ic="checkCircle" data-sz="14"></span></span><b>Admin</b><small>VERIFIKASI &amp; MASTER</small></button>
       <button type="button" class="rp-k" data-act="pick-role" data-role="kepala"><span class="rp-ic"><span data-ic="shield" data-sz="14"></span></span><b>Kepala</b><small>AKSES PENUH</small></button>
     </div>
     <div class="help" id="uuRoleHint" style="margin-top:7px"></div>
   </div>
   <div class="g-2 modal-input"><div><label for="uuMesin">Mesin / Area</label><input id="uuMesin" class="inp" placeholder="cth: Auto Paper"></div><div><label for="uuWarna">Warna Avatar</label><input id="uuWarna" type="color" class="inp inp-color" value="#0FA3A3"></div></div>
   <div class="modal-input"><label for="uuJabatan">Jabatan / Posisi</label><input id="uuJabatan" class="inp" placeholder="cth: Operator Mesin Auto Paper"></div>
-  <div class="modal-input" id="uuPassWrap"><label for="uuPass">Kata Sandi <b class="req">*</b></label><input id="uuPass" class="inp mono" placeholder="min. 6 karakter"><div class="help" id="uuEmailHint" style="margin-top:5px"></div></div>
+  <div class="modal-input" id="uuPassWrap"><label for="uuPass">Kata Sandi <b class="req">*</b></label><input id="uuPass" class="inp mono" placeholder="min. 6 karakter" autocomplete="new-password"><div class="help" id="uuEmailHint" style="margin-top:5px"></div></div>
   <div class="setup-msg" id="uuMsg" hidden></div>
   <div class="modal-btns"><button class="btn btn-ghost" data-act="user-cancel">Batal</button><button class="btn btn-primary" data-act="user-save" id="uuSave">Simpan Pengguna</button></div>
 </div></div>
@@ -1396,7 +1442,7 @@ html{scroll-behavior:auto}}
 <div class="modal-wrap" id="passWrap"><div class="modal" role="dialog" aria-modal="true">
   <h3 id="pwTitle">Reset Kata Sandi</h3>
   <p id="pwSub"></p>
-  <div class="modal-input" id="pwOldWrap" hidden><label for="pwOld">Sandi Saat Ini <span class="opt">DIBUTUHKAN TANPA EDGE FUNCTION</span></label><input id="pwOld" type="password" class="inp mono" placeholder="sandi lama akun ini"></div>
+  <div class="modal-input" id="pwOldWrap" hidden><label for="pwOld">Sandi Saat Ini <span class="opt">DIBUTUHKAN TANPA EDGE FUNCTION</span></label><input id="pwOld" type="password" class="inp mono" placeholder="sandi lama akun ini" autocomplete="new-password"></div>
   <div class="modal-input"><label for="pwNew">Kata Sandi Baru <b class="req">*</b></label><input id="pwNew" type="text" class="inp mono" placeholder="min. 6 karakter"></div>
   <div class="setup-msg" id="pwMsg" hidden></div>
   <div class="modal-btns"><button class="btn btn-ghost" data-act="pass-cancel">Batal</button><button class="btn btn-primary" data-act="pass-save" id="pwSave">Simpan Sandi</button></div>
@@ -1574,22 +1620,24 @@ const PEOPLE=[
 {kode:'ridwan',nama:'Ridwan',role:'operator',jabatan:'Operator Mesin Auto Paper',mesin:'Auto Paper',warna:'#B22F2C'},
 {kode:'fachri',nama:'Fachri',role:'operator',jabatan:'Asisten Operator Mesin Auto Paper',mesin:'Auto Paper · Asisten',warna:'#5A7E1F'}];
 const DOMAIN_SUGGEST=['mhi.local','mhipaper.id','mhi.internal','example.com','gmail.com'];
-let lastLong='L1';
+let lastLong='L1',tickerTimer=null;
 
-const CFG_KEY='mhi_cloud_cfg',PREF_KEY='mhi_prefs',DB_KEY='mhi_local_db';
+const CFG_KEY='mhi_cloud_cfg',PREF_KEY='mhi_prefs',DB_KEY='mhi_local_db',DIR_KEY='mhi_login_dir';
 function readCfg(){
   try{const s=localStorage.getItem(CFG_KEY);if(s){const c=JSON.parse(s);if(c&&c.url&&c.key)return c}}catch(e){}
   if(CONFIG.SUPABASE_URL&&CONFIG.SUPABASE_ANON_KEY)return{url:CONFIG.SUPABASE_URL.trim().replace(/\/$/,''),key:CONFIG.SUPABASE_ANON_KEY.trim(),domain:CONFIG.EMAIL_DOMAIN||'mhi.local'};
   return null;
 }
 function writeCfg(c){try{c?localStorage.setItem(CFG_KEY,JSON.stringify(c)):localStorage.removeItem(CFG_KEY)}catch(e){}}
+function readDir(){try{const d=JSON.parse(localStorage.getItem(DIR_KEY)||'[]');return Array.isArray(d)?d:[]}catch(e){return[]}}
+function writeDir(list){try{localStorage.setItem(DIR_KEY,JSON.stringify(list.map(p=>({kode:p.kode,nama:p.nama,role:p.role,aktif:p.aktif!==false}))))}catch(e){}}
 const DEMO_PASS=CONFIG.DEMO_PASSWORD||'mhi2026';
 
 const blankItem=()=>({key:uid(),nama:'',po:'',spk:'',prep:'',setting:'',ops:'',hasil:'',reject:'',keterangan:''});
 const blankAgenda=()=>({key:uid(),kategori:'',deskripsi:'',waktu:''});
 const blankExtra=()=>({key:uid(),waktu:'',keterangan:''});
 const blankForm=()=>({mode:'create',editId:null,operatorId:(S.me&&S.me.role==='operator')?S.me.kode:'',date:todayStr(),shift:autoShift(),jenis:'pack',multi:false,items:[blankItem()],hasAgenda:'ya',agenda:[blankAgenda()],hasExtra:'tidak',extra:[blankExtra()]});
-let S={mode:'local',me:null,view:'login',profiles:[],products:[],reports:[],audit:[],savedViews:[],sound:true,uq:'',
+let S={mode:'local',me:null,view:'login',profiles:[],products:[],reports:[],audit:[],savedViews:[],sound:true,uq:'',dir:[],
 loginMode:'kode',loginEmail:'',diag:[],diagRunning:false,acctDiag:[],acctRunning:false,provMode:'unknown',lastRawError:'',
 filters:{q:'',operator:'all',jenis:'all',status:'all',period:'all',sort:'dateDesc',archived:false},
 selection:new Set(),vSel:new Set(),vTab:'submit',uTab:'pengguna',drawerId:null,highlightId:null,form:null,lastSync:null};
@@ -1979,11 +2027,19 @@ function ecgD(w,h,n){
   return d;
 }
 
+/* ══════════ LOGIN ══════════ */
 function currentEmail(){
   const cfg=readCfg();
   if(S.loginMode==='email')return ($('#lgEmail').value||'').trim();
   const kode=$('#lgKode').value||'kepala';
   return kode+'@'+((cfg&&cfg.domain)||'mhi.local');
+}
+function loginDirectory(){
+  if(S.profiles.length)return S.profiles;
+  if(S.dir.length)return S.dir;
+  const cached=readDir();
+  if(cached.length){S.dir=cached;return cached}
+  return PEOPLE;
 }
 function renderLoginScreen(){
   const cfg=readCfg(),cloud=!!cfg;
@@ -2000,16 +2056,39 @@ function renderLoginScreen(){
   $('#lgEmailPreview').hidden=!cloud;
   $('#lgDomChips').hidden=!cloud||S.loginMode==='email';
   $$('#lgModes button').forEach(b=>b.classList.toggle('on',b.dataset.mode===S.loginMode));
-  const list=cloud?PEOPLE:Local.data.profiles;
-  $('#lgKode').innerHTML=[['kepala','Kepala Produksi · akses penuh'],['admin','Admin · tanpa kelola user'],['operator','Operator · laporan sendiri']].map(([r,l])=>{
+  const list=cloud?loginDirectory():Local.data.profiles;
+  const prev=$('#lgKode').value;
+  $('#lgKode').innerHTML=[['kepala','Kepala Produksi'],['admin','Admin'],['operator','Operator']].map(([r,l])=>{
     const arr=list.filter(p=>p.role===r);if(!arr.length)return'';
-    return `<optgroup label="${l}">${arr.map(p=>`<option value="${esc(p.kode)}">${esc(p.nama)} — ${esc(p.jabatan||p.mesin||'')}${p.aktif===false?' · NONAKTIF':''}</option>`).join('')}</optgroup>`}).join('');
-  if(!$('#lgKode').value)$('#lgKode').value='kepala';
-  if(cloud&&S.loginMode==='email'&&!$('#lgEmail').value)$('#lgEmail').value=S.loginEmail||currentEmail();
-  if(!cloud)$('#lgPass').value=DEMO_PASS;
+    return `<optgroup label="${l}">${arr.map(p=>`<option value="${esc(p.kode)}">${esc(p.nama)}</option>`).join('')}</optgroup>`;
+  }).join('');
+  $('#lgKode').value=(prev&&list.some(p=>p.kode===prev))?prev:(list.some(p=>p.kode==='kepala')?'kepala':(list[0]?list[0].kode:''));
+  if(cloud&&S.loginMode==='email')$('#lgEmail').value=S.loginEmail||'';
   if(cloud){const dom=cfg.domain||'mhi.local';
     $('#lgDomChips').innerHTML=DOMAIN_SUGGEST.map(d=>`<button type="button" data-act="set-domain" data-dom="${esc(d)}" class="${d===dom?'on':''}">@${esc(d)}</button>`).join('')}
   syncEmailPreview();
+  renderMonitor(cloud,list);
+}
+function renderMonitor(cloud,list){
+  const reps=cloud?[]:Local.data.reports.filter(r=>!r.deletedAt),T=todayStr();
+  const last7=reps.filter(r=>r.date>=addDays(T,-6));
+  const net7=last7.reduce((a,r)=>a+rNet(r),0),time7=last7.reduce((a,r)=>a+rWaktu(r),0);
+  const ops=list.filter(p=>p.role==='operator'&&p.aktif!==false).length;
+  $('#monStats').innerHTML=cloud?
+    `<div class="ms-cell g"><label>KEAMANAN DATA</label><b>RLS</b></div><div class="ms-cell a"><label>HAK AKSES</label><b>3 PERAN</b></div><div class="ms-cell b"><label>OPERATOR</label><b>${ops||'—'}</b></div>`
+    :`<div class="ms-cell g"><label>HASIL BERSIH · 7 HARI</label><b>${fmtNum(net7)}</b></div><div class="ms-cell a"><label>TOTAL WAKTU · 7 HARI</label><b>${fmtMin(time7)}</b></div><div class="ms-cell b"><label>OPERATOR AKTIF</label><b>${ops}</b></div>`;
+  const feed=reps.slice().sort((a,b)=>b.createdAt-a.createdAt).slice(0,5);
+  $('#monTicker').innerHTML=feed.length?feed.map((r,i)=>{
+    const p=Local.data.profiles.find(x=>x.kode===r.operatorId)||{nama:r.operatorId};
+    const v=r.jenis==='lainnya'?fmtMin(rWaktu(r)):`${fmtNum(rHasil(r))} − ${fmtNum(rReject(r))} = ${fmtNum(rNet(r))}`;
+    return `<div class="mf-row${i===0?' on':''}"><span class="c">${esc(r.code)}</span><span class="n">${esc(p.nama)}</span><span class="v">${v}</span></div>`;
+  }).join(''):`<div class="mf-row"><span class="n">${cloud?'Menunggu autentikasi — data tersinkron setelah masuk.':'Belum ada laporan tersimpan.'}</span></div>`;
+  clearInterval(tickerTimer);
+  if(feed.length>1){let k=0;tickerTimer=setInterval(()=>{
+    const rows=$$('#monTicker .mf-row');
+    if(!rows.length||document.body.dataset.view!=='login'){clearInterval(tickerTimer);return}
+    rows.forEach(r=>r.classList.remove('on'));k=(k+1)%rows.length;rows[k].classList.add('on');
+  },2200)}
 }
 function syncEmailPreview(){if(!readCfg())return;const e=currentEmail()||'—';$('#lgEmailShown').textContent=e;if(S.loginMode==='email')S.loginEmail=e}
 function loginError(err){
@@ -2018,6 +2097,17 @@ function loginError(err){
   $('#lgErrTitle').textContent=d.title;
   $('#lgErrMsg').innerHTML=d.msg+(d.fix?`<br><br><b>Perbaikan:</b> ${d.fix}`:'')+(err&&err.raw?`<span class="raw">Supabase: ${esc(err.raw)}</span>`:'');
   box.hidden=false;box.classList.remove('shake');void box.offsetWidth;box.classList.add('shake');sfx.error();
+}
+function clearLoginFields(){
+  const p=$('#lgPass'),e=$('#lgEmail');
+  const wipe=()=>{if(p){p.value='';p.type='password'}if(e)e.value='';S.loginEmail=''};
+  wipe();
+  try{$('#loginForm').reset()}catch(err){}
+  wipe();
+  $('#lgEye').innerHTML=icon('eye',16);
+  $('#lgErr').hidden=true;$('#lgCaps').hidden=true;$('#lgDiag').hidden=true;
+  S.diag=[];
+  setTimeout(wipe,60);setTimeout(wipe,260);setTimeout(wipe,700);
 }
 async function doLogin(kode,pass){
   const btn=$('#lgSubmit');btn.disabled=true;btn.innerHTML='Memeriksa…';$('#lgErr').hidden=true;
@@ -2028,16 +2118,21 @@ async function doLogin(kode,pass){
 }
 async function doLogout(){
   try{await DB.signOut()}catch(e){}
-  S.me=null;S.reports=[];S.profiles=[];S.selection.clear();S.vSel.clear();S.uq='';S.provMode='unknown';closeDrawer();
-  $('#topbar').hidden=true;$('#appMain').hidden=true;
+  if(S.profiles.length){S.dir=S.profiles.map(p=>({kode:p.kode,nama:p.nama,role:p.role,aktif:p.aktif}));writeDir(S.dir)}
+  S.me=null;S.reports=[];S.profiles=[];S.selection.clear();S.vSel.clear();S.uq='';S.provMode='unknown';
+  closeDrawer();clearInterval(tickerTimer);
+  $('#topbar').hidden=true;$('#appMain').hidden=true;$('#userMenu').hidden=true;
   document.body.dataset.view='login';S.view='login';
   try{history.replaceState(null,'',location.pathname)}catch(e){}
-  renderLoginScreen();toast('Anda telah keluar dari sistem.',{type:'info',icon:'logout'});
+  renderLoginScreen();
+  clearLoginFields();
+  toast('Anda telah keluar — kolom sandi dikosongkan.',{type:'info',icon:'logout',duration:3200});
 }
 async function useLocalMode(){
-  writeCfg(null);DB=Local;S.mode='local';S.loginMode='kode';S.diag=[];S.provMode='unknown';
-  Local.load();$('#lgDiag').hidden=true;$('#lgErr').hidden=true;$('#lgPass').value=DEMO_PASS;
-  renderLoginScreen();
+  writeCfg(null);DB=Local;S.mode='local';S.loginMode='kode';S.provMode='unknown';
+  Local.load();
+  renderLoginScreen();clearLoginFields();
+  $('#lgPass').value=DEMO_PASS;
   toast('Beralih ke <b>Mode Lokal</b> — 10 akun demo siap dipakai.',{icon:'undo',duration:4200});
   const me=await Local.session();if(me){S.me=me;await bootApp()}
 }
@@ -2078,7 +2173,7 @@ async function runDiag(){
     if(tErr){diagLast({state:'bad',title:'Tabel belum siap',detail:esc(tErr.message),fix:'Jalankan seluruh <code>schema.sql</code> di SQL Editor.'});return}
     diagLast({state:'ok',title:'Tabel products terbaca'});
     diagPush({state:'run',title:'Mencoba login ke Auth…',detail:esc(email)});
-    if(!pass){diagLast({state:'warn',title:'Kata sandi kosong'});return}
+    if(!pass){diagLast({state:'warn',title:'Kata sandi kosong',detail:'Isi kolom sandi lalu jalankan diagnosa lagi.'});return}
     const{data:aData,error:aErr}=await probe.auth.signInWithPassword({email,password:pass});
     if(aErr){const m=mapAuthError(aErr,email);diagLast({state:'bad',title:m.title,detail:esc(email)+' → '+esc(aErr.message),fix:m.fix});return}
     diagLast({state:'ok',title:'Auth berhasil',detail:'UUID: '+esc(aData.user.id)});
@@ -2153,9 +2248,11 @@ async function runAcctDiag(){
 async function reloadAll(){
   S.profiles=await DB.profiles();S.products=await DB.products();S.reports=await DB.reports();
   S.audit=isKepala()?await DB.audit():[];S.lastSync=Date.now();
+  if(S.profiles.length){S.dir=S.profiles.map(p=>({kode:p.kode,nama:p.nama,role:p.role,aktif:p.aktif}));writeDir(S.dir)}
 }
 async function bootApp(){
   await reloadAll();
+  clearInterval(tickerTimer);
   if(S.me.role==='operator'){S.filters.operator=S.me.kode;S.filters.archived=false}
   S.form=blankForm();
   $('#topbar').hidden=false;$('#appMain').hidden=false;
@@ -2183,10 +2280,8 @@ function applyRoleUI(){
   $('#umeName').textContent=S.me.nama;$('#umeMeta').textContent=`@${S.me.kode} · ${S.me.jabatan||S.me.mesin||''}`;
   $('#umeBadge').innerHTML=roleBadge(S.me.role);
   $('#umeUsers').hidden=!k;
-  /*_chip CLOUD / LOKAL hanya untuk kepala produksi_*/
   $('#syncChip').hidden=!canSeeConnection();
   $('#umeSetup').hidden=!canSeeConnection();
-  /*_Muat Ulang · Export CSV · Cetak Rekap disembunyikan untuk operator_*/
   ['btnReload','btnExport','btnPrint'].forEach(id=>{const el=document.getElementById(id);if(el)el.hidden=op});
   ['#f-operator','#o-operator'].forEach(s=>{const el=$(s);if(el)el.disabled=op});
   $('#identHint').textContent=op?'Operator terkunci pada akun Anda sendiri.':'Pilih operator — nama & jabatan terisi otomatis.';
@@ -2716,8 +2811,8 @@ function renderUsers(){
   $('#uCnt').textContent=all.length;
   $('#usersStats').innerHTML=
     statCard('st-red','shield','KEPALA PRODUKSI',c.kepala,'akses penuh + kelola pengguna')+
-    statCard('st-blue','checkCircle','ADMIN PRODUKSI',c.admin,'verifikasi & master · tanpa user')+
-    statCard('st-green','users','OPERATOR',c.operator,'hanya laporan miliknya')+
+    statCard('st-blue','checkCircle','ADMIN PRODUKSI',c.admin,'verifikasi & master')+
+    statCard('st-green','users','OPERATOR',c.operator,'laporan miliknya')+
     statCard('st-amber','lock','AKUN NONAKTIF',all.filter(x=>!x.aktif).length,'akses dicabut sementara');
   $$('#usersStats [data-count]').forEach(el=>countUp(el,Number(el.dataset.count)));
   $$('#uTabs .chip').forEach(b=>b.classList.toggle('active',b.dataset.tab===S.uTab));
@@ -2758,9 +2853,9 @@ function uCard(u){
 function renderMatrix(){
   const cell=v=>v===1?`<span class="mx-yes" title="Diizinkan">${icon('check',13)}</span>`:v==='own'?`<span class="mx-own">MILIK SENDIRI</span>`:`<span class="mx-no" title="Ditolak">${icon('x',13)}</span>`;
   const legend=`<div class="mx-legend">
-  <div class="mx-lg k"><span class="avatar" style="--av:#B22F2C">${icon('shield',13)}</span><div><b>Kepala Produksi</b><small>AKSES PENUH + KELOLA USER</small></div></div>
-  <div class="mx-lg a"><span class="avatar" style="--av:#236FD6">${icon('checkCircle',13)}</span><div><b>Admin Produksi</b><small>TANPA PENGGUNA &amp; INFO CLOUD</small></div></div>
-  <div class="mx-lg o"><span class="avatar" style="--av:#0FA3A3">${icon('package',13)}</span><div><b>Operator</b><small>TANPA EXPORT · CETAK · CLOUD</small></div></div></div>`;
+  <div class="mx-lg k"><span class="avatar" style="--av:#B22F2C">${icon('shield',13)}</span><div><b>Kepala Produksi</b><small>AKSES PENUH</small></div></div>
+  <div class="mx-lg a"><span class="avatar" style="--av:#236FD6">${icon('checkCircle',13)}</span><div><b>Admin Produksi</b><small>VERIFIKASI &amp; MASTER</small></div></div>
+  <div class="mx-lg o"><span class="avatar" style="--av:#0FA3A3">${icon('package',13)}</span><div><b>Operator</b><small>LAPORAN MILIKNYA</small></div></div></div>`;
   const groups=MATRIX.map(g=>`<div class="mx-group"><div class="mx-gtitle">${esc(g.g)}</div><div class="mx-scroll"><table class="mx-tbl"><thead><tr><th>Kemampuan</th><th class="k">Kepala</th><th class="a">Admin</th><th class="o">Operator</th></tr></thead><tbody>${g.rows.map(r=>`<tr><td>${esc(r[0])}</td><td>${cell(r[1])}</td><td>${cell(r[2])}</td><td>${cell(r[3])}</td></tr>`).join('')}</tbody></table></div></div>`).join('');
   $('#mxBody').innerHTML=legend+groups+`<div class="d-note" style="margin-top:18px">${icon('lock',15)}<span><b>Ditegakkan di dua lapis.</b> Tampilan menyembunyikan menu yang bukan haknya, dan lapisan data menolak perintah yang lolos — operator tidak bisa memverifikasi laporannya sendiri, admin tidak bisa membuat akun, meski lewat konsol browser.</span></div>`;
 }
@@ -2950,7 +3045,7 @@ function exportCSV(rows){
   downloadBlob(csv,'text/csv;charset=utf-8','laporan-produksi-ecg_'+todayStr()+'.csv');
   toast(`${rows.length} laporan diexport (${lines.length-1} baris data).`,{icon:'download'});sfx.tick();
 }
-const printHead=(t,s)=>`<div class="p-head"><div class="p-brand"><div class="p-logo">M</div><div><b>MHI PAPER</b><small>Produksi Kertas ECG/EKG dan Plain</small></div></div><div class="p-doc">FORM LH-ECG-01<br>REV. 11</div></div><div class="p-title">${t}</div><p class="p-sub">${s}</p>`;
+const printHead=(t,s)=>`<div class="p-head"><div class="p-brand"><div class="p-logo">M</div><div><b>MHI PAPER</b><small>Produksi Kertas ECG/EKG dan Plain</small></div></div><div class="p-doc">FORM LH-ECG-01<br>REV. 13</div></div><div class="p-title">${t}</div><p class="p-sub">${s}</p>`;
 const printFoot=()=>`<div class="p-foot">Dicetak: ${new Date().toLocaleString('id-ID')} · ${S.me?esc(S.me.nama)+' ('+ROLES[S.me.role].label+')':''} · Bersih = hasil − reject · MHI PAPER.</div>`;
 const signBlock=(o,v)=>`<table class="p-sign"><tr><td>Dibuat oleh,<br><br><br><br><u>&nbsp;&nbsp;${esc(o||'________________')}&nbsp;&nbsp;</u><br><small>Operator</small></td><td>Diperiksa oleh,<br><br><br><br><u>&nbsp;&nbsp;${esc(v||'________________')}&nbsp;&nbsp;</u><br><small>Admin Produksi</small></td><td>Disetujui oleh,<br><br><br><br><u>&nbsp;&nbsp;________________&nbsp;&nbsp;</u><br><small>Kepala Produksi</small></td></tr></table>`;
 function printRecap(){
@@ -3000,7 +3095,7 @@ function printSingle(id){
 function doPrint(){toast('Menyiapkan halaman cetak…',{type:'info',icon:'printer',duration:2200});setTimeout(()=>{try{window.print()}catch(e){}},80)}
 function backupJSON(){
   if(!isKepala()){toast('Hanya kepala produksi.',{type:'warn',icon:'lock'});return}
-  downloadBlob(JSON.stringify({app:'MHI PAPER',version:11,mode:S.mode,exportedAt:new Date().toISOString(),...DB.exportAll()},null,2),'application/json','mhi-paper-backup_'+todayStr()+'.json');
+  downloadBlob(JSON.stringify({app:'MHI PAPER',version:13,mode:S.mode,exportedAt:new Date().toISOString(),...DB.exportAll()},null,2),'application/json','mhi-paper-backup_'+todayStr()+'.json');
   toast('Cadangan JSON diunduh.',{icon:'download'});sfx.tick();
 }
 function openSetup(){
@@ -3026,9 +3121,9 @@ async function saveSetup(){
     DB=Object.create(Cloud);await DB.init({url,key,domain});S.mode='cloud';
     setupMsg('Terhubung. Silakan masuk dengan akun Supabase Anda.','ok');
     $('#setupWrap').classList.remove('show');
-    $('#lgErr').hidden=true;$('#lgDiag').hidden=true;
-    if(!S.me)$('#lgPass').value='';
-    renderLoginScreen();sfx.ok();
+    renderLoginScreen();
+    if(!S.me)clearLoginFields();
+    sfx.ok();
     toast('Supabase terhubung — <b>@'+esc(domain)+'</b>.',{icon:'building',duration:4200});
     if(S.me){await reloadAll();buildSelects();buildTabs();applyRoleUI();refreshDataViews();detectProv()}
   }catch(err){setupMsg(esc(err.message),'err');sfx.error()}
@@ -3283,12 +3378,13 @@ async function handleAction(t,e){
 }
 function tickClock(){
   const d=new Date();
-  $('#clock').textContent=d.toLocaleDateString('id-ID',{weekday:'short',day:'2-digit',month:'short'})+' · '+d.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
+  const c=$('#clock');if(c)c.textContent=d.toLocaleDateString('id-ID',{weekday:'short',day:'2-digit',month:'short'})+' · '+d.toLocaleTimeString('id-ID',{hour:'2-digit',minute:'2-digit',second:'2-digit'});
   const sl=$('#shiftLive');if(sl)sl.textContent=SHIFT_BADGE[autoShift()]+' · BERJALAN';
 }
 async function init(){
   $$('[data-ic]').forEach(el=>{el.innerHTML=icon(el.dataset.ic,Number(el.dataset.sz)||16)});
   loadPrefs();
+  S.dir=readDir();
   const dF=ecgD(1200,64,6),dL=ecgD(1200,120,5);
   ['ecgBaseF','ecgRunF','ecgBaseD','ecgRunD','ecgBaseO','ecgRunO','ecgBaseH','ecgRunH','ecgBaseV','ecgRunV','ecgBaseM','ecgRunM','ecgBaseU','ecgRunU'].forEach(id=>{const p=document.getElementById(id);if(p)p.setAttribute('d',dF)});
   ['ecgLoginBase','ecgLoginRun'].forEach(id=>{const p=document.getElementById(id);if(p)p.setAttribute('d',dL)});
@@ -3298,13 +3394,16 @@ async function init(){
   const cfg=readCfg();
   if(cfg){
     try{await Cloud.init(cfg);DB=Cloud;S.mode='cloud';
-      const me=await Cloud.session();renderLoginScreen();
+      const me=await Cloud.session();renderLoginScreen();clearLoginFields();
       if(me){S.me=me;await bootApp();return}
     }catch(err){DB=Local;S.mode='local';
       toast('Supabase tidak dapat dijangkau — memakai mode lokal. '+esc(err.message),{type:'warn',icon:'alert',duration:6000})}
   }else{DB=Local;S.mode='local'}
   renderLoginScreen();
-  if(S.mode==='local'){const me=await Local.session();if(me){S.me=me;await bootApp()}}
+  if(S.mode==='local'){
+    const me=await Local.session();
+    if(me){S.me=me;await bootApp()}else{$('#lgPass').value=DEMO_PASS}
+  }else clearLoginFields();
 }
 init().catch(err=>{console.error(err);document.body.dataset.view='login';
   const e=$('#lgErr');if(e){e.hidden=false;$('#lgErrTitle').textContent='Gagal memuat aplikasi';$('#lgErrMsg').textContent=err.message||String(err)}});
