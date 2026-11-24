@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>MHI PAPER — Laporan Harian Produksi · Kepala · Admin · Operator</title>
-<meta name="description" content="Laporan harian produksi kertas ECG/EKG dengan tiga hak akses, manajemen pengguna tanpa CLI, dan diagnosa Supabase built-in.">
+<meta name="description" content="Laporan harian produksi kertas ECG/EKG dengan tiga hak akses, direktori akun login yang stabil, dan diagnosa Supabase built-in.">
 <meta name="theme-color" content="#D6403C">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23D6403C'/%3E%3Cpolyline points='4 12 8 12 10 6 13 18 15 12 20 12' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -109,6 +109,13 @@ body[data-view="login"] #loginScreen{display:grid}
 .pass-wrap .inp{padding-right:44px}
 .pass-eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:7px;display:grid;place-items:center;color:var(--ink-3)}
 .pass-eye:hover{background:var(--surface-2);color:var(--ink)}
+.dir-note{display:flex;align-items:flex-start;gap:8px;padding:9px 11px;border-radius:9px;background:var(--amber-soft);border:1px solid #EFD3A0;font-size:11px;color:#8A5A08;line-height:1.45;margin-top:-4px}
+.dir-note .ic{flex:none;margin-top:1px;color:#B26F05}
+.dir-note .dn-t{flex:1;min-width:0}
+.dir-note button{flex:none;font:600 9.5px var(--font-mono);letter-spacing:.06em;padding:4px 9px;border-radius:6px;border:1.5px solid #E0BE84;background:#fff;color:#8A5A08}
+.dir-note button:hover{background:#FFF8EC}
+.dir-ok{display:flex;align-items:center;gap:7px;font:500 10.5px var(--font-mono);color:var(--ink-3);margin-top:-4px}
+.dir-ok .ic{color:var(--green)}
 .email-preview{display:flex;align-items:center;gap:8px;padding:8px 11px;border-radius:9px;background:var(--blue-soft);border:1px solid #C6DAF4;font-size:11px;color:#1D539E;margin-top:-4px}
 .email-preview .ic{flex:none}
 .email-preview .ep-t{flex:1;min-width:0;line-height:1.35}
@@ -804,10 +811,7 @@ input[type="checkbox"]{width:16px;height:16px;accent-color:var(--red);cursor:poi
 .app-foot{margin-top:44px;text-align:center;font:500 9.5px var(--font-mono);letter-spacing:.1em;color:var(--ink-3);text-transform:uppercase}
 #printArea{display:none}
 
-/* ══════════════════════════════════════════════════════════════
-   NUMERIK — angka memakai Space Grotesk (nol polos, tanpa titik),
-   kode & label tetap Roboto Mono (nol polos juga). Semua tabular.
-   ══════════════════════════════════════════════════════════════ */
+/* ══════════ NUMERIK — nol polos, tabular ══════════ */
 .st-val,.sum-num,.net-num,.dt-num,.dt-net-num,.dt-time-num,.ms-cell b,.oc-val,
 .mono.big,.net-pill,.rc-net b,.rc-stat b,.v-num b,.item-net b,.item-time b,
 .d-netline b,.d-timeline b,.d-cell b,.si-val,.si-time,.ket-count,.chip-calc,
@@ -1016,7 +1020,7 @@ html{scroll-behavior:auto}}
       </div>
       <div class="mon-foot">
         <span class="mode-chip" id="lgMode">MODE LOKAL</span>
-        <span class="mono sm">FORM LH-ECG-01 · REV. 13</span>
+        <span class="mono sm">FORM LH-ECG-01 · REV. 14</span>
       </div>
     </div>
   </div>
@@ -1029,7 +1033,7 @@ html{scroll-behavior:auto}}
       <div class="conn-strip local" id="connStrip">
         <span data-ic="building" data-sz="15"></span>
         <div class="cs-t"><b id="csTitle">Mode Lokal</b><small id="csSub">Data di perangkat ini saja</small></div>
-        <button type="button" data-act="open-setup">Ubah</button>
+        <button type="button" id="connEdit" data-act="open-setup">Ubah</button>
       </div>
       <div class="lg-modes" id="lgModes" hidden>
         <button type="button" class="on" data-act="login-mode" data-mode="kode">Kode Akun</button>
@@ -1040,6 +1044,12 @@ html{scroll-behavior:auto}}
           <label for="lgKode">Akun Pengguna <b class="req">*</b></label>
           <select id="lgKode" class="inp"></select>
         </div>
+        <div class="dir-note" id="dirNote" hidden>
+          <span data-ic="alert" data-sz="13"></span>
+          <div class="dn-t">Direktori akun di perangkat ini belum lengkap. Kepala produksi perlu menjalankan satu SQL singkat agar semua akun selalu muncul.</div>
+          <button type="button" data-act="dir-sql">SQL</button>
+        </div>
+        <div class="dir-ok" id="dirOk" hidden><span data-ic="check" data-sz="12"></span> <span id="dirOkTxt">Direktori akun lengkap</span></div>
         <div class="field" id="lgEmailField" hidden>
           <label for="lgEmail">Email Terdaftar di Supabase <b class="req">*</b></label>
           <input id="lgEmail" class="inp mono" type="email" placeholder="kepala@mhi.local" autocomplete="off">
@@ -1081,7 +1091,7 @@ html{scroll-behavior:auto}}
         </div>
         <p class="lgq-note">Sandi demo <b>mhi2026</b>. Mode lokal selalu bisa dipakai walau Supabase belum siap.</p>
       </div>
-      <div class="lg-fallback">
+      <div class="lg-fallback" id="lgFallback">
         <button class="btn btn-ghost btn-sm" data-act="use-local" id="lgLocalBtn"><span data-ic="undo" data-sz="13"></span> Pakai Mode Lokal</button>
         <button class="btn btn-ghost btn-sm" data-act="open-setup"><span data-ic="building" data-sz="13"></span> Koneksi Cloud</button>
       </div>
@@ -1124,7 +1134,7 @@ html{scroll-behavior:auto}}
 
 <section id="view-form" class="view" aria-label="Identitas laporan">
   <div class="hero">
-    <div class="hero-top"><span>FORM LH-ECG-01 · REV. 13</span><span class="live"><i class="dot"></i><span id="shiftLive">SHIFT BERJALAN</span></span></div>
+    <div class="hero-top"><span>FORM LH-ECG-01 · REV. 14</span><span class="live"><i class="dot"></i><span id="shiftLive">SHIFT BERJALAN</span></span></div>
     <h1 class="hero-title">Laporan Harian <em>Produksi</em></h1>
     <svg class="ecg" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true"><path id="ecgBaseF" class="base" fill="none" d="M0 32 L1200 32"/><path id="ecgRunF" class="run" fill="none" pathLength="1000" d="M0 32 L1200 32"/></svg>
   </div>
@@ -1387,7 +1397,7 @@ html{scroll-behavior:auto}}
     <div class="card-body" id="mxBody"></div>
   </div>
   <div id="uPaneDiag" class="card sect" hidden>
-    <header class="card-head"><span class="step" style="background:var(--plum)"><span data-ic="activity" data-sz="15"></span></span><div><h2>Diagnosa Sistem Akun</h2><p>Memeriksa Edge Function, policy RLS, dan pengaturan Auth — menampilkan pesan Supabase asli.</p></div><button class="btn btn-primary btn-sm" data-act="acct-diag" id="acctDiagBtn" style="margin-left:auto"><span data-ic="rotate" data-sz="14"></span> Jalankan Diagnosa</button></header>
+    <header class="card-head"><span class="step" style="background:var(--plum)"><span data-ic="activity" data-sz="15"></span></span><div><h2>Diagnosa Sistem Akun</h2><p>Memeriksa direktori login, Edge Function, policy RLS, dan pengaturan Auth.</p></div><button class="btn btn-primary btn-sm" data-act="acct-diag" id="acctDiagBtn" style="margin-left:auto"><span data-ic="rotate" data-sz="14"></span> Jalankan Diagnosa</button></header>
     <div class="card-body"><div class="diag-body" id="acctDiagBody" style="max-height:none;padding:0"></div></div>
   </div>
   <div id="uPaneAudit" class="card sect" hidden>
@@ -1457,6 +1467,16 @@ html{scroll-behavior:auto}}
    ══════════════════════════════════════════════════════════════ */
 const CONFIG={SUPABASE_URL:'https://ooqnifjwbglmpmmpinmo.supabase.co',SUPABASE_ANON_KEY:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9vcW5pZmp3YmdsbXBtbXBpbm1vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTUxNjA1MjgsImV4cCI6MjExMDczNjUyOH0.rbP3cyaJxSbyC-pjALn3vlxXzUB6WIphtP15aZ71ves',EMAIL_DOMAIN:'mhi.local',DEMO_PASSWORD:'mhi2026'};
 const KET_MAX=300;
+
+/* ── SQL: direktori akun untuk layar login (nama & peran saja) ── */
+const SQL_LOGIN_DIR=`-- Jalankan sekali di Supabase → SQL Editor → Run.
+-- Membuat direktori akun yang bisa dibaca layar login (tanpa sandi / email),
+-- sehingga daftar akun TIDAK menyusut setelah operator keluar.
+create or replace view public.login_directory as
+select kode, nama, role, aktif
+from public.profiles;
+
+grant select on public.login_directory to anon, authenticated;`;
 
 const SQL_INSERT_POLICY=`-- Jalankan di Supabase → SQL Editor → Run
 drop policy if exists profiles_insert on public.profiles;
@@ -1604,7 +1624,7 @@ const ACCESS={form:['kepala','admin','operator'],detail:['kepala','admin','opera
 const ROUTES={form:'#/laporan',detail:'#/detail-produksi',other:'#/kegiatan-lain',history:'#/riwayat',verify:'#/verifikasi',master:'#/master-produk',users:'#/pengguna'};
 const MATRIX=[
 {g:'LAPORAN HARIAN',rows:[['Buat laporan untuk diri sendiri',1,1,1],['Lihat laporan seluruh divisi',1,1,'own'],['Edit laporan sendiri · belum diverifikasi',1,1,1],['Edit laporan operator lain',1,1,0],['Verifikasi & kembalikan untuk revisi',1,1,0],['Batalkan verifikasi',1,1,0],['Arsipkan & pulihkan laporan',1,1,0],['Hapus permanen dari arsip',1,0,0],['Muat ulang data dari server',1,1,0],['Export CSV',1,1,0],['Cetak rekap',1,1,0]]},
-{g:'MASTER & SISTEM',rows:[['Kelola master produk Pack / Roll',1,1,0],['Info koneksi cloud (chip CLOUD)',1,0,0],['Ubah koneksi & cadangan data',1,0,0],['Lihat audit log',1,0,0]]},
+{g:'MASTER & SISTEM',rows:[['Kelola master produk Pack / Roll',1,1,0],['Info koneksi cloud (chip CLOUD)',1,0,0],['Tombol Pakai Mode Lokal / Koneksi Cloud',1,0,0],['Ubah koneksi & cadangan data',1,0,0],['Lihat audit log',1,0,0]]},
 {g:'MANAJEMEN PENGGUNA',rows:[['Melihat menu Pengguna',1,0,0],['Menambah pengguna baru',1,0,0],['Mengubah peran & data pengguna',1,0,0],['Reset kata sandi pengguna',1,0,0],['Nonaktifkan akun',1,0,0],['Hapus akun tanpa laporan',1,0,0]]}];
 const PACK_SEED=['ENDO Paper Pack 210 x 140/180_EIECG12CH','ENDO Paper Pack 210 x 140/150_EIECG3CH','ENDO Paper Pack 210 x 140/180_EIECG6CH','Fukuda Paper Pack 210 x 140/150_FDECG3CH','Nihon Kohden Paper Pack 210 x 140/180_NKECG12CH','Schiller Paper Pack 210 x 140/140_SCECG12CH','GE Marquette Paper Pack 210 x 140/180_GEECG12CH','Bistos Paper Pack 210 x 140/145_BTECG3CH'];
 const ROLL_SEED=['ENDO Paper Roll 210 x 25m_Var 12 Ch','ENDO Paper Roll 110 x 20m_Var 3 Ch','Nihon Kohden Paper Roll 210 x 30m_NKECG12CH','Schiller Paper Roll 112 x 20m_SCECG3CH','GE Marquette Paper Roll 210 x 25m_GEECG12CH','Fukuda Paper Roll 110 x 20m_FDECG3CH','Contec Paper Roll 110 x 20m_CTECG3CH'];
@@ -1622,29 +1642,48 @@ const PEOPLE=[
 const DOMAIN_SUGGEST=['mhi.local','mhipaper.id','mhi.internal','example.com','gmail.com'];
 let lastLong='L1',tickerTimer=null;
 
-const CFG_KEY='mhi_cloud_cfg',PREF_KEY='mhi_prefs',DB_KEY='mhi_local_db',DIR_KEY='mhi_login_dir';
+const CFG_KEY='mhi_cloud_cfg',PREF_KEY='mhi_prefs',DB_KEY='mhi_local_db',DIR_KEY='mhi_login_dir',ROLE_KEY='mhi_last_role';
 function readCfg(){
   try{const s=localStorage.getItem(CFG_KEY);if(s){const c=JSON.parse(s);if(c&&c.url&&c.key)return c}}catch(e){}
   if(CONFIG.SUPABASE_URL&&CONFIG.SUPABASE_ANON_KEY)return{url:CONFIG.SUPABASE_URL.trim().replace(/\/$/,''),key:CONFIG.SUPABASE_ANON_KEY.trim(),domain:CONFIG.EMAIL_DOMAIN||'mhi.local'};
   return null;
 }
 function writeCfg(c){try{c?localStorage.setItem(CFG_KEY,JSON.stringify(c)):localStorage.removeItem(CFG_KEY)}catch(e){}}
-function readDir(){try{const d=JSON.parse(localStorage.getItem(DIR_KEY)||'[]');return Array.isArray(d)?d:[]}catch(e){return[]}}
-function writeDir(list){try{localStorage.setItem(DIR_KEY,JSON.stringify(list.map(p=>({kode:p.kode,nama:p.nama,role:p.role,aktif:p.aktif!==false}))))}catch(e){}}
+function readDir(){try{const d=JSON.parse(localStorage.getItem(DIR_KEY)||'[]');return Array.isArray(d)?d.filter(p=>p&&p.kode):[]}catch(e){return[]}}
+function writeDir(list){try{localStorage.setItem(DIR_KEY,JSON.stringify(list))}catch(e){}}
+const cleanDir=list=>list.filter(p=>p&&p.kode).map(p=>({kode:String(p.kode),nama:String(p.nama||p.kode),role:ROLES[p.role]?p.role:'operator',aktif:p.aktif!==false}));
+/* Direktori login TIDAK BOLEH menyusut karena operator hanya boleh membaca profilnya sendiri.
+   complete=true hanya bila sumber benar-benar melihat seluruh tabel (kepala/admin atau view publik). */
+function mergeDir(list,{complete=false,source='cache'}={}){
+  const incoming=cleanDir(list);
+  let out;
+  if(complete){out=incoming}
+  else{
+    const map=new Map(readDir().map(p=>[p.kode,p]));
+    incoming.forEach(p=>map.set(p.kode,p));
+    out=[...map.values()];
+  }
+  if(!out.length)return S.dir;
+  writeDir(out);S.dir=out;S.dirSource=source;
+  return out;
+}
+function readLastRole(){try{return localStorage.getItem(ROLE_KEY)||''}catch(e){return''}}
+function writeLastRole(r){try{r?localStorage.setItem(ROLE_KEY,r):localStorage.removeItem(ROLE_KEY)}catch(e){}}
 const DEMO_PASS=CONFIG.DEMO_PASSWORD||'mhi2026';
 
 const blankItem=()=>({key:uid(),nama:'',po:'',spk:'',prep:'',setting:'',ops:'',hasil:'',reject:'',keterangan:''});
 const blankAgenda=()=>({key:uid(),kategori:'',deskripsi:'',waktu:''});
 const blankExtra=()=>({key:uid(),waktu:'',keterangan:''});
 const blankForm=()=>({mode:'create',editId:null,operatorId:(S.me&&S.me.role==='operator')?S.me.kode:'',date:todayStr(),shift:autoShift(),jenis:'pack',multi:false,items:[blankItem()],hasAgenda:'ya',agenda:[blankAgenda()],hasExtra:'tidak',extra:[blankExtra()]});
-let S={mode:'local',me:null,view:'login',profiles:[],products:[],reports:[],audit:[],savedViews:[],sound:true,uq:'',dir:[],
+let S={mode:'local',me:null,view:'login',profiles:[],products:[],reports:[],audit:[],savedViews:[],sound:true,uq:'',
+dir:[],dirSource:'seed',lastRole:'',
 loginMode:'kode',loginEmail:'',diag:[],diagRunning:false,acctDiag:[],acctRunning:false,provMode:'unknown',lastRawError:'',
 filters:{q:'',operator:'all',jenis:'all',status:'all',period:'all',sort:'dateDesc',archived:false},
 selection:new Set(),vSel:new Set(),vTab:'submit',uTab:'pengguna',drawerId:null,highlightId:null,form:null,lastSync:null};
 S.form=blankForm();
 const byId=id=>S.reports.find(r=>r.id===id);
 const profByKode=k=>S.profiles.find(p=>p.kode===k);
-const opOf=r=>profByKode(r.operatorId)||{nama:'—',jabatan:'',mesin:'',warna:'#999',kode:r.operatorId};
+const opOf=r=>profByKode(r.operatorId)||S.dir.find(p=>p.kode===r.operatorId)||{nama:r.operatorId||'—',jabatan:'',mesin:'',warna:'#999',kode:r.operatorId};
 const isKepala=()=>!!S.me&&S.me.role==='kepala';
 const canVerify=()=>!!S.me&&S.me.role!=='operator';
 const canMaster=()=>!!S.me&&S.me.role!=='operator';
@@ -1653,7 +1692,9 @@ const canPurge=()=>isKepala();
 const canManageUsers=()=>isKepala();
 const canExport=()=>!!S.me&&S.me.role!=='operator';
 const canReload=()=>!!S.me&&S.me.role!=='operator';
-const canSeeConnection=()=>isKepala();
+/* koneksi cloud / mode lokal hanya untuk kepala produksi — termasuk di layar login setelah keluar */
+function connAllowed(){return S.me?isKepala():(!S.lastRole||S.lastRole==='kepala')}
+const canSeeConnection=()=>connAllowed();
 const canEdit=r=>{if(!S.me||r.deletedAt)return false;if(canVerify())return true;return r.operatorId===S.me.kode&&r.status!=='verified'};
 const itemWaktu=it=>num(it.prep)+num(it.setting)+num(it.ops);
 const itemNet=it=>num(it.hasil)-num(it.reject);
@@ -1807,6 +1848,19 @@ function loadSDK(){
     s.async=true;s.onload=()=>res();s.onerror=()=>rej(new Error('Gagal memuat Supabase SDK dari CDN. Periksa koneksi internet atau pemblokir skrip.'));
     document.head.appendChild(s)});
 }
+function anonClient(cfg){return window.supabase.createClient(cfg.url,cfg.key,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false,storageKey:'mhi-anon-'+Math.random().toString(36).slice(2)}})}
+/* Ambil direktori akun publik — sumber paling akurat, tidak bergantung peran yang sedang masuk */
+async function refreshPublicDir(){
+  const cfg=readCfg();if(!cfg)return false;
+  try{
+    await loadSDK();
+    const{data,error}=await anonClient(cfg).from('login_directory').select('kode,nama,role,aktif').order('nama');
+    if(error||!Array.isArray(data)||!data.length)return false;
+    mergeDir(data,{complete:true,source:'live'});
+    if(document.body.dataset.view==='login')renderLoginScreen();
+    return true;
+  }catch(e){return false}
+}
 function mapAuthError(raw,email){
   const m=String((raw&&raw.message)||raw||'');
   if(/invalid login credentials/i.test(m))return{title:'Email atau kata sandi tidak cocok',
@@ -1834,7 +1888,7 @@ const Cloud={
   sb:null,cfg:null,map:{},rmap:{},fnAvailable:null,
   async init(cfg){await loadSDK();this.cfg=cfg;this.sb=window.supabase.createClient(cfg.url,cfg.key,{auth:{persistSession:true,autoRefreshToken:true,detectSessionInUrl:false}})},
   email(k){return k+'@'+((this.cfg&&this.cfg.domain)||'mhi.local')},
-  iso(){return window.supabase.createClient(this.cfg.url,this.cfg.key,{auth:{persistSession:false,autoRefreshToken:false,detectSessionInUrl:false,storageKey:'mhi-iso-'+Math.random().toString(36).slice(2)}})},
+  iso(){return anonClient(this.cfg)},
   pFrom:d=>({id:d.id,kode:d.kode,nama:d.nama,role:d.role,jabatan:d.jabatan||'',mesin:d.mesin||'',warna:d.warna||'#5C6270',aktif:d.aktif!==false}),
   async signIn(kode,pass){
     const email=S.loginMode==='email'?(S.loginEmail||'').trim():this.email(kode);
@@ -2035,34 +2089,40 @@ function currentEmail(){
   return kode+'@'+((cfg&&cfg.domain)||'mhi.local');
 }
 function loginDirectory(){
-  if(S.profiles.length)return S.profiles;
-  if(S.dir.length)return S.dir;
+  if(S.dirSource==='live'&&S.dir.length)return S.dir;
   const cached=readDir();
-  if(cached.length){S.dir=cached;return cached}
-  return PEOPLE;
+  if(cached.length){S.dir=cached;if(S.dirSource!=='live')S.dirSource='cache';return cached}
+  if(S.dir.length)return S.dir;
+  S.dirSource='seed';
+  return PEOPLE.map(p=>({kode:p.kode,nama:p.nama,role:p.role,aktif:true}));
 }
 function renderLoginScreen(){
-  const cfg=readCfg(),cloud=!!cfg;
+  const cfg=readCfg(),cloud=!!cfg,allow=connAllowed();
   $('#lgMode').textContent=cloud?'SUPABASE TERHUBUNG':'MODE LOKAL · DEMO';
   $('#lgMode').classList.toggle('cloud',cloud);
   $('#connStrip').className='conn-strip '+(cloud?'cloud':'local');
   $('#csTitle').textContent=cloud?'Cloud Supabase':'Mode Lokal';
   $('#csSub').textContent=cloud?(cfg.url.replace(/^https?:\/\//,'')+' · @'+cfg.domain):'10 akun demo · sandi '+DEMO_PASS;
+  $('#connEdit').hidden=!allow;
+  $('#lgFallback').hidden=!allow;
   $('#lgModes').hidden=!cloud;
   $('#lgQuick').hidden=cloud;
-  $('#lgLocalBtn').hidden=!cloud;
   $('#lgKodeField').hidden=cloud&&S.loginMode==='email';
   $('#lgEmailField').hidden=!cloud||S.loginMode!=='email';
   $('#lgEmailPreview').hidden=!cloud;
   $('#lgDomChips').hidden=!cloud||S.loginMode==='email';
   $$('#lgModes button').forEach(b=>b.classList.toggle('on',b.dataset.mode===S.loginMode));
-  const list=cloud?loginDirectory():Local.data.profiles;
+  const list=cloud?loginDirectory():Local.data.profiles.map(p=>({kode:p.kode,nama:p.nama,role:p.role,aktif:p.aktif!==false}));
   const prev=$('#lgKode').value;
   $('#lgKode').innerHTML=[['kepala','Kepala Produksi'],['admin','Admin'],['operator','Operator']].map(([r,l])=>{
     const arr=list.filter(p=>p.role===r);if(!arr.length)return'';
-    return `<optgroup label="${l}">${arr.map(p=>`<option value="${esc(p.kode)}">${esc(p.nama)}</option>`).join('')}</optgroup>`;
+    return `<optgroup label="${l}">${arr.map(p=>`<option value="${esc(p.kode)}">${esc(p.nama)}${p.aktif===false?' · nonaktif':''}</option>`).join('')}</optgroup>`;
   }).join('');
   $('#lgKode').value=(prev&&list.some(p=>p.kode===prev))?prev:(list.some(p=>p.kode==='kepala')?'kepala':(list[0]?list[0].kode:''));
+  const partial=cloud&&S.dirSource!=='live'&&list.length<3;
+  $('#dirNote').hidden=!partial;
+  $('#dirOk').hidden=!(cloud&&!partial&&S.dirSource==='live');
+  $('#dirOkTxt').textContent=`${list.length} akun dimuat dari server`;
   if(cloud&&S.loginMode==='email')$('#lgEmail').value=S.loginEmail||'';
   if(cloud){const dom=cfg.domain||'mhi.local';
     $('#lgDomChips').innerHTML=DOMAIN_SUGGEST.map(d=>`<button type="button" data-act="set-domain" data-dom="${esc(d)}" class="${d===dom?'on':''}">@${esc(d)}</button>`).join('')}
@@ -2111,30 +2171,37 @@ function clearLoginFields(){
 }
 async function doLogin(kode,pass){
   const btn=$('#lgSubmit');btn.disabled=true;btn.innerHTML='Memeriksa…';$('#lgErr').hidden=true;
-  try{const me=await DB.signIn(kode,pass);S.me=me;await bootApp();sfx.ok();
-    toast(`Masuk sebagai <b>${esc(me.nama)}</b> — ${ROLES[me.role].label}.`,{icon:ROLES[me.role].icon,duration:4200})}
-  catch(err){loginError(err)}
+  try{
+    const me=await DB.signIn(kode,pass);
+    S.me=me;S.lastRole=me.role;writeLastRole(me.role);
+    await bootApp();sfx.ok();
+    toast(`Masuk sebagai <b>${esc(me.nama)}</b> — ${ROLES[me.role].label}.`,{icon:ROLES[me.role].icon,duration:4200});
+  }catch(err){loginError(err)}
   finally{btn.disabled=false;btn.innerHTML='Masuk '+icon('arrowRight',15)}
 }
 async function doLogout(){
+  const role=S.me?S.me.role:'';
   try{await DB.signOut()}catch(e){}
-  if(S.profiles.length){S.dir=S.profiles.map(p=>({kode:p.kode,nama:p.nama,role:p.role,aktif:p.aktif}));writeDir(S.dir)}
+  /* JANGAN menimpa direktori dengan daftar profil yang dibatasi RLS operator */
   S.me=null;S.reports=[];S.profiles=[];S.selection.clear();S.vSel.clear();S.uq='';S.provMode='unknown';
+  S.lastRole=role;writeLastRole(role);
   closeDrawer();clearInterval(tickerTimer);
   $('#topbar').hidden=true;$('#appMain').hidden=true;$('#userMenu').hidden=true;
   document.body.dataset.view='login';S.view='login';
   try{history.replaceState(null,'',location.pathname)}catch(e){}
   renderLoginScreen();
   clearLoginFields();
+  refreshPublicDir();
   toast('Anda telah keluar — kolom sandi dikosongkan.',{type:'info',icon:'logout',duration:3200});
 }
 async function useLocalMode(){
-  writeCfg(null);DB=Local;S.mode='local';S.loginMode='kode';S.provMode='unknown';
+  if(!connAllowed()){toast('Perubahan mode hanya untuk kepala produksi.',{type:'warn',icon:'lock',duration:4000});return}
+  writeCfg(null);DB=Local;S.mode='local';S.loginMode='kode';S.provMode='unknown';S.dirSource='seed';
   Local.load();
   renderLoginScreen();clearLoginFields();
   $('#lgPass').value=DEMO_PASS;
   toast('Beralih ke <b>Mode Lokal</b> — 10 akun demo siap dipakai.',{icon:'undo',duration:4200});
-  const me=await Local.session();if(me){S.me=me;await bootApp()}
+  const me=await Local.session();if(me){S.me=me;S.lastRole=me.role;writeLastRole(me.role);await bootApp()}
 }
 function sqlBox(id,label,code){
   return `<div class="sqlbox"><div class="sb-head">${icon('database',11)} ${esc(label)}<button type="button" data-act="copy-sql" data-sql="${id}">Salin SQL</button></div><pre>${esc(code)}</pre></div>`;
@@ -2167,11 +2234,22 @@ async function runDiag(){
       if(r.ok)diagLast({state:'ok',title:'Server Auth terjangkau'});
       else diagLast({state:r.status===401||r.status===403?'bad':'warn',title:'Server menjawab '+r.status,fix:r.status===401?'Salin ulang anon public key.':'Proyek mungkin di-pause — restore dari dashboard.'});
     }catch(e){diagLast({state:'bad',title:'Proyek tidak terjangkau',detail:esc(e.message)});return}
+    const probe=anonClient(cfg);
     diagPush({state:'run',title:'Memeriksa tabel database…'});
-    const probe=window.supabase.createClient(cfg.url,cfg.key,{auth:{persistSession:false}});
     const{error:tErr}=await probe.from('products').select('id').limit(1);
     if(tErr){diagLast({state:'bad',title:'Tabel belum siap',detail:esc(tErr.message),fix:'Jalankan seluruh <code>schema.sql</code> di SQL Editor.'});return}
     diagLast({state:'ok',title:'Tabel products terbaca'});
+    diagPush({state:'run',title:'Memeriksa direktori akun login…'});
+    const{data:dd,error:dErr}=await probe.from('login_directory').select('kode,nama,role,aktif');
+    if(dErr||!Array.isArray(dd)||!dd.length){
+      diagLast({state:'warn',title:'Direktori login belum tersedia',detail:dErr?esc(dErr.message):'View kosong',
+        fix:'Tanpa view ini, daftar akun di layar login hanya berasal dari cache perangkat — bisa menyusut setelah operator keluar. Jalankan SQL berikut sekali:',
+        sqlId:'dir',sqlLabel:'login_directory.sql',sql:SQL_LOGIN_DIR});
+    }else{
+      mergeDir(dd,{complete:true,source:'live'});
+      diagLast({state:'ok',title:'Direktori login lengkap',detail:dd.length+' akun terbaca tanpa perlu masuk'});
+      renderLoginScreen();
+    }
     diagPush({state:'run',title:'Mencoba login ke Auth…',detail:esc(email)});
     if(!pass){diagLast({state:'warn',title:'Kata sandi kosong',detail:'Isi kolom sandi lalu jalankan diagnosa lagi.'});return}
     const{data:aData,error:aErr}=await probe.auth.signInWithPassword({email,password:pass});
@@ -2211,6 +2289,17 @@ async function runAcctDiag(){
   const btn=$('#acctDiagBtn');if(btn){btn.disabled=true;btn.innerHTML='Memeriksa…'}
   try{
     acctPush({state:'ok',title:'Peran Anda: '+ROLES[S.me.role].label,detail:'Kode @'+esc(S.me.kode)+' · UUID '+esc(S.me.id)});
+    acctPush({state:'run',title:'Memeriksa direktori akun login…'});
+    const cfg=readCfg();
+    const{data:dd,error:dErr}=await anonClient(cfg).from('login_directory').select('kode,nama,role,aktif');
+    if(dErr||!Array.isArray(dd)||!dd.length){
+      acctLast({state:'warn',title:'Direktori login belum tersedia',detail:dErr?esc(dErr.message):'View kosong',
+        fix:'Ini penyebab daftar akun menyusut setelah operator keluar. Jalankan SQL berikut sekali di SQL Editor:',
+        sqlId:'dir',sqlLabel:'login_directory.sql',sql:SQL_LOGIN_DIR});
+    }else{
+      mergeDir(dd,{complete:true,source:'live'});
+      acctLast({state:'ok',title:'Direktori login lengkap',detail:dd.length+' akun dapat dibaca layar login tanpa autentikasi'});
+    }
     acctPush({state:'run',title:'Memeriksa Edge Function manage-user…'});
     const fn=await DB.probeFunction();
     if(fn.ok){acctLast({state:'ok',title:'Edge Function tersedia',detail:esc(fn.reason)});S.provMode='fn'}
@@ -2231,7 +2320,6 @@ async function runAcctDiag(){
     const{error:uErr}=await DB.sb.from('profiles').update({nama:S.me.nama}).eq('id',S.me.id);
     if(!uErr)acctLast({state:'ok',title:'Policy update profil siap',detail:'Ubah peran / nonaktifkan akun dapat dilakukan.'});
     else acctLast({state:'bad',title:'Policy update profil bermasalah',detail:esc(uErr.message),fix:'Jalankan paket policy lengkap:',sqlId:'full',sqlLabel:'profiles policies',sql:SQL_FULL_ACCESS});
-    const cfg=readCfg();
     acctPush({state:/\.(local|internal)$/i.test(cfg.domain)?'warn':'ok',title:'Domain email: @'+esc(cfg.domain),
       detail:'Akun baru akan dibuat sebagai kode@'+esc(cfg.domain),
       fix:/\.(local|internal)$/i.test(cfg.domain)?'Domain <code>.local</code> kadang ditolak validator email Supabase. Bila muncul error "invalid email", ganti ke <code>@example.com</code> atau <code>@gmail.com</code> lewat menu Koneksi Data — lalu samakan untuk semua akun.':'Format domain umum, aman untuk signUp.'});
@@ -2248,7 +2336,10 @@ async function runAcctDiag(){
 async function reloadAll(){
   S.profiles=await DB.profiles();S.products=await DB.products();S.reports=await DB.reports();
   S.audit=isKepala()?await DB.audit():[];S.lastSync=Date.now();
-  if(S.profiles.length){S.dir=S.profiles.map(p=>({kode:p.kode,nama:p.nama,role:p.role,aktif:p.aktif}));writeDir(S.dir)}
+  /* kepala & admin melihat seluruh tabel → boleh jadi sumber lengkap.
+     operator hanya melihat barisnya sendiri → HANYA digabung, tidak menggantikan. */
+  const complete=!!S.me&&S.me.role!=='operator';
+  if(S.profiles.length)mergeDir(S.profiles,{complete,source:complete?'cache':S.dirSource});
 }
 async function bootApp(){
   await reloadAll();
@@ -2261,6 +2352,7 @@ async function bootApp(){
   const hashV=Object.keys(ROUTES).find(k=>ROUTES[k]===location.hash);
   setView(hashV&&ACCESS[hashV].includes(S.me.role)?hashV:'history',true);
   if(isKepala())detectProv();
+  refreshPublicDir();
 }
 function buildTabs(){
   const pending=S.reports.filter(r=>r.status==='submit'&&!r.deletedAt).length;
@@ -2302,7 +2394,7 @@ function buildSelects(){
   const opOpts=ops.map(o=>`<option value="${esc(o.kode)}">${esc(o.nama)} — ${esc(o.jabatan||o.mesin)}</option>`).join('');
   $('#f-operator').innerHTML='<option value="">— Pilih Operator —</option>'+opOpts;
   $('#o-operator').innerHTML='<option value="">— Pilih Operator —</option>'+opOpts;
-  $('#fl-operator').innerHTML='<option value="all">Semua Operator</option>'+ops.map(o=>`<option value="${esc(o.kode)}">${esc(o.nama)} · ${esc(o.mesin)}</option>`).join('');
+  $('#fl-operator').innerHTML='<option value="all">Semua Operator</option>'+ops.map(o=>`<option value="${esc(o.kode)}">${esc(o.nama)}${o.mesin?' · '+esc(o.mesin):''}</option>`).join('');
   $('#dl-pack').innerHTML=S.products.filter(p=>p.jenis==='pack'&&p.aktif).map(p=>`<option value="${esc(p.nama)}">`).join('');
   $('#dl-roll').innerHTML=S.products.filter(p=>p.jenis==='roll'&&p.aktif).map(p=>`<option value="${esc(p.nama)}">`).join('');
 }
@@ -2343,7 +2435,7 @@ function syncIdentity(){
 }
 function renderOperatorPreviews(stamp){
   const op=profByKode(S.form.operatorId);
-  const html=op?`<div class="op-card ${stamp?'stamp':''}"><span class="auto-tag">TERISI OTOMATIS</span><span class="avatar" style="--av:${op.warna}">${initials(op.nama)}</span><div class="op-fields"><div class="op-f"><label>NAMA OPERATOR</label><b>${esc(op.nama)}</b></div><div class="op-f"><label>JABATAN / POSISI</label><b>${esc(op.jabatan)}</b></div></div><span class="machine-chip">MESIN: ${esc(op.mesin)}</span></div>`
+  const html=op?`<div class="op-card ${stamp?'stamp':''}"><span class="auto-tag">TERISI OTOMATIS</span><span class="avatar" style="--av:${op.warna}">${initials(op.nama)}</span><div class="op-fields"><div class="op-f"><label>NAMA OPERATOR</label><b>${esc(op.nama)}</b></div><div class="op-f"><label>JABATAN / POSISI</label><b>${esc(op.jabatan||'—')}</b></div></div><span class="machine-chip">MESIN: ${esc(op.mesin||'—')}</span></div>`
   :`<div class="op-empty">${icon('users',15)} Pilih nama operator di atas — nama &amp; jabatan terisi otomatis.</div>`;
   $('#opPreviewF').innerHTML=html;$('#opPreviewO').innerHTML=html;
 }
@@ -2409,7 +2501,7 @@ function updateItemCalc(key){
 let lastNet=null;
 function updateFormSummary(){
   const f=S.form,j=JENIS[f.jenis==='roll'?'roll':'pack'],op=profByKode(f.operatorId);
-  $('#sumOp').innerHTML=op?`<b>${esc(op.nama)}</b><small>${esc(op.jabatan)}</small>`:'<small class="muted">Operator belum dipilih</small>';
+  $('#sumOp').innerHTML=op?`<b>${esc(op.nama)}</b><small>${esc(op.jabatan||op.mesin||'')}</small>`:'<small class="muted">Operator belum dipilih</small>';
   $('#sumMeta').innerHTML=`${jenisBadge(f.jenis)}<span class="mono sm">${fmtDate(f.date||todayStr())} · ${shiftShort(f.shift)}</span>`;
   let h=0,r=0,p=0,s=0,o=0,kn=0;
   f.items.forEach(it=>{h+=num(it.hasil);r+=num(it.reject);p+=num(it.prep);s+=num(it.setting);o+=num(it.ops);if(itemKet(it))kn++});
@@ -2452,7 +2544,7 @@ function renderFormDynamic(){
 }
 function updateOtherSummary(){
   const f=S.form,op=profByKode(f.operatorId);
-  $('#sumOpO').innerHTML=op?`<b>${esc(op.nama)}</b><small>${esc(op.jabatan)}</small>`:'<small class="muted">Operator belum dipilih</small>';
+  $('#sumOpO').innerHTML=op?`<b>${esc(op.nama)}</b><small>${esc(op.jabatan||op.mesin||'')}</small>`:'<small class="muted">Operator belum dipilih</small>';
   $('#sumMetaO').innerHTML=`${jenisBadge('lainnya')}<span class="mono sm">${fmtDate(f.date||todayStr())} · ${shiftShort(f.shift)}</span>`;
   const list=f.hasAgenda==='ya'?f.agenda:[],tot=list.reduce((a,x)=>a+num(x.waktu),0);
   $('#sumAgendaCount').textContent=String(list.length);
@@ -2609,7 +2701,7 @@ function rowHTML(r){
   return `<tr data-row="${r.id}" class="${sel?'selected':''}">
 <td class="td-chk"><input type="checkbox" data-chk="${r.id}" ${sel?'checked':''} aria-label="Pilih ${esc(r.code)}"></td>
 <td><div class="cell-date"><b>${fmtDate(r.date)}</b><span class="code">${esc(r.code)} · ${shiftShort(r.shift)}</span></div></td>
-<td><div class="cell-op"><span class="avatar sm" style="--av:${op.warna}">${initials(op.nama)}</span><div><b>${esc(op.nama)}</b><small>${esc(op.jabatan)}</small></div></div></td>
+<td><div class="cell-op"><span class="avatar sm" style="--av:${op.warna||'#999'}">${initials(op.nama)}</span><div><b>${esc(op.nama)}</b><small>${esc(op.jabatan||op.mesin||'')}</small></div></div></td>
 <td>${jenisBadge(r.jenis)}</td><td>${statusBadge(r.status)}${r.deletedAt?' <span class="badge b-arch">ARSIP</span>':''}</td>
 <td class="cell-sum">${summaryText(r)}</td>
 <td class="ta-r"><span class="mono big">${prod?fmtNum(h):'—'}</span> ${prod?`<small class="muted">${JENIS[r.jenis].unit}</small>`:''}</td>
@@ -2623,7 +2715,7 @@ function cardHTML(r){
   const kf=rKetFirst(r),kn=rKetCount(r);
   return `<article class="rcard ${sel?'selected':''}" data-row="${r.id}">
 <div class="rc-top"><input type="checkbox" data-chk="${r.id}" ${sel?'checked':''} aria-label="Pilih ${esc(r.code)}"><div class="cell-date"><b>${fmtDate(r.date)}</b><span class="code">${esc(r.code)} · ${shiftShort(r.shift)}</span></div>${jenisBadge(r.jenis)}${statusBadge(r.status)}</div>
-<div class="rc-op"><span class="avatar sm" style="--av:${op.warna}">${initials(op.nama)}</span><b>${esc(op.nama)}</b><small>${esc(op.mesin)}</small></div>
+<div class="rc-op"><span class="avatar sm" style="--av:${op.warna||'#999'}">${initials(op.nama)}</span><b>${esc(op.nama)}</b><small>${esc(op.mesin||'')}</small></div>
 <div class="rc-sum">${summaryText(r)}</div>
 ${kf?`<div class="rc-ket">${icon('note',13)}<span>${esc(clip(kf,120))}${kn>1?` <b>+${kn-1} lagi</b>`:''}</span></div>`:''}
 ${prod?`<div class="rc-net ${netCls(net)}"><div><label>TOTAL HASIL BERSIH</label><b>${fmtNum(net)} <span style="font-size:11px">${JENIS[r.jenis].unit}</span></b></div><span class="calc">${fmtNum(h)} − ${fmtNum(j)}</span></div>`:''}
@@ -2656,10 +2748,10 @@ function buildBarChart(){
 function buildOpChart(){
   const T=todayStr(),last7=visibleReports().filter(r=>r.date>=addDays(T,-6)),map={};
   last7.forEach(r=>{const m=map[r.operatorId]||(map[r.operatorId]={units:0,count:0});m.units+=rNet(r);m.count++});
-  const arr=Object.entries(map).map(([id,m])=>({op:profByKode(id)||{nama:id,warna:'#999',mesin:''},...m})).sort((a,b)=>b.units-a.units||b.count-a.count).slice(0,6);
+  const arr=Object.entries(map).map(([id,m])=>({op:profByKode(id)||S.dir.find(p=>p.kode===id)||{nama:id,warna:'#999',mesin:''},...m})).sort((a,b)=>b.units-a.units||b.count-a.count).slice(0,6);
   if(!arr.length)return `<div class="chart-empty">${icon('users',24)}<p>Belum ada aktivitas 7 hari terakhir.</p></div>`;
   const max=Math.max(...arr.map(a=>Math.abs(a.units)),1);
-  return arr.map((a,i)=>`<div class="oc-row"><span class="oc-rank">${i+1}</span><span class="avatar sm" style="--av:${a.op.warna}">${initials(a.op.nama)}</span><div class="oc-mid"><div class="oc-name"><b>${esc(a.op.nama)}</b><small>${esc(a.op.mesin)}</small></div><div class="oc-bar"><span style="width:${Math.max(Math.abs(a.units)/max*100,a.units!==0?3:0).toFixed(1)}%;background:${a.units<0?'var(--red)':a.op.warna};animation-delay:${i*70}ms"></span></div></div><div class="oc-val">${fmtNum(a.units)}<small>${a.count} lap.</small></div></div>`).join('');
+  return arr.map((a,i)=>`<div class="oc-row"><span class="oc-rank">${i+1}</span><span class="avatar sm" style="--av:${a.op.warna||'#999'}">${initials(a.op.nama)}</span><div class="oc-mid"><div class="oc-name"><b>${esc(a.op.nama)}</b><small>${esc(a.op.mesin||'')}</small></div><div class="oc-bar"><span style="width:${Math.max(Math.abs(a.units)/max*100,a.units!==0?3:0).toFixed(1)}%;background:${a.units<0?'var(--red)':(a.op.warna||'#999')};animation-delay:${i*70}ms"></span></div></div><div class="oc-val">${fmtNum(a.units)}<small>${a.count} lap.</small></div></div>`).join('');
 }
 function renderSavedChips(){
   $('#savedChips').innerHTML=S.savedViews.map(sv=>{
@@ -2687,7 +2779,7 @@ function renderHistory(){
   const none=all.length===0,noRes=!none&&rows.length===0,hide=none||noRes;
   $('#histTable').style.display=hide?'none':'';$('#histCards').style.display=hide?'none':'';$('#histEmpty').hidden=!hide;
   if(hide)$('#histEmpty').innerHTML=none?
-    `<svg class="flatline" viewBox="0 0 320 44"><path d="M0 22 L120 22 L128 14 L136 30 L142 22 L320 22" fill="none" stroke="#D8C9B2" stroke-width="2" stroke-linecap="round"/></svg><h3>${S.filters.archived?'Arsip kosong':'Belum ada laporan'}</h3><p>${S.filters.archived?'Laporan yang diarsipkan muncul di sini dan dapat dipulihkan.':(S.profiles.filter(p=>p.role==='operator').length?'Mulai laporan harian pertama untuk shift ini.':'Belum ada akun operator. Kepala produksi perlu menambahkannya dulu di menu Pengguna.')}</p><div class="empty-btns"><button class="btn btn-primary" data-act="empty-create">${icon('plus',14)} Buat Laporan</button>${isKepala()&&!S.profiles.filter(p=>p.role==='operator').length?`<button class="btn btn-ghost" data-act="nav" data-nav="users">${icon('userPlus',14)} Tambah Operator</button>`:''}</div>`
+    `<svg class="flatline" viewBox="0 0 320 44"><path d="M0 22 L120 22 L128 14 L136 30 L142 22 L320 22" fill="none" stroke="#D8C9B2" stroke-width="2" stroke-linecap="round"/></svg><h3>${S.filters.archived?'Arsip kosong':'Belum ada laporan'}</h3><p>${S.filters.archived?'Laporan yang diarsipkan muncul di sini dan dapat dipulihkan.':(S.profiles.filter(p=>p.role==='operator').length||S.me.role!=='kepala'?'Mulai laporan harian pertama untuk shift ini.':'Belum ada akun operator. Tambahkan dulu di menu Pengguna.')}</p><div class="empty-btns"><button class="btn btn-primary" data-act="empty-create">${icon('plus',14)} Buat Laporan</button>${isKepala()&&!S.profiles.filter(p=>p.role==='operator').length?`<button class="btn btn-ghost" data-act="nav" data-nav="users">${icon('userPlus',14)} Tambah Operator</button>`:''}</div>`
     :`<svg class="flatline" viewBox="0 0 320 44"><path d="M0 22 L320 22" fill="none" stroke="#D8C9B2" stroke-width="2" stroke-linecap="round" stroke-dasharray="4 6"/></svg><h3>Tidak ada hasil untuk filter ini</h3><p>Coba ubah kata kunci, operator, jenis, status, atau periode.</p><div class="empty-btns"><button class="btn btn-ghost" data-act="filter-reset">${icon('rotate',14)} Reset Filter</button></div>`;
   const sel=S.selection,bb=$('#bulkBar');
   bb.hidden=sel.size===0;
@@ -2734,11 +2826,11 @@ function renderVerify(){
 }
 function vCard(r){
   const op=opOf(r),prod=r.jenis!=='lainnya',h=rHasil(r),j=rReject(r),net=h-j,w=rWaktu(r),sel=S.vSel.has(r.id);
-  const vb=r.verifiedBy?(profByKode(r.verifiedBy)||{nama:r.verifiedBy}):null;
+  const vb=r.verifiedBy?(profByKode(r.verifiedBy)||S.dir.find(p=>p.kode===r.verifiedBy)||{nama:r.verifiedBy}):null;
   const kf=rKetFirst(r),kn=rKetCount(r),missing=(r.items||[]).filter(i=>num(i.reject)>0&&!itemKet(i)).length;
   return `<article class="v-card s-${r.status} ${sel?'sel':''}" data-vrow="${r.id}">
 <div class="v-top"><input type="checkbox" data-vchk="${r.id}" ${sel?'checked':''} aria-label="Pilih ${esc(r.code)}"><div class="cell-date"><b>${fmtDate(r.date)}</b><span class="code">${esc(r.code)} · ${shiftShort(r.shift)}</span></div>${jenisBadge(r.jenis)}</div>
-<div class="v-op"><span class="avatar" style="--av:${op.warna}">${initials(op.nama)}</span><div><b>${esc(op.nama)}</b><small>${esc(op.mesin)}</small></div></div>
+<div class="v-op"><span class="avatar" style="--av:${op.warna||'#999'}">${initials(op.nama)}</span><div><b>${esc(op.nama)}</b><small>${esc(op.mesin||'')}</small></div></div>
 <div class="v-sum">${summaryText(r)}</div>
 ${kf?`<div class="v-ket">${icon('note',13)}<span>${esc(clip(kf,130))}${kn>1?` <b>+${kn-1} lagi</b>`:''}</span></div>`:''}
 ${missing?`<div class="v-note">${icon('alert',12)} <span><b>${missing} item</b> ada reject tanpa keterangan.</span></div>`:''}
@@ -2794,7 +2886,7 @@ function renderMaster(){
     $('#sysPanel').innerHTML=`<div class="sys-grid">
 <div class="sys-cell"><h4>${icon('building',15)} Koneksi Data</h4><p>${cloud?'Terhubung ke Supabase — seluruh perangkat memakai data bersama dengan RLS.':'Mode lokal — data hanya di perangkat ini.'}</p><button class="btn btn-ghost btn-sm" data-act="open-setup">${cloud?'Ubah Koneksi':'Hubungkan Supabase'}</button></div>
 <div class="sys-cell"><h4>${icon('download',15)} Cadangan Data</h4><p>Unduh laporan, pengguna, dan produk sebagai JSON.</p><button class="btn btn-ghost btn-sm" data-act="backup-json">Unduh Cadangan JSON</button></div>
-<div class="sys-cell"><h4>${icon('activity',15)} Diagnosa Sistem Akun</h4><p>Periksa Edge Function, policy RLS, dan pengaturan Auth.</p><button class="btn btn-ghost btn-sm" data-act="goto-diag">Buka Diagnosa</button></div>
+<div class="sys-cell"><h4>${icon('activity',15)} Diagnosa Sistem Akun</h4><p>Periksa direktori login, Edge Function, policy RLS, dan Auth.</p><button class="btn btn-ghost btn-sm" data-act="goto-diag">Buka Diagnosa</button></div>
 ${cloud?'':`<div class="sys-cell"><h4>${icon('alert',15)} Reset Data Demo</h4><p>Kembalikan data lokal ke contoh bawaan.</p><button class="btn btn-danger btn-sm" data-act="reset-demo">Reset Data Demo</button></div>`}
 </div>`;
   }
@@ -2835,7 +2927,7 @@ function renderUsers(){
   else if(S.uTab==='diagnosa'){if(!S.acctDiag.length)runAcctDiag();else acctRender()}
   else{
     $('#auditBody').innerHTML=S.audit.length?S.audit.slice(0,150).map(a=>{
-      const who=profByKode(a.actor)||{nama:a.actor},cls=a.aksi==='INSERT'?'ins':a.aksi==='DELETE'?'del':'upd';
+      const who=profByKode(a.actor)||S.dir.find(p=>p.kode===a.actor)||{nama:a.actor},cls=a.aksi==='INSERT'?'ins':a.aksi==='DELETE'?'del':'upd';
       return `<div class="au-row"><span class="au-ic ${cls}">${icon(a.aksi==='INSERT'?'plus':a.aksi==='DELETE'?'trash':'pencil',14)}</span><span class="au-t"><b>${esc(a.detail)}</b><small>oleh ${esc(who.nama)}</small></span><span class="au-time">${fmtTS(a.at)}</span></div>`}).join(''):'<p class="muted sm">Belum ada aktivitas tercatat.</p>';
   }
 }
@@ -2911,6 +3003,7 @@ async function saveUser(){
     }
     $('#userWrap').classList.remove('show');
     await reloadAll();buildSelects();buildTabs();applyRoleUI();renderUsers();refreshDataViews();updateProvChip();sfx.ok();
+    refreshPublicDir();
   }catch(err){userMsg(esc(err.message),'err',S.lastRawError);S.lastRawError='';sfx.error()}
   finally{btn.disabled=false;btn.textContent='Simpan Pengguna'}
 }
@@ -2953,8 +3046,8 @@ function drawerHTML(r){
   const op=opOf(r),j=JENIS[r.jenis],h=rHasil(r),rej=rReject(r),net=h-rej,w=rWaktu(r);
   const pw=rProdWaktu(r),xw=rExtraWaktu(r),aw=rAgendaWaktu(r);
   const st=STATUS[r.status]||STATUS.submit;
-  const vb=r.verifiedBy?(profByKode(r.verifiedBy)||{nama:r.verifiedBy}):null;
-  let s=`<div class="d-sec"><div class="d-op"><span class="avatar lg" style="--av:${op.warna}">${initials(op.nama)}</span><div class="d-op-t"><b>${esc(op.nama)}</b><small>${esc(op.jabatan)}</small></div><span class="machine-chip">${esc(op.mesin)}</span></div></div>`;
+  const vb=r.verifiedBy?(profByKode(r.verifiedBy)||S.dir.find(p=>p.kode===r.verifiedBy)||{nama:r.verifiedBy}):null;
+  let s=`<div class="d-sec"><div class="d-op"><span class="avatar lg" style="--av:${op.warna||'#999'}">${initials(op.nama)}</span><div class="d-op-t"><b>${esc(op.nama)}</b><small>${esc(op.jabatan||op.mesin||'')}</small></div><span class="machine-chip">${esc(op.mesin||'—')}</span></div></div>`;
   s+=`<div class="d-sec"><div class="d-verify ${r.status}">${icon(st.icon,18)}<div><b>${st.label}${r.deletedAt?' · DIARSIPKAN':''}</b><p>${r.status==='verified'?`Diverifikasi oleh ${esc(vb?vb.nama:'admin')} · ${fmtTS(r.verifiedAt)}. Angka terkunci untuk operator.`:r.status==='revisi'?'Dikembalikan untuk diperbaiki operator.':'Menunggu pemeriksaan admin atau kepala produksi.'}${r.catatan?`<br><b>Catatan:</b> ${esc(r.catatan)}`:''}</p></div></div></div>`;
   s+=`<div class="d-sec d-meta">${metaCell('TANGGAL',fmtDate(r.date))}${metaCell('SHIFT',esc(shiftLabel(r.shift)))}${metaCell('JENIS KEGIATAN',jenisBadge(r.jenis))}${metaCell('KODE LAPORAN',`<span class="mono">${esc(r.code)}</span>`)}</div>`;
   if(r.jenis==='lainnya'){
@@ -3031,8 +3124,8 @@ function exportCSV(rows){
   const head=['Kode Laporan','Tanggal','Shift','Nama Operator','Jabatan','Jenis Kegiatan','Status','Verifikator','Item / Kegiatan','Nomor PO','Nomor SPK','Persiapan (mnt)','Setting (mnt)','Operasional (mnt)','Total Waktu Kegiatan (mnt)','Waktu Kegiatan Lain (mnt)','Total Waktu Laporan (mnt)','Hasil','Satuan','Reject','Hasil Bersih','Keterangan'];
   const lines=[head];
   rows.forEach(r=>{
-    const op=opOf(r),sh=shiftLabel(r.shift),st=(STATUS[r.status]||{}).label,vb=r.verifiedBy?(profByKode(r.verifiedBy)||{nama:r.verifiedBy}).nama:'';
-    const tot=rWaktu(r),base=[r.code,r.date,sh,op.nama,op.jabatan,JENIS[r.jenis].label,st,vb];
+    const op=opOf(r),sh=shiftLabel(r.shift),st=(STATUS[r.status]||{}).label,vb=r.verifiedBy?(profByKode(r.verifiedBy)||S.dir.find(p=>p.kode===r.verifiedBy)||{nama:r.verifiedBy}).nama:'';
+    const tot=rWaktu(r),base=[r.code,r.date,sh,op.nama,op.jabatan||'',JENIS[r.jenis].label,st,vb];
     if(r.jenis==='lainnya'){
       if(r.agenda&&r.agenda.length)r.agenda.forEach(a=>lines.push([...base,a.kategori,'','','','','',num(a.waktu),'',tot,'','','','',a.deskripsi]));
       else lines.push([...base,'','','','','','','','',tot,'','','','','Tanpa agenda di luar jobdesk']);
@@ -3045,7 +3138,7 @@ function exportCSV(rows){
   downloadBlob(csv,'text/csv;charset=utf-8','laporan-produksi-ecg_'+todayStr()+'.csv');
   toast(`${rows.length} laporan diexport (${lines.length-1} baris data).`,{icon:'download'});sfx.tick();
 }
-const printHead=(t,s)=>`<div class="p-head"><div class="p-brand"><div class="p-logo">M</div><div><b>MHI PAPER</b><small>Produksi Kertas ECG/EKG dan Plain</small></div></div><div class="p-doc">FORM LH-ECG-01<br>REV. 13</div></div><div class="p-title">${t}</div><p class="p-sub">${s}</p>`;
+const printHead=(t,s)=>`<div class="p-head"><div class="p-brand"><div class="p-logo">M</div><div><b>MHI PAPER</b><small>Produksi Kertas ECG/EKG dan Plain</small></div></div><div class="p-doc">FORM LH-ECG-01<br>REV. 14</div></div><div class="p-title">${t}</div><p class="p-sub">${s}</p>`;
 const printFoot=()=>`<div class="p-foot">Dicetak: ${new Date().toLocaleString('id-ID')} · ${S.me?esc(S.me.nama)+' ('+ROLES[S.me.role].label+')':''} · Bersih = hasil − reject · MHI PAPER.</div>`;
 const signBlock=(o,v)=>`<table class="p-sign"><tr><td>Dibuat oleh,<br><br><br><br><u>&nbsp;&nbsp;${esc(o||'________________')}&nbsp;&nbsp;</u><br><small>Operator</small></td><td>Diperiksa oleh,<br><br><br><br><u>&nbsp;&nbsp;${esc(v||'________________')}&nbsp;&nbsp;</u><br><small>Admin Produksi</small></td><td>Disetujui oleh,<br><br><br><br><u>&nbsp;&nbsp;________________&nbsp;&nbsp;</u><br><small>Kepala Produksi</small></td></tr></table>`;
 function printRecap(){
@@ -3063,7 +3156,7 @@ function printRecap(){
       :(r.agenda.length?r.agenda.map(a=>`${esc(a.kategori)}: ${esc(a.deskripsi)}<br><small>Waktu ${fmtMin(num(a.waktu))}</small>`).join('<br>'):'Tanpa agenda di luar jobdesk');
     const refs=prod?r.items.map(it=>`PO ${esc(it.po)} / SPK ${esc(it.spk)}`).join('<br>'):'—';
     const perTime=prod?[...r.items.map(it=>fmtMin(itemWaktu(it))),...(r.extra||[]).map(ex=>fmtMin(num(ex.waktu)))].join('<br>'):(r.agenda||[]).map(a=>fmtMin(num(a.waktu))).join('<br>')||'—';
-    return `<tr><td>${fmtDate(r.date)}<br><small>${shiftShort(r.shift)} · ${esc(r.code)}</small></td><td>${esc(op.nama)}<br><small>${esc(op.jabatan)}</small></td><td>${j.short}<br><small>${(STATUS[r.status]||{}).short}</small></td><td>${detail}</td><td><small>${refs}</small></td><td class="r timecol"><small>${perTime}</small></td><td class="r">${prod?fmtNum(h)+' '+j.unit:'—'}</td><td class="r">${prod?fmtNum(rej):'—'}</td><td class="r netcol">${prod?fmtNum(net):'—'}</td><td class="r">${fmtMin(w)}${xw?`<br><small>incl. ${fmtMin(xw)} lain</small>`:''}</td></tr>`}).join('');
+    return `<tr><td>${fmtDate(r.date)}<br><small>${shiftShort(r.shift)} · ${esc(r.code)}</small></td><td>${esc(op.nama)}<br><small>${esc(op.jabatan||'')}</small></td><td>${j.short}<br><small>${(STATUS[r.status]||{}).short}</small></td><td>${detail}</td><td><small>${refs}</small></td><td class="r timecol"><small>${perTime}</small></td><td class="r">${prod?fmtNum(h)+' '+j.unit:'—'}</td><td class="r">${prod?fmtNum(rej):'—'}</td><td class="r netcol">${prod?fmtNum(net):'—'}</td><td class="r">${fmtMin(w)}${xw?`<br><small>incl. ${fmtMin(xw)} lain</small>`:''}</td></tr>`}).join('');
   $('#printArea').innerHTML=printHead('Rekap Laporan Harian Produksi Kertas ECG/EKG',periode+' · '+rows.length+' laporan'+(S.me.role==='operator'?' · '+esc(S.me.nama):''))+
   `<div class="p-netbox"><label>TOTAL HASIL PRODUKSI BERSIH · HASIL − REJECT</label><b>${fmtNum(tn)} unit</b><span>${fmtNum(th)} hasil − ${fmtNum(tj)} reject = ${fmtNum(tn)} bersih</span></div>
   <div class="p-timebox"><label>TOTAL WAKTU · PRODUKSI + KEGIATAN LAINNYA</label><b>${fmtMin(tw)}</b><span>${rows.length} laporan terjumlah</span></div>
@@ -3074,9 +3167,9 @@ function printSingle(id){
   const r=byId(id);if(!r)return;
   const op=opOf(r),j=JENIS[r.jenis],prod=r.jenis!=='lainnya';
   const h=rHasil(r),rej=rReject(r),net=h-rej,w=rWaktu(r),pw=rProdWaktu(r),xw=rExtraWaktu(r);
-  const vb=r.verifiedBy?(profByKode(r.verifiedBy)||{nama:r.verifiedBy}):null;
+  const vb=r.verifiedBy?(profByKode(r.verifiedBy)||S.dir.find(p=>p.kode===r.verifiedBy)||{nama:r.verifiedBy}):null;
   let s=printHead('Laporan Harian Produksi — '+esc(r.code),fmtDate(r.date)+' · '+esc(shiftLabel(r.shift))+' · '+j.label+(r.status==='verified'?' · <span class="p-stamp">TERVERIFIKASI</span>':' · '+STATUS[r.status].label.toUpperCase()));
-  s+=`<table class="p-id"><tr><td>Nama Operator</td><td>${esc(op.nama)}</td></tr><tr><td>Jabatan / Posisi</td><td>${esc(op.jabatan)}</td></tr><tr><td>Tanggal / Shift</td><td>${fmtDate(r.date)} — ${esc(shiftLabel(r.shift))}</td></tr><tr><td>Jenis Kegiatan</td><td>${j.label}</td></tr><tr><td>Status Verifikasi</td><td>${STATUS[r.status].label}${vb?' oleh '+esc(vb.nama)+' · '+fmtTS(r.verifiedAt):''}${r.catatan?' — '+esc(r.catatan):''}</td></tr></table>`;
+  s+=`<table class="p-id"><tr><td>Nama Operator</td><td>${esc(op.nama)}</td></tr><tr><td>Jabatan / Posisi</td><td>${esc(op.jabatan||'—')}</td></tr><tr><td>Tanggal / Shift</td><td>${fmtDate(r.date)} — ${esc(shiftLabel(r.shift))}</td></tr><tr><td>Jenis Kegiatan</td><td>${j.label}</td></tr><tr><td>Status Verifikasi</td><td>${STATUS[r.status].label}${vb?' oleh '+esc(vb.nama)+' · '+fmtTS(r.verifiedAt):''}${r.catatan?' — '+esc(r.catatan):''}</td></tr></table>`;
   if(prod){
     s+=`<div class="p-netbox"><label>TOTAL HASIL PRODUKSI BERSIH · HASIL − REJECT</label><b>${fmtNum(net)} ${j.unit}</b><span>${fmtNum(h)} hasil − ${fmtNum(rej)} reject = ${fmtNum(net)} bersih · reject rate ${rejRate(h,rej).toFixed(1)}%</span></div>`;
     s+=`<div class="p-timebox"><label>TOTAL WAKTU · PRODUKSI + KEGIATAN LAINNYA</label><b>${fmtMin(w)}</b><span>produksi ${fmtMin(pw)}${xw?` + kegiatan lainnya ${fmtMin(xw)}`:' · tanpa kegiatan lainnya'}</span></div>`;
@@ -3095,11 +3188,11 @@ function printSingle(id){
 function doPrint(){toast('Menyiapkan halaman cetak…',{type:'info',icon:'printer',duration:2200});setTimeout(()=>{try{window.print()}catch(e){}},80)}
 function backupJSON(){
   if(!isKepala()){toast('Hanya kepala produksi.',{type:'warn',icon:'lock'});return}
-  downloadBlob(JSON.stringify({app:'MHI PAPER',version:13,mode:S.mode,exportedAt:new Date().toISOString(),...DB.exportAll()},null,2),'application/json','mhi-paper-backup_'+todayStr()+'.json');
+  downloadBlob(JSON.stringify({app:'MHI PAPER',version:14,mode:S.mode,exportedAt:new Date().toISOString(),...DB.exportAll()},null,2),'application/json','mhi-paper-backup_'+todayStr()+'.json');
   toast('Cadangan JSON diunduh.',{icon:'download'});sfx.tick();
 }
 function openSetup(){
-  if(S.me&&!canSeeConnection()){toast('Info &amp; pengaturan koneksi hanya untuk kepala produksi.',{type:'warn',icon:'lock',duration:4200});return}
+  if(!connAllowed()){toast('Info &amp; pengaturan koneksi hanya untuk kepala produksi.',{type:'warn',icon:'lock',duration:4200});return}
   const c=readCfg();
   $('#suUrl').value=c?c.url:'';$('#suKey').value=c?c.key:'';$('#suDomain').value=c?c.domain:'mhi.local';
   $('#suPreview').textContent='kepala@'+($('#suDomain').value||'mhi.local');
@@ -3114,13 +3207,14 @@ async function saveSetup(){
   const btn=$('#suSave');btn.disabled=true;btn.textContent='Menghubungkan…';
   try{
     await loadSDK();
-    const test=window.supabase.createClient(url,key,{auth:{persistSession:false}});
+    const test=anonClient({url,key});
     const{error}=await test.from('products').select('id').limit(1);
     if(error)throw new Error('Tabel belum siap: '+error.message+'. Jalankan schema.sql di SQL Editor terlebih dahulu.');
     writeCfg({url,key,domain});
     DB=Object.create(Cloud);await DB.init({url,key,domain});S.mode='cloud';
     setupMsg('Terhubung. Silakan masuk dengan akun Supabase Anda.','ok');
     $('#setupWrap').classList.remove('show');
+    await refreshPublicDir();
     renderLoginScreen();
     if(!S.me)clearLoginFields();
     sfx.ok();
@@ -3256,10 +3350,14 @@ async function handleAction(t,e){
     try{await navigator.clipboard.writeText(em);toast('Email disalin: <b>'+esc(em)+'</b>',{icon:'copy',duration:2600})}
     catch(err){toast('Salin manual: <b>'+esc(em)+'</b>',{type:'info',icon:'info',duration:5000})}break}
   case 'copy-sql':{const id=t.dataset.sql;
-    const map={insert:SQL_INSERT_POLICY,full:SQL_FULL_ACCESS,edge:EDGE_FN_CODE,bootstrap:(S.diag.find(d=>d.sqlId==='bootstrap')||{}).sql||''};
+    const map={insert:SQL_INSERT_POLICY,full:SQL_FULL_ACCESS,edge:EDGE_FN_CODE,dir:SQL_LOGIN_DIR,bootstrap:(S.diag.find(d=>d.sqlId==='bootstrap')||{}).sql||''};
     const txt=map[id]||'';
     try{await navigator.clipboard.writeText(txt);toast('Disalin ke clipboard — tempel di Supabase SQL Editor.',{icon:'copy',duration:3200})}
     catch(err){toast('Clipboard diblokir. Blok teks lalu salin manual.',{type:'info',icon:'info',duration:4000})}break}
+  case 'dir-sql':{
+    await openConfirm({title:'Direktori Akun Login',danger:false,ok:'Tutup',
+      msg:'Agar daftar akun <b>selalu lengkap</b> di layar login — termasuk setelah operator keluar — kepala produksi menjalankan SQL ini sekali di Supabase → SQL Editor. Isinya hanya nama &amp; peran, tanpa sandi atau email.'+sqlBox('dir','login_directory.sql',SQL_LOGIN_DIR)});
+    break}
   case 'trim-pass':{const p=$('#lgPass');p.value=p.value.trim();$('#lgErr').hidden=true;toast('Spasi di tepi sandi dihapus.',{icon:'rotate',duration:2400});break}
   case 'diag-run':await runDiag();break;
   case 'diag-close':$('#lgDiag').hidden=true;break;
@@ -3319,7 +3417,7 @@ async function handleAction(t,e){
   case 'print-recap':printRecap();break;
   case 'backup-json':backupJSON();break;
   case 'reload-data':{if(!canReload()){toast('Muat ulang data tidak tersedia untuk operator.',{type:'warn',icon:'lock'});break}
-    t.disabled=true;try{await reloadAll();buildSelects();buildTabs();refreshDataViews();updateSyncChip();toast('Data disinkronkan.',{icon:'rotate',duration:2200});sfx.tick()}catch(err){toast('Gagal memuat: '+esc(err.message),{type:'error',icon:'alert'})}t.disabled=false;break}
+    t.disabled=true;try{await reloadAll();await refreshPublicDir();buildSelects();buildTabs();refreshDataViews();updateSyncChip();toast('Data disinkronkan.',{icon:'rotate',duration:2200});sfx.tick()}catch(err){toast('Gagal memuat: '+esc(err.message),{type:'error',icon:'alert'})}t.disabled=false;break}
   case 'reset-demo':{if(!isKepala()){toast('Hanya kepala produksi.',{type:'warn',icon:'lock'});break}
     const ok=await openConfirm({title:'Reset seluruh data lokal?',msg:'Semua laporan, pengguna, dan produk di perangkat ini kembali ke contoh bawaan.',ok:'Reset Data'});
     if(ok){try{await DB.resetDemo();await reloadAll();buildSelects();buildTabs();refreshDataViews();renderMaster();toast('Data demo dikembalikan.',{type:'warn',icon:'rotate'})}catch(err){toast(esc(err.message),{type:'error',icon:'lock'})}}break}
@@ -3360,7 +3458,7 @@ async function handleAction(t,e){
   case 'user-save':await saveUser();break;
   case 'user-toggle':{const u=S.profiles.find(x=>x.id===t.dataset.id);if(!u)break;
     if(u.id===S.me.id){toast('Tidak dapat menonaktifkan akun sendiri.',{type:'warn',icon:'lock'});break}
-    try{await DB.updUser(u.id,{aktif:!u.aktif});await reloadAll();buildSelects();buildTabs();applyRoleUI();renderUsers();sfx.tick();
+    try{await DB.updUser(u.id,{aktif:!u.aktif});await reloadAll();await refreshPublicDir();buildSelects();buildTabs();applyRoleUI();renderUsers();sfx.tick();
       toast(`Akun <b>${esc(u.nama)}</b> ${!u.aktif?'diaktifkan':'dinonaktifkan'}.`,{type:!u.aktif?'success':'warn',icon:'shield'})}
     catch(err){toast(esc(err.message),{type:'error',icon:'lock'});sfx.error()}break}
   case 'user-del':{const u=S.profiles.find(x=>x.id===t.dataset.id);if(!u)break;
@@ -3368,7 +3466,7 @@ async function handleAction(t,e){
     const laps=S.reports.filter(r=>r.operatorId===u.kode).length;
     if(laps>0){toast(`Akun <b>${esc(u.nama)}</b> punya ${laps} laporan. Nonaktifkan saja agar arsip tetap utuh.`,{type:'warn',icon:'lock',duration:5200});break}
     const ok=await openConfirm({title:`Hapus akun @${esc(u.kode)}?`,msg:`<b>${esc(u.nama)}</b> — ${ROLES[u.role].label}.${S.mode==='cloud'&&S.provMode!=='fn'?'<br><br>Tanpa Edge Function, yang dihapus adalah <b>profilnya</b> (akses aplikasi dicabut). Akun Auth tetap ada di dashboard Supabase.':'<br>Akun dihapus permanen.'}`,ok:'Hapus Akun'});
-    if(ok){try{const r=await DB.delUser(u.id);await reloadAll();buildSelects();buildTabs();applyRoleUI();renderUsers();sfx.del();
+    if(ok){try{const r=await DB.delUser(u.id);await reloadAll();await refreshPublicDir();buildSelects();buildTabs();applyRoleUI();renderUsers();sfx.del();
       toast(r&&r.via==='profile-only'?`Profil <b>${esc(u.nama)}</b> dihapus — akses aplikasi dicabut. Akun Auth masih ada di dashboard.`:`Akun <b>${esc(u.nama)}</b> dihapus.`,{type:'warn',icon:'trash',duration:5200})}
       catch(err){toast(esc(err.message),{type:'error',icon:'lock'});sfx.error()}}break}
   case 'user-pass':openPassModal(t.dataset.id);break;
@@ -3384,7 +3482,8 @@ function tickClock(){
 async function init(){
   $$('[data-ic]').forEach(el=>{el.innerHTML=icon(el.dataset.ic,Number(el.dataset.sz)||16)});
   loadPrefs();
-  S.dir=readDir();
+  S.dir=readDir();S.dirSource=S.dir.length?'cache':'seed';
+  S.lastRole=readLastRole();
   const dF=ecgD(1200,64,6),dL=ecgD(1200,120,5);
   ['ecgBaseF','ecgRunF','ecgBaseD','ecgRunD','ecgBaseO','ecgRunO','ecgBaseH','ecgRunH','ecgBaseV','ecgRunV','ecgBaseM','ecgRunM','ecgBaseU','ecgRunU'].forEach(id=>{const p=document.getElementById(id);if(p)p.setAttribute('d',dF)});
   ['ecgLoginBase','ecgLoginRun'].forEach(id=>{const p=document.getElementById(id);if(p)p.setAttribute('d',dL)});
@@ -3394,15 +3493,17 @@ async function init(){
   const cfg=readCfg();
   if(cfg){
     try{await Cloud.init(cfg);DB=Cloud;S.mode='cloud';
-      const me=await Cloud.session();renderLoginScreen();clearLoginFields();
-      if(me){S.me=me;await bootApp();return}
+      const me=await Cloud.session();
+      await refreshPublicDir();
+      renderLoginScreen();clearLoginFields();
+      if(me){S.me=me;S.lastRole=me.role;writeLastRole(me.role);await bootApp();return}
     }catch(err){DB=Local;S.mode='local';
       toast('Supabase tidak dapat dijangkau — memakai mode lokal. '+esc(err.message),{type:'warn',icon:'alert',duration:6000})}
   }else{DB=Local;S.mode='local'}
   renderLoginScreen();
   if(S.mode==='local'){
     const me=await Local.session();
-    if(me){S.me=me;await bootApp()}else{$('#lgPass').value=DEMO_PASS}
+    if(me){S.me=me;S.lastRole=me.role;writeLastRole(me.role);await bootApp()}else{$('#lgPass').value=DEMO_PASS}
   }else clearLoginFields();
 }
 init().catch(err=>{console.error(err);document.body.dataset.view='login';
