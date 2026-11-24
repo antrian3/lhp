@@ -1025,7 +1025,7 @@ html{scroll-behavior:auto}}
 
 <section id="view-form" class="view" aria-label="Identitas laporan">
   <div class="hero">
-    <div class="hero-top"><span>FORM LH-ECG-01 · REV. 17</span><span class="live"><i class="dot"></i><span id="shiftLive">SHIFT BERJALAN</span></span></div>
+    <div class="hero-top"><span>FORM LH-ECG-01 · REV. 18</span><span class="live"><i class="dot"></i><span id="shiftLive">SHIFT BERJALAN</span></span></div>
     <h1 class="hero-title">Laporan Harian <em>Produksi</em></h1>
     <svg class="ecg" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true"><path id="eFb" class="base" fill="none" d="M0 32 L1200 32"/><path id="eFr" class="run" fill="none" pathLength="1000" d="M0 32 L1200 32"/></svg>
   </div>
@@ -1483,12 +1483,17 @@ const PEOPLE=[{kode:'kepala',nama:'Rajiv',role:'kepala',jabatan:'Kepala Divisi K
 {kode:'yoga',nama:'Yoga',role:'operator',jabatan:'Operator Mesin Offset 3',mesin:'Offset 3',warna:'#0FA3A3'},
 {kode:'ridwan',nama:'Ridwan',role:'operator',jabatan:'Operator Mesin Auto Paper',mesin:'Auto Paper',warna:'#B22F2C'},
 {kode:'fachri',nama:'Fachri',role:'operator',jabatan:'Asisten Operator Auto Paper',mesin:'Auto Paper · Asisten',warna:'#5A7E1F'}];
+/* migrasi nama admin lama → Ratna (data tersimpan & cache direktori) */
+const fixName=p=>(p&&p.kode==='admin'&&String(p.nama||'').trim()==='Nurhayati')?{...p,nama:'Ratna'}:p;
 const DOMS=['mhi.local','mhipaper.id','mhi.internal','example.com','gmail.com'];
 let lastLong='L1';
 const K={cfg:'mhi_cfg',pref:'mhi_pref',db:'mhi_db',dir:'mhi_dir',role:'mhi_role'};
 const rdCfg=()=>{try{const s=localStorage.getItem(K.cfg);if(s){const c=JSON.parse(s);if(c&&c.url&&c.key)return c}}catch(e){}return CFG.URL&&CFG.KEY?{url:CFG.URL,key:CFG.KEY,domain:CFG.DOM}:null};
 const wrCfg=c=>{try{c?localStorage.setItem(K.cfg,JSON.stringify(c)):localStorage.removeItem(K.cfg)}catch(e){}};
-const rdDir=()=>{try{const d=JSON.parse(localStorage.getItem(K.dir)||'[]');return Array.isArray(d)?d.filter(p=>p&&p.kode):[]}catch(e){return[]}};
+const rdDir=()=>{try{const d=JSON.parse(localStorage.getItem(K.dir)||'[]');if(!Array.isArray(d))return[];
+const f=d.filter(p=>p&&p.kode).map(fixName);
+if(JSON.stringify(f)!==JSON.stringify(d))try{localStorage.setItem(K.dir,JSON.stringify(f))}catch(e){}
+return f}catch(e){return[]}};
 const clean=l=>l.filter(p=>p&&p.kode).map(p=>({kode:String(p.kode),nama:String(p.nama||p.kode),role:ROLES[p.role]?p.role:'operator',aktif:p.aktif!==false}));
 function mergeDir(l,{complete=false,src='cache'}={}){const inc=clean(l);let out;if(complete)out=inc;else{const m=new Map(rdDir().map(p=>[p.kode,p]));inc.forEach(p=>m.set(p.kode,p));out=[...m.values()]}if(!out.length)return S.dir;try{localStorage.setItem(K.dir,JSON.stringify(out))}catch(e){}S.dir=out;S.dirSrc=src;return out}
 const rdRole=()=>{try{return localStorage.getItem(K.role)||''}catch(e){return''}};
@@ -1538,7 +1543,11 @@ const savePref=()=>{try{localStorage.setItem(K.pref,JSON.stringify({views:S.view
 const loadPref=()=>{try{const d=JSON.parse(localStorage.getItem(K.pref)||'{}');S.views=d.views||[];S.sound=d.sound!==false}catch(e){}};
 
 const Local={d:null,
-load(){try{const r=localStorage.getItem(K.db);if(r){this.d=JSON.parse(r);if(this.d&&this.d.profiles&&this.d.profiles.length){this.d.reports=(this.d.reports||[]).map(x=>({...x,items:(x.items||[]).map(i=>({...i,sn:i.sn||''}))}));return}}}catch(e){}this.d=this.seed();this.save()},
+load(){try{const r=localStorage.getItem(K.db);if(r){this.d=JSON.parse(r);if(this.d&&this.d.profiles&&this.d.profiles.length){
+let ch=false;
+this.d.profiles=this.d.profiles.map(p=>{const f=fixName(p);if(f!==p)ch=true;return f});
+this.d.reports=(this.d.reports||[]).map(x=>({...x,items:(x.items||[]).map(i=>({...i,sn:i.sn||''}))}));
+if(ch)this.save();return}}}catch(e){}this.d=this.seed();this.save()},
 save(){try{localStorage.setItem(K.db,JSON.stringify(this.d))}catch(e){toast('Penyimpanan perangkat penuh.',{type:'error',icon:'alert'})}},
 seed(){return{profiles:PEOPLE.map(p=>({id:uid(),...p,aktif:true,password:CFG.PASS})),products:[...PACK.map(n=>({id:uid(),jenis:'pack',nama:n,aktif:true})),...ROLL.map(n=>({id:uid(),jenis:'roll',nama:n,aktif:true}))],reports:this.seedR(),audit:[],seq:{}}},
 seedR(){const T=today(),R=[],sq={};
@@ -1715,6 +1724,8 @@ for(let i=0;i<n;i++){const x=i*s;d+=P(x+s*.14,m)+` Q${(x+s*.19).toFixed(1)} ${(m
 const curEmail=()=>{const c=rdCfg();if(S.lmode==='email')return ($('#lgEmail').value||'').trim();return ($('#lgKode').value||'kepala')+'@'+((c&&c.domain)||'mhi.local')};
 function loginDir(){if(S.dirSrc==='live'&&S.dir.length)return S.dir;const c=rdDir();if(c.length){S.dir=c;if(S.dirSrc!=='live')S.dirSrc='cache';return c}if(S.dir.length)return S.dir;S.dirSrc='seed';return PEOPLE.map(p=>({kode:p.kode,nama:p.nama,role:p.role,aktif:true}))}
 function renderLogin(){const c=rdCfg(),cloud=!!c,allow=connOK();
+/* kotak info koneksi cloud disembunyikan total untuk operator & admin */
+$('#conn').hidden=!allow;
 $('#conn').classList.toggle('cloud',cloud);$('#connT').textContent=cloud?'Cloud Supabase':'Mode Lokal';
 $('#connS').textContent=cloud?(c.url.replace(/^https?:\/\//,'')+' · @'+c.domain):'10 akun demo · sandi '+CFG.PASS;
 $('#connEdit').hidden=!allow;$('#lgFallback').hidden=!allow;$('#lgModes').hidden=!cloud;$('#lgQuick').hidden=cloud;
@@ -1725,7 +1736,7 @@ const list=cloud?loginDir():Local.d.profiles.map(p=>({kode:p.kode,nama:p.nama,ro
 const prev=$('#lgKode').value;
 $('#lgKode').innerHTML=[['kepala','Kepala Produksi'],['admin','Admin'],['operator','Operator']].map(([r,l])=>{const a=list.filter(p=>p.role===r);return a.length?`<optgroup label="${l}">${a.map(p=>`<option value="${esc(p.kode)}">${esc(p.nama)}${p.aktif===false?' · nonaktif':''}</option>`).join('')}</optgroup>`:''}).join('');
 $('#lgKode').value=(prev&&list.some(p=>p.kode===prev))?prev:(list.some(p=>p.kode==='kepala')?'kepala':(list[0]?list[0].kode:''));
-$('#dirNote').hidden=!(cloud&&S.dirSrc!=='live'&&list.length<3);
+$('#dirNote').hidden=!(cloud&&S.dirSrc!=='live'&&list.length<3&&allow);
 if(cloud&&S.lmode==='email')$('#lgEmail').value=S.lemail||'';
 if(cloud){const dm=c.domain||'mhi.local';$('#lgDoms').innerHTML=DOMS.map(d=>`<button type="button" data-act="dom" data-dom="${esc(d)}" class="${d===dm?'on':''}">@${esc(d)}</button>`).join('')}
 if(rdCfg())$('#lgEmailShown').textContent=curEmail()||'—'}
@@ -2395,7 +2406,7 @@ const bytes=buildXlsx([{name:'Detail Produksi',title:'MHI PAPER — DETAIL LAPOR
 dl(bytes,'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',`MHI-PAPER_Laporan_${today()}.xlsx`);sfx.save();
 toast(`<b>${rows.length} laporan</b> diexport ke Excel — 2 sheet, kolom SN Jumbo Roll disertakan.`,{icon:'sheet',duration:5200})}
 catch(e){toast('Export Excel gagal: '+esc(e.message||String(e)),{type:'error',icon:'alert',duration:6000});sfx.err()}}
-const pHead=(t,s)=>`<div class="p-head"><div class="p-brand"><div class="p-logo">M</div><div><b>MHI PAPER</b><small>Produksi Kertas ECG/EKG dan Plain</small></div></div><div class="p-doc">FORM LH-ECG-01<br>REV. 17</div></div><div class="p-title">${t}</div><p class="p-sub">${s}</p>`;
+const pHead=(t,s)=>`<div class="p-head"><div class="p-brand"><div class="p-logo">M</div><div><b>MHI PAPER</b><small>Produksi Kertas ECG/EKG dan Plain</small></div></div><div class="p-doc">FORM LH-ECG-01<br>REV. 18</div></div><div class="p-title">${t}</div><p class="p-sub">${s}</p>`;
 const pFoot=()=>`<div class="p-foot">Dicetak: ${new Date().toLocaleString('id-ID')} · ${S.me?esc(S.me.nama)+' ('+ROLES[S.me.role].label+')':''} · Bersih = hasil − reject · MHI PAPER.</div>`;
 const sign=(o,v)=>`<table class="p-sign"><tr><td>Dibuat oleh,<br><br><br><br><u>&nbsp;&nbsp;${esc(o||'________________')}&nbsp;&nbsp;</u><br><small>Operator</small></td><td>Diperiksa oleh,<br><br><br><br><u>&nbsp;&nbsp;${esc(v||'________________')}&nbsp;&nbsp;</u><br><small>Admin Produksi</small></td><td>Disetujui oleh,<br><br><br><br><u>&nbsp;&nbsp;________________&nbsp;&nbsp;</u><br><small>Kepala Produksi</small></td></tr></table>`;
 function printRecap(){if(!canE()){toast('Cetak rekap tidak tersedia untuk operator.',{type:'warn',icon:'alert'});return}
@@ -2430,7 +2441,7 @@ else s+='<p class="p-sub"><b>Tidak ada agenda di luar jobdesk.</b></p>'}
 s+=sign(o.nama,vb?vb.nama:'')+pFoot();$('#printArea').innerHTML=s;doPrint()}
 function doPrint(){toast('Menyiapkan halaman cetak…',{type:'info',icon:'printer',duration:2200});setTimeout(()=>{try{window.print()}catch(e){}},80)}
 function backup(){if(!isK()){toast('Hanya kepala produksi.',{type:'warn',icon:'alert'});return}
-dl(JSON.stringify({app:'MHI PAPER',version:17,mode:S.mode,exportedAt:new Date().toISOString(),...DB.all()},null,2),'application/json','mhi-paper-backup_'+today()+'.json');
+dl(JSON.stringify({app:'MHI PAPER',version:18,mode:S.mode,exportedAt:new Date().toISOString(),...DB.all()},null,2),'application/json','mhi-paper-backup_'+today()+'.json');
 toast('Cadangan JSON diunduh.',{icon:'download'});sfx.tick()}
 function openSetup(){if(!connOK()){toast('Pengaturan koneksi hanya untuk kepala produksi.',{type:'warn',icon:'alert',duration:4200});return}
 const c=rdCfg();$('#suUrl').value=c?c.url:'';$('#suKey').value=c?c.key:'';$('#suDom').value=c?c.domain:'mhi.local';
