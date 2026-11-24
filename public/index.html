@@ -74,55 +74,31 @@ body[data-view="login"] #loginScreen{display:grid}
 @keyframes ecg{from{stroke-dashoffset:1000}to{stroke-dashoffset:0}}
 .lg-panel{display:flex;align-items:center;justify-content:center;padding:32px 26px;background:radial-gradient(700px 400px at 80% 0%,rgba(214,64,60,.08),transparent 60%),var(--paper);position:relative;overflow-y:auto}
 .lg-panel::before{content:'';position:absolute;inset:0;background:repeating-linear-gradient(0deg,rgba(214,64,60,.05) 0 1px,transparent 1px 8px),repeating-linear-gradient(90deg,rgba(214,64,60,.05) 0 1px,transparent 1px 8px);pointer-events:none}
-.lg-card{position:relative;width:100%;max-width:430px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:24px;box-shadow:0 24px 60px rgba(80,55,25,.16);animation:fadeUp .5s ease both;margin:auto}
-.lg-head{display:flex;gap:12px;align-items:center;margin-bottom:15px}
+.lg-card{position:relative;width:100%;max-width:412px;background:var(--surface);border:1px solid var(--line);border-radius:16px;padding:26px 24px;box-shadow:0 24px 60px rgba(80,55,25,.16);animation:fadeUp .5s ease both;margin:auto}
+.lg-head{display:flex;gap:12px;align-items:center;margin-bottom:18px}
 .lg-head h2{font:700 17px var(--fb)}.lg-head p{font-size:12px;color:var(--ink-3)}
-.conn{display:flex;align-items:center;gap:9px;padding:9px 11px;border-radius:10px;border:1.5px solid #EFD3A0;background:var(--amber-soft);margin-bottom:13px;font-size:11.5px}
-.conn.cloud{border-color:#BFE6D6;background:var(--green-soft)}
-.conn .ic{flex:none;color:#B26F05}.conn.cloud .ic{color:var(--green)}
-.conn .ct{flex:1;min-width:0;line-height:1.35}
-.conn .ct b{display:block;font:600 11.5px var(--fb)}
-.conn .ct small{font:500 9.5px var(--fm);color:var(--ink-2);display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.conn button{font:600 10px var(--fm);padding:5px 9px;border-radius:7px;border:1.5px solid var(--line-strong);background:#fff;color:var(--ink-2);flex:none}
-.conn button:hover{border-color:var(--red);color:var(--red-deep)}
-.lg-modes{display:flex;gap:4px;background:var(--surface-2);border:1px solid var(--line-strong);border-radius:10px;padding:3px;margin-bottom:13px}
-.lg-modes button{flex:1;padding:7px 10px;border-radius:7px;font:600 11.5px var(--fb);color:var(--ink-2)}
+.lg-modes{display:flex;gap:4px;background:var(--surface-2);border:1px solid var(--line-strong);border-radius:10px;padding:3px;margin-bottom:15px}
+.lg-modes button{flex:1;padding:8px 10px;border-radius:7px;font:600 11.5px var(--fb);color:var(--ink-2);transition:.15s}
+.lg-modes button:hover{color:var(--ink)}
 .lg-modes button.on{background:#fff;color:var(--red-deep);box-shadow:0 1px 4px rgba(80,55,25,.18)}
-#loginForm{display:flex;flex-direction:column;gap:12px}
+#loginForm{display:flex;flex-direction:column;gap:14px}
 .pw{position:relative}.pw .inp{padding-right:44px}
 .eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:7px;display:grid;place-items:center;color:var(--ink-3)}
 .eye:hover{background:var(--surface-2);color:var(--ink)}
-.frow{display:flex;justify-content:flex-end;margin-top:-6px}
-.forgot{display:inline-flex;align-items:center;gap:6px;font:600 11.5px var(--fb);color:#1D539E;padding:4px 8px;border-radius:7px;border:1px dashed #C6DAF4;background:#fff}
-.forgot:hover{border-style:solid;border-color:var(--blue);background:var(--blue-soft)}
-.rstat{display:flex;align-items:flex-start;gap:8px;padding:9px 11px;border-radius:9px;font-size:11.5px;line-height:1.45;margin-top:-4px;border:1.5px solid}
+.frow{display:flex;justify-content:flex-end;margin-top:-8px}
+.forgot{display:inline-flex;align-items:center;gap:6px;font:600 11.5px var(--fb);color:#1D539E;padding:5px 9px;border-radius:7px;border:1px dashed #C6DAF4;background:#fff;transition:.14s}
+.forgot:hover{border-style:solid;border-color:var(--blue);background:var(--blue-soft);transform:translateY(-1px)}
+.rstat{display:flex;align-items:flex-start;gap:8px;padding:9px 11px;border-radius:9px;font-size:11.5px;line-height:1.45;border:1.5px solid}
 .rstat .ic{flex:none;margin-top:1px}
 .rstat.pending{background:var(--amber-soft);border-color:#EFD3A0;color:#8A5A08}
 .rstat.approved{background:var(--green-soft);border-color:#BFE6D6;color:#0B6E50}
 .rstat.rejected{background:var(--red-soft);border-color:#F0C9C5;color:var(--red-deep)}
 .rstat b{display:block;font-size:11.5px}
-.ep{display:flex;align-items:center;gap:8px;padding:8px 11px;border-radius:9px;background:var(--blue-soft);border:1px solid #C6DAF4;font-size:11px;color:#1D539E;margin-top:-4px}
-.ep .t{flex:1;min-width:0;line-height:1.35}
-.ep b{font-family:var(--fm);font-size:11.5px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.ep small{font:500 9px var(--fm);letter-spacing:.08em;color:#4A7FC4}
-.ep button{flex:none;font:600 9.5px var(--fm);padding:4px 8px;border-radius:6px;border:1px solid #C6DAF4;background:#fff;color:#1D539E}
-.doms{display:flex;gap:5px;flex-wrap:wrap;margin-top:-4px}
-.doms button{font:500 10px var(--fm);padding:4px 9px;border-radius:99px;border:1px dashed var(--line-strong);background:#fff;color:var(--ink-2)}
-.doms button.on{background:var(--blue);border-color:var(--blue);color:#fff;border-style:solid}
-.dnote{display:flex;align-items:flex-start;gap:8px;padding:9px 11px;border-radius:9px;background:var(--amber-soft);border:1px solid #EFD3A0;font-size:11px;color:#8A5A08;line-height:1.45;margin-top:-4px}
-.dnote .t{flex:1;min-width:0}
-.dnote button{flex:none;font:600 9.5px var(--fm);padding:4px 9px;border-radius:6px;border:1.5px solid #E0BE84;background:#fff;color:#8A5A08}
-.caps{display:flex;align-items:center;gap:7px;font:600 11px var(--fb);color:#B26F05;background:var(--amber-soft);border:1px solid #EFD3A0;border-radius:8px;padding:7px 10px;margin-top:-4px}
-.lg-err{background:var(--red-soft);border:1px solid #F0C9C5;color:var(--red-deep);border-radius:10px;padding:11px 12px;font-size:12px;animation:shake .45s ease}
-.lg-err b{display:block;font-size:12.5px;margin-bottom:3px}
-.lg-err span{display:block;line-height:1.5;color:#8E332F}
-.lg-err.simple{padding:9px 12px;display:flex;align-items:center;gap:8px}
-.lg-err.simple b{margin-bottom:0;font-size:12.5px}
-.eacts{display:flex;gap:6px;margin-top:9px;flex-wrap:wrap}
-.eacts button{font:600 10.5px var(--fb);padding:5px 10px;border-radius:7px;border:1.5px solid #E5B4B0;background:#fff;color:var(--red-deep);display:inline-flex;align-items:center;gap:5px}
-.diag{margin-top:13px;border:1.5px solid var(--line-strong);border-radius:11px;background:var(--surface-2);overflow:hidden}
-.diag-h{display:flex;align-items:center;gap:8px;padding:9px 12px;border-bottom:1px dashed var(--line-strong);font:600 10px var(--fm);letter-spacing:.12em;color:var(--ink-2)}
-.diag-h .ic{color:var(--plum)}.diag-h button{margin-left:auto;font:600 10px var(--fm);color:var(--ink-3)}
+.lg-err{background:var(--red-soft);border:1px solid #F0C9C5;color:var(--red-deep);border-radius:10px;padding:10px 12px;font-size:12px;animation:shake .45s ease}
+.lg-err b{display:block;font-size:12.5px}
+.lg-err span{display:block;line-height:1.5;color:#8E332F;margin-top:4px}
+.lg-err.simple{display:flex;align-items:center;gap:8px;padding:9px 12px}
+.lg-err.simple::before{content:'';width:7px;height:7px;border-radius:50%;background:var(--red);flex:none}
 .diag-b{padding:10px 12px;display:flex;flex-direction:column;gap:7px;max-height:330px;overflow-y:auto}
 .dg{display:flex;gap:9px;align-items:flex-start;font-size:11.5px;padding:8px 10px;border-radius:8px;background:#fff;border:1px solid var(--line)}
 .dg .i{width:20px;height:20px;border-radius:6px;display:grid;place-items:center;flex:none;margin-top:1px}
@@ -140,17 +116,6 @@ body[data-view="login"] #loginScreen{display:grid}
 .sqlb .h{display:flex;align-items:center;gap:7px;padding:6px 9px;background:#242A35;font:600 9px var(--fm);letter-spacing:.1em;color:#9BA1B0}
 .sqlb .h button{margin-left:auto;font:600 9.5px var(--fm);color:#FFD9D6;background:rgba(255,255,255,.12);padding:3px 9px;border-radius:6px}
 .sqlb pre{margin:0;padding:9px 10px;font:500 10.5px/1.6 var(--fm);color:#D8E2F0;white-space:pre-wrap;word-break:break-word;max-height:170px;overflow:auto}
-.lgq{margin-top:15px;padding-top:14px;border-top:1px dashed var(--line-strong)}
-.lgq-t{font:600 9px var(--fm);letter-spacing:.15em;color:var(--ink-3);margin-bottom:8px}
-.lgq-r{display:flex;gap:6px;flex-wrap:wrap}
-.qb{display:inline-flex;align-items:center;gap:6px;font:600 11.5px var(--fb);padding:8px 11px;border-radius:9px;border:1.5px solid;flex:1 1 auto;justify-content:center;transition:.15s}
-.qb:hover{transform:translateY(-1px)}
-.qb.k{color:var(--red-deep);border-color:#F0C9C5;background:var(--red-soft)}
-.qb.a{color:#1D539E;border-color:#C6DAF4;background:var(--blue-soft)}
-.qb.o{color:#0B6E50;border-color:#BFE6D6;background:var(--green-soft)}
-.lgq-n{font-size:10.5px;color:var(--ink-3);line-height:1.5;margin-top:9px}
-.lgf{display:flex;gap:7px;margin-top:14px;flex-wrap:wrap}.lgf .btn{flex:1 1 auto}
-.lg-foot{margin-top:12px;text-align:center;font:500 9px var(--fm);letter-spacing:.14em;color:var(--ink-3);text-transform:uppercase}
 
 /* TOPBAR */
 .topbar{position:fixed;top:0;left:0;right:0;height:var(--tb);z-index:50;background:rgba(255,252,247,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-strong);box-shadow:0 1px 0 rgba(214,64,60,.15),0 6px 20px rgba(80,55,25,.07)}
@@ -622,7 +587,6 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--red);cursor:point
 .sw3:disabled{opacity:.4;cursor:not-allowed}
 .uacts{display:flex;gap:6px;flex-wrap:wrap}.uacts .btn{flex:1 1 auto}
 .uacts .ib{width:34px;height:34px;border:1.5px solid var(--line-strong);background:#fff}
-/* permintaan sandi */
 .prc{background:var(--surface);border:1.5px solid var(--line);border-left:4px solid var(--pc,var(--amber));border-radius:12px;padding:15px;box-shadow:var(--sh);display:flex;flex-direction:column;gap:11px;animation:fadeUp .4s ease both}
 .prc.pending{--pc:var(--amber)}.prc.approved{--pc:var(--green)}.prc.rejected{--pc:var(--red)}
 .prc.done{opacity:.78}
@@ -918,7 +882,7 @@ body[data-view="other"] #mbO{display:flex}
 .dtnum{font-size:18px}
 .dbody{padding:15px}.dfoot{padding:10px 12px;gap:6px}.dfoot .btn{padding:9px 11px;font-size:12.5px}
 .rpick{grid-template-columns:1fr}
-.lg-card{padding:19px}.mon-brand b{font-size:17px}
+.lg-card{padding:20px 18px}.mon-brand b{font-size:17px}
 .segs button{font-size:11px;padding:8px}}
 @media (prefers-reduced-motion:reduce){
 *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
@@ -947,12 +911,7 @@ html{scroll-behavior:auto}}
   <div class="lg-panel">
     <div class="lg-card">
       <div class="lg-head"><span class="step">01</span><div><h2>Masuk ke Sistem</h2><p>Menu menyesuaikan hak akses akun Anda.</p></div></div>
-      <div class="conn" id="conn">
-        <span data-ic="building" data-sz="15"></span>
-        <div class="ct"><b id="connT">Mode Lokal</b><small id="connS">Data di perangkat ini saja</small></div>
-        <button type="button" id="connEdit" data-act="setup">Ubah</button>
-      </div>
-      <div class="lg-modes" id="lgModes" hidden>
+      <div class="lg-modes" id="lgModes">
         <button type="button" class="on" data-act="lmode" data-mode="kode">Kode Akun</button>
         <button type="button" data-act="lmode" data-mode="email">Email Lengkap</button>
       </div>
@@ -961,22 +920,10 @@ html{scroll-behavior:auto}}
           <label for="lgKode">Akun Pengguna <b class="req">*</b></label>
           <select id="lgKode" class="inp"></select>
         </div>
-        <div class="dnote" id="dirNote" hidden>
-          <span data-ic="alert" data-sz="13"></span>
-          <div class="t">Direktori akun di perangkat ini belum lengkap. Kepala produksi perlu menjalankan satu SQL singkat agar semua akun selalu muncul.</div>
-          <button type="button" data-act="dir-sql">SQL</button>
-        </div>
         <div class="field" id="lgEmailF" hidden>
-          <label for="lgEmail">Email Terdaftar di Supabase <b class="req">*</b></label>
-          <input id="lgEmail" class="inp mono" type="email" placeholder="kepala@mhi.local" autocomplete="off">
-          <div class="help">Pakai ini bila email akun Anda berbeda dari pola kode@domain.</div>
+          <label for="lgEmail">Akun Pengguna <b class="req">*</b></label>
+          <input id="lgEmail" class="inp mono" type="email" placeholder="nama@mhi.local" autocomplete="off">
         </div>
-        <div class="ep" id="lgEP" hidden>
-          <span data-ic="info" data-sz="14"></span>
-          <div class="t"><small>DIKIRIM KE SUPABASE</small><b id="lgEmailShown">—</b></div>
-          <button type="button" data-act="copy-email">Salin</button>
-        </div>
-        <div class="doms" id="lgDoms" hidden></div>
         <div class="field">
           <label for="lgPass">Kata Sandi <b class="req">*</b></label>
           <div class="pw">
@@ -986,34 +933,9 @@ html{scroll-behavior:auto}}
         </div>
         <div class="frow"><button type="button" class="forgot" data-act="forgot"><span data-ic="key" data-sz="12"></span> Lupa sandi?</button></div>
         <div class="rstat" id="resetStat" hidden></div>
-        <div class="caps" id="lgCaps" hidden><span data-ic="alert" data-sz="13"></span> Caps Lock aktif — sandi bersifat huruf besar/kecil.</div>
-        <div class="lg-err" id="lgErr" hidden>
-          <b id="lgErrT">Gagal masuk</b><span id="lgErrM"></span>
-          <div class="eacts" id="lgErrActs">
-            <button type="button" data-act="diag"><span data-ic="activity" data-sz="12"></span> Diagnosa Login</button>
-            <button type="button" data-act="trim"><span data-ic="rotate" data-sz="12"></span> Hapus Spasi Sandi</button>
-          </div>
-        </div>
+        <div class="lg-err" id="lgErr" hidden><b id="lgErrT">Gagal masuk</b><span id="lgErrM" hidden></span></div>
         <button type="submit" class="btn btn-primary btn-block" id="lgSubmit">Masuk <span data-ic="arrowRight" data-sz="15"></span></button>
       </form>
-      <div class="diag" id="lgDiag" hidden>
-        <div class="diag-h"><span data-ic="activity" data-sz="13"></span> DIAGNOSA LOGIN<button type="button" data-act="diag-close">Tutup</button></div>
-        <div class="diag-b" id="lgDiagB"></div>
-      </div>
-      <div class="lgq" id="lgQuick">
-        <div class="lgq-t">COBA TIAP PERAN · SATU KLIK</div>
-        <div class="lgq-r">
-          <button class="qb k" data-act="quick" data-kode="kepala"><span data-ic="shield" data-sz="14"></span> Kepala</button>
-          <button class="qb a" data-act="quick" data-kode="admin"><span data-ic="checkCircle" data-sz="14"></span> Admin</button>
-          <button class="qb o" data-act="quick" data-kode="yanto"><span data-ic="package" data-sz="14"></span> Operator</button>
-        </div>
-        <p class="lgq-n">Sandi demo <b>mhi2026</b>. Mode lokal selalu bisa dipakai walau Supabase belum siap.</p>
-      </div>
-      <div class="lgf" id="lgFallback">
-        <button class="btn btn-ghost btn-sm" data-act="use-local"><span data-ic="undo" data-sz="13"></span> Pakai Mode Lokal</button>
-        <button class="btn btn-ghost btn-sm" data-act="setup"><span data-ic="building" data-sz="13"></span> Koneksi Cloud</button>
-      </div>
-      <p class="lg-foot">Design By Rajiv</p>
     </div>
   </div>
 </div>
@@ -1059,7 +981,7 @@ html{scroll-behavior:auto}}
 
 <section id="view-form" class="view" aria-label="Identitas laporan">
   <div class="hero">
-    <div class="hero-top"><span>FORM LH-ECG-01 · REV. 19</span><span class="live"><i class="dot"></i><span id="shiftLive">SHIFT BERJALAN</span></span></div>
+    <div class="hero-top"><span>FORM LH-ECG-01 · REV. 20</span><span class="live"><i class="dot"></i><span id="shiftLive">SHIFT BERJALAN</span></span></div>
     <h1 class="hero-title">Laporan Harian <em>Produksi</em></h1>
     <svg class="ecg" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true"><path id="eFb" class="base" fill="none" d="M0 32 L1200 32"/><path id="eFr" class="run" fill="none" pathLength="1000" d="M0 32 L1200 32"/></svg>
   </div>
@@ -1418,27 +1340,20 @@ grant select on public.login_directory to anon, authenticated;`;
 const SQL_PR=`-- Tabel permintaan reset sandi (lupa sandi) — diverifikasi kepala produksi.
 create table if not exists public.password_requests(
   id uuid primary key default gen_random_uuid(),
-  kode text not null,
-  nama text,
-  note text,
+  kode text not null, nama text, note text,
   status text not null default 'pending',
   created_at timestamptz not null default now(),
-  resolved_at timestamptz,
-  resolved_by text
+  resolved_at timestamptz, resolved_by text
 );
 alter table public.password_requests enable row level security;
 drop policy if exists pr_send on public.password_requests;
-create policy pr_send on public.password_requests
-  for insert to anon, authenticated with check (true);
+create policy pr_send on public.password_requests for insert to anon, authenticated with check (true);
 drop policy if exists pr_read on public.password_requests;
-create policy pr_read on public.password_requests
-  for select to anon, authenticated using (true);
+create policy pr_read on public.password_requests for select to anon, authenticated using (true);
 drop policy if exists pr_resolve on public.password_requests;
-create policy pr_resolve on public.password_requests
-  for update to authenticated using (public.auth_role() = 'kepala');
+create policy pr_resolve on public.password_requests for update to authenticated using (public.auth_role() = 'kepala');
 drop policy if exists pr_del on public.password_requests;
-create policy pr_del on public.password_requests
-  for delete to authenticated using (public.auth_role() = 'kepala');`;
+create policy pr_del on public.password_requests for delete to authenticated using (public.auth_role() = 'kepala');`;
 const SQL_POL=`drop policy if exists profiles_insert on public.profiles;
 create policy profiles_insert on public.profiles
   for insert to authenticated with check (public.auth_role() = 'kepala');
@@ -1569,7 +1484,6 @@ const PEOPLE=[{kode:'kepala',nama:'Rajiv',role:'kepala',jabatan:'Kepala Divisi K
 {kode:'ridwan',nama:'Ridwan',role:'operator',jabatan:'Operator Mesin Auto Paper',mesin:'Auto Paper',warna:'#B22F2C'},
 {kode:'fachri',nama:'Fachri',role:'operator',jabatan:'Asisten Operator Auto Paper',mesin:'Auto Paper · Asisten',warna:'#5A7E1F'}];
 const fixName=p=>(p&&p.kode==='admin'&&String(p.nama||'').trim()==='Nurhayati')?{...p,nama:'Ratna'}:p;
-const DOMS=['mhi.local','mhipaper.id','mhi.internal','example.com','gmail.com'];
 let lastLong='L1';
 const K={cfg:'mhi_cfg',pref:'mhi_pref',db:'mhi_db',dir:'mhi_dir',role:'mhi_role',pr:'mhi_pwreq'};
 const rdCfg=()=>{try{const s=localStorage.getItem(K.cfg);if(s){const c=JSON.parse(s);if(c&&c.url&&c.key)return c}}catch(e){}return CFG.URL&&CFG.KEY?{url:CFG.URL,key:CFG.KEY,domain:CFG.DOM}:null};
@@ -1587,7 +1501,7 @@ const bAg=()=>({key:uid(),kategori:'',deskripsi:'',waktu:''});
 const bEx=()=>({key:uid(),waktu:'',ket:''});
 const bForm=()=>({mode:'create',editId:null,operatorId:(S.me&&S.me.role==='operator')?S.me.kode:'',date:today(),shift:autoShift(),jenis:'pack',multi:false,items:[bItem()],hasAgenda:'ya',agenda:[bAg()],hasExtra:'tidak',extra:[bEx()]});
 let S={mode:'local',me:null,view:'login',profiles:[],products:[],reports:[],audit:[],views:[],sound:true,uq:'',dir:[],dirSrc:'seed',lastRole:'',
-lmode:'kode',lemail:'',diag:[],diagRun:false,acct:[],acctRun:false,prov:'unknown',rawErr:'',
+lmode:'kode',lemail:'',acct:[],acctRun:false,prov:'unknown',rawErr:'',
 f:{q:'',operator:'all',jenis:'all',status:'all',period:'all',sort:'dateDesc',arch:false},
 sel:new Set(),vsel:new Set(),vtab:'submit',utab:'pengguna',drawer:null,hl:null,form:null,sync:null};
 S.form=bForm();
@@ -1626,7 +1540,6 @@ const vis=()=>!S.me?[]:S.me.role==='operator'?S.reports.filter(r=>r.operatorId==
 const savePref=()=>{try{localStorage.setItem(K.pref,JSON.stringify({views:S.views,sound:S.sound}))}catch(e){}};
 const loadPref=()=>{try{const d=JSON.parse(localStorage.getItem(K.pref)||'{}');S.views=d.views||[];S.sound=d.sound!==false}catch(e){}};
 
-/* ===== PERMINTAAN RESET SANDI ===== */
 let PR={list:[],mode:'local'};
 const prLocal=()=>{try{const d=JSON.parse(localStorage.getItem(K.pr)||'[]');return Array.isArray(d)?d:[]}catch(e){return[]}};
 const prSave=()=>{try{localStorage.setItem(K.pr,JSON.stringify(PR.list.slice(0,200)))}catch(e){}};
@@ -1646,15 +1559,11 @@ async function prLoad(){
 }
 async function prAdd(r){
   PR.list.unshift(r);prSave();
-  if(S.mode==='cloud'&&DB.sb){
-    try{const{error}=await DB.sb.from('password_requests').insert({id:r.id,kode:r.kode,nama:r.nama,note:r.note,status:'pending'});if(!error)PR.mode='cloud'}catch(e){}
-  }
+  if(S.mode==='cloud'&&DB.sb){try{const{error}=await DB.sb.from('password_requests').insert({id:r.id,kode:r.kode,nama:r.nama,note:r.note,status:'pending'});if(!error)PR.mode='cloud'}catch(e){}}
 }
 async function prUpd(id,patch){
   const r=PR.list.find(x=>x.id===id);if(r)Object.assign(r,patch);prSave();
-  if(S.mode==='cloud'&&DB.sb){
-    try{await DB.sb.from('password_requests').update({status:patch.status,resolved_at:new Date().toISOString(),resolved_by:patch.by||null}).eq('id',id)}catch(e){}
-  }
+  if(S.mode==='cloud'&&DB.sb){try{await DB.sb.from('password_requests').update({status:patch.status,resolved_at:new Date().toISOString(),resolved_by:patch.by||null}).eq('id',id)}catch(e){}}
 }
 async function prDel(ids){
   PR.list=PR.list.filter(r=>!ids.includes(r.id));prSave();
@@ -1743,11 +1652,11 @@ if(/email not confirmed/i.test(m))return{title:'Email belum dikonfirmasi',msg:`A
 if(/email logins are disabled|provider is not enabled/i.test(m))return{title:'Login Email dimatikan',msg:'Provider Email tidak aktif.',fix:'Aktifkan <b>Enable Email provider</b>.'};
 if(/rate limit|too many|429/i.test(m))return{title:'Terlalu banyak percobaan',msg:'Supabase membatasi percobaan.',fix:'Tunggu ±60 detik lalu coba lagi.'};
 if(/failed to fetch|networkerror|load failed/i.test(m))return{title:'Proyek tidak terjangkau',msg:'URL salah, proyek di-pause, atau internet terputus.',fix:'Cek Project URL di Settings → Data API.'};
-return{title:'Gagal masuk',msg:esc(m||'Kesalahan tidak dikenal.'),fix:'Tekan Diagnosa Login.'}}
+return{title:'Gagal masuk',msg:esc(m||'Kesalahan tidak dikenal.'),fix:'Periksa koneksi & konfigurasi lewat menu Koneksi Data.'}}
 function signErr(raw,em){const m=String((raw&&raw.message)||raw||'');
 if(/already registered|user already/i.test(m))return `Email <b>${esc(em)}</b> sudah terdaftar. Pakai kode lain.`;
 if(/signups not allowed|signup.*disabled/i.test(m))return 'Pendaftaran ditutup. Aktifkan <b>Allow new users to sign up</b>.';
-if(/invalid email|unable to validate email/i.test(m))return `Format email <b>${esc(em)}</b> ditolak. Ganti domain lewat chip @.`;
+if(/invalid email|unable to validate email/i.test(m))return `Format email <b>${esc(em)}</b> ditolak. Ganti domain di menu Koneksi Data.`;
 if(/password/i.test(m))return 'Kata sandi ditolak: minimal 6 karakter.';
 return m||'Gagal membuat akun.'}
 const Cloud={sb:null,cfg:null,map:{},rmap:{},
@@ -1755,11 +1664,12 @@ async init(c){await sdk();this.cfg=c;this.sb=window.supabase.createClient(c.url,
 email(k){return k+'@'+((this.cfg&&this.cfg.domain)||'mhi.local')},
 pf:d=>({id:d.id,kode:d.kode,nama:d.nama,role:d.role,jabatan:d.jabatan||'',mesin:d.mesin||'',warna:d.warna||'#5C6270',aktif:d.aktif!==false}),
 async signIn(k,p){const em=S.lmode==='email'?(S.lemail||'').trim():this.email(k);
+if(S.lmode==='email'&&!em)throw Object.assign(new Error('Isi email akun terlebih dahulu.'),{kind:'empty'});
 const{error}=await this.sb.auth.signInWithPassword({email:em,password:p});
 if(error){const e=authErr(error,em);throw Object.assign(new Error(e.msg),{diag:e,raw:error.message,kind:/invalid login credentials/i.test(error.message||'')?'badpass':'other'})}
 const{data:{user}}=await this.sb.auth.getUser();
 const{data,error:e2}=await this.sb.from('profiles').select('*').eq('id',user.id).single();
-if(e2||!data)throw Object.assign(new Error('Login berhasil, tetapi baris <b>profiles</b> belum ada.'),{kind:'noprofile',raw:e2?e2.message:'no rows',diag:{title:'Profil belum dibuat',msg:'Tabel profiles kosong untuk UUID ini.',fix:`Jalankan:<br><code>insert into profiles (id,kode,nama,role,jabatan,mesin,warna) values ('${user.id}','${esc(k||'kepala')}','${esc(k||'Kepala')}','kepala','Kepala Divisi Konversi','Manajemen','#B22F2C');</code>`}});
+if(e2||!data)throw Object.assign(new Error('Login berhasil, tetapi baris profiles belum ada.'),{kind:'noprofile',raw:e2?e2.message:'no rows',diag:{title:'Profil belum dibuat',msg:'Tabel profiles kosong untuk UUID ini.',fix:`Jalankan:<br><code>insert into profiles (id,kode,nama,role,jabatan,mesin,warna) values ('${user.id}','${esc(k||'kepala')}','${esc(k||'Kepala')}','kepala','Kepala Divisi Konversi','Manajemen','#B22F2C');</code>`}});
 if(!data.aktif)throw Object.assign(new Error('Akun dinonaktifkan oleh kepala produksi.'),{kind:'inactive'});
 return this.pf(data)},
 async session(){const{data:{session}}=await this.sb.auth.getSession();if(!session)return null;const{data,error}=await this.sb.from('profiles').select('*').eq('id',session.user.id).single();return(error||!data||!data.aktif)?null:this.pf(data)},
@@ -1840,9 +1750,8 @@ $('#moOk').textContent=ok;$('#moOk').className='btn btn-primary';$('#modalW').cl
 function closeMo(v){$('#modalW').classList.remove('show');const r=moRes;moRes=null;if(r)r(v)}
 function ecgD(w,h,n){const m=h/2,s=w/n;let d=`M0 ${m}`;const P=(x,y)=>` L${x.toFixed(1)} ${y.toFixed(1)}`;
 for(let i=0;i<n;i++){const x=i*s;d+=P(x+s*.14,m)+` Q${(x+s*.19).toFixed(1)} ${(m-h*.13).toFixed(1)} ${(x+s*.24).toFixed(1)} ${m.toFixed(1)}`+P(x+s*.33,m)+P(x+s*.37,m+h*.08)+P(x+s*.41,m-h*.38)+P(x+s*.45,m+h*.2)+P(x+s*.49,m)+P(x+s*.60,m)+` Q${(x+s*.66).toFixed(1)} ${(m-h*.14).toFixed(1)} ${(x+s*.72).toFixed(1)} ${m.toFixed(1)}`+P(x+s,m)}return d}
-const curEmail=()=>{const c=rdCfg();if(S.lmode==='email')return ($('#lgEmail').value||'').trim();return ($('#lgKode').value||'kepala')+'@'+((c&&c.domain)||'mhi.local')};
 function loginDir(){if(S.dirSrc==='live'&&S.dir.length)return S.dir;const c=rdDir();if(c.length){S.dir=c;if(S.dirSrc!=='live')S.dirSrc='cache';return c}if(S.dir.length)return S.dir;S.dirSrc='seed';return PEOPLE.map(p=>({kode:p.kode,nama:p.nama,role:p.role,aktif:true}))}
-function loginList(){const c=rdCfg();return c?loginDir():Local.d.profiles.map(p=>({kode:p.kode,nama:p.nama,role:p.role,aktif:p.aktif!==false}))}
+function loginList(){return rdCfg()?loginDir():Local.d.profiles.map(p=>({kode:p.kode,nama:p.nama,role:p.role,aktif:p.aktif!==false}))}
 function selAcct(){const l=loginList(),k=$('#lgKode').value;return l.find(x=>x.kode===k)||null}
 function selRole(){if(S.lmode==='email')return S.lastRole||'kepala';const a=selAcct();return a?a.role:(S.lastRole||'kepala')}
 function renderResetStat(){
@@ -1855,36 +1764,33 @@ function renderResetStat(){
   else if(r.status==='approved')box.innerHTML=`${icon('checkCircle',14)}<div><b>Sandi baru sudah disiapkan</b>Disetujui ${esc(r.by||'kepala')} · ${fTS(r.resolvedAt||r.at)}. Minta sandi baru langsung ke kepala produksi.</div>`;
   else box.innerHTML=`${icon('alert',14)}<div><b>Permintaan ditolak</b>Hubungi kepala produksi untuk penjelasan lebih lanjut.</div>`;
 }
-function renderLogin(){const c=rdCfg(),cloud=!!c,allow=connOK();
-$('#conn').hidden=!allow;
-$('#conn').classList.toggle('cloud',cloud);$('#connT').textContent=cloud?'Cloud Supabase':'Mode Lokal';
-$('#connS').textContent=cloud?(c.url.replace(/^https?:\/\//,'')+' · @'+c.domain):'10 akun demo · sandi '+CFG.PASS;
-$('#connEdit').hidden=!allow;$('#lgFallback').hidden=!allow;$('#lgModes').hidden=!cloud;$('#lgQuick').hidden=cloud;
-$('#lgKodeF').hidden=cloud&&S.lmode==='email';$('#lgEmailF').hidden=!cloud||S.lmode!=='email';
-$('#lgEP').hidden=!cloud;$('#lgDoms').hidden=!cloud||S.lmode==='email';
-$$('#lgModes button').forEach(b=>b.classList.toggle('on',b.dataset.mode===S.lmode));
-const list=loginList(),prev=$('#lgKode').value;
-$('#lgKode').innerHTML=[['kepala','Kepala Produksi'],['admin','Admin'],['operator','Operator']].map(([r,l])=>{const a=list.filter(p=>p.role===r);return a.length?`<optgroup label="${l}">${a.map(p=>`<option value="${esc(p.kode)}">${esc(p.nama)}${p.aktif===false?' · nonaktif':''}</option>`).join('')}</optgroup>`:''}).join('');
-$('#lgKode').value=(prev&&list.some(p=>p.kode===prev))?prev:(list.some(p=>p.kode==='kepala')?'kepala':(list[0]?list[0].kode:''));
-$('#dirNote').hidden=!(cloud&&S.dirSrc!=='live'&&list.length<3&&allow);
-if(cloud&&S.lmode==='email')$('#lgEmail').value=S.lemail||'';
-if(cloud){const dm=c.domain||'mhi.local';$('#lgDoms').innerHTML=DOMS.map(d=>`<button type="button" data-act="dom" data-dom="${esc(d)}" class="${d===dm?'on':''}">@${esc(d)}</button>`).join('')}
-if(rdCfg())$('#lgEmailShown').textContent=curEmail()||'—';
-renderResetStat()}
-/* pesan error: ringkas untuk operator & admin, teknis hanya untuk kepala */
+function renderLogin(){
+  const cloud=!!rdCfg();
+  $('#lgKodeF').hidden=S.lmode==='email';
+  $('#lgEmailF').hidden=S.lmode!=='email';
+  $$('#lgModes button').forEach(b=>b.classList.toggle('on',b.dataset.mode===S.lmode));
+  const list=loginList(),prev=$('#lgKode').value;
+  $('#lgKode').innerHTML=[['kepala','Kepala Produksi'],['admin','Admin'],['operator','Operator']].map(([r,l])=>{const a=list.filter(p=>p.role===r);return a.length?`<optgroup label="${l}">${a.map(p=>`<option value="${esc(p.kode)}">${esc(p.nama)}${p.aktif===false?' · nonaktif':''}</option>`).join('')}</optgroup>`:''}).join('');
+  $('#lgKode').value=(prev&&list.some(p=>p.kode===prev))?prev:(list.some(p=>p.kode==='kepala')?'kepala':(list[0]?list[0].kode:''));
+  const c=rdCfg();
+  $('#lgEmail').placeholder='nama@'+((c&&c.domain)||'mhi.local');
+  $('#lgPass').placeholder=cloud?'••••••••':'Sandi demo: '+CFG.PASS;
+  if(S.lmode==='email')$('#lgEmail').value=S.lemail||'';
+  renderResetStat();
+}
 function loginErr(e){
-  const box=$('#lgErr'),detail=selRole()==='kepala';
+  const box=$('#lgErr'),detail=selRole()==='kepala',m=$('#lgErrM');
   if(detail){
     const d=e&&e.diag?e.diag:{title:'Gagal masuk',msg:esc(e.message||String(e)),fix:''};
     box.classList.remove('simple');
     $('#lgErrT').textContent=d.title;
-    const m=$('#lgErrM');m.hidden=false;
+    m.hidden=false;
     m.innerHTML=d.msg+(d.fix?`<br><br><b>Perbaikan:</b> ${d.fix}`:'')+(e&&e.raw?`<span class="raw">Supabase: ${esc(e.raw)}</span>`:'');
-    $('#lgErrActs').hidden=false;
   }else{
     const raw=String((e&&e.raw)||(e&&e.message)||''),k=e&&e.kind;
     let msg='Gagal masuk. Coba lagi.';
     if(k==='badpass'||/sandi salah/i.test(raw))msg='Sandi salah.';
+    else if(k==='empty')msg='Isi email akun terlebih dahulu.';
     else if(k==='inactive')msg='Akun dinonaktifkan. Hubungi kepala produksi.';
     else if(k==='notfound')msg='Akun tidak ditemukan.';
     else if(k==='noprofile')msg='Akun belum disiapkan. Hubungi kepala produksi.';
@@ -1892,14 +1798,13 @@ function loginErr(e){
     else if(/failed to fetch|network|load failed/i.test(raw))msg='Koneksi bermasalah. Coba lagi.';
     else if(/rate limit|too many|429/i.test(raw))msg='Terlalu banyak percobaan. Tunggu sebentar.';
     box.classList.add('simple');
-    $('#lgErrT').textContent=msg;$('#lgErrM').hidden=true;$('#lgErrActs').hidden=true;
-    $('#lgDiag').hidden=true;
+    $('#lgErrT').textContent=msg;m.hidden=true;m.innerHTML='';
   }
   box.hidden=false;box.classList.remove('shake');void box.offsetWidth;box.classList.add('shake');sfx.err();
 }
 function clearLogin(){const p=$('#lgPass'),e=$('#lgEmail');const w=()=>{if(p){p.value='';p.type='password'}if(e)e.value='';S.lemail=''};
 w();try{$('#loginForm').reset()}catch(x){}w();$('#lgEye').innerHTML=icon('eye',16);
-$('#lgErr').hidden=true;$('#lgCaps').hidden=true;$('#lgDiag').hidden=true;S.diag=[];setTimeout(w,60);setTimeout(w,300);setTimeout(w,700)}
+$('#lgErr').hidden=true;setTimeout(w,60);setTimeout(w,300);setTimeout(w,700)}
 async function doLogin(k,p){const b=$('#lgSubmit');b.disabled=true;b.innerHTML='Memeriksa…';$('#lgErr').hidden=true;
 try{const me=await DB.signIn(k,p);S.me=me;S.lastRole=me.role;wrRole(me.role);await boot();sfx.ok();toast(`Masuk sebagai <b>${esc(me.nama)}</b> — ${ROLES[me.role].label}.`,{icon:ROLES[me.role].icon,duration:4200})}
 catch(e){loginErr(e)}finally{b.disabled=false;b.innerHTML='Masuk '+icon('arrowRight',15)}}
@@ -1916,33 +1821,6 @@ const me=await Local.session();if(me){S.me=me;S.lastRole=me.role;wrRole(me.role)
 const sqlBox=(id,l,c)=>`<div class="sqlb"><div class="h">${icon('database',11)} ${esc(l)}<button type="button" data-act="copy-sql" data-sql="${id}">Salin</button></div><pre>${esc(c)}</pre></div>`;
 function diagInto(sel,arr){const b=$(sel);if(!b)return;b.innerHTML=arr.map(d=>{const i=d.state==='ok'?'check':d.state==='bad'?'x':d.state==='warn'?'alert':'rotate';
 return `<div class="dg ${d.state}"><span class="i">${icon(i,12)}</span><div class="t"><b>${esc(d.title)}</b>${d.detail?`<small>${d.detail}</small>`:''}${d.fix?`<span class="fix">${d.fix}</span>`:''}${d.sql?sqlBox(d.sqlId,d.sqlLabel,d.sql):''}</div></div>`}).join('')}
-const diagUI=()=>{$('#lgDiag').hidden=false;diagInto('#lgDiagB',S.diag);const b=$('#lgDiagB');b.scrollTop=b.scrollHeight};
-const dPush=d=>{S.diag.push(d);diagUI()},dLast=p=>{Object.assign(S.diag[S.diag.length-1],p);diagUI()};
-async function runDiag(){if(S.diagRun)return;
-if(selRole()!=='kepala'){toast('Diagnosa teknis hanya untuk kepala produksi.',{type:'warn',icon:'shield'});return}
-const c=rdCfg();if(!c){toast('Mode lokal — sandi demo: '+CFG.PASS,{type:'info',icon:'info'});return}
-S.diagRun=true;S.diag=[];diagUI();const em=curEmail(),p=$('#lgPass').value;
-try{dPush({state:'run',title:'Memeriksa konfigurasi…'});const ok=/^https:\/\/[a-z0-9-]+\.supabase\.(co|in)$/i.test(c.url);
-dLast({state:ok&&c.key.length>40?'ok':'bad',title:'Konfigurasi proyek',detail:`${esc(c.url)} · @${esc(c.domain)} · key ${c.key.length} karakter`});if(!ok)return;
-dPush({state:'run',title:'Memuat SDK…'});try{await sdk();dLast({state:'ok',title:'Supabase SDK siap'})}catch(e){dLast({state:'bad',title:'SDK gagal',detail:esc(e.message)});return}
-const pr=anon(c);
-dPush({state:'run',title:'Memeriksa tabel…'});const{error:te}=await pr.from('products').select('id').limit(1);
-if(te){dLast({state:'bad',title:'Tabel belum siap',detail:esc(te.message),fix:'Jalankan schema.sql di SQL Editor.'});return}dLast({state:'ok',title:'Tabel products terbaca'});
-dPush({state:'run',title:'Memeriksa direktori login…'});const{data:dd,error:de}=await pr.from('login_directory').select('kode,nama,role,aktif');
-if(de||!dd||!dd.length)dLast({state:'warn',title:'Direktori login belum ada',detail:de?esc(de.message):'kosong',fix:'Agar daftar akun tidak menyusut setelah operator keluar, jalankan:',sqlId:'dir',sqlLabel:'login_directory.sql',sql:SQL_DIR});
-else{mergeDir(dd,{complete:true,src:'live'});dLast({state:'ok',title:'Direktori login lengkap',detail:dd.length+' akun'});renderLogin()}
-dPush({state:'run',title:'Memeriksa tabel permintaan sandi…'});const{error:pe2}=await pr.from('password_requests').select('id').limit(1);
-if(pe2)dLast({state:'warn',title:'Tabel permintaan sandi belum ada',detail:esc(pe2.message),fix:'Permintaan lupa sandi masih tersimpan per perangkat. Jalankan:',sqlId:'pr',sqlLabel:'password_requests.sql',sql:SQL_PR});
-else dLast({state:'ok',title:'Tabel permintaan sandi siap'});
-dPush({state:'run',title:'Mencoba login…',detail:esc(em)});if(!p){dLast({state:'warn',title:'Sandi kosong'});return}
-const{data:ad,error:ae}=await pr.auth.signInWithPassword({email:em,password:p});
-if(ae){const m=authErr(ae,em);dLast({state:'bad',title:m.title,detail:esc(ae.message),fix:m.fix});return}
-dLast({state:'ok',title:'Auth berhasil'});
-dPush({state:'run',title:'Memeriksa profiles…'});const{data:pf,error:pe}=await pr.from('profiles').select('*').eq('id',ad.user.id).single();
-if(pe||!pf){dLast({state:'bad',title:'Profil belum dibuat',fix:'Jalankan SQL insert profiles dengan UUID '+ad.user.id});return}
-dLast({state:'ok',title:'Profil ditemukan',detail:`@${esc(pf.kode)} · ${esc((ROLES[pf.role]||{}).label||pf.role)}`});
-dPush({state:'ok',title:'Semua pemeriksaan lolos',detail:'Tekan Masuk.'});sfx.ok()}
-catch(e){dPush({state:'bad',title:'Diagnosa terhenti',detail:esc(e.message)})}finally{S.diagRun=false}}
 const acctUI=()=>diagInto('#acctB',S.acct);
 const aPush=d=>{S.acct.push(d);acctUI()},aLast=p=>{Object.assign(S.acct[S.acct.length-1],p);acctUI()};
 function provUI(){const c=$('#provChip');if(!c)return;const m={fn:['fn','EDGE FUNCTION'],direct:['direct','LANGSUNG · RLS'],local:['direct','MODE LOKAL'],unknown:['','MEMERIKSA…']}[S.prov]||['','MEMERIKSA…'];
@@ -2394,7 +2272,7 @@ function renderPR(){
   if(!l.length)$('#prEmpty').innerHTML=`<svg class="flat" viewBox="0 0 320 44"><path d="M0 22 L120 22 L128 14 L136 30 L142 22 L320 22" fill="none" stroke="#BFE6D6" stroke-width="2"/></svg><h3>Belum ada permintaan reset sandi</h3><p>Bila operator atau admin menekan <b>Lupa sandi?</b> di layar login, permintaannya muncul di sini untuk Anda verifikasi.</p>`;
   $('#prClear').hidden=!PR.list.some(r=>r.status!=='pending');
   $('#prStore').innerHTML=S.mode==='cloud'
-    ?(PR.mode==='cloud'?`${icon('database',15)}<span><b>Tersinkron ke server.</b> Permintaan dari semua perangkat masuk ke antrean ini.</span>`:`${icon('alert',15)}<span><b>Belum tersinkron.</b> Tabel <code>password_requests</code> belum ada, jadi permintaan hanya tersimpan di perangkat ini. Jalankan SQL di tab <b>Diagnosa</b> agar.antrean menyatu.</span>`)
+    ?(PR.mode==='cloud'?`${icon('database',15)}<span><b>Tersinkron ke server.</b> Permintaan dari semua perangkat masuk ke antrean ini.</span>`:`${icon('alert',15)}<span><b>Belum tersinkron.</b> Tabel <code>password_requests</code> belum ada, jadi permintaan hanya tersimpan di perangkat ini. Jalankan SQL di tab <b>Diagnosa</b> agar antrean menyatu.</span>`)
     :`${icon('info',15)}<span><b>Mode lokal.</b> Permintaan tersimpan di perangkat ini — cukup untuk satu komputer produksi bersama.</span>`;
 }
 function prCard(r){
@@ -2424,7 +2302,7 @@ const leg=`<div class="mleg"><div class="mlg k"><span class="av" style="--av:#B2
 <div class="mlg a"><span class="av" style="--av:#236FD6">${icon('checkCircle',13)}</span><div><b>Admin Produksi</b><small>VERIFIKASI &amp; MASTER</small></div></div>
 <div class="mlg o"><span class="av" style="--av:#0FA3A3">${icon('package',13)}</span><div><b>Operator</b><small>LAPORAN MILIKNYA</small></div></div></div>`;
 const g=MX.map(x=>`<div class="mgrp"><div class="mgt">${esc(x.g)}</div><div class="mscr"><table class="mtbl"><thead><tr><th>Kemampuan</th><th class="k">Kepala</th><th class="a">Admin</th><th class="o">Operator</th></tr></thead><tbody>${x.rows.map(r=>`<tr><td>${esc(r[0])}</td><td>${cell(r[1])}</td><td>${cell(r[2])}</td><td>${cell(r[3])}</td></tr>`).join('')}</tbody></table></div></div>`).join('');
-$('#mxBody').innerHTML=leg+g+`<div class="dnote2" style="margin-top:18px">${icon('info',15)}<span>Operator &amp; admin hanya melihat pesan singkat <b>“Sandi salah.”</b> saat gagal masuk. Penjelasan teknis, tombol Diagnosa Login, dan detail Supabase hanya tampil untuk <b>kepala produksi</b>.</span></div>`}
+$('#mxBody').innerHTML=leg+g+`<div class="dnote2" style="margin-top:18px">${icon('info',15)}<span>Layar login hanya memuat <b>Masuk ke Sistem</b>, pilihan Kode Akun / Email Lengkap, Akun Pengguna, Kata Sandi, Lupa sandi, dan tombol Masuk. Pengaturan koneksi tersedia di menu <b>Koneksi Data</b> khusus kepala produksi.</span></div>`}
 let editU=null,pickRole='operator';
 function setRole(r){pickRole=r;$$('#uuPick button').forEach(b=>b.classList.toggle('on',b.dataset.role===r));
 $('#uuHint').textContent=ROLES[r].hint;const c=rdCfg(),k=($('#uuKode').value||'kode').toLowerCase();
@@ -2467,7 +2345,6 @@ const b=$('#pwSave');b.disabled=true;b.textContent='Menyimpan…';
 try{if(passId===S.me.id){if(S.mode==='cloud')await DB.myPass(np);else await DB.resetPass(passId,np)}else await DB.resetPass(passId,np,op);
 $('#passW').classList.remove('show');toast('Kata sandi diperbarui.',{icon:'key'});sfx.ok();if(S.view==='users')renderUsers()}
 catch(e){pMsg(esc(e.message),'err',S.rawErr);S.rawErr='';sfx.err()}finally{b.disabled=false;b.textContent='Simpan Sandi'}}
-/* ==== alur lupa sandi ==== */
 function openForgot(){
   const a=selAcct();
   if(S.lmode==='email'||!a){toast('Pilih akun pada tab <b>Kode Akun</b> dulu agar permintaan bisa dikirim.',{type:'info',icon:'info',duration:4600});return}
@@ -2496,7 +2373,7 @@ function openApprove(id){
   if(!p){toast('Profil akun ini tidak ditemukan di database. Tambahkan atau perbaiki dulu di Daftar Pengguna.',{type:'error',icon:'alert',duration:5200});return}
   apId=id;apKode=r.kode;
   $('#apT').textContent='Setujui & Reset Sandi';
-  $('#apS').innerHTML=`Tetapkan sandi baru untuk akun ini, lalu serahkan langsung kepada yang bersangkutan.`;
+  $('#apS').innerHTML='Tetapkan sandi baru untuk akun ini, lalu serahkan langsung kepada yang bersangkutan.';
   $('#apAcct').innerHTML=`<span class="av" style="--av:${p.warna}">${ini(p.nama)}</span><div class="t"><b>${esc(p.nama)}</b><small>@${esc(p.kode)} · ${esc((ROLES[p.role]||{}).label||'Operator')}</small></div>${rB(p.role)}`;
   $('#apNew').value=genPass();$('#apOld').value='';
   $('#apOldW').hidden=!(S.mode==='cloud'&&S.prov!=='fn');
@@ -2649,7 +2526,7 @@ const bytes=buildXlsx([{name:'Detail Produksi',title:'MHI PAPER — DETAIL LAPOR
 dl(bytes,'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',`MHI-PAPER_Laporan_${today()}.xlsx`);sfx.save();
 toast(`<b>${rows.length} laporan</b> diexport ke Excel — 2 sheet, kolom SN Jumbo Roll disertakan.`,{icon:'sheet',duration:5200})}
 catch(e){toast('Export Excel gagal: '+esc(e.message||String(e)),{type:'error',icon:'alert',duration:6000});sfx.err()}}
-const pHead=(t,s)=>`<div class="p-head"><div class="p-brand"><div class="p-logo">M</div><div><b>MHI PAPER</b><small>Produksi Kertas ECG/EKG dan Plain</small></div></div><div class="p-doc">FORM LH-ECG-01<br>REV. 19</div></div><div class="p-title">${t}</div><p class="p-sub">${s}</p>`;
+const pHead=(t,s)=>`<div class="p-head"><div class="p-brand"><div class="p-logo">M</div><div><b>MHI PAPER</b><small>Produksi Kertas ECG/EKG dan Plain</small></div></div><div class="p-doc">FORM LH-ECG-01<br>REV. 20</div></div><div class="p-title">${t}</div><p class="p-sub">${s}</p>`;
 const pFoot=()=>`<div class="p-foot">Dicetak: ${new Date().toLocaleString('id-ID')} · ${S.me?esc(S.me.nama)+' ('+ROLES[S.me.role].label+')':''} · Bersih = hasil − reject · MHI PAPER.</div>`;
 const sign=(o,v)=>`<table class="p-sign"><tr><td>Dibuat oleh,<br><br><br><br><u>&nbsp;&nbsp;${esc(o||'________________')}&nbsp;&nbsp;</u><br><small>Operator</small></td><td>Diperiksa oleh,<br><br><br><br><u>&nbsp;&nbsp;${esc(v||'________________')}&nbsp;&nbsp;</u><br><small>Admin Produksi</small></td><td>Disetujui oleh,<br><br><br><br><u>&nbsp;&nbsp;________________&nbsp;&nbsp;</u><br><small>Kepala Produksi</small></td></tr></table>`;
 function printRecap(){if(!canE()){toast('Cetak rekap tidak tersedia untuk operator.',{type:'warn',icon:'alert'});return}
@@ -2684,7 +2561,7 @@ else s+='<p class="p-sub"><b>Tidak ada agenda di luar jobdesk.</b></p>'}
 s+=sign(o.nama,vb?vb.nama:'')+pFoot();$('#printArea').innerHTML=s;doPrint()}
 function doPrint(){toast('Menyiapkan halaman cetak…',{type:'info',icon:'printer',duration:2200});setTimeout(()=>{try{window.print()}catch(e){}},80)}
 function backup(){if(!isK()){toast('Hanya kepala produksi.',{type:'warn',icon:'alert'});return}
-dl(JSON.stringify({app:'MHI PAPER',version:19,mode:S.mode,exportedAt:new Date().toISOString(),passwordRequests:PR.list,...DB.all()},null,2),'application/json','mhi-paper-backup_'+today()+'.json');
+dl(JSON.stringify({app:'MHI PAPER',version:20,mode:S.mode,exportedAt:new Date().toISOString(),passwordRequests:PR.list,...DB.all()},null,2),'application/json','mhi-paper-backup_'+today()+'.json');
 toast('Cadangan JSON diunduh.',{icon:'download'});sfx.tick()}
 function openSetup(){if(!connOK()){toast('Pengaturan koneksi hanya untuk kepala produksi.',{type:'warn',icon:'alert',duration:4200});return}
 const c=rdCfg();$('#suUrl').value=c?c.url:'';$('#suKey').value=c?c.key:'';$('#suDom').value=c?c.domain:'mhi.local';
@@ -2719,10 +2596,9 @@ function goDetail(){if(!vIdent())return;setView('detail');setTimeout(()=>{const 
 function bind(){
 $('#loginForm').addEventListener('submit',e=>{e.preventDefault();doLogin($('#lgKode').value,$('#lgPass').value)});
 $('#lgEye').addEventListener('click',()=>{const p=$('#lgPass');p.type=p.type==='password'?'text':'password';$('#lgEye').innerHTML=icon(p.type==='password'?'eye':'eyeOff',16)});
-$('#lgKode').addEventListener('change',()=>{if(rdCfg())$('#lgEmailShown').textContent=curEmail();$('#lgErr').hidden=true;renderResetStat()});
-$('#lgEmail').addEventListener('input',()=>{S.lemail=$('#lgEmail').value;if(rdCfg())$('#lgEmailShown').textContent=curEmail();$('#lgErr').hidden=true});
+$('#lgKode').addEventListener('change',()=>{$('#lgErr').hidden=true;renderResetStat()});
+$('#lgEmail').addEventListener('input',()=>{S.lemail=$('#lgEmail').value;$('#lgErr').hidden=true});
 $('#lgPass').addEventListener('input',()=>$('#lgErr').hidden=true);
-$('#lgPass').addEventListener('keyup',e=>{$('#lgCaps').hidden=!(e.getModifierState&&e.getModifierState('CapsLock'))});
 $('#suDom').addEventListener('input',()=>$('#suPrev').textContent='kepala@'+($('#suDom').value.replace(/^@/,'')||'mhi.local'));
 $('#uuKode').addEventListener('input',()=>setRole(pickRole));
 $('#tabs').addEventListener('scroll',arrows,{passive:true});
@@ -2777,13 +2653,9 @@ $('#formOther').addEventListener('submit',e=>{e.preventDefault();saveOther()});
 reorder($('#itemList'),()=>S.form.items,()=>{renderItems();sumForm()})}
 async function act(t,e){const a=t.dataset.act;
 switch(a){
-case 'quick':await doLogin(t.dataset.kode,CFG.PASS);break;
-case 'lmode':S.lmode=t.dataset.mode;$('#lgErr').hidden=true;renderLogin();sfx.tick();break;
-case 'dom':{const c=rdCfg();if(!c)break;c.domain=t.dataset.dom;wrCfg(c);if(S.mode==='cloud'&&DB.cfg)DB.cfg=c;$('#lgErr').hidden=true;renderLogin();sfx.tick();toast(`Domain diubah ke <b>@${esc(t.dataset.dom)}</b>.`,{type:'info',icon:'building',duration:2800});break}
-case 'copy-email':{const em=curEmail();try{await navigator.clipboard.writeText(em);toast('Email disalin.',{icon:'copy',duration:2400})}catch(x){toast('Salin manual: <b>'+esc(em)+'</b>',{type:'info',icon:'info',duration:5000})}break}
+case 'lmode':S.lmode=t.dataset.mode;$('#lgErr').hidden=true;renderLogin();sfx.tick();
+setTimeout(()=>{const f=S.lmode==='email'?$('#lgEmail'):$('#lgKode');if(f)try{f.focus({preventScroll:true})}catch(x){}},30);break;
 case 'copy-sql':{const m={dir:SQL_DIR,pol:SQL_POL,fn:SQL_FN,pr:SQL_PR}[t.dataset.sql]||'';try{await navigator.clipboard.writeText(m);toast('Disalin — tempel di Supabase SQL Editor.',{icon:'copy',duration:3200})}catch(x){toast('Clipboard diblokir. Blok teks lalu salin manual.',{type:'info',icon:'info'})}break}
-case 'dir-sql':await confirmBox({title:'Direktori Akun Login',danger:false,ok:'Tutup',msg:'Agar daftar akun <b>selalu lengkap</b> di layar login, kepala produksi menjalankan SQL ini sekali di Supabase → SQL Editor. Isinya hanya nama &amp; peran.'+sqlBox('dir','login_directory.sql',SQL_DIR)});break;
-case 'trim':{const p=$('#lgPass');p.value=p.value.trim();$('#lgErr').hidden=true;toast('Spasi di tepi sandi dihapus.',{icon:'rotate',duration:2400});break}
 case 'forgot':openForgot();break;
 case 'forgot-cancel':$('#forgotW').classList.remove('show');break;
 case 'forgot-send':await sendForgot();break;
@@ -2807,11 +2679,8 @@ if(ok){await prDel(ids);renderUsers();roleUI();sfx.del();toast('Antrean dibersih
 case 'ap-cancel':$('#apprW').classList.remove('show');break;
 case 'ap-save':await saveApprove();break;
 case 'ap-copy':{const v=$('#apPass').textContent;try{await navigator.clipboard.writeText(v);toast('Sandi baru disalin.',{icon:'copy',duration:2600})}catch(x){toast('Salin manual: <b>'+esc(v)+'</b>',{type:'info',icon:'info',duration:6000})}break}
-case 'diag':await runDiag();break;
-case 'diag-close':$('#lgDiag').hidden=true;break;
 case 'acct-diag':await runAcct();break;
 case 'goto-diag':S.utab='diagnosa';setView('users');break;
-case 'use-local':await useLocal();break;
 case 'setup':openSetup();break;
 case 'setup-close':$('#setupW').classList.remove('show');break;
 case 'setup-save':await saveSetup();break;
@@ -2948,7 +2817,7 @@ else{DB=Local;S.mode='local'}
 await prLoad();renderLogin();
 if(S.mode==='local'){const me=await Local.session();if(me){S.me=me;S.lastRole=me.role;wrRole(me.role);await boot()}else $('#lgPass').value=CFG.PASS}
 else clearLogin()}
-init().catch(e=>{console.error(e);document.body.dataset.view='login';const b=$('#lgErr');if(b){b.hidden=false;b.classList.add('simple');$('#lgErrT').textContent='Gagal memuat aplikasi';$('#lgErrM').hidden=true;$('#lgErrActs').hidden=true}});
+init().catch(e=>{console.error(e);document.body.dataset.view='login';const b=$('#lgErr');if(b){b.hidden=false;b.classList.add('simple');$('#lgErrT').textContent='Gagal memuat aplikasi';$('#lgErrM').hidden=true}});
 </script>
 </body>
 </html>
