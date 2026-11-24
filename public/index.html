@@ -92,6 +92,15 @@ body[data-view="login"] #loginScreen{display:grid}
 .pw{position:relative}.pw .inp{padding-right:44px}
 .eye{position:absolute;right:6px;top:50%;transform:translateY(-50%);width:32px;height:32px;border-radius:7px;display:grid;place-items:center;color:var(--ink-3)}
 .eye:hover{background:var(--surface-2);color:var(--ink)}
+.frow{display:flex;justify-content:flex-end;margin-top:-6px}
+.forgot{display:inline-flex;align-items:center;gap:6px;font:600 11.5px var(--fb);color:#1D539E;padding:4px 8px;border-radius:7px;border:1px dashed #C6DAF4;background:#fff}
+.forgot:hover{border-style:solid;border-color:var(--blue);background:var(--blue-soft)}
+.rstat{display:flex;align-items:flex-start;gap:8px;padding:9px 11px;border-radius:9px;font-size:11.5px;line-height:1.45;margin-top:-4px;border:1.5px solid}
+.rstat .ic{flex:none;margin-top:1px}
+.rstat.pending{background:var(--amber-soft);border-color:#EFD3A0;color:#8A5A08}
+.rstat.approved{background:var(--green-soft);border-color:#BFE6D6;color:#0B6E50}
+.rstat.rejected{background:var(--red-soft);border-color:#F0C9C5;color:var(--red-deep)}
+.rstat b{display:block;font-size:11.5px}
 .ep{display:flex;align-items:center;gap:8px;padding:8px 11px;border-radius:9px;background:var(--blue-soft);border:1px solid #C6DAF4;font-size:11px;color:#1D539E;margin-top:-4px}
 .ep .t{flex:1;min-width:0;line-height:1.35}
 .ep b{font-family:var(--fm);font-size:11.5px;display:block;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
@@ -107,6 +116,8 @@ body[data-view="login"] #loginScreen{display:grid}
 .lg-err{background:var(--red-soft);border:1px solid #F0C9C5;color:var(--red-deep);border-radius:10px;padding:11px 12px;font-size:12px;animation:shake .45s ease}
 .lg-err b{display:block;font-size:12.5px;margin-bottom:3px}
 .lg-err span{display:block;line-height:1.5;color:#8E332F}
+.lg-err.simple{padding:9px 12px;display:flex;align-items:center;gap:8px}
+.lg-err.simple b{margin-bottom:0;font-size:12.5px}
 .eacts{display:flex;gap:6px;margin-top:9px;flex-wrap:wrap}
 .eacts button{font:600 10.5px var(--fb);padding:5px 10px;border-radius:7px;border:1.5px solid #E5B4B0;background:#fff;color:var(--red-deep);display:inline-flex;align-items:center;gap:5px}
 .diag{margin-top:13px;border:1.5px solid var(--line-strong);border-radius:11px;background:var(--surface-2);overflow:hidden}
@@ -139,7 +150,7 @@ body[data-view="login"] #loginScreen{display:grid}
 .qb.o{color:#0B6E50;border-color:#BFE6D6;background:var(--green-soft)}
 .lgq-n{font-size:10.5px;color:var(--ink-3);line-height:1.5;margin-top:9px}
 .lgf{display:flex;gap:7px;margin-top:14px;flex-wrap:wrap}.lgf .btn{flex:1 1 auto}
-.lg-foot{margin-top:16px;text-align:center;font:500 9px var(--fm);letter-spacing:.14em;color:var(--ink-3);text-transform:uppercase}
+.lg-foot{margin-top:12px;text-align:center;font:500 9px var(--fm);letter-spacing:.14em;color:var(--ink-3);text-transform:uppercase}
 
 /* TOPBAR */
 .topbar{position:fixed;top:0;left:0;right:0;height:var(--tb);z-index:50;background:rgba(255,252,247,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-strong);box-shadow:0 1px 0 rgba(214,64,60,.15),0 6px 20px rgba(80,55,25,.07)}
@@ -182,6 +193,7 @@ body[data-view="login"] #loginScreen{display:grid}
 .umi{display:flex;align-items:center;gap:9px;width:100%;padding:9px 11px;border-radius:8px;font:600 12.5px var(--fb);color:var(--ink-2);text-align:left}
 .umi:hover{background:var(--surface-2);color:var(--ink)}
 .umi.danger{color:var(--red-deep)}.umi.danger:hover{background:var(--red-soft)}
+.umi .tbadge{margin-left:auto}
 
 /* LAYOUT */
 main{padding-top:calc(var(--tb) + var(--gap));padding-bottom:60px}
@@ -359,7 +371,7 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--red);cursor:point
 .wnav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px;padding-top:16px;border-top:1px dashed var(--line-strong);flex-wrap:wrap}
 .wnav .hint{font-size:11.5px;color:var(--ink-3)}
 
-/* FORM LAYOUT — kotak kanan selalu bisa diakses */
+/* FORM LAYOUT */
 .fl{display:grid;grid-template-columns:minmax(0,1fr) 344px;gap:20px;align-items:start;margin-top:4px}
 .aside{position:sticky;top:calc(var(--tb) + 16px);align-self:start;max-height:calc(100vh - var(--tb) - 32px);display:flex;flex-direction:column;min-height:0}
 .scard{padding:0;position:relative;overflow:hidden;display:flex;flex-direction:column;min-height:0;max-height:100%}
@@ -610,6 +622,23 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--red);cursor:point
 .sw3:disabled{opacity:.4;cursor:not-allowed}
 .uacts{display:flex;gap:6px;flex-wrap:wrap}.uacts .btn{flex:1 1 auto}
 .uacts .ib{width:34px;height:34px;border:1.5px solid var(--line-strong);background:#fff}
+/* permintaan sandi */
+.prc{background:var(--surface);border:1.5px solid var(--line);border-left:4px solid var(--pc,var(--amber));border-radius:12px;padding:15px;box-shadow:var(--sh);display:flex;flex-direction:column;gap:11px;animation:fadeUp .4s ease both}
+.prc.pending{--pc:var(--amber)}.prc.approved{--pc:var(--green)}.prc.rejected{--pc:var(--red)}
+.prc.done{opacity:.78}
+.prh{display:flex;align-items:center;gap:10px}
+.prh .t{flex:1;min-width:0}
+.prh .t b{font-size:14px;display:block;line-height:1.2}
+.prh .t small{font:500 10px var(--fm);color:var(--ink-3)}
+.prnote{font-size:12px;color:var(--ink-2);line-height:1.5;background:var(--surface-2);border:1px solid var(--line);border-radius:9px;padding:9px 11px}
+.prmeta{font:500 10px var(--fm);color:var(--ink-3)}
+.practs{display:flex;gap:7px;flex-wrap:wrap}.practs .btn{flex:1 1 auto}
+.reveal{border:1.5px solid #9FDDC5;background:linear-gradient(150deg,#EAFBF3,#F4FCF8);border-radius:11px;padding:12px 13px;margin-top:13px}
+.reveal label{font:600 8.5px var(--fm);letter-spacing:.13em;color:#0B6E50;display:block}
+.reveal .rv{display:flex;align-items:center;gap:9px;margin-top:6px}
+.reveal .rv b{flex:1;font:700 19px var(--fm);letter-spacing:.04em;color:#0B6E50;word-break:break-all}
+.reveal .rv button{flex:none;font:600 10px var(--fm);padding:6px 10px;border-radius:7px;border:1.5px solid #9FDDC5;background:#fff;color:#0B6E50}
+.reveal small{display:block;font-size:10.5px;color:#4A8F76;margin-top:7px;line-height:1.45}
 .alist{display:flex;flex-direction:column;gap:6px;max-height:540px;overflow-y:auto}
 .ar{display:flex;align-items:center;gap:11px;padding:9px 12px;border:1px solid var(--line);border-radius:9px;background:#fff;font-size:12px}
 .ari{width:26px;height:26px;border-radius:7px;display:grid;place-items:center;flex:none;background:var(--surface-2);color:var(--ink-2)}
@@ -759,6 +788,8 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--red);cursor:point
 .modal p{font-size:12.5px;color:var(--ink-2);line-height:1.55}
 .mi{margin-top:13px}.mi label{display:block;margin-bottom:5px}
 .mbtns{display:flex;gap:9px;justify-content:flex-end;margin-top:20px;flex-wrap:wrap}
+.acct{display:flex;align-items:center;gap:11px;padding:11px 13px;border:1.5px solid var(--line-strong);border-radius:11px;background:linear-gradient(135deg,#fff,var(--surface-2));margin-top:13px}
+.acct .t{flex:1;min-width:0}.acct .t b{font-size:14px;display:block}.acct .t small{font:500 10px var(--fm);color:var(--ink-3)}
 .smsg{margin-top:13px;padding:10px 12px;border-radius:9px;font-size:12px;line-height:1.55;background:var(--blue-soft);border:1px solid #C6DAF4;color:#1D539E}
 .smsg.err{background:var(--red-soft);border-color:#F0C9C5;color:var(--red-deep)}
 .smsg.ok{background:var(--green-soft);border-color:#BFE6D6;color:#0B6E50}
@@ -916,7 +947,7 @@ html{scroll-behavior:auto}}
   <div class="lg-panel">
     <div class="lg-card">
       <div class="lg-head"><span class="step">01</span><div><h2>Masuk ke Sistem</h2><p>Menu menyesuaikan hak akses akun Anda.</p></div></div>
-      <div class="conn" id="conn" hidden>
+      <div class="conn" id="conn">
         <span data-ic="building" data-sz="15"></span>
         <div class="ct"><b id="connT">Mode Lokal</b><small id="connS">Data di perangkat ini saja</small></div>
         <button type="button" id="connEdit" data-act="setup">Ubah</button>
@@ -953,10 +984,12 @@ html{scroll-behavior:auto}}
             <button type="button" class="eye" id="lgEye" aria-label="Tampilkan kata sandi"><span data-ic="eye" data-sz="16"></span></button>
           </div>
         </div>
+        <div class="frow"><button type="button" class="forgot" data-act="forgot"><span data-ic="key" data-sz="12"></span> Lupa sandi?</button></div>
+        <div class="rstat" id="resetStat" hidden></div>
         <div class="caps" id="lgCaps" hidden><span data-ic="alert" data-sz="13"></span> Caps Lock aktif — sandi bersifat huruf besar/kecil.</div>
         <div class="lg-err" id="lgErr" hidden>
           <b id="lgErrT">Gagal masuk</b><span id="lgErrM"></span>
-          <div class="eacts">
+          <div class="eacts" id="lgErrActs">
             <button type="button" data-act="diag"><span data-ic="activity" data-sz="12"></span> Diagnosa Login</button>
             <button type="button" data-act="trim"><span data-ic="rotate" data-sz="12"></span> Hapus Spasi Sandi</button>
           </div>
@@ -976,7 +1009,7 @@ html{scroll-behavior:auto}}
         </div>
         <p class="lgq-n">Sandi demo <b>mhi2026</b>. Mode lokal selalu bisa dipakai walau Supabase belum siap.</p>
       </div>
-      <div class="lgf" id="lgFallback" hidden>
+      <div class="lgf" id="lgFallback">
         <button class="btn btn-ghost btn-sm" data-act="use-local"><span data-ic="undo" data-sz="13"></span> Pakai Mode Lokal</button>
         <button class="btn btn-ghost btn-sm" data-act="setup"><span data-ic="building" data-sz="13"></span> Koneksi Cloud</button>
       </div>
@@ -1011,6 +1044,7 @@ html{scroll-behavior:auto}}
           <button class="umi" data-act="nav" data-nav="history"><span data-ic="barChart" data-sz="15"></span> Riwayat &amp; Rekap</button>
           <button class="umi" data-act="nav" data-nav="master" id="umMaster"><span data-ic="roll" data-sz="15"></span> Master Produk</button>
           <button class="umi" data-act="nav" data-nav="users" id="umUsers"><span data-ic="userPlus" data-sz="15"></span> Manajemen Pengguna</button>
+          <button class="umi" data-act="goto-sandi" id="umSandi"><span data-ic="key" data-sz="15"></span> Permintaan Sandi <span class="tbadge zero" id="umSandiN">0</span></button>
           <button class="umi" data-act="xlsx" id="umXlsx"><span data-ic="sheet" data-sz="15"></span> Export Excel</button>
           <button class="umi" data-act="mypass"><span data-ic="key" data-sz="15"></span> Ganti Sandi Saya</button>
           <button class="umi" data-act="setup" id="umSetup"><span data-ic="building" data-sz="15"></span> Koneksi Data</button>
@@ -1281,6 +1315,7 @@ html{scroll-behavior:auto}}
   <div class="card tool"><div class="tbr">
     <div class="chips" id="uTabs">
       <button class="chip active" data-act="utab" data-tab="pengguna">Daftar Pengguna <span class="cnt" id="uCnt">0</span></button>
+      <button class="chip" data-act="utab" data-tab="sandi"><span data-ic="key" data-sz="11"></span> Permintaan Sandi <span class="cnt" id="prCnt">0</span></button>
       <button class="chip" data-act="utab" data-tab="akses"><span data-ic="shield" data-sz="11"></span> Matriks Hak Akses</button>
       <button class="chip" data-act="utab" data-tab="diagnosa"><span data-ic="activity" data-sz="11"></span> Diagnosa</button>
       <button class="chip" data-act="utab" data-tab="audit">Audit Log</button>
@@ -1292,8 +1327,12 @@ html{scroll-behavior:auto}}
   </div></div>
   <div id="uPane" class="ugrid"></div>
   <div id="uEmpty" class="card empty" hidden></div>
+  <div id="uSandi" hidden>
+    <div class="card sect" style="margin-top:14px"><header class="ch"><span class="step" style="background:var(--amber)"><span data-ic="key" data-sz="15"></span></span><div><h2>Permintaan Reset Sandi</h2><p>Operator &amp; admin yang lupa sandi mengirim permintaan dari layar login. Kepala produksi memverifikasi, lalu menetapkan sandi baru.</p></div><button class="btn btn-ghost btn-sm" data-act="pr-clear" id="prClear" style="margin-left:auto"><span data-ic="trash" data-sz="13"></span> Bersihkan yang selesai</button></header>
+    <div class="cb"><div id="prList" class="ugrid" style="margin-top:0"></div><div id="prEmpty" class="empty" hidden style="padding:34px 20px"></div><div class="dnote2" id="prStore" style="margin-top:14px"></div></div></div>
+  </div>
   <div id="uAkses" class="card sect" hidden><header class="ch"><span class="step" style="background:var(--red-deep)"><span data-ic="shield" data-sz="15"></span></span><div><h2>Matriks Hak Akses</h2><p>Ditegakkan di tampilan dan di lapisan data.</p></div></header><div class="cb" id="mxBody"></div></div>
-  <div id="uDiag" class="card sect" hidden><header class="ch"><span class="step" style="background:var(--plum)"><span data-ic="activity" data-sz="15"></span></span><div><h2>Diagnosa Sistem Akun</h2><p>Memeriksa direktori login, Edge Function, policy RLS, dan Auth.</p></div><button class="btn btn-primary btn-sm" data-act="acct-diag" id="acctBtn" style="margin-left:auto"><span data-ic="rotate" data-sz="14"></span> Jalankan Diagnosa</button></header><div class="cb"><div class="diag-b" id="acctB" style="max-height:none;padding:0"></div></div></div>
+  <div id="uDiag" class="card sect" hidden><header class="ch"><span class="step" style="background:var(--plum)"><span data-ic="activity" data-sz="15"></span></span><div><h2>Diagnosa Sistem Akun</h2><p>Memeriksa direktori login, tabel permintaan sandi, Edge Function, dan policy RLS.</p></div><button class="btn btn-primary btn-sm" data-act="acct-diag" id="acctBtn" style="margin-left:auto"><span data-ic="rotate" data-sz="14"></span> Jalankan Diagnosa</button></header><div class="cb"><div class="diag-b" id="acctB" style="max-height:none;padding:0"></div></div></div>
   <div id="uAudit" class="card sect" hidden><header class="ch"><span class="step" style="background:var(--ink-2)">A</span><div><h2>Audit Log</h2><p>Rekam jejak perubahan — siapa, kapan, dan apa.</p></div></header><div class="cb"><div id="auditB" class="alist"></div></div></div>
 </section>
 
@@ -1310,6 +1349,26 @@ html{scroll-behavior:auto}}
 <div id="toasts" aria-live="polite"></div>
 
 <div class="mw" id="modalW"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="moT"><h3 id="moT"></h3><p id="moM"></p><div class="mi" id="moIW" hidden><label for="moI" id="moIL"></label><textarea id="moI" class="inp" rows="3" maxlength="300"></textarea></div><div class="mbtns"><button class="btn btn-ghost" data-act="mo-cancel">Batal</button><button class="btn btn-danger" data-act="mo-ok" id="moOk">OK</button></div></div></div>
+
+<div class="mw" id="forgotW"><div class="modal" role="dialog" aria-modal="true">
+  <h3>Lupa Kata Sandi</h3>
+  <p>Kirim permintaan reset ke <b>kepala produksi</b>. Setelah diverifikasi, kepala menetapkan sandi baru dan menyerahkannya langsung kepada Anda.</p>
+  <div class="acct" id="fgAcct"></div>
+  <div class="mi"><label for="fgNote">Catatan untuk kepala produksi <span class="opt">OPSIONAL</span></label><textarea id="fgNote" class="inp" rows="2" maxlength="180" placeholder="cth: Lupa sandi setelah ganti HP. Shift 1 hari ini."></textarea></div>
+  <div class="smsg" id="fgMsg" hidden></div>
+  <div class="mbtns"><button class="btn btn-ghost" data-act="forgot-cancel">Batal</button><button class="btn btn-primary" data-act="forgot-send" id="fgSend"><span data-ic="arrowRight" data-sz="14"></span> Kirim Permintaan</button></div>
+</div></div>
+
+<div class="mw" id="apprW"><div class="modal" role="dialog" aria-modal="true">
+  <h3 id="apT">Setujui &amp; Reset Sandi</h3>
+  <p id="apS"></p>
+  <div class="acct" id="apAcct"></div>
+  <div class="mi"><label for="apNew">Kata Sandi Baru <b class="req">*</b></label><input id="apNew" class="inp mono" autocomplete="new-password"><div class="help" style="margin-top:5px">Minimal 6 karakter. Sandi ini yang akan dipakai akun tersebut untuk masuk.</div></div>
+  <div class="mi" id="apOldW" hidden><label for="apOld">Sandi Lama Akun Ini <span class="opt">TANPA EDGE FUNCTION</span></label><input id="apOld" type="password" class="inp mono" autocomplete="new-password"></div>
+  <div class="smsg" id="apMsg" hidden></div>
+  <div class="reveal" id="apReveal" hidden><label>SANDI BARU · SERAHKAN LANGSUNG KE PENGGUNA</label><div class="rv"><b id="apPass">—</b><button type="button" data-act="ap-copy">Salin</button></div><small>Sandi hanya ditampilkan sekali di sini. Setelah dialog ditutup, sandi tidak dapat dilihat lagi.</small></div>
+  <div class="mbtns"><button class="btn btn-ghost" data-act="ap-cancel" id="apCancel">Batal</button><button class="btn btn-green" data-act="ap-save" id="apSave"><span data-ic="check" data-sz="14"></span> Setujui &amp; Terapkan</button></div>
+</div></div>
 
 <div class="mw" id="setupW"><div class="modal wide" role="dialog" aria-modal="true">
   <h3>Koneksi Cloud Supabase</h3>
@@ -1356,6 +1415,30 @@ const SQL_DIR=`-- Jalankan sekali di Supabase → SQL Editor → Run.
 create or replace view public.login_directory as
 select kode, nama, role, aktif from public.profiles;
 grant select on public.login_directory to anon, authenticated;`;
+const SQL_PR=`-- Tabel permintaan reset sandi (lupa sandi) — diverifikasi kepala produksi.
+create table if not exists public.password_requests(
+  id uuid primary key default gen_random_uuid(),
+  kode text not null,
+  nama text,
+  note text,
+  status text not null default 'pending',
+  created_at timestamptz not null default now(),
+  resolved_at timestamptz,
+  resolved_by text
+);
+alter table public.password_requests enable row level security;
+drop policy if exists pr_send on public.password_requests;
+create policy pr_send on public.password_requests
+  for insert to anon, authenticated with check (true);
+drop policy if exists pr_read on public.password_requests;
+create policy pr_read on public.password_requests
+  for select to anon, authenticated using (true);
+drop policy if exists pr_resolve on public.password_requests;
+create policy pr_resolve on public.password_requests
+  for update to authenticated using (public.auth_role() = 'kepala');
+drop policy if exists pr_del on public.password_requests;
+create policy pr_del on public.password_requests
+  for delete to authenticated using (public.auth_role() = 'kepala');`;
 const SQL_POL=`drop policy if exists profiles_insert on public.profiles;
 create policy profiles_insert on public.profiles
   for insert to authenticated with check (public.auth_role() = 'kepala');
@@ -1436,6 +1519,7 @@ const icon=(n,s=16)=>`<svg class="ic" width="${s}" height="${s}" viewBox="0 0 24
 const $=s=>document.querySelector(s),$$=s=>[...document.querySelectorAll(s)];
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
 const uid=()=>(crypto.randomUUID?crypto.randomUUID():'id-'+Date.now().toString(36)+Math.random().toString(36).slice(2,9));
+const uuid=()=>crypto.randomUUID?crypto.randomUUID():'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g,c=>{const r=Math.random()*16|0;return(c==='x'?r:(r&3|8)).toString(16)});
 const pad=n=>String(n).padStart(2,'0'),pad3=n=>String(n).padStart(3,'0');
 const num=v=>{const n=Number(v);return isFinite(n)?n:0};
 const today=()=>{const d=new Date();return d.getFullYear()+'-'+pad(d.getMonth()+1)+'-'+pad(d.getDate())};
@@ -1453,6 +1537,7 @@ const ini=n=>esc(String(n||'?').slice(0,2).toUpperCase());
 const autoShift=()=>{const h=new Date().getHours();return h>=8&&h<17?'N1':h>=17&&h<20?'L1':'L2'};
 const pct=(p,t)=>t>0?Math.round(p/t*100):0;
 const clip=(s,n)=>{s=String(s||'');return s.length>n?s.slice(0,n-1)+'…':s};
+const genPass=()=>'MHI'+Math.random().toString(36).slice(2,6).toUpperCase()+pad(Math.floor(Math.random()*90+10));
 const JENIS={pack:{label:'Produksi Paper Pack',short:'Paper Pack',unit:'pack',icon:'package',cls:'pack',ex:'ENDO Paper Pack 210 x 140/180_EIECG12CH'},
 roll:{label:'Produksi Paper Roll',short:'Paper Roll',unit:'roll',icon:'roll',cls:'roll',ex:'ENDO Paper Roll 210 x 25m_Var 12 Ch'},
 lainnya:{label:'Kegiatan Lainnya',short:'Lainnya',unit:'',icon:'users',cls:'lainnya',ex:''}};
@@ -1462,15 +1547,15 @@ const SHS={N1:'S1',L1:'LS1',L2:'LS2'},SHB={N1:'SHIFT 1 · 08.00–17.00',L1:'LON
 const shMode=s=>String(s||'').startsWith('L')?'LONG':'N1';
 const shNorm=s=>({'1':'N1','2':'L2','3':'L2'}[s]||(SH[s]?s:'N1'));
 const shLabel=s=>SH[s]||SH.N1,shShort=s=>SHS[s]||'S1';
-const ROLES={kepala:{label:'Kepala Produksi',short:'KEPALA',cls:'b-kepala',icon:'shield',color:'#B22F2C',hint:'Akses penuh: semua laporan, verifikasi, hapus permanen, master, sistem, audit, export Excel, dan manajemen pengguna.'},
+const ROLES={kepala:{label:'Kepala Produksi',short:'KEPALA',cls:'b-kepala',icon:'shield',color:'#B22F2C',hint:'Akses penuh: semua laporan, verifikasi, hapus permanen, master, sistem, audit, export Excel, manajemen pengguna, dan persetujuan reset sandi.'},
 admin:{label:'Admin Produksi',short:'ADMIN',cls:'b-admin',icon:'checkCircle',color:'#236FD6',hint:'Semua laporan, verifikasi & revisi, arsip, master produk, export Excel & cetak. Tidak dapat melihat atau menambah pengguna.'},
 operator:{label:'Operator',short:'OPERATOR',cls:'b-operator',icon:'package',color:'#0FA3A3',hint:'Hanya laporan miliknya. Mengisi dan mengedit selama belum diverifikasi.'}};
 const ST={submit:{label:'Menunggu Verifikasi',short:'MENUNGGU',cls:'b-submit',icon:'clock'},revisi:{label:'Perlu Revisi',short:'REVISI',cls:'b-revisi',icon:'alert'},verified:{label:'Terverifikasi',short:'VERIFIED',cls:'b-verified',icon:'checkCircle'}};
 const ACC={form:['kepala','admin','operator'],detail:['kepala','admin','operator'],other:['kepala','admin','operator'],history:['kepala','admin','operator'],verify:['kepala','admin'],master:['kepala','admin'],users:['kepala']};
 const RT={form:'#/laporan',detail:'#/detail-produksi',other:'#/kegiatan-lain',history:'#/riwayat',verify:'#/verifikasi',master:'#/master-produk',users:'#/pengguna'};
 const MX=[{g:'LAPORAN HARIAN',rows:[['Buat laporan untuk diri sendiri',1,1,1],['Lihat laporan seluruh divisi',1,1,'own'],['Edit laporan sendiri · belum diverifikasi',1,1,1],['Edit laporan operator lain',1,1,0],['Verifikasi & minta revisi',1,1,0],['Arsipkan & pulihkan',1,1,0],['Hapus permanen',1,0,0],['Muat ulang / Export Excel / CSV / Cetak',1,1,0]]},
-{g:'MASTER & SISTEM',rows:[['Kelola master produk',1,1,0],['Info & ubah koneksi cloud',1,0,0],['Cadangan data & audit log',1,0,0]]},
-{g:'MANAJEMEN PENGGUNA',rows:[['Melihat menu Pengguna',1,0,0],['Menambah pengguna',1,0,0],['Ubah peran & reset sandi',1,0,0],['Nonaktifkan / hapus akun',1,0,0]]}];
+{g:'AKUN & SANDI',rows:[['Melihat pesan error teknis saat login',1,0,0],['Kirim permintaan lupa sandi',1,1,1],['Menyetujui reset sandi pengguna',1,0,0],['Melihat & mengubah koneksi cloud',1,0,0]]},
+{g:'MASTER & PENGGUNA',rows:[['Kelola master produk',1,1,0],['Cadangan data & audit log',1,0,0],['Melihat menu Pengguna',1,0,0],['Menambah / mengubah / hapus akun',1,0,0]]}];
 const PACK=['ENDO Paper Pack 210 x 140/180_EIECG12CH','ENDO Paper Pack 210 x 140/150_EIECG3CH','ENDO Paper Pack 210 x 140/180_EIECG6CH','Fukuda Paper Pack 210 x 140/150_FDECG3CH','Nihon Kohden Paper Pack 210 x 140/180_NKECG12CH','Schiller Paper Pack 210 x 140/140_SCECG12CH','GE Marquette Paper Pack 210 x 140/180_GEECG12CH','Bistos Paper Pack 210 x 140/145_BTECG3CH'];
 const ROLL=['ENDO Paper Roll 210 x 25m_Var 12 Ch','ENDO Paper Roll 110 x 20m_Var 3 Ch','Nihon Kohden Paper Roll 210 x 30m_NKECG12CH','Schiller Paper Roll 112 x 20m_SCECG3CH','GE Marquette Paper Roll 210 x 25m_GEECG12CH','Fukuda Paper Roll 110 x 20m_FDECG3CH','Contec Paper Roll 110 x 20m_CTECG3CH'];
 const PEOPLE=[{kode:'kepala',nama:'Rajiv',role:'kepala',jabatan:'Kepala Divisi Konversi',mesin:'Manajemen',warna:'#B22F2C'},
@@ -1486,7 +1571,7 @@ const PEOPLE=[{kode:'kepala',nama:'Rajiv',role:'kepala',jabatan:'Kepala Divisi K
 const fixName=p=>(p&&p.kode==='admin'&&String(p.nama||'').trim()==='Nurhayati')?{...p,nama:'Ratna'}:p;
 const DOMS=['mhi.local','mhipaper.id','mhi.internal','example.com','gmail.com'];
 let lastLong='L1';
-const K={cfg:'mhi_cfg',pref:'mhi_pref',db:'mhi_db',dir:'mhi_dir',role:'mhi_role'};
+const K={cfg:'mhi_cfg',pref:'mhi_pref',db:'mhi_db',dir:'mhi_dir',role:'mhi_role',pr:'mhi_pwreq'};
 const rdCfg=()=>{try{const s=localStorage.getItem(K.cfg);if(s){const c=JSON.parse(s);if(c&&c.url&&c.key)return c}}catch(e){}return CFG.URL&&CFG.KEY?{url:CFG.URL,key:CFG.KEY,domain:CFG.DOM}:null};
 const wrCfg=c=>{try{c?localStorage.setItem(K.cfg,JSON.stringify(c)):localStorage.removeItem(K.cfg)}catch(e){}};
 const rdDir=()=>{try{const d=JSON.parse(localStorage.getItem(K.dir)||'[]');if(!Array.isArray(d))return[];
@@ -1513,9 +1598,7 @@ const opOf=r=>prof(r.operatorId)||dirOf(r.operatorId)||{nama:r.operatorId||'—'
 const isK=()=>!!S.me&&S.me.role==='kepala';
 const canV=()=>!!S.me&&S.me.role!=='operator';
 const canM=()=>canV(),canA=()=>canV(),canP=()=>isK(),canU=()=>isK(),canE=()=>canV();
-/* info koneksi & tombol mode HANYA untuk kepala produksi.
-   Pada kunjungan pertama (belum ada peran tersimpan) semuanya disembunyikan. */
-const connOK=()=>S.me?isK():S.lastRole==='kepala';
+const connOK=()=>S.me?isK():(!S.lastRole||S.lastRole==='kepala');
 const ops=()=>S.profiles.filter(p=>p.aktif&&p.role==='operator');
 const isOp=k=>{const p=prof(k);return !!p&&p.role==='operator'};
 const opLbl=o=>`${o.nama} — ${o.mesin||o.jabatan||'Operator'}`;
@@ -1542,6 +1625,41 @@ const rB=r=>{const m=ROLES[r]||ROLES.operator;return `<span class="badge ${m.cls
 const vis=()=>!S.me?[]:S.me.role==='operator'?S.reports.filter(r=>r.operatorId===S.me.kode&&!r.deletedAt):S.reports.filter(r=>S.f.arch?!!r.deletedAt:!r.deletedAt);
 const savePref=()=>{try{localStorage.setItem(K.pref,JSON.stringify({views:S.views,sound:S.sound}))}catch(e){}};
 const loadPref=()=>{try{const d=JSON.parse(localStorage.getItem(K.pref)||'{}');S.views=d.views||[];S.sound=d.sound!==false}catch(e){}};
+
+/* ===== PERMINTAAN RESET SANDI ===== */
+let PR={list:[],mode:'local'};
+const prLocal=()=>{try{const d=JSON.parse(localStorage.getItem(K.pr)||'[]');return Array.isArray(d)?d:[]}catch(e){return[]}};
+const prSave=()=>{try{localStorage.setItem(K.pr,JSON.stringify(PR.list.slice(0,200)))}catch(e){}};
+const prPending=()=>PR.list.filter(r=>r.status==='pending').length;
+const prFor=k=>PR.list.filter(r=>r.kode===k).sort((a,b)=>b.at-a.at)[0]||null;
+async function prLoad(){
+  PR.list=prLocal();PR.mode='local';
+  if(S.mode==='cloud'&&DB.sb){
+    try{
+      const{data,error}=await DB.sb.from('password_requests').select('*').order('created_at',{ascending:false}).limit(200);
+      if(!error&&Array.isArray(data)){
+        PR.list=data.map(d=>({id:d.id,kode:d.kode,nama:d.nama||d.kode,note:d.note||'',status:d.status||'pending',at:new Date(d.created_at).getTime(),resolvedAt:d.resolved_at?new Date(d.resolved_at).getTime():null,by:d.resolved_by||''}));
+        PR.mode='cloud';prSave();
+      }
+    }catch(e){}
+  }
+}
+async function prAdd(r){
+  PR.list.unshift(r);prSave();
+  if(S.mode==='cloud'&&DB.sb){
+    try{const{error}=await DB.sb.from('password_requests').insert({id:r.id,kode:r.kode,nama:r.nama,note:r.note,status:'pending'});if(!error)PR.mode='cloud'}catch(e){}
+  }
+}
+async function prUpd(id,patch){
+  const r=PR.list.find(x=>x.id===id);if(r)Object.assign(r,patch);prSave();
+  if(S.mode==='cloud'&&DB.sb){
+    try{await DB.sb.from('password_requests').update({status:patch.status,resolved_at:new Date().toISOString(),resolved_by:patch.by||null}).eq('id',id)}catch(e){}
+  }
+}
+async function prDel(ids){
+  PR.list=PR.list.filter(r=>!ids.includes(r.id));prSave();
+  if(S.mode==='cloud'&&DB.sb){try{await DB.sb.from('password_requests').delete().in('id',ids)}catch(e){}}
+}
 
 const Local={d:null,
 load(){try{const r=localStorage.getItem(K.db);if(r){this.d=JSON.parse(r);if(this.d&&this.d.profiles&&this.d.profiles.length){
@@ -1581,9 +1699,9 @@ return R},
 log(a,d){this.d.audit.unshift({id:uid(),actor:S.me?S.me.kode:'sistem',aksi:a,detail:d,at:Date.now()});this.d.audit=this.d.audit.slice(0,400)},
 code(dt){this.d.seq[dt]=(this.d.seq[dt]||0)+1;return 'LH-'+dt.replace(/-/g,'').slice(2)+'-'+pad3(this.d.seq[dt])},
 guard(){if(!isK())throw new Error('Hanya kepala produksi yang boleh mengelola pengguna.')},
-async signIn(k,p){const x=this.d.profiles.find(v=>v.kode===k);if(!x)throw Object.assign(new Error('Akun tidak ditemukan di data lokal.'),{kind:'local'});
+async signIn(k,p){const x=this.d.profiles.find(v=>v.kode===k);if(!x)throw Object.assign(new Error('Akun tidak ditemukan di data lokal.'),{kind:'notfound'});
 if(!x.aktif)throw Object.assign(new Error('Akun dinonaktifkan. Hubungi kepala produksi.'),{kind:'inactive'});
-if(x.password!==p)throw Object.assign(new Error('Kata sandi salah. Sandi demo: '+CFG.PASS),{kind:'local'});
+if(x.password!==p)throw Object.assign(new Error('Kata sandi salah.'),{kind:'badpass'});
 try{sessionStorage.setItem('mhi_u',x.id)}catch(e){}return{...x}},
 async session(){try{const id=sessionStorage.getItem('mhi_u');const p=this.d.profiles.find(x=>x.id===id&&x.aktif);return p?{...p}:null}catch(e){return null}},
 async signOut(){try{sessionStorage.removeItem('mhi_u')}catch(e){}},
@@ -1638,11 +1756,11 @@ email(k){return k+'@'+((this.cfg&&this.cfg.domain)||'mhi.local')},
 pf:d=>({id:d.id,kode:d.kode,nama:d.nama,role:d.role,jabatan:d.jabatan||'',mesin:d.mesin||'',warna:d.warna||'#5C6270',aktif:d.aktif!==false}),
 async signIn(k,p){const em=S.lmode==='email'?(S.lemail||'').trim():this.email(k);
 const{error}=await this.sb.auth.signInWithPassword({email:em,password:p});
-if(error){const e=authErr(error,em);throw Object.assign(new Error(e.msg),{diag:e,raw:error.message})}
+if(error){const e=authErr(error,em);throw Object.assign(new Error(e.msg),{diag:e,raw:error.message,kind:/invalid login credentials/i.test(error.message||'')?'badpass':'other'})}
 const{data:{user}}=await this.sb.auth.getUser();
 const{data,error:e2}=await this.sb.from('profiles').select('*').eq('id',user.id).single();
-if(e2||!data)throw Object.assign(new Error('Login berhasil, tetapi baris <b>profiles</b> belum ada.'),{raw:e2?e2.message:'no rows',diag:{title:'Profil belum dibuat',msg:'Tabel profiles kosong untuk UUID ini.',fix:`Jalankan:<br><code>insert into profiles (id,kode,nama,role,jabatan,mesin,warna) values ('${user.id}','${esc(k||'kepala')}','${esc(k||'Kepala')}','kepala','Kepala Divisi Konversi','Manajemen','#B22F2C');</code>`}});
-if(!data.aktif)throw new Error('Akun dinonaktifkan oleh kepala produksi.');
+if(e2||!data)throw Object.assign(new Error('Login berhasil, tetapi baris <b>profiles</b> belum ada.'),{kind:'noprofile',raw:e2?e2.message:'no rows',diag:{title:'Profil belum dibuat',msg:'Tabel profiles kosong untuk UUID ini.',fix:`Jalankan:<br><code>insert into profiles (id,kode,nama,role,jabatan,mesin,warna) values ('${user.id}','${esc(k||'kepala')}','${esc(k||'Kepala')}','kepala','Kepala Divisi Konversi','Manajemen','#B22F2C');</code>`}});
+if(!data.aktif)throw Object.assign(new Error('Akun dinonaktifkan oleh kepala produksi.'),{kind:'inactive'});
 return this.pf(data)},
 async session(){const{data:{session}}=await this.sb.auth.getSession();if(!session)return null;const{data,error}=await this.sb.from('profiles').select('*').eq('id',session.user.id).single();return(error||!data||!data.aktif)?null:this.pf(data)},
 async signOut(){await this.sb.auth.signOut()},
@@ -1666,7 +1784,7 @@ async invoke(b){return this.sb.functions.invoke('manage-user',{body:b})},
 async probeFn(){try{const{data,error}=await this.invoke({action:'ping'});
 if(error){const st=error.context&&error.context.status;if(st===404||/not found|404/i.test(error.message||''))return{ok:false,reason:'404 — manage-user belum ter-deploy',raw:error.message};if(st===401||st===403)return{ok:true,reason:'Fungsi ada ('+st+')'};return{ok:false,reason:error.message||'unknown'}}
 return{ok:true,reason:'Fungsi aktif'}}catch(e){return{ok:false,reason:e.message}}},
-async probeIns(){const id=uid();const{error}=await this.sb.from('profiles').insert({id,kode:'__probe__'+Date.now(),nama:'probe',role:'operator'});
+async probeIns(){const id=uuid();const{error}=await this.sb.from('profiles').insert({id,kode:'__probe__'+Date.now(),nama:'probe',role:'operator'});
 if(!error){await this.sb.from('profiles').delete().eq('id',id);return{ok:true,reason:'Insert diizinkan (baris uji dibersihkan)'}}
 if(error.code==='42501')return{ok:false,reason:'42501 — policy profiles_insert belum ada',raw:error.message};
 if(error.code==='23503'||error.code==='23505')return{ok:true,reason:'Policy ada — ditolak FK/unique (sesuai harapan)'};
@@ -1687,7 +1805,7 @@ try{await iso.auth.signOut()}catch(e){}return{via:'direct'}},
 async updUser(id,p){const{error}=await this.sb.from('profiles').update(p).eq('id',id);if(error){S.rawErr=error.message;throw new Error(error.code==='42501'?'RLS menolak update (42501). Jalankan SQL policy.':error.message)}},
 async resetPass(id,np,op){try{await this.fn({action:'reset',id,password:np});S.prov='fn';return{via:'function'}}catch(e){if(!e.nf){S.rawErr=e.raw||e.message;throw new Error(e.message)}S.prov='direct'}
 const p=S.profiles.find(x=>x.id===id);if(!p)throw new Error('Profil tidak ditemukan.');
-if(!op)throw new Error('Tanpa Edge Function, reset sandi akun lain butuh <b>sandi lamanya</b>.');
+if(!op)throw new Error('Tanpa Edge Function, reset sandi akun lain butuh <b>sandi lamanya</b>. Isi kolom Sandi Lama, atau deploy Edge Function (tab Diagnosa).');
 const iso=anon(this.cfg);const{error:e1}=await iso.auth.signInWithPassword({email:this.email(p.kode),password:op});
 if(e1)throw new Error('Sandi lama salah: '+esc(e1.message));
 const{error:e2}=await iso.auth.updateUser({password:np});if(e2)throw new Error(esc(e2.message));
@@ -1724,8 +1842,20 @@ function ecgD(w,h,n){const m=h/2,s=w/n;let d=`M0 ${m}`;const P=(x,y)=>` L${x.toF
 for(let i=0;i<n;i++){const x=i*s;d+=P(x+s*.14,m)+` Q${(x+s*.19).toFixed(1)} ${(m-h*.13).toFixed(1)} ${(x+s*.24).toFixed(1)} ${m.toFixed(1)}`+P(x+s*.33,m)+P(x+s*.37,m+h*.08)+P(x+s*.41,m-h*.38)+P(x+s*.45,m+h*.2)+P(x+s*.49,m)+P(x+s*.60,m)+` Q${(x+s*.66).toFixed(1)} ${(m-h*.14).toFixed(1)} ${(x+s*.72).toFixed(1)} ${m.toFixed(1)}`+P(x+s,m)}return d}
 const curEmail=()=>{const c=rdCfg();if(S.lmode==='email')return ($('#lgEmail').value||'').trim();return ($('#lgKode').value||'kepala')+'@'+((c&&c.domain)||'mhi.local')};
 function loginDir(){if(S.dirSrc==='live'&&S.dir.length)return S.dir;const c=rdDir();if(c.length){S.dir=c;if(S.dirSrc!=='live')S.dirSrc='cache';return c}if(S.dir.length)return S.dir;S.dirSrc='seed';return PEOPLE.map(p=>({kode:p.kode,nama:p.nama,role:p.role,aktif:true}))}
+function loginList(){const c=rdCfg();return c?loginDir():Local.d.profiles.map(p=>({kode:p.kode,nama:p.nama,role:p.role,aktif:p.aktif!==false}))}
+function selAcct(){const l=loginList(),k=$('#lgKode').value;return l.find(x=>x.kode===k)||null}
+function selRole(){if(S.lmode==='email')return S.lastRole||'kepala';const a=selAcct();return a?a.role:(S.lastRole||'kepala')}
+function renderResetStat(){
+  const box=$('#resetStat'),a=selAcct();
+  if(!a||S.lmode==='email'){box.hidden=true;return}
+  const r=prFor(a.kode);
+  if(!r){box.hidden=true;return}
+  box.hidden=false;box.className='rstat '+r.status;
+  if(r.status==='pending')box.innerHTML=`${icon('clock',14)}<div><b>Permintaan reset sandi terkirim</b>Menunggu verifikasi kepala produksi · ${fTS(r.at)}</div>`;
+  else if(r.status==='approved')box.innerHTML=`${icon('checkCircle',14)}<div><b>Sandi baru sudah disiapkan</b>Disetujui ${esc(r.by||'kepala')} · ${fTS(r.resolvedAt||r.at)}. Minta sandi baru langsung ke kepala produksi.</div>`;
+  else box.innerHTML=`${icon('alert',14)}<div><b>Permintaan ditolak</b>Hubungi kepala produksi untuk penjelasan lebih lanjut.</div>`;
+}
 function renderLogin(){const c=rdCfg(),cloud=!!c,allow=connOK();
-/* kotak info koneksi cloud + tombol mode: hanya kepala produksi */
 $('#conn').hidden=!allow;
 $('#conn').classList.toggle('cloud',cloud);$('#connT').textContent=cloud?'Cloud Supabase':'Mode Lokal';
 $('#connS').textContent=cloud?(c.url.replace(/^https?:\/\//,'')+' · @'+c.domain):'10 akun demo · sandi '+CFG.PASS;
@@ -1733,17 +1863,40 @@ $('#connEdit').hidden=!allow;$('#lgFallback').hidden=!allow;$('#lgModes').hidden
 $('#lgKodeF').hidden=cloud&&S.lmode==='email';$('#lgEmailF').hidden=!cloud||S.lmode!=='email';
 $('#lgEP').hidden=!cloud;$('#lgDoms').hidden=!cloud||S.lmode==='email';
 $$('#lgModes button').forEach(b=>b.classList.toggle('on',b.dataset.mode===S.lmode));
-const list=cloud?loginDir():Local.d.profiles.map(p=>({kode:p.kode,nama:p.nama,role:p.role,aktif:p.aktif!==false}));
-const prev=$('#lgKode').value;
+const list=loginList(),prev=$('#lgKode').value;
 $('#lgKode').innerHTML=[['kepala','Kepala Produksi'],['admin','Admin'],['operator','Operator']].map(([r,l])=>{const a=list.filter(p=>p.role===r);return a.length?`<optgroup label="${l}">${a.map(p=>`<option value="${esc(p.kode)}">${esc(p.nama)}${p.aktif===false?' · nonaktif':''}</option>`).join('')}</optgroup>`:''}).join('');
 $('#lgKode').value=(prev&&list.some(p=>p.kode===prev))?prev:(list.some(p=>p.kode==='kepala')?'kepala':(list[0]?list[0].kode:''));
 $('#dirNote').hidden=!(cloud&&S.dirSrc!=='live'&&list.length<3&&allow);
 if(cloud&&S.lmode==='email')$('#lgEmail').value=S.lemail||'';
 if(cloud){const dm=c.domain||'mhi.local';$('#lgDoms').innerHTML=DOMS.map(d=>`<button type="button" data-act="dom" data-dom="${esc(d)}" class="${d===dm?'on':''}">@${esc(d)}</button>`).join('')}
-if(rdCfg())$('#lgEmailShown').textContent=curEmail()||'—'}
-function loginErr(e){const b=$('#lgErr'),d=e&&e.diag?e.diag:{title:'Gagal masuk',msg:esc(e.message||String(e)),fix:''};
-$('#lgErrT').textContent=d.title;$('#lgErrM').innerHTML=d.msg+(d.fix?`<br><br><b>Perbaikan:</b> ${d.fix}`:'')+(e&&e.raw?`<span class="raw">Supabase: ${esc(e.raw)}</span>`:'');
-b.hidden=false;b.classList.remove('shake');void b.offsetWidth;b.classList.add('shake');sfx.err()}
+if(rdCfg())$('#lgEmailShown').textContent=curEmail()||'—';
+renderResetStat()}
+/* pesan error: ringkas untuk operator & admin, teknis hanya untuk kepala */
+function loginErr(e){
+  const box=$('#lgErr'),detail=selRole()==='kepala';
+  if(detail){
+    const d=e&&e.diag?e.diag:{title:'Gagal masuk',msg:esc(e.message||String(e)),fix:''};
+    box.classList.remove('simple');
+    $('#lgErrT').textContent=d.title;
+    const m=$('#lgErrM');m.hidden=false;
+    m.innerHTML=d.msg+(d.fix?`<br><br><b>Perbaikan:</b> ${d.fix}`:'')+(e&&e.raw?`<span class="raw">Supabase: ${esc(e.raw)}</span>`:'');
+    $('#lgErrActs').hidden=false;
+  }else{
+    const raw=String((e&&e.raw)||(e&&e.message)||''),k=e&&e.kind;
+    let msg='Gagal masuk. Coba lagi.';
+    if(k==='badpass'||/sandi salah/i.test(raw))msg='Sandi salah.';
+    else if(k==='inactive')msg='Akun dinonaktifkan. Hubungi kepala produksi.';
+    else if(k==='notfound')msg='Akun tidak ditemukan.';
+    else if(k==='noprofile')msg='Akun belum disiapkan. Hubungi kepala produksi.';
+    else if(/not confirmed/i.test(raw))msg='Akun belum diaktifkan. Hubungi kepala produksi.';
+    else if(/failed to fetch|network|load failed/i.test(raw))msg='Koneksi bermasalah. Coba lagi.';
+    else if(/rate limit|too many|429/i.test(raw))msg='Terlalu banyak percobaan. Tunggu sebentar.';
+    box.classList.add('simple');
+    $('#lgErrT').textContent=msg;$('#lgErrM').hidden=true;$('#lgErrActs').hidden=true;
+    $('#lgDiag').hidden=true;
+  }
+  box.hidden=false;box.classList.remove('shake');void box.offsetWidth;box.classList.add('shake');sfx.err();
+}
 function clearLogin(){const p=$('#lgPass'),e=$('#lgEmail');const w=()=>{if(p){p.value='';p.type='password'}if(e)e.value='';S.lemail=''};
 w();try{$('#loginForm').reset()}catch(x){}w();$('#lgEye').innerHTML=icon('eye',16);
 $('#lgErr').hidden=true;$('#lgCaps').hidden=true;$('#lgDiag').hidden=true;S.diag=[];setTimeout(w,60);setTimeout(w,300);setTimeout(w,700)}
@@ -1754,9 +1907,10 @@ async function doLogout(){const role=S.me?S.me.role:'';try{await DB.signOut()}ca
 S.me=null;S.reports=[];S.profiles=[];S.sel.clear();S.vsel.clear();S.uq='';S.prov='unknown';S.lastRole=role;wrRole(role);
 closeDrawer();$('#topbar').hidden=true;$('#main').hidden=true;$('#uMenu').hidden=true;
 document.body.dataset.view='login';S.view='login';try{history.replaceState(null,'',location.pathname)}catch(e){}
-renderLogin();clearLogin();pubDir();toast('Anda telah keluar — kolom sandi dikosongkan.',{type:'info',icon:'logout',duration:3200})}
+renderLogin();clearLogin();pubDir();prLoad().then(renderResetStat);
+toast('Anda telah keluar — kolom sandi dikosongkan.',{type:'info',icon:'logout',duration:3200})}
 async function useLocal(){if(!connOK()){toast('Perubahan mode hanya untuk kepala produksi.',{type:'warn',icon:'alert'});return}
-wrCfg(null);DB=Local;S.mode='local';S.lmode='kode';S.prov='unknown';S.dirSrc='seed';Local.load();renderLogin();clearLogin();$('#lgPass').value=CFG.PASS;
+wrCfg(null);DB=Local;S.mode='local';S.lmode='kode';S.prov='unknown';S.dirSrc='seed';Local.load();await prLoad();renderLogin();clearLogin();$('#lgPass').value=CFG.PASS;
 toast('Beralih ke <b>Mode Lokal</b> — 10 akun demo siap dipakai.',{icon:'undo',duration:4200});
 const me=await Local.session();if(me){S.me=me;S.lastRole=me.role;wrRole(me.role);await boot()}}
 const sqlBox=(id,l,c)=>`<div class="sqlb"><div class="h">${icon('database',11)} ${esc(l)}<button type="button" data-act="copy-sql" data-sql="${id}">Salin</button></div><pre>${esc(c)}</pre></div>`;
@@ -1764,7 +1918,9 @@ function diagInto(sel,arr){const b=$(sel);if(!b)return;b.innerHTML=arr.map(d=>{c
 return `<div class="dg ${d.state}"><span class="i">${icon(i,12)}</span><div class="t"><b>${esc(d.title)}</b>${d.detail?`<small>${d.detail}</small>`:''}${d.fix?`<span class="fix">${d.fix}</span>`:''}${d.sql?sqlBox(d.sqlId,d.sqlLabel,d.sql):''}</div></div>`}).join('')}
 const diagUI=()=>{$('#lgDiag').hidden=false;diagInto('#lgDiagB',S.diag);const b=$('#lgDiagB');b.scrollTop=b.scrollHeight};
 const dPush=d=>{S.diag.push(d);diagUI()},dLast=p=>{Object.assign(S.diag[S.diag.length-1],p);diagUI()};
-async function runDiag(){if(S.diagRun)return;const c=rdCfg();if(!c){toast('Mode lokal — sandi demo: '+CFG.PASS,{type:'info',icon:'info'});return}
+async function runDiag(){if(S.diagRun)return;
+if(selRole()!=='kepala'){toast('Diagnosa teknis hanya untuk kepala produksi.',{type:'warn',icon:'shield'});return}
+const c=rdCfg();if(!c){toast('Mode lokal — sandi demo: '+CFG.PASS,{type:'info',icon:'info'});return}
 S.diagRun=true;S.diag=[];diagUI();const em=curEmail(),p=$('#lgPass').value;
 try{dPush({state:'run',title:'Memeriksa konfigurasi…'});const ok=/^https:\/\/[a-z0-9-]+\.supabase\.(co|in)$/i.test(c.url);
 dLast({state:ok&&c.key.length>40?'ok':'bad',title:'Konfigurasi proyek',detail:`${esc(c.url)} · @${esc(c.domain)} · key ${c.key.length} karakter`});if(!ok)return;
@@ -1775,6 +1931,9 @@ if(te){dLast({state:'bad',title:'Tabel belum siap',detail:esc(te.message),fix:'J
 dPush({state:'run',title:'Memeriksa direktori login…'});const{data:dd,error:de}=await pr.from('login_directory').select('kode,nama,role,aktif');
 if(de||!dd||!dd.length)dLast({state:'warn',title:'Direktori login belum ada',detail:de?esc(de.message):'kosong',fix:'Agar daftar akun tidak menyusut setelah operator keluar, jalankan:',sqlId:'dir',sqlLabel:'login_directory.sql',sql:SQL_DIR});
 else{mergeDir(dd,{complete:true,src:'live'});dLast({state:'ok',title:'Direktori login lengkap',detail:dd.length+' akun'});renderLogin()}
+dPush({state:'run',title:'Memeriksa tabel permintaan sandi…'});const{error:pe2}=await pr.from('password_requests').select('id').limit(1);
+if(pe2)dLast({state:'warn',title:'Tabel permintaan sandi belum ada',detail:esc(pe2.message),fix:'Permintaan lupa sandi masih tersimpan per perangkat. Jalankan:',sqlId:'pr',sqlLabel:'password_requests.sql',sql:SQL_PR});
+else dLast({state:'ok',title:'Tabel permintaan sandi siap'});
 dPush({state:'run',title:'Mencoba login…',detail:esc(em)});if(!p){dLast({state:'warn',title:'Sandi kosong'});return}
 const{data:ad,error:ae}=await pr.auth.signInWithPassword({email:em,password:p});
 if(ae){const m=authErr(ae,em);dLast({state:'bad',title:m.title,detail:esc(ae.message),fix:m.fix});return}
@@ -1790,27 +1949,30 @@ function provUI(){const c=$('#provChip');if(!c)return;const m={fn:['fn','EDGE FU
 c.className='pchip '+m[0];c.innerHTML=icon(S.prov==='fn'?'zap':'database',11)+' <span id="provL">'+m[1]+'</span>'}
 async function detectProv(){if(S.mode!=='cloud'){S.prov='local';provUI();return}S.prov='unknown';provUI();const r=await DB.probeFn();S.prov=r.ok?'fn':'direct';provUI()}
 async function runAcct(){if(S.acctRun)return;
-if(S.mode!=='cloud'){S.acct=[{state:'ok',title:'Mode lokal aktif',detail:'Semua operasi akun berjalan di perangkat ini.'}];acctUI();return}
+if(S.mode!=='cloud'){S.acct=[{state:'ok',title:'Mode lokal aktif',detail:'Semua operasi akun & permintaan sandi berjalan di perangkat ini.'}];acctUI();return}
 S.acctRun=true;S.acct=[];acctUI();const b=$('#acctBtn');if(b){b.disabled=true;b.innerHTML='Memeriksa…'}
 try{aPush({state:'ok',title:'Peran Anda: '+ROLES[S.me.role].label,detail:'@'+esc(S.me.kode)});
 aPush({state:'run',title:'Memeriksa direktori login…'});const c=rdCfg();const{data:dd,error:de}=await anon(c).from('login_directory').select('kode,nama,role,aktif');
 if(de||!dd||!dd.length)aLast({state:'warn',title:'Direktori login belum ada',detail:de?esc(de.message):'kosong',fix:'Penyebab daftar akun menyusut. Jalankan sekali:',sqlId:'dir',sqlLabel:'login_directory.sql',sql:SQL_DIR});
 else{mergeDir(dd,{complete:true,src:'live'});aLast({state:'ok',title:'Direktori login lengkap',detail:dd.length+' akun'})}
+aPush({state:'run',title:'Memeriksa tabel permintaan sandi…'});const{error:pe}=await anon(c).from('password_requests').select('id').limit(1);
+if(pe)aLast({state:'warn',title:'Tabel permintaan sandi belum ada',detail:esc(pe.message),fix:'Agar permintaan lupa sandi dari semua perangkat masuk ke satu antrean kepala produksi, jalankan:',sqlId:'pr',sqlLabel:'password_requests.sql',sql:SQL_PR});
+else{await prLoad();aLast({state:'ok',title:'Antrean permintaan sandi tersinkron',detail:PR.list.length+' permintaan · '+prPending()+' menunggu'})}
 aPush({state:'run',title:'Memeriksa Edge Function…'});const f=await DB.probeFn();
 if(f.ok){aLast({state:'ok',title:'Edge Function tersedia',detail:esc(f.reason)});S.prov='fn'}
-else{aLast({state:'warn',title:'Edge Function tidak tersedia',detail:esc(f.reason),fix:'Aplikasi memakai jalur langsung (signUp + RLS). Untuk reset sandi tanpa sandi lama, deploy:',sqlId:'fn',sqlLabel:'manage-user/index.ts',sql:SQL_FN});S.prov='direct'}
+else{aLast({state:'warn',title:'Edge Function tidak tersedia',detail:esc(f.reason),fix:'Tanpa fungsi ini, menyetujui reset sandi orang lain memerlukan sandi lama akun tersebut. Deploy:',sqlId:'fn',sqlLabel:'manage-user/index.ts',sql:SQL_FN});S.prov='direct'}
 provUI();
-aPush({state:'run',title:'Menguji policy INSERT…'});const i=await DB.probeIns();
+aPush({state:'run',title:'Menguji policy INSERT profiles…'});const i=await DB.probeIns();
 if(i.ok)aLast({state:'ok',title:'Policy insert siap',detail:esc(i.reason)});
 else aLast({state:'bad',title:'Policy insert belum ada',detail:esc(i.reason),fix:'Jalankan di SQL Editor:',sqlId:'pol',sqlLabel:'profiles policies',sql:SQL_POL});
-aPush({state:'ok',title:'Operator untuk formulir',detail:ops().length+' akun Operator aktif — hanya mereka yang muncul di pilihan Nama Operator.'});
+aPush({state:'ok',title:'Operator untuk formulir',detail:ops().length+' akun Operator aktif.'});
 if(S.rawErr)aPush({state:'bad',title:'Error Supabase terakhir',detail:esc(S.rawErr)});
 aPush({state:'ok',title:'Diagnosa selesai'});sfx.tick()}
 catch(e){aPush({state:'bad',title:'Terhenti',detail:esc(e.message)})}
 finally{S.acctRun=false;if(b){b.disabled=false;b.innerHTML=icon('rotate',14)+' Jalankan Diagnosa'}}}
 async function reloadAll(){S.profiles=await DB.profiles();S.products=await DB.products();S.reports=await DB.reports();S.audit=isK()?await DB.audit():[];S.sync=Date.now();
 if(S.profiles.length)mergeDir(S.profiles,{complete:!!S.me&&S.me.role!=='operator',src:S.me&&S.me.role!=='operator'?'cache':S.dirSrc})}
-async function boot(){await reloadAll();
+async function boot(){await reloadAll();await prLoad();
 if(S.me.role==='operator'){S.f.operator=S.me.kode;S.f.arch=false}
 S.form=bForm();$('#topbar').hidden=false;$('#main').hidden=false;
 buildTabs();buildSelects();roleUI();syncIdent();syncTool();syncUI();provUI();renderForm();renderOther();
@@ -1836,7 +1998,8 @@ function roleUI(){const op=S.me.role==='operator',k=isK();
 $('#uAv').textContent=ini(S.me.nama);$('#uAv').style.setProperty('--av',S.me.warna);
 $('#uName').textContent=S.me.nama;$('#uRole').textContent=ROLES[S.me.role].short;$('#uRole').style.color=ROLES[S.me.role].color;
 $('#umName').textContent=S.me.nama;$('#umMeta').textContent=`@${S.me.kode} · ${S.me.jabatan||S.me.mesin||''}`;$('#umBadge').innerHTML=rB(S.me.role);
-$('#umUsers').hidden=!k;$('#umMaster').hidden=!canM();$('#umXlsx').hidden=!canE();
+$('#umUsers').hidden=!k;$('#umSandi').hidden=!k;$('#umMaster').hidden=!canM();$('#umXlsx').hidden=!canE();
+const pn=prPending();const pnEl=$('#umSandiN');if(pnEl){pnEl.textContent=String(pn);pnEl.classList.toggle('zero',!pn)}
 $('#sync').hidden=!connOK();$('#umSetup').hidden=!connOK();
 ['bReload','bXlsx','bCsv','bPrint'].forEach(id=>{const e=document.getElementById(id);if(e)e.hidden=op});
 ['#f-op','#o-op'].forEach(s=>{const e=$(s);if(e)e.disabled=op});
@@ -2192,24 +2355,26 @@ $('#pPack').innerHTML=p.length?p.map(row).join(''):'<p class="muted sm">Belum ad
 $('#pRoll').innerHTML=r.length?r.map(row).join(''):'<p class="muted sm">Belum ada produk roll.</p>';
 if(isK())$('#sysPanel').innerHTML=`<div class="sysg">
 <div class="sysc"><h4>${icon('building',15)} Koneksi Data</h4><p>${S.mode==='cloud'?'Terhubung ke Supabase — data bersama dengan RLS.':'Mode lokal — data hanya di perangkat ini.'}</p><button class="btn btn-ghost btn-sm" data-act="setup">${S.mode==='cloud'?'Ubah Koneksi':'Hubungkan Supabase'}</button></div>
+<div class="sysc"><h4>${icon('key',15)} Permintaan Sandi</h4><p>${prPending()} permintaan menunggu verifikasi kepala produksi.</p><button class="btn btn-ghost btn-sm" data-act="goto-sandi">Buka Antrean</button></div>
 <div class="sysc"><h4>${icon('sheet',15)} Export Excel</h4><p>Rekap .xlsx — lebar kolom sudah pas, tanpa mengubah ukuran sel.</p><button class="btn btn-x btn-sm" data-act="xlsx">Export Excel Sekarang</button></div>
 <div class="sysc"><h4>${icon('download',15)} Cadangan Data</h4><p>Unduh laporan, pengguna, dan produk sebagai JSON.</p><button class="btn btn-ghost btn-sm" data-act="backup">Unduh Cadangan JSON</button></div>
-<div class="sysc"><h4>${icon('activity',15)} Diagnosa Sistem Akun</h4><p>Periksa direktori login, Edge Function, dan policy RLS.</p><button class="btn btn-ghost btn-sm" data-act="goto-diag">Buka Diagnosa</button></div>
+<div class="sysc"><h4>${icon('activity',15)} Diagnosa Sistem Akun</h4><p>Periksa direktori login, permintaan sandi, Edge Function, dan RLS.</p><button class="btn btn-ghost btn-sm" data-act="goto-diag">Buka Diagnosa</button></div>
 ${S.mode==='cloud'?'':`<div class="sysc"><h4>${icon('alert',15)} Reset Data Demo</h4><p>Kembalikan data lokal ke contoh bawaan.</p><button class="btn btn-danger btn-sm" data-act="reset-demo">Reset Data Demo</button></div>`}</div>`}
-const PERM={kepala:[['Semua laporan',1],['Verifikasi',1],['Hapus permanen',1],['Master',1],['Excel & cetak',1],['Info cloud',1],['Kelola pengguna',1]],
-admin:[['Semua laporan',1],['Verifikasi',1],['Master',1],['Excel & cetak',1],['Hapus permanen',0],['Info cloud',0],['Kelola pengguna',0]],
-operator:[['Laporan sendiri',1],['Edit belum verified',1],['Verifikasi',0],['Master',0],['Excel & cetak',0],['Info cloud',0],['Kelola pengguna',0]]};
+const PERM={kepala:[['Semua laporan',1],['Verifikasi',1],['Hapus permanen',1],['Master',1],['Excel & cetak',1],['Info cloud',1],['Kelola pengguna',1],['Setujui reset sandi',1]],
+admin:[['Semua laporan',1],['Verifikasi',1],['Master',1],['Excel & cetak',1],['Hapus permanen',0],['Info cloud',0],['Kelola pengguna',0],['Setujui reset sandi',0]],
+operator:[['Laporan sendiri',1],['Edit belum verified',1],['Verifikasi',0],['Master',0],['Excel & cetak',0],['Info cloud',0],['Kelola pengguna',0],['Lupa sandi',1]]};
 function renderUsers(){if(!canU()){$('#uPane').innerHTML='';return}
 const all=S.profiles,c={kepala:0,admin:0,operator:0};all.forEach(x=>c[x.role]=(c[x.role]||0)+1);
 $('#uCount').textContent=`${all.length} AKUN · ${all.filter(x=>x.aktif).length} AKTIF`;$('#uCnt').textContent=all.length;
+const pn=prPending();$('#prCnt').textContent=String(pn);
 $('#uStats').innerHTML=stat('st-red','shield','KEPALA PRODUKSI',c.kepala,'akses penuh + kelola pengguna')+
 stat('st-blue','checkCircle','ADMIN PRODUKSI',c.admin,'verifikasi & master')+
 stat('st-green','users','OPERATOR',c.operator,'muncul di pilihan formulir')+
-stat('st-amber','clock','AKUN NONAKTIF',all.filter(x=>!x.aktif).length,'akses dicabut sementara');
+stat('st-amber','key','PERMINTAAN SANDI',pn,pn?'menunggu persetujuan Anda':'tidak ada yang menunggu');
 $$('#uStats [data-count]').forEach(e=>countUp(e,Number(e.dataset.count)));
 $$('#uTabs .chip').forEach(b=>b.classList.toggle('active',b.dataset.tab===S.utab));
-$('#uPane').hidden=S.utab!=='pengguna';$('#uEmpty').hidden=true;$('#uAkses').hidden=S.utab!=='akses';
-$('#uDiag').hidden=S.utab!=='diagnosa';$('#uAudit').hidden=S.utab!=='audit';
+$('#uPane').hidden=S.utab!=='pengguna';$('#uEmpty').hidden=true;$('#uSandi').hidden=S.utab!=='sandi';
+$('#uAkses').hidden=S.utab!=='akses';$('#uDiag').hidden=S.utab!=='diagnosa';$('#uAudit').hidden=S.utab!=='audit';
 $('#uSearchW').hidden=S.utab!=='pengguna';$('#uAdd').hidden=S.utab!=='pengguna';provUI();
 if(S.utab==='pengguna'){const q=S.uq.toLowerCase();
 const l=all.filter(u=>!q||[u.nama,u.kode,u.mesin,u.jabatan,ROLES[u.role].label].join(' ').toLowerCase().includes(q));
@@ -2217,16 +2382,41 @@ const ord={kepala:0,admin:1,operator:2};
 $('#uPane').innerHTML=l.slice().sort((a,b)=>ord[a.role]-ord[b.role]||a.nama.localeCompare(b.nama)).map(uCard).join('');
 if(!l.length){$('#uPane').innerHTML='';$('#uEmpty').hidden=false;
 $('#uEmpty').innerHTML=`<svg class="flat" viewBox="0 0 320 44"><path d="M0 22 L320 22" fill="none" stroke="#D8C9B2" stroke-width="2" stroke-dasharray="4 6"/></svg><h3>Tidak ada akun cocok</h3><p>Ubah kata kunci atau tambah pengguna baru.</p><div class="ebtns"><button class="btn btn-ghost" data-act="u-clear">Reset Pencarian</button><button class="btn btn-primary" data-act="user-add">${icon('userPlus',14)} Tambah Pengguna</button></div>`}}
+else if(S.utab==='sandi')renderPR();
 else if(S.utab==='akses')renderMx();
 else if(S.utab==='diagnosa'){if(!S.acct.length)runAcct();else acctUI()}
 else $('#auditB').innerHTML=S.audit.length?S.audit.slice(0,150).map(a=>{const w=prof(a.actor)||dirOf(a.actor)||{nama:a.actor},cl=a.aksi==='INSERT'?'ins':a.aksi==='DELETE'?'del':'upd';
 return `<div class="ar"><span class="ari ${cl}">${icon(a.aksi==='INSERT'?'plus':a.aksi==='DELETE'?'trash':'pencil',14)}</span><span class="art"><b>${esc(a.detail)}</b><small>oleh ${esc(w.nama)}</small></span><span class="artm">${fTS(a.at)}</span></div>`}).join(''):'<p class="muted sm">Belum ada aktivitas tercatat.</p>'}
+function renderPR(){
+  const l=PR.list.slice().sort((a,b)=>(a.status==='pending'?0:1)-(b.status==='pending'?0:1)||b.at-a.at);
+  $('#prList').innerHTML=l.map(prCard).join('');
+  $('#prEmpty').hidden=l.length>0;
+  if(!l.length)$('#prEmpty').innerHTML=`<svg class="flat" viewBox="0 0 320 44"><path d="M0 22 L120 22 L128 14 L136 30 L142 22 L320 22" fill="none" stroke="#BFE6D6" stroke-width="2"/></svg><h3>Belum ada permintaan reset sandi</h3><p>Bila operator atau admin menekan <b>Lupa sandi?</b> di layar login, permintaannya muncul di sini untuk Anda verifikasi.</p>`;
+  $('#prClear').hidden=!PR.list.some(r=>r.status!=='pending');
+  $('#prStore').innerHTML=S.mode==='cloud'
+    ?(PR.mode==='cloud'?`${icon('database',15)}<span><b>Tersinkron ke server.</b> Permintaan dari semua perangkat masuk ke antrean ini.</span>`:`${icon('alert',15)}<span><b>Belum tersinkron.</b> Tabel <code>password_requests</code> belum ada, jadi permintaan hanya tersimpan di perangkat ini. Jalankan SQL di tab <b>Diagnosa</b> agar.antrean menyatu.</span>`)
+    :`${icon('info',15)}<span><b>Mode lokal.</b> Permintaan tersimpan di perangkat ini — cukup untuk satu komputer produksi bersama.</span>`;
+}
+function prCard(r){
+  const p=prof(r.kode)||dirOf(r.kode)||{nama:r.nama,kode:r.kode,warna:'#999',role:'operator',mesin:''};
+  const lbl={pending:'MENUNGGU',approved:'DISETUJUI',rejected:'DITOLAK'}[r.status]||r.status;
+  const cls={pending:'b-submit',approved:'b-verified',rejected:'b-revisi'}[r.status]||'b-arch';
+  return `<article class="prc ${r.status} ${r.status!=='pending'?'done':''}">
+<div class="prh"><span class="av" style="--av:${p.warna||'#999'}">${ini(p.nama)}</span><div class="t"><b>${esc(p.nama)}</b><small>@${esc(r.kode)} · ${esc((ROLES[p.role]||{}).label||'Operator')}</small></div><span class="badge ${cls}">${lbl}</span></div>
+${r.note?`<div class="prnote">${esc(r.note)}</div>`:'<div class="prnote muted">Tanpa catatan tambahan.</div>'}
+<div class="prmeta">DIKIRIM ${fTS(r.at)}${r.status!=='pending'?` · DIPROSES ${fTS(r.resolvedAt||r.at)} oleh ${esc(r.by||'kepala')}`:''}</div>
+<div class="practs">${r.status==='pending'
+?`<button class="btn btn-green btn-sm" data-act="pr-ok" data-id="${r.id}">${icon('check',13)} Setujui &amp; Reset</button><button class="btn btn-ghost btn-sm" data-act="pr-no" data-id="${r.id}">${icon('x',13)} Tolak</button>`
+:`<button class="btn btn-ghost btn-sm" data-act="pr-again" data-id="${r.id}">${icon('key',13)} Reset Lagi</button><button class="btn btn-ghost btn-sm" data-act="pr-del" data-id="${r.id}">${icon('trash',13)} Hapus</button>`}</div></article>`;
+}
 function uCard(u){const me=S.me.id===u.id,my=S.reports.filter(r=>r.operatorId===u.kode&&!r.deletedAt);
 const ch=(PERM[u.role]||[]).map(([l,on])=>`<span class="${on?'on':'off'}">${esc(l)}</span>`).join('');
+const pr=prFor(u.kode);
 return `<article class="uc r-${u.role} ${u.aktif?'':'off'} ${me?'me':''}">
 <div class="utop"><span class="av lg" style="--av:${u.warna}">${ini(u.nama)}</span><div class="ut"><b>${esc(u.nama)}</b><small>@${esc(u.kode)}</small></div>${me?'<span class="ume">ANDA</span>':rB(u.role)}</div>
 <div class="umeta"><div class="umc"><label>JABATAN</label><b>${esc(u.jabatan||'—')}</b></div><div class="umc"><label>MESIN / AREA</label><b>${esc(u.mesin||'—')}</b></div><div class="umc"><label>LAPORAN</label><b>${my.length} laporan</b></div><div class="umc"><label>HASIL BERSIH</label><b style="color:var(--green)">${fNum(my.reduce((a,r)=>a+rN(r),0))} unit</b></div></div>
 <div class="uperm">${ch}</div>
+${pr&&pr.status==='pending'?`<div class="prnote" style="background:var(--amber-soft);border-color:#EFD3A0;color:#8A5A08">${icon('key',12)} Mengajukan reset sandi · ${fTS(pr.at)}</div>`:''}
 <div class="usw"><span>${u.role==='operator'?'Muncul di pilihan Nama Operator':'Tidak muncul di pilihan Operator'}</span><button class="sw3 ${u.aktif?'on':''}" data-act="u-toggle" data-id="${u.id}" ${me?'disabled':''} aria-label="Aktifkan atau nonaktifkan"></button></div>
 <div class="uacts"><button class="btn btn-ghost btn-sm" data-act="u-edit" data-id="${u.id}">${icon('pencil',13)} Ubah</button><button class="btn btn-ghost btn-sm" data-act="u-pass" data-id="${u.id}">${icon('key',13)} Sandi</button><button class="ib danger" data-act="u-del" data-id="${u.id}" ${me?'disabled':''}>${icon('trash',15)}</button></div></article>`}
 function renderMx(){const cell=v=>v===1?`<span class="my">${icon('check',13)}</span>`:v==='own'?`<span class="mown">MILIK SENDIRI</span>`:`<span class="mno">${icon('x',13)}</span>`;
@@ -2234,7 +2424,7 @@ const leg=`<div class="mleg"><div class="mlg k"><span class="av" style="--av:#B2
 <div class="mlg a"><span class="av" style="--av:#236FD6">${icon('checkCircle',13)}</span><div><b>Admin Produksi</b><small>VERIFIKASI &amp; MASTER</small></div></div>
 <div class="mlg o"><span class="av" style="--av:#0FA3A3">${icon('package',13)}</span><div><b>Operator</b><small>LAPORAN MILIKNYA</small></div></div></div>`;
 const g=MX.map(x=>`<div class="mgrp"><div class="mgt">${esc(x.g)}</div><div class="mscr"><table class="mtbl"><thead><tr><th>Kemampuan</th><th class="k">Kepala</th><th class="a">Admin</th><th class="o">Operator</th></tr></thead><tbody>${x.rows.map(r=>`<tr><td>${esc(r[0])}</td><td>${cell(r[1])}</td><td>${cell(r[2])}</td><td>${cell(r[3])}</td></tr>`).join('')}</tbody></table></div></div>`).join('');
-$('#mxBody').innerHTML=leg+g+`<div class="dnote2" style="margin-top:18px">${icon('info',15)}<span>Pilihan <b>Nama Operator</b> pada formulir hanya memuat akun berperan Operator — kepala dan admin tidak pernah muncul di sana.</span></div>`}
+$('#mxBody').innerHTML=leg+g+`<div class="dnote2" style="margin-top:18px">${icon('info',15)}<span>Operator &amp; admin hanya melihat pesan singkat <b>“Sandi salah.”</b> saat gagal masuk. Penjelasan teknis, tombol Diagnosa Login, dan detail Supabase hanya tampil untuk <b>kepala produksi</b>.</span></div>`}
 let editU=null,pickRole='operator';
 function setRole(r){pickRole=r;$$('#uuPick button').forEach(b=>b.classList.toggle('on',b.dataset.role===r));
 $('#uuHint').textContent=ROLES[r].hint;const c=rdCfg(),k=($('#uuKode').value||'kode').toLowerCase();
@@ -2277,6 +2467,59 @@ const b=$('#pwSave');b.disabled=true;b.textContent='Menyimpan…';
 try{if(passId===S.me.id){if(S.mode==='cloud')await DB.myPass(np);else await DB.resetPass(passId,np)}else await DB.resetPass(passId,np,op);
 $('#passW').classList.remove('show');toast('Kata sandi diperbarui.',{icon:'key'});sfx.ok();if(S.view==='users')renderUsers()}
 catch(e){pMsg(esc(e.message),'err',S.rawErr);S.rawErr='';sfx.err()}finally{b.disabled=false;b.textContent='Simpan Sandi'}}
+/* ==== alur lupa sandi ==== */
+function openForgot(){
+  const a=selAcct();
+  if(S.lmode==='email'||!a){toast('Pilih akun pada tab <b>Kode Akun</b> dulu agar permintaan bisa dikirim.',{type:'info',icon:'info',duration:4600});return}
+  const ex=prFor(a.kode);
+  if(ex&&ex.status==='pending'){toast('Permintaan untuk akun ini sudah menunggu verifikasi kepala produksi.',{type:'info',icon:'clock',duration:4200});renderResetStat();return}
+  $('#fgAcct').innerHTML=`<span class="av" style="--av:${(prof(a.kode)||{}).warna||'#999'}">${ini(a.nama)}</span><div class="t"><b>${esc(a.nama)}</b><small>@${esc(a.kode)} · ${esc((ROLES[a.role]||{}).label||'Operator')}</small></div>${rB(a.role)}`;
+  $('#fgNote').value='';$('#fgMsg').hidden=true;$('#fgSend').disabled=false;
+  $('#forgotW').classList.add('show');setTimeout(()=>$('#fgNote').focus(),40);
+}
+function fgMsg(m,c){const e=$('#fgMsg');e.className='smsg'+(c?' '+c:'');e.innerHTML=m;e.hidden=false}
+async function sendForgot(){
+  const a=selAcct();if(!a)return fgMsg('Akun tidak dikenali.','err');
+  const b=$('#fgSend');b.disabled=true;b.textContent='Mengirim…';
+  try{
+    const r={id:uuid(),kode:a.kode,nama:a.nama,note:$('#fgNote').value.trim().slice(0,180),status:'pending',at:Date.now(),resolvedAt:null,by:''};
+    await prAdd(r);
+    $('#forgotW').classList.remove('show');renderResetStat();sfx.ok();
+    toast(`Permintaan reset sandi untuk <b>${esc(a.nama)}</b> terkirim. Kepala produksi akan memverifikasi.`,{icon:'key',duration:5200});
+  }catch(e){fgMsg('Gagal mengirim: '+esc(e.message||String(e)),'err');sfx.err()}
+  finally{b.disabled=false;b.innerHTML=icon('arrowRight',14)+' Kirim Permintaan'}
+}
+let apId=null,apKode=null;
+function openApprove(id){
+  const r=PR.list.find(x=>x.id===id);if(!r)return;
+  const p=prof(r.kode);
+  if(!p){toast('Profil akun ini tidak ditemukan di database. Tambahkan atau perbaiki dulu di Daftar Pengguna.',{type:'error',icon:'alert',duration:5200});return}
+  apId=id;apKode=r.kode;
+  $('#apT').textContent='Setujui & Reset Sandi';
+  $('#apS').innerHTML=`Tetapkan sandi baru untuk akun ini, lalu serahkan langsung kepada yang bersangkutan.`;
+  $('#apAcct').innerHTML=`<span class="av" style="--av:${p.warna}">${ini(p.nama)}</span><div class="t"><b>${esc(p.nama)}</b><small>@${esc(p.kode)} · ${esc((ROLES[p.role]||{}).label||'Operator')}</small></div>${rB(p.role)}`;
+  $('#apNew').value=genPass();$('#apOld').value='';
+  $('#apOldW').hidden=!(S.mode==='cloud'&&S.prov!=='fn');
+  $('#apMsg').hidden=true;$('#apReveal').hidden=true;$('#apSave').hidden=false;
+  $('#apCancel').textContent='Batal';
+  $('#apprW').classList.add('show');setTimeout(()=>$('#apNew').focus(),40);
+}
+function apMsg(m,c,raw){const e=$('#apMsg');e.className='smsg'+(c?' '+c:'');e.innerHTML=m+(raw?`<span class="raw">Supabase: ${esc(raw)}</span>`:'');e.hidden=false}
+async function saveApprove(){
+  const p=prof(apKode);if(!p)return apMsg('Profil tidak ditemukan.','err');
+  const np=$('#apNew').value.trim(),op=$('#apOld').value;
+  if(np.length<6)return apMsg('Kata sandi baru minimal 6 karakter.','err');
+  const b=$('#apSave');b.disabled=true;b.textContent='Menerapkan…';
+  try{
+    await DB.resetPass(p.id,np,op);
+    if(apId)await prUpd(apId,{status:'approved',resolvedAt:Date.now(),by:S.me.kode});
+    $('#apPass').textContent=np;$('#apReveal').hidden=false;$('#apSave').hidden=true;
+    $('#apCancel').textContent='Selesai';$('#apMsg').hidden=true;
+    sfx.ok();toast(`Sandi <b>${esc(p.nama)}</b> berhasil diperbarui. Serahkan sandi baru langsung ke yang bersangkutan.`,{icon:'key',duration:6000});
+    if(S.view==='users')renderUsers();roleUI();
+  }catch(e){apMsg(esc(e.message),'err',S.rawErr);S.rawErr='';sfx.err()}
+  finally{b.disabled=false;b.innerHTML=icon('check',14)+' Setujui & Terapkan'}
+}
 const mc=(l,v)=>`<div class="dmc"><label>${l}</label><div>${v}</div></div>`;
 function tlHTML(t,sh,c,seg,plum){const bar=seg?`<div class="bar">${seg}</div><div class="key"><span><i style="background:var(--amber)"></i>Persiapan</span><span><i style="background:var(--blue)"></i>Setting</span><span><i style="background:var(--green)"></i>Operasional</span></div>`:'';
 return `<div class="dtl${plum?' plum':''}">${icon('timer',13)} Total waktu kegiatan ini <b>${fMin(t)}</b><span class="share">${sh}% dari laporan</span><span class="calc">${c}</span>${bar}</div>`}
@@ -2341,7 +2584,6 @@ else{const u=JENIS[r.jenis].unit;r.items.forEach(i=>L.push([...b,i.nama,i.po,i.s
 (r.extra||[]).forEach(x=>L.push([...b,'Kegiatan Lainnya','','','','','','','',num(x.waktu),t,'','','','',x.ket]))}});
 dl('\uFEFF'+L.map(l=>l.map(c=>'"'+String(c??'').replace(/"/g,'""')+'"').join(';')).join('\r\n'),'text/csv;charset=utf-8','laporan-produksi_'+today()+'.csv');
 toast(`${rows.length} laporan diexport CSV.`,{icon:'download'});sfx.tick()}
-/* ===== XLSX ===== */
 const CT=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
 function crc32(u){let c=0xFFFFFFFF;for(let i=0;i<u.length;i++)c=CT[(c^u[i])&255]^(c>>>8);return(c^0xFFFFFFFF)>>>0}
 function zip(files){const enc=new TextEncoder(),ch=[],cd=[];let off=0;const n=new Date();
@@ -2442,7 +2684,7 @@ else s+='<p class="p-sub"><b>Tidak ada agenda di luar jobdesk.</b></p>'}
 s+=sign(o.nama,vb?vb.nama:'')+pFoot();$('#printArea').innerHTML=s;doPrint()}
 function doPrint(){toast('Menyiapkan halaman cetak…',{type:'info',icon:'printer',duration:2200});setTimeout(()=>{try{window.print()}catch(e){}},80)}
 function backup(){if(!isK()){toast('Hanya kepala produksi.',{type:'warn',icon:'alert'});return}
-dl(JSON.stringify({app:'MHI PAPER',version:19,mode:S.mode,exportedAt:new Date().toISOString(),...DB.all()},null,2),'application/json','mhi-paper-backup_'+today()+'.json');
+dl(JSON.stringify({app:'MHI PAPER',version:19,mode:S.mode,exportedAt:new Date().toISOString(),passwordRequests:PR.list,...DB.all()},null,2),'application/json','mhi-paper-backup_'+today()+'.json');
 toast('Cadangan JSON diunduh.',{icon:'download'});sfx.tick()}
 function openSetup(){if(!connOK()){toast('Pengaturan koneksi hanya untuk kepala produksi.',{type:'warn',icon:'alert',duration:4200});return}
 const c=rdCfg();$('#suUrl').value=c?c.url:'';$('#suKey').value=c?c.key:'';$('#suDom').value=c?c.domain:'mhi.local';
@@ -2456,7 +2698,7 @@ const b=$('#suSave');b.disabled=true;b.textContent='Menghubungkan…';
 try{await sdk();const{error}=await anon({url,key}).from('products').select('id').limit(1);
 if(error)throw new Error('Tabel belum siap: '+error.message);
 wrCfg({url,key,domain:dom});DB=Object.create(Cloud);await DB.init({url,key,domain:dom});S.mode='cloud';
-suMsg('Terhubung.','ok');$('#setupW').classList.remove('show');await pubDir();renderLogin();if(!S.me)clearLogin();sfx.ok();
+suMsg('Terhubung.','ok');$('#setupW').classList.remove('show');await pubDir();await prLoad();renderLogin();if(!S.me)clearLogin();sfx.ok();
 toast('Supabase terhubung — <b>@'+esc(dom)+'</b>.',{icon:'building',duration:4200});
 if(S.me){await reloadAll();buildSelects();buildTabs();roleUI();refresh();detectProv()}}
 catch(e){suMsg(esc(e.message),'err');sfx.err()}finally{b.disabled=false;b.textContent='Simpan & Hubungkan'}}
@@ -2477,7 +2719,7 @@ function goDetail(){if(!vIdent())return;setView('detail');setTimeout(()=>{const 
 function bind(){
 $('#loginForm').addEventListener('submit',e=>{e.preventDefault();doLogin($('#lgKode').value,$('#lgPass').value)});
 $('#lgEye').addEventListener('click',()=>{const p=$('#lgPass');p.type=p.type==='password'?'text':'password';$('#lgEye').innerHTML=icon(p.type==='password'?'eye':'eyeOff',16)});
-$('#lgKode').addEventListener('change',()=>{if(rdCfg())$('#lgEmailShown').textContent=curEmail();$('#lgErr').hidden=true});
+$('#lgKode').addEventListener('change',()=>{if(rdCfg())$('#lgEmailShown').textContent=curEmail();$('#lgErr').hidden=true;renderResetStat()});
 $('#lgEmail').addEventListener('input',()=>{S.lemail=$('#lgEmail').value;if(rdCfg())$('#lgEmailShown').textContent=curEmail();$('#lgErr').hidden=true});
 $('#lgPass').addEventListener('input',()=>$('#lgErr').hidden=true);
 $('#lgPass').addEventListener('keyup',e=>{$('#lgCaps').hidden=!(e.getModifierState&&e.getModifierState('CapsLock'))});
@@ -2519,7 +2761,7 @@ if(!e.target.closest('.uw'))$('#uMenu').hidden=true;
 const v=e.target.closest('[data-vrow]');if(v&&!e.target.closest('input,button')){openDrawer(v.dataset.vrow);return}
 const r=e.target.closest('[data-row]');if(r&&!e.target.closest('input,select,button,a,label'))openDrawer(r.dataset.row)});
 document.addEventListener('keydown',e=>{
-if(e.key==='Escape'){for(const id of['#passW','#userW','#setupW']){if($(id).classList.contains('show')){$(id).classList.remove('show');return}}
+if(e.key==='Escape'){for(const id of['#passW','#userW','#setupW','#forgotW','#apprW']){if($(id).classList.contains('show')){$(id).classList.remove('show');return}}
 if($('#modalW').classList.contains('show')){closeMo(moPrompt?null:false);return}
 if($('#drawer').classList.contains('open')){closeDrawer();return}
 $('#uMenu').hidden=true;if(e.target.id==='fl-q'&&e.target.value){e.target.value='';S.f.q='';renderHist()}}
@@ -2528,7 +2770,7 @@ if(e.key==='Enter'&&e.target.matches&&e.target.matches('.chip.saved'))e.target.c
 if(e.key==='/'&&S.view==='history'&&!/INPUT|TEXTAREA|SELECT/.test(document.activeElement.tagName)){e.preventDefault();$('#fl-q').focus()}});
 $('#scrim').addEventListener('click',closeDrawer);
 $('#modalW').addEventListener('click',e=>{if(e.target.id==='modalW')closeMo(moPrompt?null:false)});
-['setupW','userW','passW'].forEach(id=>$('#'+id).addEventListener('click',e=>{if(e.target.id===id)$('#'+id).classList.remove('show')}));
+['setupW','userW','passW','forgotW','apprW'].forEach(id=>$('#'+id).addEventListener('click',e=>{if(e.target.id===id)$('#'+id).classList.remove('show')}));
 $('#formIdent').addEventListener('submit',e=>{e.preventDefault();goDetail()});
 $('#formDetail').addEventListener('submit',e=>{e.preventDefault();saveProd()});
 $('#formOther').addEventListener('submit',e=>{e.preventDefault();saveOther()});
@@ -2539,9 +2781,32 @@ case 'quick':await doLogin(t.dataset.kode,CFG.PASS);break;
 case 'lmode':S.lmode=t.dataset.mode;$('#lgErr').hidden=true;renderLogin();sfx.tick();break;
 case 'dom':{const c=rdCfg();if(!c)break;c.domain=t.dataset.dom;wrCfg(c);if(S.mode==='cloud'&&DB.cfg)DB.cfg=c;$('#lgErr').hidden=true;renderLogin();sfx.tick();toast(`Domain diubah ke <b>@${esc(t.dataset.dom)}</b>.`,{type:'info',icon:'building',duration:2800});break}
 case 'copy-email':{const em=curEmail();try{await navigator.clipboard.writeText(em);toast('Email disalin.',{icon:'copy',duration:2400})}catch(x){toast('Salin manual: <b>'+esc(em)+'</b>',{type:'info',icon:'info',duration:5000})}break}
-case 'copy-sql':{const m={dir:SQL_DIR,pol:SQL_POL,fn:SQL_FN}[t.dataset.sql]||'';try{await navigator.clipboard.writeText(m);toast('Disalin — tempel di Supabase SQL Editor.',{icon:'copy',duration:3200})}catch(x){toast('Clipboard diblokir. Blok teks lalu salin manual.',{type:'info',icon:'info'})}break}
+case 'copy-sql':{const m={dir:SQL_DIR,pol:SQL_POL,fn:SQL_FN,pr:SQL_PR}[t.dataset.sql]||'';try{await navigator.clipboard.writeText(m);toast('Disalin — tempel di Supabase SQL Editor.',{icon:'copy',duration:3200})}catch(x){toast('Clipboard diblokir. Blok teks lalu salin manual.',{type:'info',icon:'info'})}break}
 case 'dir-sql':await confirmBox({title:'Direktori Akun Login',danger:false,ok:'Tutup',msg:'Agar daftar akun <b>selalu lengkap</b> di layar login, kepala produksi menjalankan SQL ini sekali di Supabase → SQL Editor. Isinya hanya nama &amp; peran.'+sqlBox('dir','login_directory.sql',SQL_DIR)});break;
 case 'trim':{const p=$('#lgPass');p.value=p.value.trim();$('#lgErr').hidden=true;toast('Spasi di tepi sandi dihapus.',{icon:'rotate',duration:2400});break}
+case 'forgot':openForgot();break;
+case 'forgot-cancel':$('#forgotW').classList.remove('show');break;
+case 'forgot-send':await sendForgot();break;
+case 'goto-sandi':$('#uMenu').hidden=true;S.utab='sandi';setView('users');break;
+case 'pr-ok':openApprove(t.dataset.id);break;
+case 'pr-again':{const r=PR.list.find(x=>x.id===t.dataset.id);if(r){apId=null;apKode=r.kode;
+const p=prof(r.kode);if(!p){toast('Profil akun tidak ditemukan.',{type:'error',icon:'alert'});break}
+$('#apT').textContent='Reset Sandi Lagi';$('#apS').textContent='Tetapkan sandi baru untuk akun ini.';
+$('#apAcct').innerHTML=`<span class="av" style="--av:${p.warna}">${ini(p.nama)}</span><div class="t"><b>${esc(p.nama)}</b><small>@${esc(p.kode)}</small></div>${rB(p.role)}`;
+$('#apNew').value=genPass();$('#apOld').value='';$('#apOldW').hidden=!(S.mode==='cloud'&&S.prov!=='fn');
+$('#apMsg').hidden=true;$('#apReveal').hidden=true;$('#apSave').hidden=false;$('#apCancel').textContent='Batal';
+$('#apprW').classList.add('show');setTimeout(()=>$('#apNew').focus(),40)}break}
+case 'pr-no':{const r=PR.list.find(x=>x.id===t.dataset.id);if(!r)break;
+const ok=await confirmBox({title:'Tolak permintaan ini?',msg:`Permintaan reset sandi dari <b>${esc(r.nama)}</b> akan ditandai ditolak. Akun tetap memakai sandi lama.`,ok:'Tolak'});
+if(ok){await prUpd(r.id,{status:'rejected',resolvedAt:Date.now(),by:S.me.kode});renderUsers();roleUI();sfx.del();toast('Permintaan ditolak.',{type:'warn',icon:'x'})}break}
+case 'pr-del':{const ok=await confirmBox({title:'Hapus catatan permintaan?',msg:'Catatan ini dihapus dari antrean. Sandi akun tidak berubah.',ok:'Hapus'});
+if(ok){await prDel([t.dataset.id]);renderUsers();roleUI();sfx.del();toast('Catatan dihapus.',{type:'info',icon:'trash'})}break}
+case 'pr-clear':{const ids=PR.list.filter(r=>r.status!=='pending').map(r=>r.id);if(!ids.length)break;
+const ok=await confirmBox({title:`Bersihkan ${ids.length} permintaan selesai?`,msg:'Permintaan yang sudah disetujui atau ditolak akan dihapus dari daftar.',ok:'Bersihkan'});
+if(ok){await prDel(ids);renderUsers();roleUI();sfx.del();toast('Antrean dibersihkan.',{icon:'trash'})}break}
+case 'ap-cancel':$('#apprW').classList.remove('show');break;
+case 'ap-save':await saveApprove();break;
+case 'ap-copy':{const v=$('#apPass').textContent;try{await navigator.clipboard.writeText(v);toast('Sandi baru disalin.',{icon:'copy',duration:2600})}catch(x){toast('Salin manual: <b>'+esc(v)+'</b>',{type:'info',icon:'info',duration:6000})}break}
 case 'diag':await runDiag();break;
 case 'diag-close':$('#lgDiag').hidden=true;break;
 case 'acct-diag':await runAcct();break;
@@ -2599,7 +2864,7 @@ case 'xlsx':xlsxExport(filtered());break;
 case 'print-recap':printRecap();break;
 case 'backup':backup();break;
 case 'reload':{if(!canE()){toast('Muat ulang tidak tersedia untuk operator.',{type:'warn',icon:'alert'});break}
-t.disabled=true;try{await reloadAll();await pubDir();buildSelects();buildTabs();refresh();syncUI();toast('Data disinkronkan.',{icon:'rotate',duration:2200});sfx.tick()}catch(x){toast('Gagal memuat: '+esc(x.message),{type:'error',icon:'alert'})}t.disabled=false;break}
+t.disabled=true;try{await reloadAll();await pubDir();await prLoad();buildSelects();buildTabs();roleUI();refresh();syncUI();toast('Data disinkronkan.',{icon:'rotate',duration:2200});sfx.tick()}catch(x){toast('Gagal memuat: '+esc(x.message),{type:'error',icon:'alert'})}t.disabled=false;break}
 case 'reset-demo':{if(!isK())break;const ok=await confirmBox({title:'Reset seluruh data lokal?',msg:'Semua laporan, pengguna, dan produk kembali ke contoh bawaan.',ok:'Reset Data'});
 if(ok){try{await DB.resetDemo();await reloadAll();buildSelects();buildTabs();refresh();renderMas();toast('Data demo dikembalikan.',{type:'warn',icon:'rotate'})}catch(x){toast(esc(x.message),{type:'error',icon:'alert'})}}break}
 case 'bulk-clear':S.sel.clear();renderHist();break;
@@ -2641,7 +2906,7 @@ if(n&&n.length>=3){try{await DB.updProduct(p.id,{nama:n});p.nama=n;buildSelects(
 case 'p-del':{const p=S.products.find(x=>x.id===t.dataset.id);if(!p)break;
 const ok=await confirmBox({title:'Hapus produk ini?',msg:`<b>${esc(p.nama)}</b> tidak lagi muncul sebagai saran. Laporan lama tetap utuh.`,ok:'Hapus'});
 if(ok){try{await DB.delProduct(p.id);S.products=S.products.filter(x=>x.id!==p.id);buildSelects();renderMas();sfx.del();toast('Produk dihapus.',{type:'warn',icon:'trash'})}catch(x){toast(esc(x.message),{type:'error',icon:'alert'})}}break}
-case 'utab':S.utab=t.dataset.tab;if(S.utab==='audit'&&isK()){try{S.audit=await DB.audit()}catch(x){}}renderUsers();sfx.tick();break;
+case 'utab':S.utab=t.dataset.tab;if(S.utab==='audit'&&isK()){try{S.audit=await DB.audit()}catch(x){}}if(S.utab==='sandi')await prLoad();renderUsers();sfx.tick();break;
 case 'u-clear':S.uq='';$('#u-q').value='';renderUsers();break;
 case 'pick':setRole(t.dataset.role);sfx.tick();break;
 case 'user-add':openUser(null);break;
@@ -2676,14 +2941,14 @@ const dF=ecgD(1200,64,6),dL=ecgD(1200,120,5);
 const a=autoShift();if(shMode(a)==='LONG')lastLong=a;
 sndUI();bind();clockTick();setInterval(clockTick,1000);Local.load();
 const c=rdCfg();
-if(c){try{await Cloud.init(c);DB=Cloud;S.mode='cloud';const me=await Cloud.session();await pubDir();renderLogin();clearLogin();
+if(c){try{await Cloud.init(c);DB=Cloud;S.mode='cloud';const me=await Cloud.session();await pubDir();await prLoad();renderLogin();clearLogin();
 if(me){S.me=me;S.lastRole=me.role;wrRole(me.role);await boot();return}}
 catch(e){DB=Local;S.mode='local';toast('Supabase tidak dapat dijangkau — memakai mode lokal.',{type:'warn',icon:'alert',duration:6000})}}
 else{DB=Local;S.mode='local'}
-renderLogin();
+await prLoad();renderLogin();
 if(S.mode==='local'){const me=await Local.session();if(me){S.me=me;S.lastRole=me.role;wrRole(me.role);await boot()}else $('#lgPass').value=CFG.PASS}
 else clearLogin()}
-init().catch(e=>{console.error(e);document.body.dataset.view='login';const b=$('#lgErr');if(b){b.hidden=false;$('#lgErrT').textContent='Gagal memuat aplikasi';$('#lgErrM').textContent=e.message||String(e)}});
+init().catch(e=>{console.error(e);document.body.dataset.view='login';const b=$('#lgErr');if(b){b.hidden=false;b.classList.add('simple');$('#lgErrT').textContent='Gagal memuat aplikasi';$('#lgErrM').hidden=true;$('#lgErrActs').hidden=true}});
 </script>
 </body>
 </html>
