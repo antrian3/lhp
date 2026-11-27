@@ -1,3 +1,4 @@
+```html
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -221,11 +222,16 @@ textarea.inp{resize:vertical;min-height:70px;line-height:1.5}
 .cb>.g2,.cb>.g3,.cb>.field{margin-bottom:14px}
 .cb>.g2:last-child,.cb>.g3:last-child,.cb>.field:last-child{margin-bottom:0}
 input[type=checkbox]{width:16px;height:16px;accent-color:var(--red);cursor:pointer}
-.sn-field{background:linear-gradient(180deg,var(--surface),#fff);border:1px dashed var(--line-strong);border-radius:10px;padding:11px 12px}
-.sn-field>label{display:flex;align-items:center;gap:7px}
+.trace{display:grid;grid-template-columns:1fr 1fr;gap:14px}
+.sn-field,.lot-field{background:linear-gradient(180deg,var(--surface),#fff);border:1px dashed var(--line-strong);border-radius:10px;padding:11px 12px}
+.sn-field>label,.lot-field>label{display:flex;align-items:center;gap:7px}
 .sn-field>label .ic{color:var(--blue)}
-.sn-field .inp{border-style:dashed}
-.sn-field .inp:focus,.sn-field .inp.has{border-style:solid}
+.lot-field>label .ic{color:var(--plum)}
+.sn-field .inp,.lot-field .inp{border-style:dashed}
+.sn-field .inp:focus,.sn-field .inp.has{border-style:solid;border-color:var(--blue)}
+.lot-field .inp:focus,.lot-field .inp.has{border-style:solid;border-color:var(--plum)}
+.sn-field .inp.has{background:#F7FBFF}
+.lot-field .inp.has{background:#FBF8FE}
 .jenis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .jc{position:relative;text-align:left;border:1.5px solid var(--line-strong);border-radius:12px;padding:14px;background:#fff;transition:.18s;display:flex;flex-direction:column;gap:8px}
 .jc:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(80,55,25,.12);border-color:var(--jc)}
@@ -276,6 +282,7 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--red);cursor:point
 .cc.time{color:var(--amber-deep);border-color:#EFD3A0;background:linear-gradient(180deg,#FDF4E3,#FBF0DA)}
 .cc.ket{color:#5E379C;border-color:#DECDF2;background:var(--plum-soft)}
 .cc.sn{color:#1D539E;border-color:#C6DAF4;background:var(--blue-soft)}
+.cc.lot{color:#5E379C;border-color:#DECDF2;background:linear-gradient(180deg,#F6F0FD,#EFE6FA)}
 .cc.muted{color:var(--ink-3);font-weight:500}
 .iacts{display:flex;gap:3px}
 .ib{width:29px;height:29px;border-radius:7px;display:inline-grid;place-items:center;color:var(--ink-3);transition:.13s;border:1px solid transparent}
@@ -284,7 +291,7 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--red);cursor:point
 .ib.good:hover{color:var(--green);border-color:#BFE6D6;background:var(--green-soft)}
 .ib:disabled{opacity:.3;cursor:not-allowed}
 .ibody{padding:15px;display:flex;flex-direction:column;gap:13px}
-.ibody .g2,.ibody .g3{margin:0}
+.ibody .g2,.ibody .g3,.ibody .trace{margin:0}
 .kf{background:linear-gradient(180deg,var(--surface),#fff);border:1px dashed var(--line-strong);border-radius:10px;padding:11px 12px;gap:6px}
 .kf>label{display:flex;align-items:center;gap:7px;color:var(--ink-2)}
 .kf>label .ic{color:var(--plum)}
@@ -398,6 +405,10 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--red);cursor:point
 .siv{font:600 11px var(--fn);font-variant-numeric:tabular-nums;flex:none}
 .siv.net{color:var(--green)}
 .sit{font:500 10px var(--fn);font-variant-numeric:tabular-nums;color:#A8802F;background:var(--amber-soft);border:1px solid #EFD3A0;border-radius:99px;padding:1px 6px;flex:none}
+.strace{display:flex;gap:5px;flex-wrap:wrap;margin-top:2px;padding-left:26px}
+.strace span{font:500 9px var(--fm);padding:1px 6px;border-radius:99px;border:1px solid}
+.strace .s1{color:#1D539E;background:var(--blue-soft);border-color:#C6DAF4}
+.strace .s2{color:#5E379C;background:var(--plum-soft);border-color:#DECDF2}
 .sacts{display:flex;gap:8px}
 .sacts .btn{flex:1}
 .snote{display:flex;gap:7px;font-size:10.5px;color:var(--ink-3);margin-top:11px;line-height:1.45}
@@ -673,6 +684,7 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--red);cursor:point
 .dc.hl{background:var(--green-soft)}.dc.hl b{color:var(--green)}
 .dc.warn{background:var(--amber-soft)}.dc.warn b{color:#B26F05}
 .dc.sn{background:var(--blue-soft)}.dc.sn b{color:#1D539E;font-family:var(--fm);font-size:12px}
+.dc.lot{background:var(--plum-soft)}.dc.lot b{color:#5E379C;font-family:var(--fm);font-size:12px}
 .dket{display:flex;gap:9px;margin-top:7px;padding:9px 11px;border-radius:8px;background:linear-gradient(120deg,var(--surface-2),#fff);border:1px solid var(--line);border-left:3px solid var(--plum)}
 .dket>.ic{color:var(--plum);margin-top:2px}
 .dket label{font:600 8px var(--fm);letter-spacing:.12em;color:var(--ink-3);display:block;margin-bottom:2px}
@@ -791,6 +803,7 @@ body>*:not(#printArea){display:none!important}
 .p-tbl .nc{background:#EAFBF3!important;font-weight:700;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .p-tbl .tc{background:#FDF4E3!important;font-weight:700;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .p-tbl .sc{background:#E8F0FB!important;font-family:'Roboto Mono',monospace;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.p-tbl .lc{background:#F3EDFB!important;font-family:'Roboto Mono',monospace;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .p-id{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:12px}
 .p-id td{border:1px solid #555;padding:5px 8px}
 .p-id td:first-child{background:#f2f2f2!important;font-weight:600;width:150px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -852,6 +865,10 @@ body[data-view="other"] #mbO{display:flex}
 .rcs b{font:700 12.5px var(--fn);font-variant-numeric:tabular-nums}
 .rcs b small{font-size:9px;color:var(--ink-3)}
 .rcs.time{background:var(--plum-soft)}.rcs.time label{color:#7B4FC0}.rcs.time b{color:#5E379C}
+.rctrace{display:flex;gap:6px;flex-wrap:wrap;margin-bottom:10px}
+.rctrace span{font:500 9.5px var(--fm);padding:2px 7px;border-radius:99px;border:1px solid}
+.rctrace .s1{color:#1D539E;background:var(--blue-soft);border-color:#C6DAF4}
+.rctrace .s2{color:#5E379C;background:var(--plum-soft);border-color:#DECDF2}
 .rcacts{display:flex;gap:7px}.rcacts .btn{flex:1}}
 @media (max-width:760px){
 :root{--gap:20px}
@@ -872,7 +889,7 @@ body[data-view="other"] #mbO{display:flex}
 .mleg{flex-direction:column}}
 @media (max-width:560px){
 :root{--gap:16px}
-.g2{grid-template-columns:1fr}
+.g2,.trace{grid-template-columns:1fr}
 .snd .mono{display:none}.snd{padding:7px 9px}
 .wrap{padding:0 14px}
 .mrow{flex-direction:column;align-items:flex-start}
@@ -883,7 +900,8 @@ body[data-view="other"] #mbO{display:flex}
 .dbody{padding:15px}.dfoot{padding:10px 12px;gap:6px}.dfoot .btn{padding:9px 11px;font-size:12.5px}
 .rpick{grid-template-columns:1fr}
 .lg-card{padding:20px 18px}.mon-brand b{font-size:17px}
-.segs button{font-size:11px;padding:8px}}
+.segs button{font-size:11px;padding:8px}
+.dg2.two{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){
 *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 .ecg .run,.mon-ecg .run{stroke-dasharray:none;animation:none}
@@ -981,7 +999,7 @@ html{scroll-behavior:auto}}
 
 <section id="view-form" class="view" aria-label="Identitas laporan">
   <div class="hero">
-    <div class="hero-top"><span>FORM LH-ECG-01 · REV. 20</span><span class="live"><i class="dot"></i><span id="shiftLive">SHIFT BERJALAN</span></span></div>
+    <div class="hero-top"><span>FORM LH-ECG-01 · REV. 21</span><span class="live"><i class="dot"></i><span id="shiftLive">SHIFT BERJALAN</span></span></div>
     <h1 class="hero-title">Laporan Harian <em>Produksi</em></h1>
     <svg class="ecg" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true"><path id="eFb" class="base" fill="none" d="M0 32 L1200 32"/><path id="eFr" class="run" fill="none" pathLength="1000" d="M0 32 L1200 32"/></svg>
   </div>
@@ -1029,7 +1047,7 @@ html{scroll-behavior:auto}}
         <div class="shead"><div class="sh">LANGKAH 1 DARI 2 · IDENTITAS</div></div>
         <div class="sbody">
           <div class="sop"><b>Lengkapi Identitas</b><small>Operator, tanggal, shift &amp; jenis kegiatan.</small></div>
-          <div class="smeta"><span class="mono sm">Keterangan, total waktu &amp; hasil bersih ada di Langkah 2.</span></div>
+          <div class="smeta"><span class="mono sm">SN jumbo roll, LOT tinta, keterangan, waktu &amp; hasil bersih ada di Langkah 2.</span></div>
           <p class="snote"><span data-ic="info" data-sz="13"></span><span>Laporan dikirim berstatus <b>Menunggu Verifikasi</b> sampai admin atau kepala produksi memeriksanya.</span></p>
         </div>
         <div class="sfoot">
@@ -1057,7 +1075,7 @@ html{scroll-behavior:auto}}
   <div class="fl">
     <form id="formDetail" novalidate autocomplete="off">
       <section class="card sect">
-        <header class="ch"><span class="step">02</span><div><h2 id="itemsTitle">Detail Produksi — Paper Pack</h2><p>Tiap item punya SN jumbo roll, keterangan, hasil bersih, dan total waktunya sendiri.</p></div><span class="utag" id="unitTag">SATUAN: PACK</span></header>
+        <header class="ch"><span class="step">02</span><div><h2 id="itemsTitle">Detail Produksi — Paper Pack</h2><p>Tiap item punya SN jumbo roll, LOT tinta, keterangan, hasil bersih, dan total waktunya sendiri.</p></div><span class="utag" id="unitTag">SATUAN: PACK</span></header>
         <div class="cb">
           <div class="mrow"><div><b>Apakah mengerjakan lebih dari 1 jenis item?</b><small>Pilih “Ya” untuk menambah item produksi lain dalam shift yang sama.</small></div><div class="seg" id="multiSeg" role="group"><button type="button" data-act="multi" data-val="tidak" class="active">Tidak</button><button type="button" data-act="multi" data-val="ya">Ya</button></div></div>
           <div id="itemList" class="ilist"></div>
@@ -1099,7 +1117,7 @@ html{scroll-behavior:auto}}
   <div class="mbar" id="mbD"><div class="mbs" id="mbsD"></div><button class="btn btn-primary" type="submit" form="formDetail" id="saveDM">Simpan</button></div>
 </section>
 
-<datalist id="dl-pack"></datalist><datalist id="dl-roll"></datalist><datalist id="dl-sn"></datalist>
+<datalist id="dl-pack"></datalist><datalist id="dl-roll"></datalist><datalist id="dl-sn"></datalist><datalist id="dl-lot"></datalist>
 
 <section id="view-other" class="view" aria-label="Kegiatan lainnya">
   <div class="hero hero-plum">
@@ -1167,7 +1185,7 @@ html{scroll-behavior:auto}}
   </div>
   <div class="card tool">
     <div class="tbr">
-      <div class="sw2"><span data-ic="search" data-sz="15"></span><input id="fl-q" class="inp" type="search" placeholder="Cari produk, PO, SPK, SN jumbo roll, operator, kode…  ( / )" aria-label="Cari laporan"></div>
+      <div class="sw2"><span data-ic="search" data-sz="15"></span><input id="fl-q" class="inp" type="search" placeholder="Cari produk, PO, SPK, SN jumbo roll, LOT tinta, operator…  ( / )" aria-label="Cari laporan"></div>
       <select id="fl-op" class="inp tsel" aria-label="Filter operator"></select>
       <select id="fl-jenis" class="inp tsel" aria-label="Filter jenis"><option value="all">Semua Jenis</option><option value="pack">Paper Pack</option><option value="roll">Paper Roll</option><option value="lainnya">Kegiatan Lainnya</option></select>
       <select id="fl-status" class="inp tsel" aria-label="Filter status"><option value="all">Semua Status</option><option value="submit">Menunggu Verifikasi</option><option value="revisi">Perlu Revisi</option><option value="verified">Terverifikasi</option></select>
@@ -1332,7 +1350,7 @@ html{scroll-behavior:auto}}
 <script>
 'use strict';
 const CFG={URL:'https://ooqnifjwbglmpmmpinmo.supabase.co',KEY:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9vcW5pZmp3YmdsbXBtbXBpbm1vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTUxNjA1MjgsImV4cCI6MjExMDczNjUyOH0.rbP3cyaJxSbyC-pjALn3vlxXzUB6WIphtP15aZ71ves',DOM:'mhi.local',PASS:'mhi2026'};
-const KMAX=300,SNMAX=32;
+const KMAX=300,SNMAX=32,LOTMAX=32;
 const SQL_DIR=`-- Jalankan sekali di Supabase → SQL Editor → Run.
 create or replace view public.login_directory as
 select kode, nama, role, aktif from public.profiles;
@@ -1391,6 +1409,7 @@ Deno.serve(async(req)=>{
 const I={activity:'<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>',
 package:'<path d="M16.5 9.4 7.55 4.24"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.29 7 12 12 20.71 7"/><line x1="12" y1="22" x2="12" y2="12"/>',
 roll:'<ellipse cx="12" cy="5" rx="8" ry="3"/><path d="M4 5v14c0 1.66 3.58 3 8 3s8-1.34 8-3V5"/><path d="M4 12c0 1.66 3.58 3 8 3s8-1.34 8-3"/>',
+droplet:'<path d="M12 2.7l5.66 5.66a8 8 0 1 1-11.31 0z"/>',
 users:'<path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/>',
 userPlus:'<path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><line x1="19" y1="8" x2="19" y2="14"/><line x1="22" y1="11" x2="16" y2="11"/>',
 plus:'<path d="M12 5v14"/><path d="M5 12h14"/>',
@@ -1496,7 +1515,7 @@ const clean=l=>l.filter(p=>p&&p.kode).map(p=>({kode:String(p.kode),nama:String(p
 function mergeDir(l,{complete=false,src='cache'}={}){const inc=clean(l);let out;if(complete)out=inc;else{const m=new Map(rdDir().map(p=>[p.kode,p]));inc.forEach(p=>m.set(p.kode,p));out=[...m.values()]}if(!out.length)return S.dir;try{localStorage.setItem(K.dir,JSON.stringify(out))}catch(e){}S.dir=out;S.dirSrc=src;return out}
 const rdRole=()=>{try{return localStorage.getItem(K.role)||''}catch(e){return''}};
 const wrRole=r=>{try{r?localStorage.setItem(K.role,r):localStorage.removeItem(K.role)}catch(e){}};
-const bItem=()=>({key:uid(),nama:'',po:'',spk:'',sn:'',prep:'',setting:'',ops:'',hasil:'',reject:'',ket:''});
+const bItem=()=>({key:uid(),nama:'',po:'',spk:'',sn:'',lot:'',prep:'',setting:'',ops:'',hasil:'',reject:'',ket:''});
 const bAg=()=>({key:uid(),kategori:'',deskripsi:'',waktu:''});
 const bEx=()=>({key:uid(),waktu:'',ket:''});
 const bForm=()=>({mode:'create',editId:null,operatorId:(S.me&&S.me.role==='operator')?S.me.kode:'',date:today(),shift:autoShift(),jenis:'pack',multi:false,items:[bItem()],hasAgenda:'ya',agenda:[bAg()],hasExtra:'tidak',extra:[bEx()]});
@@ -1521,6 +1540,7 @@ const iW=i=>num(i.prep)+num(i.setting)+num(i.ops);
 const iN=i=>num(i.hasil)-num(i.reject);
 const iK=i=>String(i.ket||'').trim();
 const iSN=i=>String(i.sn||'').trim();
+const iLOT=i=>String(i.lot||'').trim();
 const rH=r=>(r.items||[]).reduce((a,i)=>a+num(i.hasil),0);
 const rJ=r=>(r.items||[]).reduce((a,i)=>a+num(i.reject),0);
 const rN=r=>rH(r)-rJ(r);
@@ -1574,17 +1594,19 @@ const Local={d:null,
 load(){try{const r=localStorage.getItem(K.db);if(r){this.d=JSON.parse(r);if(this.d&&this.d.profiles&&this.d.profiles.length){
 let ch=false;
 this.d.profiles=this.d.profiles.map(p=>{const f=fixName(p);if(f!==p)ch=true;return f});
-this.d.reports=(this.d.reports||[]).map(x=>({...x,items:(x.items||[]).map(i=>({...i,sn:i.sn||''}))}));
+this.d.reports=(this.d.reports||[]).map(x=>({...x,items:(x.items||[]).map(i=>({...i,sn:i.sn||'',lot:i.lot||''}))}));
 if(ch)this.save();return}}}catch(e){}this.d=this.seed();this.save()},
 save(){try{localStorage.setItem(K.db,JSON.stringify(this.d))}catch(e){toast('Penyimpanan perangkat penuh.',{type:'error',icon:'alert'})}},
 seed(){return{profiles:PEOPLE.map(p=>({id:uid(),...p,aktif:true,password:CFG.PASS})),products:[...PACK.map(n=>({id:uid(),jenis:'pack',nama:n,aktif:true})),...ROLL.map(n=>({id:uid(),jenis:'roll',nama:n,aktif:true}))],reports:this.seedR(),audit:[],seq:{}}},
 seedR(){const T=today(),R=[],sq={};
-const it=(n,po,spk,p,s,o,h,j,k='')=>({nama:n,po,spk,sn:'',prep:p,setting:s,ops:o,hasil:h,reject:j,ket:k});
+const it=(n,po,spk,p,s,o,h,j,k='')=>({nama:n,po,spk,sn:'',lot:'',prep:p,setting:s,ops:o,hasil:h,reject:j,ket:k});
 const ag=(k,d,w)=>({kategori:k,deskripsi:d,waktu:w}),ex=(w,k)=>({waktu:w,ket:k});
 const mk=(off,op,je,sh,items,agenda,extra,st,cat)=>{const date=addDays(T,-off);sq[date]=(sq[date]||0)+1;
 const ts=new Date(date+'T00:00:00').getTime()+(sh==='L2'?20:8)*36e5+sq[date]*17*6e4;const s=st||(off>=2?'verified':'submit');
 const ym=date.replace(/-/g,'').slice(2,6);
-const its=(items||[]).map((x,ix)=>({...x,sn:x.sn||('JR-'+ym+'-'+pad3(sq[date]*7+ix*3+1))}));
+const its=(items||[]).map((x,ix)=>({...x,
+sn:x.sn||('JR-'+ym+'-'+pad3(sq[date]*7+ix*3+1)),
+lot:x.lot||('LT-'+ym+'-'+pad(sq[date]*2+ix+1))}));
 R.push({id:uid(),code:'LH-'+date.replace(/-/g,'').slice(2)+'-'+pad3(sq[date]),date,shift:sh,operatorId:op,jenis:je,items:its,agenda:agenda||[],extra:extra||[],hasAgenda:je==='lainnya'?!!(agenda&&agenda.length):null,status:s,catatan:cat||'',verifiedBy:s==='verified'?'admin':null,verifiedAt:s==='verified'?ts+36e5:null,deletedAt:null,createdBy:op,createdAt:ts,updatedAt:ts})};
 mk(0,'yanto','pack','N1',[it(PACK[0],'7100006123','00220',25,45,310,420,14,'Reject 14 pack saat 20 menit pertama: grid cetak miring karena register belum terkunci. Setelah setting ulang, produksi normal.'),it(PACK[2],'7100006124','00221',15,30,120,180,6,'Reject 6 pack lipatan tidak simetris.')],null,[ex(30,'Membantu teknisi setting ulang pisau potong Flexo')],'submit');
 mk(0,'ridwan','pack','N1',[it(PACK[1],'7100006466','00223',10,40,340,200,20,'')],null,[ex(60,'Bantu teknisi setting pisau potong Auto Paper')],'submit');
@@ -1676,7 +1698,7 @@ async session(){const{data:{session}}=await this.sb.auth.getSession();if(!sessio
 async signOut(){await this.sb.auth.signOut()},
 async profiles(){const{data,error}=await this.sb.from('profiles').select('*').order('nama');if(error)throw new Error(error.message);this.map={};this.rmap={};return data.map(d=>{const p=this.pf(d);this.map[p.kode]=p.id;this.rmap[p.id]=p.kode;return p})},
 async products(){const{data,error}=await this.sb.from('products').select('*').order('nama');if(error)throw new Error(error.message);return data.map(d=>({id:d.id,jenis:d.jenis,nama:d.nama,aktif:d.aktif!==false}))},
-rF(d){return{id:d.id,code:d.code,date:d.tanggal,shift:d.shift,operatorId:this.rmap[d.operator_id]||'',jenis:d.jenis,items:(d.items||[]).map(i=>({...i,sn:i.sn||''})),agenda:d.agenda||[],extra:d.extra||[],hasAgenda:d.has_agenda,status:d.status,catatan:d.catatan||'',verifiedBy:d.verified_by?(this.rmap[d.verified_by]||null):null,verifiedAt:d.verified_at?new Date(d.verified_at).getTime():null,deletedAt:d.deleted_at,createdAt:new Date(d.created_at).getTime(),updatedAt:new Date(d.updated_at).getTime()}},
+rF(d){return{id:d.id,code:d.code,date:d.tanggal,shift:d.shift,operatorId:this.rmap[d.operator_id]||'',jenis:d.jenis,items:(d.items||[]).map(i=>({...i,sn:i.sn||'',lot:i.lot||''})),agenda:d.agenda||[],extra:d.extra||[],hasAgenda:d.has_agenda,status:d.status,catatan:d.catatan||'',verifiedBy:d.verified_by?(this.rmap[d.verified_by]||null):null,verifiedAt:d.verified_at?new Date(d.verified_at).getTime():null,deletedAt:d.deleted_at,createdAt:new Date(d.created_at).getTime(),updatedAt:new Date(d.updated_at).getTime()}},
 rT(p){return{tanggal:p.date,shift:p.shift,operator_id:this.map[p.operatorId],jenis:p.jenis,items:p.items||[],agenda:p.agenda||[],extra:p.extra||[],has_agenda:p.jenis==='lainnya'?!!p.hasAgenda:null,has_extra:(p.extra||[]).length>0}},
 async reports(){const{data,error}=await this.sb.from('reports').select('*').order('tanggal',{ascending:false}).limit(3000);if(error)throw new Error(error.message);return data.map(d=>this.rF(d))},
 async audit(){const{data,error}=await this.sb.from('audit_log').select('*').order('at',{ascending:false}).limit(200);if(error)return[];
@@ -1896,7 +1918,9 @@ $('#fl-op').innerHTML='<option value="all">Semua Operator</option>'+o.map(x=>`<o
 $('#dl-pack').innerHTML=S.products.filter(p=>p.jenis==='pack'&&p.aktif).map(p=>`<option value="${esc(p.nama)}">`).join('');
 $('#dl-roll').innerHTML=S.products.filter(p=>p.jenis==='roll'&&p.aktif).map(p=>`<option value="${esc(p.nama)}">`).join('');
 const sns=[...new Set(S.reports.flatMap(r=>(r.items||[]).map(i=>iSN(i))).filter(Boolean))].slice(0,60);
-$('#dl-sn').innerHTML=sns.map(s=>`<option value="${esc(s)}">`).join('')}
+$('#dl-sn').innerHTML=sns.map(s=>`<option value="${esc(s)}">`).join('');
+const lots=[...new Set(S.reports.flatMap(r=>(r.items||[]).map(i=>iLOT(i))).filter(Boolean))].slice(0,60);
+$('#dl-lot').innerHTML=lots.map(s=>`<option value="${esc(s)}">`).join('')}
 function setView(v,skip){if(!S.me)return;
 if(!ACC[v]||!ACC[v].includes(S.me.role)){toast(`Menu itu hanya untuk ${v==='users'?'Kepala Produksi':'Admin & Kepala Produksi'}.`,{type:'warn',icon:'alert'});v='history'}
 S.view=v;document.body.dataset.view=v;
@@ -1930,7 +1954,10 @@ return `<article class="icard" data-key="${it.key}">
 <div class="ibody">
 <div class="field"><label>Nama Produk / Item <b class="req">*</b></label><input class="inp" data-item="${it.key}" data-f="nama" list="dl-${j.cls}" placeholder="cth: ${esc(j.ex)}" value="${v(it.nama)}"><div class="err"></div></div>
 <div class="g2"><div class="field"><label>Nomor PO <b class="req">*</b></label><input class="inp num" inputmode="numeric" data-item="${it.key}" data-f="po" placeholder="cth: 7100006123" value="${v(it.po)}"><div class="err"></div></div><div class="field"><label>Nomor SPK <b class="req">*</b></label><input class="inp num" inputmode="numeric" data-item="${it.key}" data-f="spk" placeholder="cth: 00220" value="${v(it.spk)}"><div class="err"></div></div></div>
-<div class="field sn-field"><label for="sn-${it.key}">${icon('roll',14)} No. SN Jumbo Roll <span class="opt">OPSIONAL</span></label><input id="sn-${it.key}" class="inp mono${iSN(it)?' has':''}" data-item="${it.key}" data-f="sn" list="dl-sn" maxlength="${SNMAX}" placeholder="cth: JR-2611-0451" value="${v(it.sn)}"><div class="help">Nomor seri gulungan bahan baku (jumbo roll) yang dipakai untuk item ini.</div><div class="err"></div></div>
+<div class="trace">
+<div class="field sn-field"><label for="sn-${it.key}">${icon('roll',14)} No. SN Jumbo Roll <span class="opt">OPSIONAL</span></label><input id="sn-${it.key}" class="inp mono${iSN(it)?' has':''}" data-item="${it.key}" data-f="sn" list="dl-sn" maxlength="${SNMAX}" placeholder="cth: JR-2611-0451" value="${v(it.sn)}"><div class="help">Nomor seri gulungan bahan baku yang dipakai.</div><div class="err"></div></div>
+<div class="field lot-field"><label for="lot-${it.key}">${icon('droplet',14)} No. LOT Tinta <span class="opt">OPSIONAL</span></label><input id="lot-${it.key}" class="inp mono${iLOT(it)?' has':''}" data-item="${it.key}" data-f="lot" list="dl-lot" maxlength="${LOTMAX}" placeholder="cth: LT-2611-07" value="${v(it.lot)}"><div class="help">Nomor LOT / batch tinta cetak yang dipakai.</div><div class="err"></div></div>
+</div>
 <div class="g3"><div class="field"><label>Persiapan (mnt) <b class="req">*</b></label><input type="number" min="0" max="1440" class="inp num" data-item="${it.key}" data-f="prep" placeholder="0" value="${v(it.prep)}"><div class="help">Ambil bahan baku &amp; persiapan.</div><div class="err"></div></div><div class="field"><label>Setting (mnt) <b class="req">*</b></label><input type="number" min="0" max="1440" class="inp num" data-item="${it.key}" data-f="setting" placeholder="0" value="${v(it.setting)}"><div class="err"></div></div><div class="field"><label>Operasional (mnt) <b class="req">*</b></label><input type="number" min="0" max="1440" class="inp num" data-item="${it.key}" data-f="ops" placeholder="0" value="${v(it.ops)}"><div class="err"></div></div></div>
 <div class="g2"><div class="field"><label>Hasil Produksi (${j.unit}) <b class="req">*</b></label><div class="wu"><input type="number" min="0" class="inp num" data-item="${it.key}" data-f="hasil" placeholder="0" value="${v(it.hasil)}"><span class="u">${j.unit}</span></div><div class="err"></div></div><div class="field"><label>Reject (${j.unit}) <b class="req">*</b></label><div class="wu"><input type="number" min="0" class="inp num" data-item="${it.key}" data-f="reject" placeholder="0" value="${v(it.reject)}"><span class="u">${j.unit}</span></div><div class="err"></div></div></div>
 <div class="field kf"><label for="k-${it.key}">${icon('note',14)} Keterangan <span class="opt">OPSIONAL</span></label><textarea id="k-${it.key}" class="inp${iK(it)?' has':''}" rows="2" maxlength="${KMAX}" data-item="${it.key}" data-f="ket" placeholder="cth: Reject 14 pack karena grid miring saat setting awal; sudah dikoreksi.">${esc(it.ket||'')}</textarea><div class="kfoot"><span class="help" data-kh="${it.key}">Catatan penyebab reject, kendala mesin, atau kondisi bahan.</span><span class="kcount" data-kc="${it.key}">${String(it.ket||'').length}/${KMAX}</span></div><div class="err"></div></div>
@@ -1949,13 +1976,14 @@ function renderItems(){$('#itemList').innerHTML=S.form.items.map(itemHTML).join(
 function renderExtra(){$('#extraList').innerHTML=S.form.extra.map(exHTML).join('')}
 function renderAgenda(){$('#agendaList').innerHTML=S.form.agenda.map(agHTML).join('')}
 function calcItem(k){const it=S.form.items.find(x=>x.key===k);if(!it)return;
-const j=JENIS[S.form.jenis==='roll'?'roll':'pack'],w=iW(it),h=num(it.hasil),r=num(it.reject),rt=rate(h,r),net=h-r,kt=iK(it),sn=iSN(it);
-const any=['prep','setting','ops','hasil','reject'].some(x=>it[x]!=='')||kt||sn;
+const j=JENIS[S.form.jenis==='roll'?'roll':'pack'],w=iW(it),h=num(it.hasil),r=num(it.reject),rt=rate(h,r),net=h-r,kt=iK(it),sn=iSN(it),lot=iLOT(it);
+const any=['prep','setting','ops','hasil','reject'].some(x=>it[x]!=='')||kt||sn||lot;
 const e=$(`[data-calc="${k}"]`);
-if(e)e.innerHTML=any?`<span class="cc time">${icon('timer',11)} ${fMin(w)}</span><span class="cc">${icon(j.icon,11)} ${fNum(h)} ${j.unit}</span><span class="cc ${rCls(rt)}">${icon('alert',11)} ${rt.toFixed(1)}%</span><span class="cc net">${icon('sigma',11)} bersih ${fNum(net)}</span>${sn?`<span class="cc sn" title="SN Jumbo Roll: ${esc(sn)}">${icon('roll',11)} ${esc(clip(sn,16))}</span>`:''}${kt?`<span class="cc ket">${icon('note',11)} ket</span>`:''}`:'<span class="cc muted">belum diisi</span>';
+if(e)e.innerHTML=any?`<span class="cc time">${icon('timer',11)} ${fMin(w)}</span><span class="cc">${icon(j.icon,11)} ${fNum(h)} ${j.unit}</span><span class="cc ${rCls(rt)}">${icon('alert',11)} ${rt.toFixed(1)}%</span><span class="cc net">${icon('sigma',11)} bersih ${fNum(net)}</span>${sn?`<span class="cc sn" title="SN Jumbo Roll: ${esc(sn)}">${icon('roll',11)} ${esc(clip(sn,14))}</span>`:''}${lot?`<span class="cc lot" title="LOT Tinta: ${esc(lot)}">${icon('droplet',11)} ${esc(clip(lot,14))}</span>`:''}${kt?`<span class="cc ket">${icon('note',11)} ket</span>`:''}`:'<span class="cc muted">belum diisi</span>';
 const nl=$(`[data-inet="${k}"]`);if(nl)nl.innerHTML=`${icon('sigma',14)} Hasil bersih kegiatan ini <b>${fNum(net)}</b> ${j.unit}<span class="calc">${fNum(h)} − ${fNum(r)}</span>`;
 const tl=$(`[data-itime="${k}"]`);if(tl)tl.innerHTML=`${icon('timer',14)} Total waktu kegiatan ini <b>${fMin(w)}</b><span class="calc">${num(it.prep)} + ${num(it.setting)} + ${num(it.ops)} mnt</span>`;
 const si=document.getElementById('sn-'+k);if(si)si.classList.toggle('has',!!sn);
+const li=document.getElementById('lot-'+k);if(li)li.classList.toggle('has',!!lot);
 const raw=String(it.ket||''),kc=$(`[data-kc="${k}"]`),kh=$(`[data-kh="${k}"]`),ki=document.getElementById('k-'+k);
 if(kc){kc.textContent=`${raw.length}/${KMAX}`;kc.classList.toggle('near',raw.length>KMAX-40)}
 if(ki)ki.classList.toggle('has',!!kt);
@@ -1975,7 +2003,8 @@ pn.classList.toggle('zero',net===0);pn.classList.toggle('neg',net<0);
 if(lastNet!==null&&lastNet!==net){pn.classList.remove('bump');void pn.offsetWidth;pn.classList.add('bump')}lastNet=net;
 $('#sWaktu').textContent=fMin(tw);$('#sSplit').innerHTML=split(pw,xw,'kegiatan lain');
 $('#bdBar').innerHTML=bdSeg(p,s,oo,xw);$('#bdLeg').innerHTML=bdLeg(p,s,oo,xw);
-$('#sItems').innerHTML=f.items.map((i,x)=>`<div class="sir"><span class="sii">${pad(x+1)}</span><span class="sin">${esc(i.nama)||'<i>belum diisi</i>'}</span>${iK(i)?`<span class="sino">${icon('note',11)}</span>`:''}<span class="sit">${fMin(iW(i))}</span><span class="siv net">${fNum(iN(i))}</span></div>`).join('');
+$('#sItems').innerHTML=f.items.map((i,x)=>{const sn=iSN(i),lot=iLOT(i);
+return `<div class="sir"><span class="sii">${pad(x+1)}</span><span class="sin">${esc(i.nama)||'<i>belum diisi</i>'}</span>${iK(i)?`<span class="sino">${icon('note',11)}</span>`:''}<span class="sit">${fMin(iW(i))}</span><span class="siv net">${fNum(iN(i))}</span></div>${sn||lot?`<div class="strace">${sn?`<span class="s1">SN ${esc(clip(sn,18))}</span>`:''}${lot?`<span class="s2">LOT ${esc(clip(lot,18))}</span>`:''}</div>`:''}`}).join('');
 $('#sExCount').textContent=`${ex.length} kegiatan · ${fMin(xw)}`;
 $('#sExList').innerHTML=f.hasExtra==='ya'?(ex.length?ex.map((x,i)=>`<div class="sir"><span class="sii" style="background:var(--plum);color:#fff">L${pad(i+1)}</span><span class="sin">${esc(x.ket)||'<i>belum diisi</i>'}</span><span class="siv" style="color:var(--plum)">${fMin(num(x.waktu))}</span></div>`).join(''):'<div class="sir"><span class="sin muted">Belum ada kegiatan</span></div>'):'<div class="sir"><span class="sin muted">Tidak ada kegiatan lainnya</span></div>';
 $('#mbsF').innerHTML=`bersih <b class="net">${fNum(net)}</b> ${j.unit} · waktu <b>${fMin(tw)}</b>`;
@@ -2022,6 +2051,8 @@ if(!/^\d{6,14}$/.test(String(it.po).trim()))bad(q('po'),'PO: 6–14 digit angka.
 if(!/^\d{3,10}$/.test(String(it.spk).trim()))bad(q('spk'),'SPK: 3–10 digit angka.',a);
 const sn=iSN(it);
 if(sn&&(sn.length<3||sn.length>SNMAX))bad(q('sn'),`SN Jumbo Roll: 3–${SNMAX} karakter (atau kosongkan).`,a);
+const lot=iLOT(it);
+if(lot&&(lot.length<3||lot.length>LOTMAX))bad(q('lot'),`LOT Tinta: 3–${LOTMAX} karakter (atau kosongkan).`,a);
 [['prep','Persiapan'],['setting','Setting'],['ops','Operasional']].forEach(([k,l])=>{const v=it[k];if(v===''||!Number.isInteger(Number(v))||num(v)<0||num(v)>1440)bad(q(k),l+': bulat 0–1440 menit.',a)});
 [['hasil','Hasil'],['reject','Reject']].forEach(([k,l])=>{const v=it[k];if(v===''||!Number.isInteger(Number(v))||num(v)<0)bad(q(k),l+': angka bulat ≥ 0.',a)});
 if(num(it.reject)>num(it.hasil))bad(q('reject'),'Reject melebihi hasil.',a);
@@ -2044,7 +2075,7 @@ sfx.save();S.form={...bForm(),...keep};S.hl=r.id;lastNet=null;buildSelects();syn
 setView('history');toast(msg,{icon:'checkCircle',duration:4200});setTimeout(()=>openDrawer(r.id),380)}
 async function saveProd(){if(!vProd())return;const f=S.form;
 const p={date:f.date,shift:f.shift,operatorId:f.operatorId,jenis:f.jenis,
-items:f.items.map(i=>({nama:i.nama.trim(),po:String(i.po).trim(),spk:String(i.spk).trim(),sn:iSN(i).slice(0,SNMAX),prep:num(i.prep),setting:num(i.setting),ops:num(i.ops),hasil:num(i.hasil),reject:num(i.reject),ket:iK(i).slice(0,KMAX)})),
+items:f.items.map(i=>({nama:i.nama.trim(),po:String(i.po).trim(),spk:String(i.spk).trim(),sn:iSN(i).slice(0,SNMAX),lot:iLOT(i).slice(0,LOTMAX),prep:num(i.prep),setting:num(i.setting),ops:num(i.ops),hasil:num(i.hasil),reject:num(i.reject),ket:iK(i).slice(0,KMAX)})),
 agenda:[],hasAgenda:null,extra:f.hasExtra==='ya'?f.extra.map(x=>({waktu:num(x.waktu),ket:x.ket.trim()})):[]};
 const id=f.mode==='edit'?f.editId:null;lock(true);
 try{const r=await DB.saveReport(p,id);upsert(r);afterSave(r,`<b>${esc(r.code)}</b> ${id?'diperbarui':'tersimpan'} · bersih <b>${fNum(rN(r))}</b> ${JENIS[r.jenis].unit} · waktu <b>${fMin(rW(r))}</b>.`)}
@@ -2058,7 +2089,7 @@ catch(e){toast('Gagal menyimpan: '+esc(e.message),{type:'error',icon:'alert'});s
 function startEdit(id){const r=byId(id);if(!r)return;
 if(!canEdit(r)){toast(r.status==='verified'?'Laporan terverifikasi dan terkunci.':'Anda tidak berhak mengubah laporan ini.',{type:'warn',icon:'alert'});return}
 S.form={mode:'edit',editId:id,operatorId:r.operatorId,date:r.date,shift:shNorm(r.shift),jenis:r.jenis,multi:(r.items||[]).length>1,
-items:(r.items&&r.items.length)?r.items.map(i=>({...i,sn:i.sn||'',ket:i.ket||'',key:uid()})):[bItem()],
+items:(r.items&&r.items.length)?r.items.map(i=>({...i,sn:i.sn||'',lot:i.lot||'',ket:i.ket||'',key:uid()})):[bItem()],
 hasAgenda:r.hasAgenda===false?'tidak':'ya',agenda:(r.agenda&&r.agenda.length)?r.agenda.map(a=>({...a,key:uid()})):[bAg()],
 hasExtra:(r.extra&&r.extra.length)?'ya':'tidak',extra:(r.extra&&r.extra.length)?r.extra.map(e=>({...e,ket:e.ket||'',key:uid()})):[bEx()]};
 if(!isOp(S.form.operatorId))S.form.operatorId=S.me.role==='operator'?S.me.kode:'';
@@ -2066,18 +2097,18 @@ lastNet=null;buildSelects();syncIdent();closeDrawer();setView(r.jenis==='lainnya
 toast(`Mode edit aktif — <b>${esc(r.code)}</b>.`,{type:'info',icon:'pencil'});sfx.open()}
 function dup(id){const r=byId(id);if(!r)return;
 S.form={mode:'create',editId:null,operatorId:r.operatorId,date:today(),shift:shNorm(r.shift),jenis:r.jenis,multi:(r.items||[]).length>1,
-items:(r.items&&r.items.length)?r.items.map(i=>({...i,sn:i.sn||'',ket:i.ket||'',key:uid()})):[bItem()],
+items:(r.items&&r.items.length)?r.items.map(i=>({...i,sn:i.sn||'',lot:i.lot||'',ket:i.ket||'',key:uid()})):[bItem()],
 hasAgenda:r.hasAgenda===false?'tidak':'ya',agenda:(r.agenda&&r.agenda.length)?r.agenda.map(a=>({...a,key:uid()})):[bAg()],
 hasExtra:(r.extra&&r.extra.length)?'ya':'tidak',extra:(r.extra&&r.extra.length)?r.extra.map(e=>({...e,ket:e.ket||'',key:uid()})):[bEx()]};
 if(!isOp(S.form.operatorId))S.form.operatorId=S.me.role==='operator'?S.me.kode:'';
 lastNet=null;buildSelects();syncIdent();closeDrawer();setView(r.jenis==='lainnya'?'other':'detail');
-toast('Laporan disalin — periksa tanggal, SN jumbo roll &amp; keterangan, lalu simpan.',{type:'info',icon:'copy'});sfx.tick()}
-const dirty=()=>S.form.mode==='edit'||(S.me&&S.me.role!=='operator'&&!!S.form.operatorId)||S.form.items.some(i=>['nama','po','spk','sn','prep','setting','ops','hasil','reject','ket'].some(k=>String(i[k]??'').trim()!==''))||S.form.agenda.some(a=>a.kategori||String(a.deskripsi).trim()||a.waktu!=='')||S.form.hasExtra==='ya';
+toast('Laporan disalin — periksa tanggal, SN jumbo roll, LOT tinta &amp; keterangan, lalu simpan.',{type:'info',icon:'copy',duration:4600});sfx.tick()}
+const dirty=()=>S.form.mode==='edit'||(S.me&&S.me.role!=='operator'&&!!S.form.operatorId)||S.form.items.some(i=>['nama','po','spk','sn','lot','prep','setting','ops','hasil','reject','ket'].some(k=>String(i[k]??'').trim()!==''))||S.form.agenda.some(a=>a.kategori||String(a.deskripsi).trim()||a.waktu!=='')||S.form.hasExtra==='ya';
 const CMP={dateDesc:(a,b)=>b.date.localeCompare(a.date)||b.createdAt-a.createdAt,dateAsc:(a,b)=>a.date.localeCompare(b.date)||a.createdAt-b.createdAt,
 netDesc:(a,b)=>rN(b)-rN(a),netAsc:(a,b)=>rN(a)-rN(b),hasilDesc:(a,b)=>rH(b)-rH(a),hasilAsc:(a,b)=>rH(a)-rH(b),
 rejectDesc:(a,b)=>rJ(b)-rJ(a),rejectAsc:(a,b)=>rJ(a)-rJ(b),waktuDesc:(a,b)=>rW(b)-rW(a),waktuAsc:(a,b)=>rW(a)-rW(b),
 operatorAsc:(a,b)=>opOf(a).nama.localeCompare(opOf(b).nama)};
-const hay=r=>{const o=opOf(r);return[r.code,r.date,shLabel(r.shift),o.nama,o.jabatan,(JENIS[r.jenis]||{}).label,(ST[r.status]||{}).label,r.catatan||'',...(r.items||[]).flatMap(i=>[i.nama,i.po,i.spk,i.sn||'',i.ket||'']),...(r.agenda||[]).flatMap(a=>[a.kategori,a.deskripsi]),...(r.extra||[]).map(e=>e.ket)].join(' ').toLowerCase()};
+const hay=r=>{const o=opOf(r);return[r.code,r.date,shLabel(r.shift),o.nama,o.jabatan,(JENIS[r.jenis]||{}).label,(ST[r.status]||{}).label,r.catatan||'',...(r.items||[]).flatMap(i=>[i.nama,i.po,i.spk,i.sn||'',i.lot||'',i.ket||'']),...(r.agenda||[]).flatMap(a=>[a.kategori,a.deskripsi]),...(r.extra||[]).map(e=>e.ket)].join(' ').toLowerCase()};
 function filtered(){let a=vis();const f=S.f,T=today();
 if(f.period!=='all'){const c=f.period==='today'?T:addDays(T,-(Number(f.period)-1));a=a.filter(r=>r.date>=c)}
 if(f.operator!=='all')a=a.filter(r=>r.operatorId===f.operator);
@@ -2107,10 +2138,12 @@ return `<tr data-row="${r.id}" class="${s?'selected':''}">
 <td class="ta-r"><span class="mono">${fMin(w)}</span>${x?`<br><small class="muted mono" style="font-size:9px">+${fMin(x)} lain</small>`:''}</td>
 <td class="ta-r"><div class="racts">${rowActs(r)}</div></td></tr>`}
 function cardHTML(r){const o=opOf(r),h=rH(r),j=rJ(r),n=h-j,w=rW(r),x=rXW(r)+rAW(r),rt=rate(h,j),s=S.sel.has(r.id),p=r.jenis!=='lainnya',k=rK1(r),kc=rKC(r);
+const sns=[...new Set((r.items||[]).map(i=>iSN(i)).filter(Boolean))],lots=[...new Set((r.items||[]).map(i=>iLOT(i)).filter(Boolean))];
 return `<article class="rcard ${s?'selected':''}" data-row="${r.id}">
 <div class="rct"><input type="checkbox" data-chk="${r.id}" ${s?'checked':''} aria-label="Pilih ${esc(r.code)}"><div class="cd"><b>${fDate(r.date)}</b><span class="code">${esc(r.code)} · ${shShort(r.shift)}</span></div>${jB(r.jenis)}${sB(r.status)}</div>
 <div class="rcop"><span class="av sm" style="--av:${o.warna||'#999'}">${ini(o.nama)}</span><b>${esc(o.nama)}</b><small>${esc(o.mesin||'')}</small></div>
 <div class="rcsum">${sumText(r)}</div>
+${sns.length||lots.length?`<div class="rctrace">${sns.slice(0,2).map(v=>`<span class="s1">SN ${esc(clip(v,16))}</span>`).join('')}${lots.slice(0,2).map(v=>`<span class="s2">LOT ${esc(clip(v,16))}</span>`).join('')}</div>`:''}
 ${k?`<div class="rcket">${icon('note',13)}<span>${esc(clip(k,120))}${kc>1?` <b>+${kc-1} lagi</b>`:''}</span></div>`:''}
 ${p?`<div class="rcnet ${nCls(n)}"><div><label>TOTAL HASIL BERSIH</label><b>${fNum(n)} <span style="font-size:11px">${JENIS[r.jenis].unit}</span></b></div><span class="calc">${fNum(h)} − ${fNum(j)}</span></div>`:''}
 <div class="rcst"><div class="rcs"><label>HASIL</label><b>${p?fNum(h):'—'} <small>${p?JENIS[r.jenis].unit:''}</small></b></div><div class="rcs"><label>REJECT</label><b>${p?fNum(j):'—'} ${p?`<small>${rt.toFixed(1)}%</small>`:''}</b></div><div class="rcs time"><label>WAKTU TOTAL</label><b>${fMin(w)}</b></div><div class="rcs"><label>KEG. LAINNYA</label><b>${fMin(x)}</b></div></div>
@@ -2234,7 +2267,7 @@ $('#pRoll').innerHTML=r.length?r.map(row).join(''):'<p class="muted sm">Belum ad
 if(isK())$('#sysPanel').innerHTML=`<div class="sysg">
 <div class="sysc"><h4>${icon('building',15)} Koneksi Data</h4><p>${S.mode==='cloud'?'Terhubung ke Supabase — data bersama dengan RLS.':'Mode lokal — data hanya di perangkat ini.'}</p><button class="btn btn-ghost btn-sm" data-act="setup">${S.mode==='cloud'?'Ubah Koneksi':'Hubungkan Supabase'}</button></div>
 <div class="sysc"><h4>${icon('key',15)} Permintaan Sandi</h4><p>${prPending()} permintaan menunggu verifikasi kepala produksi.</p><button class="btn btn-ghost btn-sm" data-act="goto-sandi">Buka Antrean</button></div>
-<div class="sysc"><h4>${icon('sheet',15)} Export Excel</h4><p>Rekap .xlsx — lebar kolom sudah pas, tanpa mengubah ukuran sel.</p><button class="btn btn-x btn-sm" data-act="xlsx">Export Excel Sekarang</button></div>
+<div class="sysc"><h4>${icon('sheet',15)} Export Excel</h4><p>Rekap .xlsx — SN jumbo roll &amp; LOT tinta disertakan, kolom sudah pas.</p><button class="btn btn-x btn-sm" data-act="xlsx">Export Excel Sekarang</button></div>
 <div class="sysc"><h4>${icon('download',15)} Cadangan Data</h4><p>Unduh laporan, pengguna, dan produk sebagai JSON.</p><button class="btn btn-ghost btn-sm" data-act="backup">Unduh Cadangan JSON</button></div>
 <div class="sysc"><h4>${icon('activity',15)} Diagnosa Sistem Akun</h4><p>Periksa direktori login, permintaan sandi, Edge Function, dan RLS.</p><button class="btn btn-ghost btn-sm" data-act="goto-diag">Buka Diagnosa</button></div>
 ${S.mode==='cloud'?'':`<div class="sysc"><h4>${icon('alert',15)} Reset Data Demo</h4><p>Kembalikan data lokal ke contoh bawaan.</p><button class="btn btn-danger btn-sm" data-act="reset-demo">Reset Data Demo</button></div>`}</div>`}
@@ -2412,10 +2445,10 @@ else s+=`<div class="dnote2">${icon('info',15)}<span>Operator melaporkan <b>tida
 s+=`<div class="dtot"><div class="dtime" style="margin-bottom:0"><label>TOTAL WAKTU · DI LUAR JOBDESK</label><div class="dttime">${fMin(w)}</div><div class="dtsplit">${ags.length} agenda terjumlah</div></div>${ags.length?`<div class="dbrk">${ags.map((a,i)=>`<div class="br"><i style="background:var(--plum)"></i><span class="nm">A${pad(i+1)} · ${esc(a.kategori)}</span><b>${fMin(num(a.waktu))}</b></div>`).join('')}</div>`:''}</div>`}
 else{const items=r.items||[];
 s+=`<div class="dl">ITEM PRODUKSI (${items.length})<span class="lt">${icon('timer',10)} total ${fMin(pw)}</span>${rKC(r)?`<span class="lt plum">${icon('note',10)} ${rKC(r)} keterangan</span>`:''}</div>`;
-s+=items.map((it,i)=>{const ih=num(it.hasil),ir=num(it.reject),rt=rate(ih,ir),iw=iW(it),k=iK(it),sn=iSN(it);
+s+=items.map((it,i)=>{const ih=num(it.hasil),ir=num(it.reject),rt=rate(ih,ir),iw=iW(it),k=iK(it),sn=iSN(it),lot=iLOT(it);
 return `<div class="di"><div class="dih"><span class="iidx">ITEM ${pad(i+1)}</span><span class="cc ${rCls(rt)}">${rt.toFixed(1)}% reject</span></div><div class="dnm">${esc(it.nama)}</div>
 <div class="dg2 two"><div class="dc"><label>NO. PO</label><b>${esc(it.po)}</b></div><div class="dc"><label>NO. SPK</label><b>${esc(it.spk)}</b></div></div>
-<div class="dg2 one"><div class="dc sn"><label>NO. SN JUMBO ROLL</label><b>${sn?esc(sn):'—'}</b></div></div>
+<div class="dg2 two"><div class="dc sn"><label>NO. SN JUMBO ROLL</label><b>${sn?esc(sn):'—'}</b></div><div class="dc lot"><label>NO. LOT TINTA</label><b>${lot?esc(lot):'—'}</b></div></div>
 <div class="dg2"><div class="dc"><label>PERSIAPAN</label><b>${num(it.prep)}′</b></div><div class="dc"><label>SETTING</label><b>${num(it.setting)}′</b></div><div class="dc"><label>OPERASIONAL</label><b>${num(it.ops)}′</b></div></div>
 <div class="dg2 two"><div class="dc hl"><label>HASIL</label><b>${fNum(ih)} <small>${j.unit}</small></b></div><div class="dc warn"><label>REJECT</label><b>${fNum(ir)} <small>${j.unit}</small></b></div></div>
 ${k?`<div class="dket">${icon('note',13)}<div><label>KETERANGAN</label><p>${esc(k)}</p></div></div>`:(ir>0?`<div class="dket" style="border-left-color:var(--amber)">${icon('alert',13)}<div><label>KETERANGAN</label><p style="color:#B26F05">Belum diisi — ada ${fNum(ir)} ${j.unit} reject tanpa penjelasan.</p></div></div>`:'')}
@@ -2453,12 +2486,12 @@ a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.cli
 catch(e){toast('Unduhan gagal di perangkat ini.',{type:'error',icon:'alert'})}}
 function csvExport(rows){if(!canE()){toast('Export tidak tersedia untuk operator.',{type:'warn',icon:'alert'});return}
 if(!rows.length){toast('Tidak ada data.',{type:'warn',icon:'alert'});return}
-const head=['Kode','Tanggal','Shift','Operator','Jabatan','Jenis','Status','Verifikator','Item / Kegiatan','PO','SPK','SN Jumbo Roll','Persiapan','Setting','Operasional','Total Waktu Kegiatan','Waktu Lain','Total Waktu Laporan','Hasil','Satuan','Reject','Bersih','Keterangan'];
+const head=['Kode','Tanggal','Shift','Operator','Jabatan','Jenis','Status','Verifikator','Item / Kegiatan','PO','SPK','SN Jumbo Roll','LOT Tinta','Persiapan','Setting','Operasional','Total Waktu Kegiatan','Waktu Lain','Total Waktu Laporan','Hasil','Satuan','Reject','Bersih','Keterangan'];
 const L=[head];rows.forEach(r=>{const o=opOf(r),vb=r.verifiedBy?(prof(r.verifiedBy)||dirOf(r.verifiedBy)||{nama:r.verifiedBy}).nama:'';
 const b=[r.code,r.date,shLabel(r.shift),o.nama,o.jabatan||'',JENIS[r.jenis].label,(ST[r.status]||{}).label,vb],t=rW(r);
-if(r.jenis==='lainnya'){if(r.agenda&&r.agenda.length)r.agenda.forEach(a=>L.push([...b,a.kategori,'','','','','','',num(a.waktu),'',t,'','','','',a.deskripsi]));else L.push([...b,'','','','','','','','','',t,'','','','','Tanpa agenda'])}
-else{const u=JENIS[r.jenis].unit;r.items.forEach(i=>L.push([...b,i.nama,i.po,i.spk,iSN(i),num(i.prep),num(i.setting),num(i.ops),iW(i),'',t,num(i.hasil),u,num(i.reject),iN(i),iK(i)]));
-(r.extra||[]).forEach(x=>L.push([...b,'Kegiatan Lainnya','','','','','','','',num(x.waktu),t,'','','','',x.ket]))}});
+if(r.jenis==='lainnya'){if(r.agenda&&r.agenda.length)r.agenda.forEach(a=>L.push([...b,a.kategori,'','','','','','','',num(a.waktu),'',t,'','','','',a.deskripsi]));else L.push([...b,'','','','','','','','','','',t,'','','','','Tanpa agenda'])}
+else{const u=JENIS[r.jenis].unit;r.items.forEach(i=>L.push([...b,i.nama,i.po,i.spk,iSN(i),iLOT(i),num(i.prep),num(i.setting),num(i.ops),iW(i),'',t,num(i.hasil),u,num(i.reject),iN(i),iK(i)]));
+(r.extra||[]).forEach(x=>L.push([...b,'Kegiatan Lainnya','','','','','','','','',num(x.waktu),t,'','','','',x.ket]))}});
 dl('\uFEFF'+L.map(l=>l.map(c=>'"'+String(c??'').replace(/"/g,'""')+'"').join(';')).join('\r\n'),'text/csv;charset=utf-8','laporan-produksi_'+today()+'.csv');
 toast(`${rows.length} laporan diexport CSV.`,{icon:'download'});sfx.tick()}
 const CT=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
@@ -2509,24 +2542,25 @@ return zip([{name:'[Content_Types].xml',data:ct},{name:'_rels/.rels',data:rels},
 const vName=r=>r.verifiedBy?(prof(r.verifiedBy)||dirOf(r.verifiedBy)||{nama:r.verifiedBy}).nama:'';
 function xlsxExport(rows,label){if(!canE()){toast('Export Excel hanya untuk kepala produksi & admin.',{type:'warn',icon:'alert'});return}
 if(!rows||!rows.length){toast('Tidak ada data untuk diexport.',{type:'warn',icon:'alert'});return}
-try{const dc=[{l:'Kode Laporan',w:15,t:'code'},{l:'Tanggal',w:13,t:'center'},{l:'Shift',w:11,t:'center'},{l:'Operator',w:15},{l:'Jabatan / Mesin',w:24,wrap:1},{l:'Jenis Kegiatan',w:16,wrap:1},{l:'Status',w:17,wrap:1},{l:'Item / Kegiatan',w:44,wrap:1},{l:'No. PO',w:14,t:'code'},{l:'No. SPK',w:11,t:'code'},{l:'No. SN Jumbo Roll',w:19,t:'code'},{l:'Persiapan (mnt)',w:12,t:'int'},{l:'Setting (mnt)',w:11,t:'int'},{l:'Operasional (mnt)',w:13,t:'int'},{l:'Total Waktu (mnt)',w:13,t:'int'},{l:'Hasil',w:10,t:'int'},{l:'Satuan',w:9,t:'center'},{l:'Reject',w:9,t:'reject'},{l:'Hasil Bersih',w:12,t:'net'},{l:'Reject %',w:10,t:'pct'},{l:'Keterangan',w:50,wrap:1},{l:'Verifikator',w:15}];
+try{const dc=[{l:'Kode Laporan',w:15,t:'code'},{l:'Tanggal',w:13,t:'center'},{l:'Shift',w:11,t:'center'},{l:'Operator',w:15},{l:'Jabatan / Mesin',w:24,wrap:1},{l:'Jenis Kegiatan',w:16,wrap:1},{l:'Status',w:17,wrap:1},{l:'Item / Kegiatan',w:44,wrap:1},{l:'No. PO',w:14,t:'code'},{l:'No. SPK',w:11,t:'code'},{l:'No. SN Jumbo Roll',w:19,t:'code'},{l:'No. LOT Tinta',w:18,t:'code'},{l:'Persiapan (mnt)',w:12,t:'int'},{l:'Setting (mnt)',w:11,t:'int'},{l:'Operasional (mnt)',w:13,t:'int'},{l:'Total Waktu (mnt)',w:13,t:'int'},{l:'Hasil',w:10,t:'int'},{l:'Satuan',w:9,t:'center'},{l:'Reject',w:9,t:'reject'},{l:'Hasil Bersih',w:12,t:'net'},{l:'Reject %',w:10,t:'pct'},{l:'Keterangan',w:50,wrap:1},{l:'Verifikator',w:15}];
 const det=[];rows.forEach(r=>{const o=opOf(r),b=[r.code,r.date,shShort(r.shift),o.nama,o.jabatan||o.mesin||'',JENIS[r.jenis].label,(ST[r.status]||{}).label],vb=vName(r);
-if(r.jenis==='lainnya'){const a=r.agenda||[];if(a.length)a.forEach(x=>det.push([...b,`${x.kategori} — ${x.deskripsi}`,'','','',0,0,0,num(x.waktu),0,'',0,0,0,x.deskripsi,vb]));else det.push([...b,'Tanpa agenda di luar jobdesk','','','',0,0,0,0,0,'',0,0,0,'',vb])}
-else{const u=JENIS[r.jenis].unit;(r.items||[]).forEach(i=>{const h=num(i.hasil),j=num(i.reject);det.push([...b,i.nama,i.po,i.spk,iSN(i),num(i.prep),num(i.setting),num(i.ops),iW(i),h,u,j,h-j,Number(rate(h,j).toFixed(1)),iK(i),vb])});
-(r.extra||[]).forEach(x=>det.push([...b,'Kegiatan Lainnya: '+x.ket,'','','',0,0,0,num(x.waktu),0,'',0,0,0,x.ket,vb]))}});
-const rc=[{l:'Kode Laporan',w:15,t:'code'},{l:'Tanggal',w:13,t:'center'},{l:'Shift',w:24,wrap:1},{l:'Operator',w:15},{l:'Jenis',w:16,wrap:1},{l:'Status',w:17,wrap:1},{l:'Jml Item / Agenda',w:12,t:'int'},{l:'Hasil',w:10,t:'int'},{l:'Satuan',w:9,t:'center'},{l:'Reject',w:9,t:'reject'},{l:'Hasil Bersih',w:12,t:'net'},{l:'Reject %',w:10,t:'pct'},{l:'Waktu Produksi (mnt)',w:14,t:'int'},{l:'Waktu Lain (mnt)',w:13,t:'int'},{l:'Total Waktu (mnt)',w:13,t:'int'},{l:'Verifikator',w:15},{l:'SN Jumbo Roll terpakai',w:34,wrap:1},{l:'Catatan / Keterangan',w:52,wrap:1}];
+if(r.jenis==='lainnya'){const a=r.agenda||[];if(a.length)a.forEach(x=>det.push([...b,`${x.kategori} — ${x.deskripsi}`,'','','','',0,0,0,num(x.waktu),0,'',0,0,0,x.deskripsi,vb]));else det.push([...b,'Tanpa agenda di luar jobdesk','','','','',0,0,0,0,0,'',0,0,0,'',vb])}
+else{const u=JENIS[r.jenis].unit;(r.items||[]).forEach(i=>{const h=num(i.hasil),j=num(i.reject);det.push([...b,i.nama,i.po,i.spk,iSN(i),iLOT(i),num(i.prep),num(i.setting),num(i.ops),iW(i),h,u,j,h-j,Number(rate(h,j).toFixed(1)),iK(i),vb])});
+(r.extra||[]).forEach(x=>det.push([...b,'Kegiatan Lainnya: '+x.ket,'','','','',0,0,0,num(x.waktu),0,'',0,0,0,x.ket,vb]))}});
+const rc=[{l:'Kode Laporan',w:15,t:'code'},{l:'Tanggal',w:13,t:'center'},{l:'Shift',w:24,wrap:1},{l:'Operator',w:15},{l:'Jenis',w:16,wrap:1},{l:'Status',w:17,wrap:1},{l:'Jml Item / Agenda',w:12,t:'int'},{l:'Hasil',w:10,t:'int'},{l:'Satuan',w:9,t:'center'},{l:'Reject',w:9,t:'reject'},{l:'Hasil Bersih',w:12,t:'net'},{l:'Reject %',w:10,t:'pct'},{l:'Waktu Produksi (mnt)',w:14,t:'int'},{l:'Waktu Lain (mnt)',w:13,t:'int'},{l:'Total Waktu (mnt)',w:13,t:'int'},{l:'Verifikator',w:15},{l:'SN Jumbo Roll terpakai',w:32,wrap:1},{l:'LOT Tinta terpakai',w:28,wrap:1},{l:'Catatan / Keterangan',w:52,wrap:1}];
 const rec=rows.map(r=>{const o=opOf(r),p=r.jenis!=='lainnya',h=rH(r),j=rJ(r),k=[rK1(r),r.catatan||''].filter(Boolean).join(' · ');
 const sns=[...new Set((r.items||[]).map(i=>iSN(i)).filter(Boolean))].join(', ');
-return[r.code,r.date,shLabel(r.shift),o.nama,JENIS[r.jenis].label,(ST[r.status]||{}).label,p?(r.items||[]).length:(r.agenda||[]).length,h,p?JENIS[r.jenis].unit:'—',j,h-j,Number(rate(h,j).toFixed(1)),rPW(r),rXW(r)+rAW(r),rW(r),vName(r),sns,k]});
+const lots=[...new Set((r.items||[]).map(i=>iLOT(i)).filter(Boolean))].join(', ');
+return[r.code,r.date,shLabel(r.shift),o.nama,JENIS[r.jenis].label,(ST[r.status]||{}).label,p?(r.items||[]).length:(r.agenda||[]).length,h,p?JENIS[r.jenis].unit:'—',j,h-j,Number(rate(h,j).toFixed(1)),rPW(r),rXW(r)+rAW(r),rW(r),vName(r),sns,lots,k]});
 const th=rows.reduce((a,r)=>a+rH(r),0),tj=rows.reduce((a,r)=>a+rJ(r),0),tw=rows.reduce((a,r)=>a+rW(r),0);
-rec.push(['TOTAL','','','',rows.length+' laporan','',rows.reduce((a,r)=>a+(r.jenis==='lainnya'?(r.agenda||[]).length:(r.items||[]).length),0),th,'unit',tj,th-tj,Number(rate(th,tj).toFixed(1)),rows.reduce((a,r)=>a+rPW(r),0),rows.reduce((a,r)=>a+rXW(r)+rAW(r),0),tw,'','','']);
+rec.push(['TOTAL','','','',rows.length+' laporan','',rows.reduce((a,r)=>a+(r.jenis==='lainnya'?(r.agenda||[]).length:(r.items||[]).length),0),th,'unit',tj,th-tj,Number(rate(th,tj).toFixed(1)),rows.reduce((a,r)=>a+rPW(r),0),rows.reduce((a,r)=>a+rXW(r)+rAW(r),0),tw,'','','','']);
 const scope=label||(S.f.arch?'Arsip':({all:'Semua Periode',today:'Hari Ini','7':'7 Hari Terakhir','30':'30 Hari Terakhir'}[S.f.period]||'Semua Periode'));
 const sub=`${scope} · ${rows.length} laporan · ${det.length} baris rincian · diekspor ${new Date().toLocaleString('id-ID')} oleh ${S.me.nama} (${ROLES[S.me.role].label})`;
 const bytes=buildXlsx([{name:'Detail Produksi',title:'MHI PAPER — DETAIL LAPORAN HARIAN PRODUKSI',sub,cols:dc,rows:det},{name:'Rekap Laporan',title:'MHI PAPER — REKAP PER LAPORAN',sub:sub+' · bersih = hasil − reject',cols:rc,rows:rec}],'MHI PAPER — Laporan Harian Produksi');
 dl(bytes,'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',`MHI-PAPER_Laporan_${today()}.xlsx`);sfx.save();
-toast(`<b>${rows.length} laporan</b> diexport ke Excel — 2 sheet, kolom SN Jumbo Roll disertakan.`,{icon:'sheet',duration:5200})}
+toast(`<b>${rows.length} laporan</b> diexport ke Excel — SN Jumbo Roll &amp; LOT Tinta disertakan.`,{icon:'sheet',duration:5200})}
 catch(e){toast('Export Excel gagal: '+esc(e.message||String(e)),{type:'error',icon:'alert',duration:6000});sfx.err()}}
-const pHead=(t,s)=>`<div class="p-head"><div class="p-brand"><div class="p-logo">M</div><div><b>MHI PAPER</b><small>Produksi Kertas ECG/EKG dan Plain</small></div></div><div class="p-doc">FORM LH-ECG-01<br>REV. 20</div></div><div class="p-title">${t}</div><p class="p-sub">${s}</p>`;
+const pHead=(t,s)=>`<div class="p-head"><div class="p-brand"><div class="p-logo">M</div><div><b>MHI PAPER</b><small>Produksi Kertas ECG/EKG dan Plain</small></div></div><div class="p-doc">FORM LH-ECG-01<br>REV. 21</div></div><div class="p-title">${t}</div><p class="p-sub">${s}</p>`;
 const pFoot=()=>`<div class="p-foot">Dicetak: ${new Date().toLocaleString('id-ID')} · ${S.me?esc(S.me.nama)+' ('+ROLES[S.me.role].label+')':''} · Bersih = hasil − reject · MHI PAPER.</div>`;
 const sign=(o,v)=>`<table class="p-sign"><tr><td>Dibuat oleh,<br><br><br><br><u>&nbsp;&nbsp;${esc(o||'________________')}&nbsp;&nbsp;</u><br><small>Operator</small></td><td>Diperiksa oleh,<br><br><br><br><u>&nbsp;&nbsp;${esc(v||'________________')}&nbsp;&nbsp;</u><br><small>Admin Produksi</small></td><td>Disetujui oleh,<br><br><br><br><u>&nbsp;&nbsp;________________&nbsp;&nbsp;</u><br><small>Kepala Produksi</small></td></tr></table>`;
 function printRecap(){if(!canE()){toast('Cetak rekap tidak tersedia untuk operator.',{type:'warn',icon:'alert'});return}
@@ -2537,13 +2571,13 @@ const trs=rows.map(r=>{const o=opOf(r),j=JENIS[r.jenis],h=rH(r),rej=rJ(r),n=h-re
 const p=r.jenis!=='lainnya';
 const xd=(r.extra&&r.extra.length)?'<br><b>Kegiatan Lainnya ('+fMin(rXW(r))+'):</b><br>'+r.extra.map(v=>`${esc(v.ket)} — <b>${fMin(num(v.waktu))}</b>`).join('<br>'):'';
 const d=p?r.items.map(i=>`${esc(i.nama)} — <b>${fNum(num(i.hasil))} ${j.unit}</b>${num(i.reject)?`, reject ${fNum(num(i.reject))}`:''}<br><small>Bersih ${fNum(iN(i))} ${j.unit} · Waktu ${fMin(iW(i))}</small>${iK(i)?`<br><small><i>Ket: ${esc(iK(i))}</i></small>`:''}`).join('<br>')+xd:(r.agenda.length?r.agenda.map(a=>`${esc(a.kategori)}: ${esc(a.deskripsi)}<br><small>Waktu ${fMin(num(a.waktu))}</small>`).join('<br>'):'Tanpa agenda');
-const rf=p?r.items.map(i=>`PO ${esc(i.po)} / SPK ${esc(i.spk)}${iSN(i)?`<br>SN ${esc(iSN(i))}`:''}`).join('<br>'):'—';
+const rf=p?r.items.map(i=>`PO ${esc(i.po)} / SPK ${esc(i.spk)}${iSN(i)?`<br>SN ${esc(iSN(i))}`:''}${iLOT(i)?`<br>LOT ${esc(iLOT(i))}`:''}`).join('<br>'):'—';
 const pt=p?[...r.items.map(i=>fMin(iW(i))),...(r.extra||[]).map(v=>fMin(num(v.waktu)))].join('<br>'):(r.agenda||[]).map(a=>fMin(num(a.waktu))).join('<br>')||'—';
 return `<tr><td>${fDate(r.date)}<br><small>${shShort(r.shift)} · ${esc(r.code)}</small></td><td>${esc(o.nama)}<br><small>${esc(o.jabatan||'')}</small></td><td>${j.short}<br><small>${(ST[r.status]||{}).short}</small></td><td>${d}</td><td><small>${rf}</small></td><td class="r tc"><small>${pt}</small></td><td class="r">${p?fNum(h)+' '+j.unit:'—'}</td><td class="r">${p?fNum(rej):'—'}</td><td class="r nc">${p?fNum(n):'—'}</td><td class="r">${fMin(w)}${x?`<br><small>incl. ${fMin(x)} lain</small>`:''}</td></tr>`}).join('');
 $('#printArea').innerHTML=pHead('Rekap Laporan Harian Produksi Kertas ECG/EKG',per+' · '+rows.length+' laporan')+
 `<div class="p-net"><label>TOTAL HASIL PRODUKSI BERSIH · HASIL − REJECT</label><b>${fNum(tn)} unit</b><span>${fNum(th)} hasil − ${fNum(tj)} reject = ${fNum(tn)} bersih</span></div>
 <div class="p-time"><label>TOTAL WAKTU · PRODUKSI + KEGIATAN LAINNYA</label><b>${fMin(tw)}</b><span>${rows.length} laporan terjumlah</span></div>
-<table class="p-tbl"><thead><tr><th>Tanggal</th><th>Operator</th><th>Jenis / Status</th><th>Item · Bersih · Waktu · Keterangan</th><th>PO / SPK / SN</th><th class="r">Waktu / Kegiatan</th><th class="r">Hasil</th><th class="r">Reject</th><th class="r">Bersih</th><th class="r">Waktu Total</th></tr></thead><tbody>${trs}</tbody><tfoot><tr><td colspan="6"><b>TOTAL</b></td><td class="r"><b>${fNum(th)}</b></td><td class="r"><b>${fNum(tj)}</b></td><td class="r nc"><b>${fNum(tn)}</b></td><td class="r"><b>${fMin(tw)}</b></td></tr></tfoot></table>`+sign('','')+pFoot();
+<table class="p-tbl"><thead><tr><th>Tanggal</th><th>Operator</th><th>Jenis / Status</th><th>Item · Bersih · Waktu · Keterangan</th><th>PO / SPK / SN / LOT</th><th class="r">Waktu / Kegiatan</th><th class="r">Hasil</th><th class="r">Reject</th><th class="r">Bersih</th><th class="r">Waktu Total</th></tr></thead><tbody>${trs}</tbody><tfoot><tr><td colspan="6"><b>TOTAL</b></td><td class="r"><b>${fNum(th)}</b></td><td class="r"><b>${fNum(tj)}</b></td><td class="r nc"><b>${fNum(tn)}</b></td><td class="r"><b>${fMin(tw)}</b></td></tr></tfoot></table>`+sign('','')+pFoot();
 doPrint()}
 function printOne(id){const r=byId(id);if(!r)return;const o=opOf(r),j=JENIS[r.jenis],p=r.jenis!=='lainnya';
 const h=rH(r),rej=rJ(r),n=h-rej,w=rW(r),pw=rPW(r),xw=rXW(r),vb=r.verifiedBy?(prof(r.verifiedBy)||dirOf(r.verifiedBy)||{nama:r.verifiedBy}):null;
@@ -2552,7 +2586,7 @@ s+=`<table class="p-id"><tr><td>Nama Operator</td><td>${esc(o.nama)}</td></tr><t
 if(p){s+=`<div class="p-net"><label>TOTAL HASIL BERSIH · HASIL − REJECT</label><b>${fNum(n)} ${j.unit}</b><span>${fNum(h)} hasil − ${fNum(rej)} reject · rate ${rate(h,rej).toFixed(1)}%</span></div>
 <div class="p-time"><label>TOTAL WAKTU · PRODUKSI + KEGIATAN LAINNYA</label><b>${fMin(w)}</b><span>produksi ${fMin(pw)}${xw?` + lainnya ${fMin(xw)}`:''}</span></div>`;
 s+=r.items.map((i,x)=>{const ih=num(i.hasil),ir=num(i.reject),iw=iW(i),k=iK(i);
-return `<div class="p-sec">Item ${x+1} — ${esc(i.nama)}</div><table class="p-tbl"><thead><tr><th>PO</th><th>SPK</th><th>SN Jumbo Roll</th><th>Persiapan</th><th>Setting</th><th>Operasional</th><th class="r">Total Waktu</th><th class="r">Hasil</th><th class="r">Reject</th><th class="r">Bersih</th><th class="r">Rate</th></tr></thead><tbody><tr><td>${esc(i.po)}</td><td>${esc(i.spk)}</td><td class="sc">${iSN(i)?esc(iSN(i)):'—'}</td><td>${num(i.prep)} mnt</td><td>${num(i.setting)} mnt</td><td>${num(i.ops)} mnt</td><td class="r tc">${iw} mnt<br><small>${fMin(iw)} · ${pct(iw,w)}%</small></td><td class="r"><b>${fNum(ih)}</b></td><td class="r">${fNum(ir)}</td><td class="r nc">${fNum(ih-ir)}</td><td class="r">${rate(ih,ir).toFixed(1)}%</td></tr></tbody></table><div class="p-line">Bersih ${fNum(ih-ir)} ${j.unit} · Waktu ${fMin(iw)} (${num(i.prep)} + ${num(i.setting)} + ${num(i.ops)} mnt)</div>${k?`<div class="p-ket"><b>Keterangan:</b> ${esc(k)}</div>`:''}`}).join('');
+return `<div class="p-sec">Item ${x+1} — ${esc(i.nama)}</div><table class="p-tbl"><thead><tr><th>PO</th><th>SPK</th><th>SN Jumbo Roll</th><th>LOT Tinta</th><th>Persiapan</th><th>Setting</th><th>Operasional</th><th class="r">Total Waktu</th><th class="r">Hasil</th><th class="r">Reject</th><th class="r">Bersih</th><th class="r">Rate</th></tr></thead><tbody><tr><td>${esc(i.po)}</td><td>${esc(i.spk)}</td><td class="sc">${iSN(i)?esc(iSN(i)):'—'}</td><td class="lc">${iLOT(i)?esc(iLOT(i)):'—'}</td><td>${num(i.prep)} mnt</td><td>${num(i.setting)} mnt</td><td>${num(i.ops)} mnt</td><td class="r tc">${iw} mnt<br><small>${fMin(iw)} · ${pct(iw,w)}%</small></td><td class="r"><b>${fNum(ih)}</b></td><td class="r">${fNum(ir)}</td><td class="r nc">${fNum(ih-ir)}</td><td class="r">${rate(ih,ir).toFixed(1)}%</td></tr></tbody></table><div class="p-line">Bersih ${fNum(ih-ir)} ${j.unit} · Waktu ${fMin(iw)} (${num(i.prep)} + ${num(i.setting)} + ${num(i.ops)} mnt)</div>${k?`<div class="p-ket"><b>Keterangan:</b> ${esc(k)}</div>`:''}`}).join('');
 s+=`<table class="p-tbl"><tbody><tr><td><b>TOTAL — ${r.items.length} item</b></td><td class="r"><b>Hasil ${fNum(h)} ${j.unit}</b></td><td class="r"><b>Reject ${fNum(rej)}</b></td><td class="r nc"><b>Bersih ${fNum(n)} ${j.unit}</b></td><td class="r tc"><b>Waktu ${fMin(w)}</b></td></tr></tbody></table>`;
 if(r.extra&&r.extra.length)s+=`<div class="p-sec">Kegiatan Lainnya — ${r.extra.length} · ${fMin(xw)}</div><table class="p-tbl"><thead><tr><th>No</th><th>Kegiatan</th><th class="r">Waktu</th><th class="r">Porsi</th></tr></thead><tbody>${r.extra.map((v,i)=>`<tr><td>${i+1}</td><td>${esc(v.ket)}</td><td class="r tc">${num(v.waktu)} mnt</td><td class="r">${pct(num(v.waktu),w)}%</td></tr>`).join('')}</tbody></table>`}
 else{s+=`<div class="p-time"><label>TOTAL WAKTU · DI LUAR JOBDESK</label><b>${fMin(w)}</b><span>${(r.agenda||[]).length} agenda</span></div>`;
@@ -2561,7 +2595,7 @@ else s+='<p class="p-sub"><b>Tidak ada agenda di luar jobdesk.</b></p>'}
 s+=sign(o.nama,vb?vb.nama:'')+pFoot();$('#printArea').innerHTML=s;doPrint()}
 function doPrint(){toast('Menyiapkan halaman cetak…',{type:'info',icon:'printer',duration:2200});setTimeout(()=>{try{window.print()}catch(e){}},80)}
 function backup(){if(!isK()){toast('Hanya kepala produksi.',{type:'warn',icon:'alert'});return}
-dl(JSON.stringify({app:'MHI PAPER',version:20,mode:S.mode,exportedAt:new Date().toISOString(),passwordRequests:PR.list,...DB.all()},null,2),'application/json','mhi-paper-backup_'+today()+'.json');
+dl(JSON.stringify({app:'MHI PAPER',version:21,mode:S.mode,exportedAt:new Date().toISOString(),passwordRequests:PR.list,...DB.all()},null,2),'application/json','mhi-paper-backup_'+today()+'.json');
 toast('Cadangan JSON diunduh.',{icon:'download'});sfx.tick()}
 function openSetup(){if(!connOK()){toast('Pengaturan koneksi hanya untuk kepala produksi.',{type:'warn',icon:'alert',duration:4200});return}
 const c=rdCfg();$('#suUrl').value=c?c.url:'';$('#suKey').value=c?c.key:'';$('#suDom').value=c?c.domain:'mhi.local';
@@ -2702,7 +2736,7 @@ case 'wiz':t.dataset.view==='detail'?goDetail():setView('form');break;
 case 'sound':S.sound=!S.sound;savePref();sndUI();if(S.sound)sfx.tick();toast(S.sound?'Bunyi efek aktif.':'Bunyi dimatikan.',{type:'info',icon:S.sound?'volume':'volumeX',duration:2000});break;
 case 'jenis':{const j=t.dataset.jenis;S.form.jenis=j;sfx.tick();j==='lainnya'?setView('other'):renderForm();break}
 case 'multi':{const v=t.dataset.val;
-if(v==='tidak'&&S.form.items.length>1){const ok=await confirmBox({title:'Kembalikan ke 1 item?',msg:`<b>${S.form.items.length-1} item tambahan</b> beserta SN &amp; keterangannya akan dihapus dari formulir.`,ok:'Ya, sisakan 1'});
+if(v==='tidak'&&S.form.items.length>1){const ok=await confirmBox({title:'Kembalikan ke 1 item?',msg:`<b>${S.form.items.length-1} item tambahan</b> beserta SN, LOT &amp; keterangannya akan dihapus dari formulir.`,ok:'Ya, sisakan 1'});
 if(ok){S.form.multi=false;S.form.items=S.form.items.slice(0,1);renderForm();sfx.tick()}}
 else{S.form.multi=v==='ya';renderForm();sfx.tick()}break}
 case 'item-add':{S.form.items.push(bItem());renderItems();sumForm();sfx.tick();const l=S.form.items[S.form.items.length-1],i=$(`#itemList [data-item="${l.key}"][data-f="nama"]`);if(i){i.focus();i.scrollIntoView({behavior:'smooth',block:'center'})}break}
@@ -2821,3 +2855,4 @@ init().catch(e=>{console.error(e);document.body.dataset.view='login';const b=$('
 </script>
 </body>
 </html>
+```
