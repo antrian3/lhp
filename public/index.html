@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
 <title>MHI PAPER — Laporan Harian Produksi Kertas ECG/EKG</title>
-<meta name="description" content="Laporan harian produksi kertas ECG/EKG — Paper Pack, Paper Roll, kegiatan di luar jobdesk. Tiga hak akses, rekap, verifikasi, dan export Excel.">
+<meta name="description" content="Laporan harian produksi kertas ECG/EKG — Paper Pack, Paper Roll, kegiatan di luar jobdesk. SN jumbo roll, LOT tinta per warna, LOT pipa core. Tiga hak akses, rekap, verifikasi, dan export Excel.">
 <meta name="theme-color" content="#D6403C">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24'%3E%3Crect width='24' height='24' rx='6' fill='%23D6403C'/%3E%3Cpolyline points='4 12 8 12 10 6 13 18 15 12 20 12' fill='none' stroke='white' stroke-width='2' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -52,7 +52,6 @@ code{font-family:var(--fm);font-size:.92em;background:rgba(35,39,51,.06);padding
 .sr-only{position:absolute;width:1px;height:1px;overflow:hidden;clip:rect(0 0 0 0);white-space:nowrap}
 .ic{display:inline-block;vertical-align:-2px;flex:none}
 .wrap{max-width:1340px;margin:0 auto;padding:0 20px}
-
 /* LOGIN */
 #loginScreen{display:none;min-height:100vh;grid-template-columns:1.05fr .95fr}
 body[data-view="login"] #loginScreen{display:grid}
@@ -116,7 +115,6 @@ body[data-view="login"] #loginScreen{display:grid}
 .sqlb .h{display:flex;align-items:center;gap:7px;padding:6px 9px;background:#242A35;font:600 9px var(--fm);letter-spacing:.1em;color:#9BA1B0}
 .sqlb .h button{margin-left:auto;font:600 9.5px var(--fm);color:#FFD9D6;background:rgba(255,255,255,.12);padding:3px 9px;border-radius:6px}
 .sqlb pre{margin:0;padding:9px 10px;font:500 10.5px/1.6 var(--fm);color:#D8E2F0;white-space:pre-wrap;word-break:break-word;max-height:170px;overflow:auto}
-
 /* TOPBAR */
 .topbar{position:fixed;top:0;left:0;right:0;height:var(--tb);z-index:50;background:rgba(255,252,247,.96);backdrop-filter:blur(12px);border-bottom:1px solid var(--line-strong);box-shadow:0 1px 0 rgba(214,64,60,.15),0 6px 20px rgba(80,55,25,.07)}
 .topbar::before{content:'';position:absolute;top:0;left:0;right:0;height:3px;background:linear-gradient(90deg,var(--red),var(--amber) 35%,var(--blue) 70%,var(--plum))}
@@ -159,7 +157,6 @@ body[data-view="login"] #loginScreen{display:grid}
 .umi:hover{background:var(--surface-2);color:var(--ink)}
 .umi.danger{color:var(--red-deep)}.umi.danger:hover{background:var(--red-soft)}
 .umi .tbadge{margin-left:auto}
-
 /* LAYOUT */
 main{padding-top:calc(var(--tb) + var(--gap));padding-bottom:60px}
 .view{display:none}.view.active{display:block;animation:viewIn .35s ease both}
@@ -186,7 +183,6 @@ main{padding-top:calc(var(--tb) + var(--gap));padding-bottom:60px}
 .hero-plum .ecg .run{stroke:var(--plum);filter:drop-shadow(0 0 5px rgba(123,79,192,.65))}
 .hero-small{padding-top:26px}
 .hero-small .hero-title{font-size:clamp(22px,3.2vw,32px);margin:12px 0 6px}
-
 /* CARDS / FIELDS */
 .card{background:var(--surface);border:1px solid var(--line);border-radius:13px;box-shadow:var(--sh)}
 .sect{margin-top:18px;animation:fadeUp .5s ease both}
@@ -221,16 +217,29 @@ textarea.inp{resize:vertical;min-height:70px;line-height:1.5}
 .cb>.g2,.cb>.g3,.cb>.field{margin-bottom:14px}
 .cb>.g2:last-child,.cb>.g3:last-child,.cb>.field:last-child{margin-bottom:0}
 input[type=checkbox]{width:16px;height:16px;accent-color:var(--red);cursor:pointer}
-.trace{display:grid;grid-template-columns:1fr 1fr;gap:14px}
-.sn-field,.lot-field{background:linear-gradient(180deg,var(--surface),#fff);border:1px dashed var(--line-strong);border-radius:10px;padding:11px 12px}
-.sn-field>label,.lot-field>label{display:flex;align-items:center;gap:7px}
+.trace{display:flex;flex-direction:column;gap:12px}
+.sn-field,.lot-group,.core-field{background:linear-gradient(180deg,var(--surface),#fff);border:1px dashed var(--line-strong);border-radius:10px;padding:11px 12px}
+.sn-field>label,.lot-group>label,.core-field>label{display:flex;align-items:center;gap:7px}
 .sn-field>label .ic{color:var(--blue)}
-.lot-field>label .ic{color:var(--plum)}
-.sn-field .inp,.lot-field .inp{border-style:dashed}
+.lot-group>label .ic{color:var(--plum)}
+.core-field>label .ic{color:var(--teal)}
+.sn-field .inp,.core-field .inp{border-style:dashed}
 .sn-field .inp:focus,.sn-field .inp.has{border-style:solid;border-color:var(--blue)}
-.lot-field .inp:focus,.lot-field .inp.has{border-style:solid;border-color:var(--plum)}
+.core-field .inp:focus,.core-field .inp.has{border-style:solid;border-color:var(--teal)}
 .sn-field .inp.has{background:#F7FBFF}
-.lot-field .inp.has{background:#FBF8FE}
+.core-field .inp.has{background:#F3FAFA}
+.inkgrid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-top:9px}
+.ink{gap:5px;min-width:0}
+.ink>label{display:flex;align-items:center;gap:6px;font:600 11px var(--fb);color:var(--ink-2)}
+.inkdot{width:9px;height:9px;border-radius:50%;flex:none;box-shadow:0 0 0 2px #fff,0 0 0 3px var(--line)}
+.ink.im .inkdot{background:var(--red)}
+.ink.ih .inkdot{background:var(--ink)}
+.ink.ig .inkdot{background:var(--green)}
+.ink .inp{border-style:dashed;font-size:12.5px}
+.ink.im .inp:focus,.ink.im .inp.has{border-style:solid;border-color:var(--red);background:#FFF8F7}
+.ink.ih .inp:focus,.ink.ih .inp.has{border-style:solid;border-color:var(--ink-2);background:#F6F7F9}
+.ink.ig .inp:focus,.ink.ig .inp.has{border-style:solid;border-color:var(--green);background:#F5FBF8}
+.lot-group>.help{margin-top:8px}
 .jenis{display:grid;grid-template-columns:repeat(3,1fr);gap:12px}
 .jc{position:relative;text-align:left;border:1.5px solid var(--line-strong);border-radius:12px;padding:14px;background:#fff;transition:.18s;display:flex;flex-direction:column;gap:8px}
 .jc:hover{transform:translateY(-2px);box-shadow:0 8px 20px rgba(80,55,25,.12);border-color:var(--jc)}
@@ -282,6 +291,10 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--red);cursor:point
 .cc.ket{color:#5E379C;border-color:#DECDF2;background:var(--plum-soft)}
 .cc.sn{color:#1D539E;border-color:#C6DAF4;background:var(--blue-soft)}
 .cc.lot{color:#5E379C;border-color:#DECDF2;background:linear-gradient(180deg,#F6F0FD,#EFE6FA)}
+.cc.lm{color:var(--red-deep);border-color:#F0C9C5;background:var(--red-soft)}
+.cc.lh{color:#232733;border-color:#C9CDD8;background:#ECEEF2}
+.cc.lg{color:#0B6E50;border-color:#BFE6D6;background:var(--green-soft)}
+.cc.core{color:#0A7373;border-color:#B9E4E4;background:var(--teal-soft)}
 .cc.muted{color:var(--ink-3);font-weight:500}
 .iacts{display:flex;gap:3px}
 .ib{width:29px;height:29px;border-radius:7px;display:inline-grid;place-items:center;color:var(--ink-3);transition:.13s;border:1px solid transparent}
@@ -341,7 +354,6 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--red);cursor:point
 .wiz[data-step="2"] .wl::after{--f:1}
 .wnav{display:flex;justify-content:space-between;align-items:center;gap:12px;margin-top:18px;padding-top:16px;border-top:1px dashed var(--line-strong);flex-wrap:wrap}
 .wnav .hint{font-size:11.5px;color:var(--ink-3)}
-
 /* FORM LAYOUT */
 .fl{display:grid;grid-template-columns:minmax(0,1fr) 344px;gap:20px;align-items:start;margin-top:4px}
 .aside{position:sticky;top:calc(var(--tb) + 16px);align-self:start;max-height:calc(100vh - var(--tb) - 32px);display:flex;flex-direction:column;min-height:0}
@@ -408,6 +420,10 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--red);cursor:point
 .strace span{font:500 9px var(--fm);padding:1px 6px;border-radius:99px;border:1px solid}
 .strace .s1{color:#1D539E;background:var(--blue-soft);border-color:#C6DAF4}
 .strace .s2{color:#5E379C;background:var(--plum-soft);border-color:#DECDF2}
+.strace .lm,.rctrace .lm{color:#B22F2C;background:var(--red-soft);border-color:#F0C9C5}
+.strace .lh,.rctrace .lh{color:#232733;background:#ECEEF2;border-color:#C9CDD8}
+.strace .lg,.rctrace .lg{color:#0B6E50;background:var(--green-soft);border-color:#BFE6D6}
+.strace .s3,.rctrace .s3{color:#0A7373;background:var(--teal-soft);border-color:#B9E4E4}
 .sacts{display:flex;gap:8px}
 .sacts .btn{flex:1}
 .snote{display:flex;gap:7px;font-size:10.5px;color:var(--ink-3);margin-top:11px;line-height:1.45}
@@ -676,14 +692,19 @@ input[type=checkbox]{width:16px;height:16px;accent-color:var(--red);cursor:point
 .dg2{display:grid;grid-template-columns:repeat(3,1fr);gap:7px;margin-top:7px}
 .dg2.two{grid-template-columns:1fr 1fr}
 .dg2.one{grid-template-columns:1fr}
-.dc{background:var(--surface-2);border-radius:8px;padding:7px 10px}
+.dc{background:var(--surface-2);border-radius:8px;padding:7px 10px;min-width:0}
 .dc label{font:600 8px var(--fm);letter-spacing:.12em;color:var(--ink-3);display:block}
 .dc b{font:700 12.5px var(--fn);font-variant-numeric:tabular-nums}
 .dc b small{font-size:9px;color:var(--ink-3)}
+.dc.tr b{font-family:var(--fm);font-size:11.5px;word-break:break-all}
 .dc.hl{background:var(--green-soft)}.dc.hl b{color:var(--green)}
 .dc.warn{background:var(--amber-soft)}.dc.warn b{color:#B26F05}
 .dc.sn{background:var(--blue-soft)}.dc.sn b{color:#1D539E;font-family:var(--fm);font-size:12px}
 .dc.lot{background:var(--plum-soft)}.dc.lot b{color:#5E379C;font-family:var(--fm);font-size:12px}
+.dc.im{background:var(--red-soft)}.dc.im b{color:var(--red-deep)}
+.dc.ih{background:#ECEEF2}.dc.ih b{color:#232733}
+.dc.ig{background:var(--green-soft)}.dc.ig b{color:#0B6E50}
+.dc.core{background:var(--teal-soft)}.dc.core b{color:#0A7373}
 .dket{display:flex;gap:9px;margin-top:7px;padding:9px 11px;border-radius:8px;background:linear-gradient(120deg,var(--surface-2),#fff);border:1px solid var(--line);border-left:3px solid var(--plum)}
 .dket>.ic{color:var(--plum);margin-top:2px}
 .dket label{font:600 8px var(--fm);letter-spacing:.12em;color:var(--ink-3);display:block;margin-bottom:2px}
@@ -803,6 +824,10 @@ body>*:not(#printArea){display:none!important}
 .p-tbl .tc{background:#FDF4E3!important;font-weight:700;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .p-tbl .sc{background:#E8F0FB!important;font-family:'Roboto Mono',monospace;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .p-tbl .lc{background:#F3EDFB!important;font-family:'Roboto Mono',monospace;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.p-tbl .mc{background:#FBEAE8!important;color:#B22F2C;font-family:'Roboto Mono',monospace;font-size:9px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.p-tbl .hc{background:#ECEEF2!important;color:#232733;font-family:'Roboto Mono',monospace;font-size:9px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.p-tbl .gc{background:#E4F5EE!important;color:#0B6E50;font-family:'Roboto Mono',monospace;font-size:9px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
+.p-tbl .pc{background:#E1F5F5!important;color:#0A7373;font-family:'Roboto Mono',monospace;font-size:9px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
 .p-id{width:100%;border-collapse:collapse;font-size:11px;margin-bottom:12px}
 .p-id td{border:1px solid #555;padding:5px 8px}
 .p-id td:first-child{background:#f2f2f2!important;font-weight:600;width:150px;-webkit-print-color-adjust:exact;print-color-adjust:exact}
@@ -875,6 +900,7 @@ body[data-view="other"] #mbO{display:flex}
 .tab .lbl{display:none}.tab{padding:8px 11px}
 .jenis{grid-template-columns:1fr}.jc{flex-direction:row;align-items:center}.jc>div{flex:1}
 .g3{grid-template-columns:1fr}
+.inkgrid{grid-template-columns:1fr}
 .hero-top{flex-direction:column;align-items:flex-start;gap:5px}
 .opf{grid-template-columns:1fr}.opc{flex-wrap:wrap}
 .cb{padding:14px}
@@ -900,7 +926,8 @@ body[data-view="other"] #mbO{display:flex}
 .rpick{grid-template-columns:1fr}
 .lg-card{padding:20px 18px}.mon-brand b{font-size:17px}
 .segs button{font-size:11px;padding:8px}
-.dg2.two{grid-template-columns:1fr}}
+.dg2.two{grid-template-columns:1fr}
+.dg2.ink3{grid-template-columns:1fr}}
 @media (prefers-reduced-motion:reduce){
 *,*::before,*::after{animation-duration:.01ms!important;animation-iteration-count:1!important;transition-duration:.01ms!important}
 .ecg .run,.mon-ecg .run{stroke-dasharray:none;animation:none}
@@ -909,443 +936,421 @@ html{scroll-behavior:auto}}
 </head>
 <body data-view="login">
 <noscript><p style="padding:90px 20px;text-align:center">Aplikasi ini membutuhkan JavaScript.</p></noscript>
-
 <div id="loginScreen">
-  <div class="lg-mon">
-    <div class="mon-grid"></div>
-    <div class="mon-in">
-      <div class="mon-brand">
-        <span class="bm lg"><span data-ic="activity" data-sz="25"></span></span>
-        <div><b>MHI PAPER</b><small>PRODUKSI KERTAS ECG / EKG &amp; PLAIN</small></div>
-      </div>
-      <h1 class="mon-title">LAPORAN<br>HARIAN <em>PRODUKSI</em></h1>
-      <svg class="mon-ecg" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
-        <path id="ecgLBase" class="base" fill="none" d="M0 60 L1200 60"/>
-        <path id="ecgLRun" class="run" fill="none" pathLength="1000" d="M0 60 L1200 60"/>
-      </svg>
-    </div>
-  </div>
-  <div class="lg-panel">
-    <div class="lg-card">
-      <div class="lg-head"><span class="step">01</span><div><h2>Masuk ke Sistem</h2><p>Menu menyesuaikan hak akses akun Anda.</p></div></div>
-      <div class="lg-modes" id="lgModes">
-        <button type="button" class="on" data-act="lmode" data-mode="kode">Kode Akun</button>
-        <button type="button" data-act="lmode" data-mode="email">Email Lengkap</button>
-      </div>
-      <form id="loginForm" novalidate autocomplete="off">
-        <div class="field" id="lgKodeF">
-          <label for="lgKode">Akun Pengguna <b class="req">*</b></label>
-          <select id="lgKode" class="inp"></select>
-        </div>
-        <div class="field" id="lgEmailF" hidden>
-          <label for="lgEmail">Akun Pengguna <b class="req">*</b></label>
-          <input id="lgEmail" class="inp mono" type="email" placeholder="nama@mhi.local" autocomplete="off">
-        </div>
-        <div class="field">
-          <label for="lgPass">Kata Sandi <b class="req">*</b></label>
-          <div class="pw">
-            <input type="password" id="lgPass" class="inp" placeholder="••••••••" autocomplete="new-password">
-            <button type="button" class="eye" id="lgEye" aria-label="Tampilkan kata sandi"><span data-ic="eye" data-sz="16"></span></button>
-          </div>
-        </div>
-        <div class="frow"><button type="button" class="forgot" data-act="forgot"><span data-ic="key" data-sz="12"></span> Lupa sandi?</button></div>
-        <div class="rstat" id="resetStat" hidden></div>
-        <div class="lg-err" id="lgErr" hidden><b id="lgErrT">Gagal masuk</b><span id="lgErrM" hidden></span></div>
-        <button type="submit" class="btn btn-primary btn-block" id="lgSubmit">Masuk <span data-ic="arrowRight" data-sz="15"></span></button>
-      </form>
-    </div>
-  </div>
+<div class="lg-mon">
+<div class="mon-grid"></div>
+<div class="mon-in">
+<div class="mon-brand">
+<span class="bm lg"><span data-ic="activity" data-sz="25"></span></span>
+<div><b>MHI PAPER</b><small>PRODUKSI KERTAS ECG / EKG &amp; PLAIN</small></div>
 </div>
-
+<h1 class="mon-title">LAPORAN<br>HARIAN <em>PRODUKSI</em></h1>
+<svg class="mon-ecg" viewBox="0 0 1200 120" preserveAspectRatio="none" aria-hidden="true">
+<path id="ecgLBase" class="base" fill="none" d="M0 60 L1200 60"/>
+<path id="ecgLRun" class="run" fill="none" pathLength="1000" d="M0 60 L1200 60"/>
+</svg>
+</div>
+</div>
+<div class="lg-panel">
+<div class="lg-card">
+<div class="lg-head"><span class="step">01</span><div><h2>Masuk ke Sistem</h2><p>Menu menyesuaikan hak akses akun Anda.</p></div></div>
+<div class="lg-modes" id="lgModes">
+<button type="button" class="on" data-act="lmode" data-mode="kode">Kode Akun</button>
+<button type="button" data-act="lmode" data-mode="email">Email Lengkap</button>
+</div>
+<form id="loginForm" novalidate autocomplete="off">
+<div class="field" id="lgKodeF">
+<label for="lgKode">Akun Pengguna <b class="req">*</b></label>
+<select id="lgKode" class="inp"></select>
+</div>
+<div class="field" id="lgEmailF" hidden>
+<label for="lgEmail">Akun Pengguna <b class="req">*</b></label>
+<input id="lgEmail" class="inp mono" type="email" placeholder="nama@mhi.local" autocomplete="off">
+</div>
+<div class="field">
+<label for="lgPass">Kata Sandi <b class="req">*</b></label>
+<div class="pw">
+<input type="password" id="lgPass" class="inp" placeholder="••••••••" autocomplete="new-password">
+<button type="button" class="eye" id="lgEye" aria-label="Tampilkan kata sandi"><span data-ic="eye" data-sz="16"></span></button>
+</div>
+</div>
+<div class="frow"><button type="button" class="forgot" data-act="forgot"><span data-ic="key" data-sz="12"></span> Lupa sandi?</button></div>
+<div class="rstat" id="resetStat" hidden></div>
+<div class="lg-err" id="lgErr" hidden><b id="lgErrT">Gagal masuk</b><span id="lgErrM" hidden></span></div>
+<button type="submit" class="btn btn-primary btn-block" id="lgSubmit">Masuk <span data-ic="arrowRight" data-sz="15"></span></button>
+</form>
+</div>
+</div>
+</div>
 <header class="topbar" id="topbar" hidden>
-  <div class="wrap tb-in">
-    <div class="brand">
-      <span class="bm"><span data-ic="activity" data-sz="20"></span></span>
-      <div class="brand-t"><b>MHI PAPER</b><small>Produksi Kertas ECG/EKG</small></div>
-    </div>
-    <div class="tabs-wrap" id="tabsWrap">
-      <button class="tarrow" id="tPrev" data-act="tscroll" data-dir="-1" aria-label="Geser menu ke kiri" hidden><span data-ic="chevLeft" data-sz="15"></span></button>
-      <nav class="tabs" id="tabs" aria-label="Navigasi utama"></nav>
-      <button class="tarrow" id="tNext" data-act="tscroll" data-dir="1" aria-label="Geser menu ke kanan" hidden><span data-ic="chevRight" data-sz="15"></span></button>
-    </div>
-    <div class="tr">
-      <button class="sync" id="sync" data-act="setup" title="Status koneksi data"><i class="dot"></i><span class="mono" id="syncL">LOKAL</span></button>
-      <div class="clock" id="clock" aria-hidden="true"></div>
-      <button class="snd" id="sndBtn" data-act="sound" aria-pressed="true" title="Aktif / matikan bunyi efek"><span id="sndIc"></span><span class="mono" id="sndL">BUNYI ON</span></button>
-      <div class="uw">
-        <button class="ubtn" id="uBtn" data-act="umenu" aria-haspopup="true" aria-expanded="false">
-          <span class="av sm" id="uAv">??</span>
-          <span class="ubt"><b id="uName">—</b><small id="uRole">—</small></span>
-          <span data-ic="chevDown" data-sz="14"></span>
-        </button>
-        <div class="umenu" id="uMenu" hidden>
-          <div class="umh"><b id="umName">—</b><small id="umMeta">—</small><div id="umBadge" style="margin-top:7px"></div></div>
-          <button class="umi" data-act="nav" data-nav="history"><span data-ic="barChart" data-sz="15"></span> Riwayat &amp; Rekap</button>
-          <button class="umi" data-act="nav" data-nav="master" id="umMaster"><span data-ic="roll" data-sz="15"></span> Master Produk</button>
-          <button class="umi" data-act="nav" data-nav="users" id="umUsers"><span data-ic="userPlus" data-sz="15"></span> Manajemen Pengguna</button>
-          <button class="umi" data-act="goto-sandi" id="umSandi"><span data-ic="key" data-sz="15"></span> Permintaan Sandi <span class="tbadge zero" id="umSandiN">0</span></button>
-          <button class="umi" data-act="xlsx" id="umXlsx"><span data-ic="sheet" data-sz="15"></span> Export Excel</button>
-          <button class="umi" data-act="mypass"><span data-ic="key" data-sz="15"></span> Ganti Sandi Saya</button>
-          <button class="umi" data-act="setup" id="umSetup"><span data-ic="building" data-sz="15"></span> Koneksi Data</button>
-          <button class="umi danger" data-act="logout"><span data-ic="logout" data-sz="15"></span> Keluar</button>
-        </div>
-      </div>
-    </div>
-  </div>
+<div class="wrap tb-in">
+<div class="brand">
+<span class="bm"><span data-ic="activity" data-sz="20"></span></span>
+<div class="brand-t"><b>MHI PAPER</b><small>Produksi Kertas ECG/EKG</small></div>
+</div>
+<div class="tabs-wrap" id="tabsWrap">
+<button class="tarrow" id="tPrev" data-act="tscroll" data-dir="-1" aria-label="Geser menu ke kiri" hidden><span data-ic="chevLeft" data-sz="15"></span></button>
+<nav class="tabs" id="tabs" aria-label="Navigasi utama"></nav>
+<button class="tarrow" id="tNext" data-act="tscroll" data-dir="1" aria-label="Geser menu ke kanan" hidden><span data-ic="chevRight" data-sz="15"></span></button>
+</div>
+<div class="tr">
+<button class="sync" id="sync" data-act="setup" title="Status koneksi data"><i class="dot"></i><span class="mono" id="syncL">LOKAL</span></button>
+<div class="clock" id="clock" aria-hidden="true"></div>
+<button class="snd" id="sndBtn" data-act="sound" aria-pressed="true" title="Aktif / matikan bunyi efek"><span id="sndIc"></span><span class="mono" id="sndL">BUNYI ON</span></button>
+<div class="uw">
+<button class="ubtn" id="uBtn" data-act="umenu" aria-haspopup="true" aria-expanded="false">
+<span class="av sm" id="uAv">??</span>
+<span class="ubt"><b id="uName">—</b><small id="uRole">—</small></span>
+<span data-ic="chevDown" data-sz="14"></span>
+</button>
+<div class="umenu" id="uMenu" hidden>
+<div class="umh"><b id="umName">—</b><small id="umMeta">—</small><div id="umBadge" style="margin-top:7px"></div></div>
+<button class="umi" data-act="nav" data-nav="history"><span data-ic="barChart" data-sz="15"></span> Riwayat &amp; Rekap</button>
+<button class="umi" data-act="nav" data-nav="master" id="umMaster"><span data-ic="roll" data-sz="15"></span> Master Produk</button>
+<button class="umi" data-act="nav" data-nav="users" id="umUsers"><span data-ic="userPlus" data-sz="15"></span> Manajemen Pengguna</button>
+<button class="umi" data-act="goto-sandi" id="umSandi"><span data-ic="key" data-sz="15"></span> Permintaan Sandi <span class="tbadge zero" id="umSandiN">0</span></button>
+<button class="umi" data-act="xlsx" id="umXlsx"><span data-ic="sheet" data-sz="15"></span> Export Excel</button>
+<button class="umi" data-act="mypass"><span data-ic="key" data-sz="15"></span> Ganti Sandi Saya</button>
+<button class="umi" data-act="setup" id="umSetup"><span data-ic="building" data-sz="15"></span> Koneksi Data</button>
+<button class="umi danger" data-act="logout"><span data-ic="logout" data-sz="15"></span> Keluar</button>
+</div>
+</div>
+</div>
+</div>
 </header>
-
 <main class="wrap" id="main" hidden>
-
 <section id="view-form" class="view" aria-label="Identitas laporan">
-  <div class="hero">
-    <div class="hero-top"><span>FORM LH-ECG-01 · REV. 21</span><span class="live"><i class="dot"></i><span id="shiftLive">SHIFT BERJALAN</span></span></div>
-    <h1 class="hero-title">Laporan Harian <em>Produksi</em></h1>
-    <svg class="ecg" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true"><path id="eFb" class="base" fill="none" d="M0 32 L1200 32"/><path id="eFr" class="run" fill="none" pathLength="1000" d="M0 32 L1200 32"/></svg>
-  </div>
-  <div class="wiz" data-step="1">
-    <button type="button" class="ws active" data-act="wiz" data-view="form"><span class="wn">1</span><span><b>Identitas</b><small>Operator &amp; jenis kegiatan</small></span></button>
-    <div class="wl"></div>
-    <button type="button" class="ws" data-act="wiz" data-view="detail"><span class="wn">2</span><span><b>Detail Produksi</b><small>Item, waktu &amp; hasil</small></span></button>
-  </div>
-  <div class="eban" id="ebF" hidden><span data-ic="pencil" data-sz="15"></span><span><b>MODE EDIT</b> — mengubah laporan <b id="ebFc"></b>.</span><button type="button" class="btn btn-ghost btn-sm" data-act="cancel-edit">Batal Edit</button></div>
-  <div class="fl">
-    <form id="formIdent" novalidate autocomplete="off">
-      <section class="card sect">
-        <header class="ch"><span class="step">01</span><div><h2>Identitas Laporan</h2><p id="identHint">Hanya akun berperan Operator yang dapat dipilih.</p></div></header>
-        <div class="cb">
-          <div class="g2">
-            <div class="field"><label for="f-op">Nama Operator <b class="req">*</b></label><select id="f-op" class="inp"></select><div class="err"></div></div>
-            <div class="field"><label for="f-date">Tanggal <b class="req">*</b></label><input type="date" id="f-date" class="inp"><div class="err"></div></div>
-          </div>
-          <div class="opv" id="opvF"></div>
-          <div class="g2">
-            <div class="field">
-              <label for="f-shift">Shift Kerja</label>
-              <select id="f-shift" class="inp"><option value="N1">Shift 1 · 08.00–17.00</option><option value="LONG">2 Shift Long Shift</option></select>
-              <div class="ssub" id="f-ssub" hidden>
-                <span class="help">Sistem 2 shift — pilih shift yang dijalankan:</span>
-                <div class="seg segs" id="f-segs" role="group"><button type="button" data-act="long" data-val="L1">Shift 1 · 08.00–20.00</button><button type="button" data-act="long" data-val="L2">Shift 2 · 20.00–08.00</button></div>
-              </div>
-            </div>
-            <div class="field"><label>Kode Laporan</label><input class="inp num" value="Dibuat otomatis oleh sistem" disabled></div>
-          </div>
-          <div class="field">
-            <label>Jenis Kegiatan <b class="req">*</b></label>
-            <div class="jenis" role="radiogroup">
-              <button type="button" class="jc j-pack active" data-act="jenis" data-jenis="pack" role="radio" aria-checked="true"><span class="ji"><span data-ic="package" data-sz="20"></span></span><div><b>Produksi Paper Pack</b><small>Kertas ECG lipat dalam kemasan pack siap pakai.</small></div><span class="jck"><span data-ic="check" data-sz="12"></span></span></button>
-              <button type="button" class="jc j-roll" data-act="jenis" data-jenis="roll" role="radio" aria-checked="false"><span class="ji"><span data-ic="roll" data-sz="20"></span></span><div><b>Produksi Paper Roll</b><small>Kertas ECG gulung untuk monitor &amp; thermal printer.</small></div><span class="jck"><span data-ic="check" data-sz="12"></span></span></button>
-              <button type="button" class="jc j-lain" data-act="jenis" data-jenis="lainnya" role="radio" aria-checked="false"><span class="ji"><span data-ic="users" data-sz="20"></span></span><div><b>Kegiatan Lainnya</b><small>Agenda di luar jobdesk — bantu teknisi, operator, lintas divisi.</small><span class="jgo">→ Halaman terpisah</span></div><span class="jck"><span data-ic="check" data-sz="12"></span></span></button>
-            </div>
-          </div>
-        </div>
-      </section>
-      <div class="wnav"><span class="hint">Langkah 1 dari 2 — isi Identitas dulu, lalu Detail Produksi.</span><button type="button" class="btn btn-primary" data-act="go-detail">Lanjut ke Detail Produksi <span data-ic="arrowRight" data-sz="15"></span></button></div>
-    </form>
-    <aside class="aside">
-      <div class="card scard">
-        <div class="shead"><div class="sh">LANGKAH 1 DARI 2 · IDENTITAS</div></div>
-        <div class="sbody">
-          <div class="sop"><b>Lengkapi Identitas</b><small>Operator, tanggal, shift &amp; jenis kegiatan.</small></div>
-          <div class="smeta"><span class="mono sm">SN jumbo roll, LOT tinta, keterangan, waktu &amp; hasil bersih ada di Langkah 2.</span></div>
-          <p class="snote"><span data-ic="info" data-sz="13"></span><span>Laporan dikirim berstatus <b>Menunggu Verifikasi</b> sampai admin atau kepala produksi memeriksanya.</span></p>
-        </div>
-        <div class="sfoot">
-          <button class="btn btn-primary btn-block" type="button" data-act="go-detail">Lanjut ke Detail Produksi <span data-ic="arrowRight" data-sz="15"></span></button>
-          <div class="sacts"><button type="button" class="btn btn-ghost btn-sm" data-act="reset"><span data-ic="rotate" data-sz="13"></span> Reset</button><button type="button" class="btn btn-ghost btn-sm" data-act="nav" data-nav="history"><span data-ic="barChart" data-sz="13"></span> Riwayat</button></div>
-        </div>
-      </div>
-    </aside>
-  </div>
-  <div class="mbar" id="mbF"><div class="mbs" id="mbsF"></div><button class="btn btn-primary" type="button" data-act="go-detail">Lanjut <span data-ic="arrowRight" data-sz="14"></span></button></div>
+<div class="hero">
+<div class="hero-top"><span>FORM LH-ECG-01 · REV. 22</span><span class="live"><i class="dot"></i><span id="shiftLive">SHIFT BERJALAN</span></span></div>
+<h1 class="hero-title">Laporan Harian <em>Produksi</em></h1>
+<svg class="ecg" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true"><path id="eFb" class="base" fill="none" d="M0 32 L1200 32"/><path id="eFr" class="run" fill="none" pathLength="1000" d="M0 32 L1200 32"/></svg>
+</div>
+<div class="wiz" data-step="1">
+<button type="button" class="ws active" data-act="wiz" data-view="form"><span class="wn">1</span><span><b>Identitas</b><small>Operator &amp; jenis kegiatan</small></span></button>
+<div class="wl"></div>
+<button type="button" class="ws" data-act="wiz" data-view="detail"><span class="wn">2</span><span><b>Detail Produksi</b><small>Item, waktu &amp; hasil</small></span></button>
+</div>
+<div class="eban" id="ebF" hidden><span data-ic="pencil" data-sz="15"></span><span><b>MODE EDIT</b> — mengubah laporan <b id="ebFc"></b>.</span><button type="button" class="btn btn-ghost btn-sm" data-act="cancel-edit">Batal Edit</button></div>
+<div class="fl">
+<form id="formIdent" novalidate autocomplete="off">
+<section class="card sect">
+<header class="ch"><span class="step">01</span><div><h2>Identitas Laporan</h2><p id="identHint">Hanya akun berperan Operator yang dapat dipilih.</p></div></header>
+<div class="cb">
+<div class="g2">
+<div class="field"><label for="f-op">Nama Operator <b class="req">*</b></label><select id="f-op" class="inp"></select><div class="err"></div></div>
+<div class="field"><label for="f-date">Tanggal <b class="req">*</b></label><input type="date" id="f-date" class="inp"><div class="err"></div></div>
+</div>
+<div class="opv" id="opvF"></div>
+<div class="g2">
+<div class="field">
+<label for="f-shift">Shift Kerja</label>
+<select id="f-shift" class="inp"><option value="N1">Shift 1 · 08.00–17.00</option><option value="LONG">2 Shift Long Shift</option></select>
+<div class="ssub" id="f-ssub" hidden>
+<span class="help">Sistem 2 shift — pilih shift yang dijalankan:</span>
+<div class="seg segs" id="f-segs" role="group"><button type="button" data-act="long" data-val="L1">Shift 1 · 08.00–20.00</button><button type="button" data-act="long" data-val="L2">Shift 2 · 20.00–08.00</button></div>
+</div>
+</div>
+<div class="field"><label>Kode Laporan</label><input class="inp num" value="Dibuat otomatis oleh sistem" disabled></div>
+</div>
+<div class="field">
+<label>Jenis Kegiatan <b class="req">*</b></label>
+<div class="jenis" role="radiogroup">
+<button type="button" class="jc j-pack active" data-act="jenis" data-jenis="pack" role="radio" aria-checked="true"><span class="ji"><span data-ic="package" data-sz="20"></span></span><div><b>Produksi Paper Pack</b><small>Kertas ECG lipat dalam kemasan pack siap pakai.</small></div><span class="jck"><span data-ic="check" data-sz="12"></span></span></button>
+<button type="button" class="jc j-roll" data-act="jenis" data-jenis="roll" role="radio" aria-checked="false"><span class="ji"><span data-ic="roll" data-sz="20"></span></span><div><b>Produksi Paper Roll</b><small>Kertas ECG gulung untuk monitor &amp; thermal printer.</small></div><span class="jck"><span data-ic="check" data-sz="12"></span></span></button>
+<button type="button" class="jc j-lain" data-act="jenis" data-jenis="lainnya" role="radio" aria-checked="false"><span class="ji"><span data-ic="users" data-sz="20"></span></span><div><b>Kegiatan Lainnya</b><small>Agenda di luar jobdesk — bantu teknisi, operator, lintas divisi.</small><span class="jgo">→ Halaman terpisah</span></div><span class="jck"><span data-ic="check" data-sz="12"></span></span></button>
+</div>
+</div>
+</div>
 </section>
-
+<div class="wnav"><span class="hint">Langkah 1 dari 2 — isi Identitas dulu, lalu Detail Produksi.</span><button type="button" class="btn btn-primary" data-act="go-detail">Lanjut ke Detail Produksi <span data-ic="arrowRight" data-sz="15"></span></button></div>
+</form>
+<aside class="aside">
+<div class="card scard">
+<div class="shead"><div class="sh">LANGKAH 1 DARI 2 · IDENTITAS</div></div>
+<div class="sbody">
+<div class="sop"><b>Lengkapi Identitas</b><small>Operator, tanggal, shift &amp; jenis kegiatan.</small></div>
+<div class="smeta"><span class="mono sm">SN jumbo roll, LOT tinta per warna, LOT pipa core, keterangan, waktu &amp; hasil bersih ada di Langkah 2.</span></div>
+<p class="snote"><span data-ic="info" data-sz="13"></span><span>Laporan dikirim berstatus <b>Menunggu Verifikasi</b> sampai admin atau kepala produksi memeriksanya.</span></p>
+</div>
+<div class="sfoot">
+<button class="btn btn-primary btn-block" type="button" data-act="go-detail">Lanjut ke Detail Produksi <span data-ic="arrowRight" data-sz="15"></span></button>
+<div class="sacts"><button type="button" class="btn btn-ghost btn-sm" data-act="reset"><span data-ic="rotate" data-sz="13"></span> Reset</button><button type="button" class="btn btn-ghost btn-sm" data-act="nav" data-nav="history"><span data-ic="barChart" data-sz="13"></span> Riwayat</button></div>
+</div>
+</div>
+</aside>
+</div>
+<div class="mbar" id="mbF"><div class="mbs" id="mbsF"></div><button class="btn btn-primary" type="button" data-act="go-detail">Lanjut <span data-ic="arrowRight" data-sz="14"></span></button></div>
+</section>
 <section id="view-detail" class="view" aria-label="Detail produksi">
-  <div class="hero">
-    <div class="hero-top"><span>FORM LH-ECG-01 · DETAIL PRODUKSI</span><span class="live"><i class="dot"></i>LANGKAH 2</span></div>
-    <h1 class="hero-title">Detail <em>Produksi</em></h1>
-    <svg class="ecg" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true"><path id="eDb" class="base" fill="none" d="M0 32 L1200 32"/><path id="eDr" class="run" fill="none" pathLength="1000" d="M0 32 L1200 32"/></svg>
-  </div>
-  <div class="wiz" data-step="2">
-    <button type="button" class="ws done" data-act="wiz" data-view="form"><span class="wn">✓</span><span><b>Identitas</b><small>Operator &amp; jenis kegiatan</small></span></button>
-    <div class="wl"></div>
-    <button type="button" class="ws active" data-act="wiz" data-view="detail"><span class="wn">2</span><span><b>Detail Produksi</b><small>Item, waktu &amp; hasil</small></span></button>
-  </div>
-  <div class="eban" id="ebD" hidden><span data-ic="pencil" data-sz="15"></span><span><b>MODE EDIT</b> — mengubah laporan <b id="ebDc"></b>.</span><button type="button" class="btn btn-ghost btn-sm" data-act="cancel-edit">Batal Edit</button></div>
-  <div class="fl">
-    <form id="formDetail" novalidate autocomplete="off">
-      <section class="card sect">
-        <header class="ch"><span class="step">02</span><div><h2 id="itemsTitle">Detail Produksi — Paper Pack</h2><p>Tiap item punya SN jumbo roll, LOT tinta, keterangan, hasil bersih, dan total waktunya sendiri.</p></div><span class="utag" id="unitTag">SATUAN: PACK</span></header>
-        <div class="cb">
-          <div class="mrow"><div><b>Apakah mengerjakan lebih dari 1 jenis item?</b><small>Pilih “Ya” untuk menambah item produksi lain dalam shift yang sama.</small></div><div class="seg" id="multiSeg" role="group"><button type="button" data-act="multi" data-val="tidak" class="active">Tidak</button><button type="button" data-act="multi" data-val="ya">Ya</button></div></div>
-          <div id="itemList" class="ilist"></div>
-          <button type="button" class="btn addb" id="addItem" data-act="item-add" hidden><span data-ic="plus" data-sz="15"></span> Tambah Item Produksi</button>
-        </div>
-      </section>
-      <section class="card sect">
-        <header class="ch"><span class="step" style="background:var(--plum)">03</span><div><h2>Kegiatan Lainnya</h2><p>Waktunya otomatis ditambahkan ke Total Waktu di kotak kanan.</p></div><span class="utag" style="color:#5E379C;background:var(--plum-soft);border-color:#D9C6F0">OPSIONAL</span></header>
-        <div class="cb">
-          <div class="card qcard" style="box-shadow:none;margin-bottom:14px"><div><b>Apakah ada kegiatan lainnya?</b><small>Contoh: membantu teknisi, membantu sesama operator, bersih-bersih area.</small></div><div class="seg" id="extraSeg" role="group"><button type="button" data-act="has-extra" data-val="tidak" class="active">Tidak</button><button type="button" data-act="has-extra" data-val="ya">Ya</button></div></div>
-          <div class="dnote2" id="extraNote" style="margin-bottom:14px"><span data-ic="info" data-sz="15"></span><span>Tidak ada kegiatan lainnya. Total Waktu hanya menghitung waktu produksi.</span></div>
-          <div id="extraList" class="ilist"></div>
-          <button type="button" class="btn addb" id="addExtra" data-act="extra-add" hidden><span data-ic="plus" data-sz="15"></span> Tambah Kegiatan Lainnya</button>
-        </div>
-      </section>
-      <div class="wnav"><button type="button" class="btn btn-ghost" data-act="back-ident"><span data-ic="arrowLeft" data-sz="15"></span> Kembali ke Identitas</button><button type="submit" class="btn btn-primary" id="saveD2">Simpan Laporan</button></div>
-    </form>
-    <aside class="aside">
-      <div class="card scard">
-        <div class="shead"><div class="sh">RINGKASAN LAPORAN · LIVE</div></div>
-        <div class="sbody">
-          <div class="sop" id="sOp"></div>
-          <div class="smeta" id="sMeta"></div>
-          <div class="snums"><div><label>HASIL PRODUKSI</label><div class="snum" id="sHasil">0</div><small id="sHasilU">pack</small></div><div><label>REJECT</label><div class="snum amber" id="sReject">0</div><small id="sRate">rate 0%</small></div></div>
-          <div class="snet" id="sNetP"><label>TOTAL HASIL PRODUKSI · BERSIH</label><div class="nrow"><span class="nnum" id="sNet">0</span><span class="nunit" id="sNetU">pack</span><span class="ncalc" id="sNetC">0 − 0</span></div><small>hasil produksi dikurangi reject</small></div>
-          <div class="stime"><label>TOTAL WAKTU · PRODUKSI + KEGIATAN LAIN</label><div class="snum" id="sWaktu">0 mnt</div><div class="tsplit" id="sSplit">produksi saja</div></div>
-          <div class="bdb" id="bdBar"></div>
-          <div class="bdl" id="bdLeg"></div>
-          <div class="sitems" id="sItems"></div>
-          <div style="border-top:1px dashed var(--line-strong);padding-top:11px"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><label style="font:600 9px var(--fm);letter-spacing:.1em;color:var(--plum)">KEGIATAN LAINNYA</label><span class="mono sm" id="sExCount" style="color:var(--plum);font-weight:600">0 kegiatan · 0 mnt</span></div><div class="sitems" id="sExList" style="border-top:none;padding-top:6px;margin:0"></div></div>
-        </div>
-        <div class="sfoot">
-          <button class="btn btn-primary btn-block" type="submit" form="formDetail" id="saveD">Simpan Laporan</button>
-          <div class="sacts"><button type="button" class="btn btn-ghost btn-sm" data-act="back-ident"><span data-ic="arrowLeft" data-sz="13"></span> Identitas</button><button type="button" class="btn btn-ghost btn-sm" data-act="reset"><span data-ic="rotate" data-sz="13"></span> Reset</button></div>
-        </div>
-      </div>
-    </aside>
-  </div>
-  <div class="mbar" id="mbD"><div class="mbs" id="mbsD"></div><button class="btn btn-primary" type="submit" form="formDetail" id="saveDM">Simpan</button></div>
+<div class="hero">
+<div class="hero-top"><span>FORM LH-ECG-01 · DETAIL PRODUKSI</span><span class="live"><i class="dot"></i>LANGKAH 2</span></div>
+<h1 class="hero-title">Detail <em>Produksi</em></h1>
+<svg class="ecg" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true"><path id="eDb" class="base" fill="none" d="M0 32 L1200 32"/><path id="eDr" class="run" fill="none" pathLength="1000" d="M0 32 L1200 32"/></svg>
+</div>
+<div class="wiz" data-step="2">
+<button type="button" class="ws done" data-act="wiz" data-view="form"><span class="wn">✓</span><span><b>Identitas</b><small>Operator &amp; jenis kegiatan</small></span></button>
+<div class="wl"></div>
+<button type="button" class="ws active" data-act="wiz" data-view="detail"><span class="wn">2</span><span><b>Detail Produksi</b><small>Item, waktu &amp; hasil</small></span></button>
+</div>
+<div class="eban" id="ebD" hidden><span data-ic="pencil" data-sz="15"></span><span><b>MODE EDIT</b> — mengubah laporan <b id="ebDc"></b>.</span><button type="button" class="btn btn-ghost btn-sm" data-act="cancel-edit">Batal Edit</button></div>
+<div class="fl">
+<form id="formDetail" novalidate autocomplete="off">
+<section class="card sect">
+<header class="ch"><span class="step">02</span><div><h2 id="itemsTitle">Detail Produksi — Paper Pack</h2><p>Tiap item punya SN jumbo roll, LOT tinta (merah / hitam / hijau), LOT pipa core, keterangan, hasil bersih, dan total waktunya sendiri.</p></div><span class="utag" id="unitTag">SATUAN: PACK</span></header>
+<div class="cb">
+<div class="mrow"><div><b>Apakah mengerjakan lebih dari 1 jenis item?</b><small>Pilih “Ya” untuk menambah item produksi lain dalam shift yang sama.</small></div><div class="seg" id="multiSeg" role="group"><button type="button" data-act="multi" data-val="tidak" class="active">Tidak</button><button type="button" data-act="multi" data-val="ya">Ya</button></div></div>
+<div id="itemList" class="ilist"></div>
+<button type="button" class="btn addb" id="addItem" data-act="item-add" hidden><span data-ic="plus" data-sz="15"></span> Tambah Item Produksi</button>
+</div>
 </section>
-
-<datalist id="dl-pack"></datalist><datalist id="dl-roll"></datalist><datalist id="dl-sn"></datalist><datalist id="dl-lot"></datalist>
-
+<section class="card sect">
+<header class="ch"><span class="step" style="background:var(--plum)">03</span><div><h2>Kegiatan Lainnya</h2><p>Waktunya otomatis ditambahkan ke Total Waktu di kotak kanan.</p></div><span class="utag" style="color:#5E379C;background:var(--plum-soft);border-color:#D9C6F0">OPSIONAL</span></header>
+<div class="cb">
+<div class="card qcard" style="box-shadow:none;margin-bottom:14px"><div><b>Apakah ada kegiatan lainnya?</b><small>Contoh: membantu teknisi, membantu sesama operator, bersih-bersih area.</small></div><div class="seg" id="extraSeg" role="group"><button type="button" data-act="has-extra" data-val="tidak" class="active">Tidak</button><button type="button" data-act="has-extra" data-val="ya">Ya</button></div></div>
+<div class="dnote2" id="extraNote" style="margin-bottom:14px"><span data-ic="info" data-sz="15"></span><span>Tidak ada kegiatan lainnya. Total Waktu hanya menghitung waktu produksi.</span></div>
+<div id="extraList" class="ilist"></div>
+<button type="button" class="btn addb" id="addExtra" data-act="extra-add" hidden><span data-ic="plus" data-sz="15"></span> Tambah Kegiatan Lainnya</button>
+</div>
+</section>
+<div class="wnav"><button type="button" class="btn btn-ghost" data-act="back-ident"><span data-ic="arrowLeft" data-sz="15"></span> Kembali ke Identitas</button><button type="submit" class="btn btn-primary" id="saveD2">Simpan Laporan</button></div>
+</form>
+<aside class="aside">
+<div class="card scard">
+<div class="shead"><div class="sh">RINGKASAN LAPORAN · LIVE</div></div>
+<div class="sbody">
+<div class="sop" id="sOp"></div>
+<div class="smeta" id="sMeta"></div>
+<div class="snums"><div><label>HASIL PRODUKSI</label><div class="snum" id="sHasil">0</div><small id="sHasilU">pack</small></div><div><label>REJECT</label><div class="snum amber" id="sReject">0</div><small id="sRate">rate 0%</small></div></div>
+<div class="snet" id="sNetP"><label>TOTAL HASIL PRODUKSI · BERSIH</label><div class="nrow"><span class="nnum" id="sNet">0</span><span class="nunit" id="sNetU">pack</span><span class="ncalc" id="sNetC">0 − 0</span></div><small>hasil produksi dikurangi reject</small></div>
+<div class="stime"><label>TOTAL WAKTU · PRODUKSI + KEGIATAN LAIN</label><div class="snum" id="sWaktu">0 mnt</div><div class="tsplit" id="sSplit">produksi saja</div></div>
+<div class="bdb" id="bdBar"></div>
+<div class="bdl" id="bdLeg"></div>
+<div class="sitems" id="sItems"></div>
+<div style="border-top:1px dashed var(--line-strong);padding-top:11px"><div style="display:flex;justify-content:space-between;align-items:baseline;gap:8px"><label style="font:600 9px var(--fm);letter-spacing:.1em;color:var(--plum)">KEGIATAN LAINNYA</label><span class="mono sm" id="sExCount" style="color:var(--plum);font-weight:600">0 kegiatan · 0 mnt</span></div><div class="sitems" id="sExList" style="border-top:none;padding-top:6px;margin:0"></div></div>
+</div>
+<div class="sfoot">
+<button class="btn btn-primary btn-block" type="submit" form="formDetail" id="saveD">Simpan Laporan</button>
+<div class="sacts"><button type="button" class="btn btn-ghost btn-sm" data-act="back-ident"><span data-ic="arrowLeft" data-sz="13"></span> Identitas</button><button type="button" class="btn btn-ghost btn-sm" data-act="reset"><span data-ic="rotate" data-sz="13"></span> Reset</button></div>
+</div>
+</div>
+</aside>
+</div>
+<div class="mbar" id="mbD"><div class="mbs" id="mbsD"></div><button class="btn btn-primary" type="submit" form="formDetail" id="saveDM">Simpan</button></div>
+</section>
+<datalist id="dl-pack"></datalist><datalist id="dl-roll"></datalist><datalist id="dl-sn"></datalist><datalist id="dl-lot"></datalist><datalist id="dl-core"></datalist>
 <section id="view-other" class="view" aria-label="Kegiatan lainnya">
-  <div class="hero hero-plum">
-    <button type="button" class="btn btn-ghost btn-sm" data-act="back-form" style="margin-bottom:14px"><span data-ic="arrowLeft" data-sz="14"></span> Kembali ke Laporan Produksi</button>
-    <div class="hero-top"><span>FORM LH-ECG-02 · DI LUAR JOBDESK</span><span class="live"><i class="dot"></i>HALAMAN TERPISAH</span></div>
-    <h1 class="hero-title">Kegiatan <em>Lainnya</em></h1>
-    <p class="hero-sub">Agenda <b>di luar jobdesk</b> — membantu teknisi, sesama operator, atau pekerjaan lintas divisi.</p>
-    <div class="exchips"><span class="exchip"><span data-ic="wrench" data-sz="13"></span> Membantu Teknisi</span><span class="exchip"><span data-ic="users" data-sz="13"></span> Membantu Sesama Operator</span><span class="exchip"><span data-ic="building" data-sz="13"></span> Lintas Divisi</span></div>
-    <svg class="ecg" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true"><path id="eOb" class="base" fill="none" d="M0 32 L1200 32"/><path id="eOr" class="run" fill="none" pathLength="1000" d="M0 32 L1200 32"/></svg>
-  </div>
-  <div class="eban" id="ebO" hidden><span data-ic="pencil" data-sz="15"></span><span><b>MODE EDIT</b> — mengubah laporan <b id="ebOc"></b>.</span><button type="button" class="btn btn-ghost btn-sm" data-act="cancel-edit">Batal Edit</button></div>
-  <div class="fl">
-    <form id="formOther" novalidate autocomplete="off">
-      <section class="card sect">
-        <header class="ch"><span class="step" style="background:var(--plum)">01</span><div><h2>Identitas</h2><p>Nama &amp; jabatan terisi otomatis.</p></div></header>
-        <div class="cb">
-          <div class="g2"><div class="field"><label for="o-op">Nama Operator <b class="req">*</b></label><select id="o-op" class="inp"></select><div class="err"></div></div><div class="field"><label for="o-date">Tanggal <b class="req">*</b></label><input type="date" id="o-date" class="inp"><div class="err"></div></div></div>
-          <div class="opv" id="opvO"></div>
-          <div class="g2">
-            <div class="field"><label for="o-shift">Shift Kerja</label><select id="o-shift" class="inp"><option value="N1">Shift 1 · 08.00–17.00</option><option value="LONG">2 Shift Long Shift</option></select><div class="ssub" id="o-ssub" hidden><span class="help">Sistem 2 shift — pilih shift yang dijalankan:</span><div class="seg segs" id="o-segs" role="group"><button type="button" data-act="long" data-val="L1">Shift 1 · 08.00–20.00</button><button type="button" data-act="long" data-val="L2">Shift 2 · 20.00–08.00</button></div></div></div>
-            <div class="field"><label>Jenis Kegiatan</label><input class="inp" value="Kegiatan Lainnya (di luar jobdesk)" disabled style="background:var(--plum-soft);color:#5E379C;font-weight:600"></div>
-          </div>
-        </div>
-      </section>
-      <section class="card sect">
-        <header class="ch"><span class="step" style="background:var(--plum)">02</span><div><h2>Agenda Di Luar Jobdesk</h2><p>Jawab pertanyaan berikut, lalu rincikan kegiatan bila ada.</p></div></header>
-        <div class="cb">
-          <div class="card qcard" style="box-shadow:none;margin-bottom:15px"><div><b>Apakah memiliki agenda di luar jobdesk?</b><small>Contoh: membantu teknisi, sesama operator, pekerjaan lintas divisi.</small></div><div class="seg" id="agendaSeg" role="group"><button type="button" data-act="has-agenda" data-val="tidak">Tidak</button><button type="button" data-act="has-agenda" data-val="ya" class="active">Ya</button></div></div>
-          <div class="dnote2" id="agendaNote" hidden style="margin-bottom:14px"><span data-ic="info" data-sz="15"></span><span>Tidak ada agenda di luar jobdesk. Laporan tetap disimpan sebagai catatan <b>tanpa rincian agenda</b>.</span></div>
-          <div id="agendaList" class="ilist"></div>
-          <button type="button" class="btn addb" id="addAgenda" data-act="agenda-add"><span data-ic="plus" data-sz="15"></span> Tambah Agenda Kegiatan</button>
-        </div>
-      </section>
-    </form>
-    <aside class="aside">
-      <div class="card scard">
-        <div class="shead"><div class="sh">RINGKASAN KEGIATAN · LIVE</div></div>
-        <div class="sbody">
-          <div class="sop" id="sOpO"></div>
-          <div class="smeta" id="sMetaO"></div>
-          <div class="snums"><div><label>JUMLAH AGENDA</label><div class="snum" id="sAgCount">0</div><small>kegiatan</small></div><div><label>RATA-RATA</label><div class="snum" id="sAgAvg" style="font-size:19px">0 mnt</div><small>per kegiatan</small></div></div>
-          <div class="stime" style="border-color:#DECDF2;background:linear-gradient(150deg,var(--plum-soft),#fff)"><label style="color:var(--plum)">TOTAL WAKTU · DI LUAR JOBDESK</label><div class="snum" id="sWaktuO" style="color:#5E379C">0 mnt</div><div class="tsplit" id="sSplitO">belum ada agenda</div></div>
-          <div class="sitems" id="sAgList"></div>
-        </div>
-        <div class="sfoot">
-          <button class="btn btn-plum btn-block" type="submit" form="formOther" id="saveO">Simpan Laporan Kegiatan</button>
-          <div class="sacts"><button type="button" class="btn btn-ghost btn-sm" data-act="back-form"><span data-ic="arrowLeft" data-sz="13"></span> Kembali</button><button type="button" class="btn btn-ghost btn-sm" data-act="nav" data-nav="history"><span data-ic="barChart" data-sz="13"></span> Riwayat</button></div>
-        </div>
-      </div>
-    </aside>
-  </div>
-  <div class="mbar" id="mbO"><div class="mbs" id="mbsO"></div><button class="btn btn-plum" type="submit" form="formOther" id="saveOM">Simpan</button></div>
+<div class="hero hero-plum">
+<button type="button" class="btn btn-ghost btn-sm" data-act="back-form" style="margin-bottom:14px"><span data-ic="arrowLeft" data-sz="14"></span> Kembali ke Laporan Produksi</button>
+<div class="hero-top"><span>FORM LH-ECG-02 · DI LUAR JOBDESK</span><span class="live"><i class="dot"></i>HALAMAN TERPISAH</span></div>
+<h1 class="hero-title">Kegiatan <em>Lainnya</em></h1>
+<p class="hero-sub">Agenda <b>di luar jobdesk</b> — membantu teknisi, sesama operator, atau pekerjaan lintas divisi.</p>
+<div class="exchips"><span class="exchip"><span data-ic="wrench" data-sz="13"></span> Membantu Teknisi</span><span class="exchip"><span data-ic="users" data-sz="13"></span> Membantu Sesama Operator</span><span class="exchip"><span data-ic="building" data-sz="13"></span> Lintas Divisi</span></div>
+<svg class="ecg" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true"><path id="eOb" class="base" fill="none" d="M0 32 L1200 32"/><path id="eOr" class="run" fill="none" pathLength="1000" d="M0 32 L1200 32"/></svg>
+</div>
+<div class="eban" id="ebO" hidden><span data-ic="pencil" data-sz="15"></span><span><b>MODE EDIT</b> — mengubah laporan <b id="ebOc"></b>.</span><button type="button" class="btn btn-ghost btn-sm" data-act="cancel-edit">Batal Edit</button></div>
+<div class="fl">
+<form id="formOther" novalidate autocomplete="off">
+<section class="card sect">
+<header class="ch"><span class="step" style="background:var(--plum)">01</span><div><h2>Identitas</h2><p>Nama &amp; jabatan terisi otomatis.</p></div></header>
+<div class="cb">
+<div class="g2"><div class="field"><label for="o-op">Nama Operator <b class="req">*</b></label><select id="o-op" class="inp"></select><div class="err"></div></div><div class="field"><label for="o-date">Tanggal <b class="req">*</b></label><input type="date" id="o-date" class="inp"><div class="err"></div></div></div>
+<div class="opv" id="opvO"></div>
+<div class="g2">
+<div class="field"><label for="o-shift">Shift Kerja</label><select id="o-shift" class="inp"><option value="N1">Shift 1 · 08.00–17.00</option><option value="LONG">2 Shift Long Shift</option></select><div class="ssub" id="o-ssub" hidden><span class="help">Sistem 2 shift — pilih shift yang dijalankan:</span><div class="seg segs" id="o-segs" role="group"><button type="button" data-act="long" data-val="L1">Shift 1 · 08.00–20.00</button><button type="button" data-act="long" data-val="L2">Shift 2 · 20.00–08.00</button></div></div></div>
+<div class="field"><label>Jenis Kegiatan</label><input class="inp" value="Kegiatan Lainnya (di luar jobdesk)" disabled style="background:var(--plum-soft);color:#5E379C;font-weight:600"></div>
+</div>
+</div>
 </section>
-
+<section class="card sect">
+<header class="ch"><span class="step" style="background:var(--plum)">02</span><div><h2>Agenda Di Luar Jobdesk</h2><p>Jawab pertanyaan berikut, lalu rincikan kegiatan bila ada.</p></div></header>
+<div class="cb">
+<div class="card qcard" style="box-shadow:none;margin-bottom:15px"><div><b>Apakah memiliki agenda di luar jobdesk?</b><small>Contoh: membantu teknisi, sesama operator, pekerjaan lintas divisi.</small></div><div class="seg" id="agendaSeg" role="group"><button type="button" data-act="has-agenda" data-val="tidak">Tidak</button><button type="button" data-act="has-agenda" data-val="ya" class="active">Ya</button></div></div>
+<div class="dnote2" id="agendaNote" hidden style="margin-bottom:14px"><span data-ic="info" data-sz="15"></span><span>Tidak ada agenda di luar jobdesk. Laporan tetap disimpan sebagai catatan <b>tanpa rincian agenda</b>.</span></div>
+<div id="agendaList" class="ilist"></div>
+<button type="button" class="btn addb" id="addAgenda" data-act="agenda-add"><span data-ic="plus" data-sz="15"></span> Tambah Agenda Kegiatan</button>
+</div>
+</section>
+</form>
+<aside class="aside">
+<div class="card scard">
+<div class="shead"><div class="sh">RINGKASAN KEGIATAN · LIVE</div></div>
+<div class="sbody">
+<div class="sop" id="sOpO"></div>
+<div class="smeta" id="sMetaO"></div>
+<div class="snums"><div><label>JUMLAH AGENDA</label><div class="snum" id="sAgCount">0</div><small>kegiatan</small></div><div><label>RATA-RATA</label><div class="snum" id="sAgAvg" style="font-size:19px">0 mnt</div><small>per kegiatan</small></div></div>
+<div class="stime" style="border-color:#DECDF2;background:linear-gradient(150deg,var(--plum-soft),#fff)"><label style="color:var(--plum)">TOTAL WAKTU · DI LUAR JOBDESK</label><div class="snum" id="sWaktuO" style="color:#5E379C">0 mnt</div><div class="tsplit" id="sSplitO">belum ada agenda</div></div>
+<div class="sitems" id="sAgList"></div>
+</div>
+<div class="sfoot">
+<button class="btn btn-plum btn-block" type="submit" form="formOther" id="saveO">Simpan Laporan Kegiatan</button>
+<div class="sacts"><button type="button" class="btn btn-ghost btn-sm" data-act="back-form"><span data-ic="arrowLeft" data-sz="13"></span> Kembali</button><button type="button" class="btn btn-ghost btn-sm" data-act="nav" data-nav="history"><span data-ic="barChart" data-sz="13"></span> Riwayat</button></div>
+</div>
+</div>
+</aside>
+</div>
+<div class="mbar" id="mbO"><div class="mbs" id="mbsO"></div><button class="btn btn-plum" type="submit" form="formOther" id="saveOM">Simpan</button></div>
+</section>
 <section id="view-history" class="view" aria-label="Riwayat dan rekap">
-  <div class="hero hero-small">
-    <div class="hero-top"><span id="hScope">REKAP &amp; ARSIP · DIVISI KONVERSI</span><span id="hCount"></span></div>
-    <h1 class="hero-title">Riwayat <em>&amp; Rekap</em></h1>
-    <svg class="ecg" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true"><path id="eHb" class="base" fill="none" d="M0 32 L1200 32"/><path id="eHr" class="run" fill="none" pathLength="1000" d="M0 32 L1200 32"/></svg>
-  </div>
-  <div class="sgrid" id="hStats"></div>
-  <div class="cgrid">
-    <div class="card ccard"><header class="cch"><span class="cct">PRODUKSI 7 HARI TERAKHIR</span><div class="leg"><span><i class="lp"></i>Pack</span><span><i class="lr"></i>Roll</span><span><i class="ln"></i>Bersih</span><span><i class="lj"></i>Reject</span></div></header><div id="barChart"></div></div>
-    <div class="card ccard"><header class="cch"><span class="cct" id="opChartT">OPERATOR TERAKTIF · 7 HARI</span><span class="cct">hasil bersih</span></header><div id="opChart"></div></div>
-  </div>
-  <div class="card tool">
-    <div class="tbr">
-      <div class="sw2"><span data-ic="search" data-sz="15"></span><input id="fl-q" class="inp" type="search" placeholder="Cari produk, PO, SPK, SN jumbo roll, LOT tinta, operator…  ( / )" aria-label="Cari laporan"></div>
-      <select id="fl-op" class="inp tsel" aria-label="Filter operator"></select>
-      <select id="fl-jenis" class="inp tsel" aria-label="Filter jenis"><option value="all">Semua Jenis</option><option value="pack">Paper Pack</option><option value="roll">Paper Roll</option><option value="lainnya">Kegiatan Lainnya</option></select>
-      <select id="fl-status" class="inp tsel" aria-label="Filter status"><option value="all">Semua Status</option><option value="submit">Menunggu Verifikasi</option><option value="revisi">Perlu Revisi</option><option value="verified">Terverifikasi</option></select>
-      <select id="fl-sort" class="inp tsel" aria-label="Urutkan"><option value="dateDesc">Terbaru</option><option value="dateAsc">Terlama</option><option value="netDesc">Bersih terbanyak</option><option value="netAsc">Bersih tersedikit</option><option value="hasilDesc">Hasil terbanyak</option><option value="hasilAsc">Hasil tersedikit</option><option value="rejectDesc">Reject terbanyak</option><option value="rejectAsc">Reject tersedikit</option><option value="waktuDesc">Waktu terlama</option><option value="waktuAsc">Waktu tersingkat</option><option value="operatorAsc">Operator A–Z</option></select>
-    </div>
-    <div class="tbr">
-      <div class="chips" id="periodChips"><button class="chip active" data-act="period" data-period="all">Semua</button><button class="chip" data-act="period" data-period="today">Hari Ini</button><button class="chip" data-act="period" data-period="7">7 Hari</button><button class="chip" data-act="period" data-period="30">30 Hari</button><button class="chip arch" data-act="arch" id="archChip" hidden><span data-ic="trash" data-sz="11"></span> Arsip</button></div>
-      <div class="chips" id="savedChips"></div>
-      <button class="chip" data-act="view-save"><span data-ic="bookmark" data-sz="11"></span> Simpan Tampilan</button>
-      <span class="spc"></span>
-      <button class="btn btn-ghost btn-sm" id="bReload" data-act="reload"><span data-ic="rotate" data-sz="14"></span> Muat Ulang</button>
-      <button class="btn btn-x btn-sm" id="bXlsx" data-act="xlsx"><span data-ic="sheet" data-sz="14"></span> Export Excel</button>
-      <button class="btn btn-ghost btn-sm" id="bCsv" data-act="csv"><span data-ic="download" data-sz="14"></span> CSV</button>
-      <button class="btn btn-ghost btn-sm" id="bPrint" data-act="print-recap"><span data-ic="printer" data-sz="14"></span> Cetak Rekap</button>
-    </div>
-  </div>
-  <div class="bulk" id="bulkBar" hidden></div>
-  <div class="card tcard">
-    <table class="tbl" id="hTable"><caption class="sr-only">Riwayat laporan harian produksi</caption>
-      <thead><tr><th class="thchk"><input type="checkbox" id="chkAll" aria-label="Pilih semua"></th><th data-act="sort" data-sort="date">Tanggal <span class="sarr"></span></th><th>Operator</th><th>Jenis</th><th>Status</th><th>Ringkasan</th><th class="ta-r" data-act="sort" data-sort="hasil">Hasil <span class="sarr"></span></th><th class="ta-r" data-act="sort" data-sort="reject">Reject <span class="sarr"></span></th><th class="ta-r thnet" data-act="sort" data-sort="net">Bersih <span class="sarr"></span></th><th class="ta-r" data-act="sort" data-sort="waktu">Waktu Total <span class="sarr"></span></th><th class="ta-r">Aksi</th></tr></thead>
-      <tbody id="hBody"></tbody>
-    </table>
-    <div id="hCards" class="rcards"></div>
-    <div id="hEmpty" class="empty" hidden></div>
-  </div>
-  <p class="hfoot" id="hFoot"></p>
+<div class="hero hero-small">
+<div class="hero-top"><span id="hScope">REKAP &amp; ARSIP · DIVISI KONVERSI</span><span id="hCount"></span></div>
+<h1 class="hero-title">Riwayat <em>&amp; Rekap</em></h1>
+<svg class="ecg" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true"><path id="eHb" class="base" fill="none" d="M0 32 L1200 32"/><path id="eHr" class="run" fill="none" pathLength="1000" d="M0 32 L1200 32"/></svg>
+</div>
+<div class="sgrid" id="hStats"></div>
+<div class="cgrid">
+<div class="card ccard"><header class="cch"><span class="cct">PRODUKSI 7 HARI TERAKHIR</span><div class="leg"><span><i class="lp"></i>Pack</span><span><i class="lr"></i>Roll</span><span><i class="ln"></i>Bersih</span><span><i class="lj"></i>Reject</span></div></header><div id="barChart"></div></div>
+<div class="card ccard"><header class="cch"><span class="cct" id="opChartT">OPERATOR TERAKTIF · 7 HARI</span><span class="cct">hasil bersih</span></header><div id="opChart"></div></div>
+</div>
+<div class="card tool">
+<div class="tbr">
+<div class="sw2"><span data-ic="search" data-sz="15"></span><input id="fl-q" class="inp" type="search" placeholder="Cari produk, PO, SPK, SN jumbo roll, LOT tinta, LOT pipa core, operator…  ( / )" aria-label="Cari laporan"></div>
+<select id="fl-op" class="inp tsel" aria-label="Filter operator"></select>
+<select id="fl-jenis" class="inp tsel" aria-label="Filter jenis"><option value="all">Semua Jenis</option><option value="pack">Paper Pack</option><option value="roll">Paper Roll</option><option value="lainnya">Kegiatan Lainnya</option></select>
+<select id="fl-status" class="inp tsel" aria-label="Filter status"><option value="all">Semua Status</option><option value="submit">Menunggu Verifikasi</option><option value="revisi">Perlu Revisi</option><option value="verified">Terverifikasi</option></select>
+<select id="fl-sort" class="inp tsel" aria-label="Urutkan"><option value="dateDesc">Terbaru</option><option value="dateAsc">Terlama</option><option value="netDesc">Bersih terbanyak</option><option value="netAsc">Bersih tersedikit</option><option value="hasilDesc">Hasil terbanyak</option><option value="hasilAsc">Hasil tersedikit</option><option value="rejectDesc">Reject terbanyak</option><option value="rejectAsc">Reject tersedikit</option><option value="waktuDesc">Waktu terlama</option><option value="waktuAsc">Waktu tersingkat</option><option value="operatorAsc">Operator A–Z</option></select>
+</div>
+<div class="tbr">
+<div class="chips" id="periodChips"><button class="chip active" data-act="period" data-period="all">Semua</button><button class="chip" data-act="period" data-period="today">Hari Ini</button><button class="chip" data-act="period" data-period="7">7 Hari</button><button class="chip" data-act="period" data-period="30">30 Hari</button><button class="chip arch" data-act="arch" id="archChip" hidden><span data-ic="trash" data-sz="11"></span> Arsip</button></div>
+<div class="chips" id="savedChips"></div>
+<button class="chip" data-act="view-save"><span data-ic="bookmark" data-sz="11"></span> Simpan Tampilan</button>
+<span class="spc"></span>
+<button class="btn btn-ghost btn-sm" id="bReload" data-act="reload"><span data-ic="rotate" data-sz="14"></span> Muat Ulang</button>
+<button class="btn btn-x btn-sm" id="bXlsx" data-act="xlsx"><span data-ic="sheet" data-sz="14"></span> Export Excel</button>
+<button class="btn btn-ghost btn-sm" id="bCsv" data-act="csv"><span data-ic="download" data-sz="14"></span> CSV</button>
+<button class="btn btn-ghost btn-sm" id="bPrint" data-act="print-recap"><span data-ic="printer" data-sz="14"></span> Cetak Rekap</button>
+</div>
+</div>
+<div class="bulk" id="bulkBar" hidden></div>
+<div class="card tcard">
+<table class="tbl" id="hTable"><caption class="sr-only">Riwayat laporan harian produksi</caption>
+<thead><tr><th class="thchk"><input type="checkbox" id="chkAll" aria-label="Pilih semua"></th><th data-act="sort" data-sort="date">Tanggal <span class="sarr"></span></th><th>Operator</th><th>Jenis</th><th>Status</th><th>Ringkasan</th><th class="ta-r" data-act="sort" data-sort="hasil">Hasil <span class="sarr"></span></th><th class="ta-r" data-act="sort" data-sort="reject">Reject <span class="sarr"></span></th><th class="ta-r thnet" data-act="sort" data-sort="net">Bersih <span class="sarr"></span></th><th class="ta-r" data-act="sort" data-sort="waktu">Waktu Total <span class="sarr"></span></th><th class="ta-r">Aksi</th></tr></thead>
+<tbody id="hBody"></tbody>
+</table>
+<div id="hCards" class="rcards"></div>
+<div id="hEmpty" class="empty" hidden></div>
+</div>
+<p class="hfoot" id="hFoot"></p>
 </section>
-
 <section id="view-verify" class="view" aria-label="Verifikasi laporan">
-  <div class="hero hero-small">
-    <div class="hero-top"><span>MEJA VERIFIKASI · ADMIN &amp; KEPALA PRODUKSI</span><span class="live"><i class="dot"></i>ANTREAN AKTIF</span></div>
-    <h1 class="hero-title">Meja <em>Verifikasi</em></h1>
-    <svg class="ecg" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true"><path id="eVb" class="base" fill="none" d="M0 32 L1200 32"/><path id="eVr" class="run" fill="none" pathLength="1000" d="M0 32 L1200 32"/></svg>
-  </div>
-  <div class="sgrid" id="vStats"></div>
-  <div class="card tool"><div class="tbr">
-    <div class="chips" id="vTabs"><button class="chip active" data-act="vtab" data-tab="submit">Menunggu <span class="cnt" id="cSub">0</span></button><button class="chip" data-act="vtab" data-tab="revisi">Perlu Revisi <span class="cnt" id="cRev">0</span></button><button class="chip" data-act="vtab" data-tab="verified">Terverifikasi <span class="cnt" id="cVer">0</span></button></div>
-    <span class="spc"></span>
-    <button class="btn btn-ghost btn-sm" data-act="vsel-all"><span data-ic="check" data-sz="14"></span> Pilih Semua</button>
-    <button class="btn btn-primary btn-sm" data-act="vbulk-verify"><span data-ic="checkCircle" data-sz="14"></span> Verifikasi Terpilih</button>
-  </div></div>
-  <div class="bulk" id="vBulk" hidden></div>
-  <div id="vQueue" class="vgrid"></div>
-  <div id="vEmpty" class="card empty" hidden></div>
+<div class="hero hero-small">
+<div class="hero-top"><span>MEJA VERIFIKASI · ADMIN &amp; KEPALA PRODUKSI</span><span class="live"><i class="dot"></i>ANTREAN AKTIF</span></div>
+<h1 class="hero-title">Meja <em>Verifikasi</em></h1>
+<svg class="ecg" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true"><path id="eVb" class="base" fill="none" d="M0 32 L1200 32"/><path id="eVr" class="run" fill="none" pathLength="1000" d="M0 32 L1200 32"/></svg>
+</div>
+<div class="sgrid" id="vStats"></div>
+<div class="card tool"><div class="tbr">
+<div class="chips" id="vTabs"><button class="chip active" data-act="vtab" data-tab="submit">Menunggu <span class="cnt" id="cSub">0</span></button><button class="chip" data-act="vtab" data-tab="revisi">Perlu Revisi <span class="cnt" id="cRev">0</span></button><button class="chip" data-act="vtab" data-tab="verified">Terverifikasi <span class="cnt" id="cVer">0</span></button></div>
+<span class="spc"></span>
+<button class="btn btn-ghost btn-sm" data-act="vsel-all"><span data-ic="check" data-sz="14"></span> Pilih Semua</button>
+<button class="btn btn-primary btn-sm" data-act="vbulk-verify"><span data-ic="checkCircle" data-sz="14"></span> Verifikasi Terpilih</button>
+</div></div>
+<div class="bulk" id="vBulk" hidden></div>
+<div id="vQueue" class="vgrid"></div>
+<div id="vEmpty" class="card empty" hidden></div>
 </section>
-
 <section id="view-master" class="view" aria-label="Master produk dan sistem">
-  <div class="hero hero-small">
-    <div class="hero-top"><span>MASTER DATA · ADMIN &amp; KEPALA PRODUKSI</span><span id="mCount"></span></div>
-    <h1 class="hero-title">Master <em>Produk</em></h1>
-    <svg class="ecg" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true"><path id="eMb" class="base" fill="none" d="M0 32 L1200 32"/><path id="eMr" class="run" fill="none" pathLength="1000" d="M0 32 L1200 32"/></svg>
-  </div>
-  <div class="mgrid">
-    <div class="card sect" style="margin-top:0"><header class="ch"><span class="step" style="background:var(--red-deep)">P</span><div><h2>Paper Pack</h2><p>Kertas ECG lipat dalam kemasan pack.</p></div><span class="utag">PACK</span></header><div class="cb"><form class="arow" data-form="prod" data-jenis="pack"><input class="inp" placeholder="Nama produk pack baru…" aria-label="Nama produk pack"><button class="btn btn-primary btn-sm" type="submit"><span data-ic="plus" data-sz="14"></span> Tambah</button></form><div id="pPack" class="plist"></div></div></div>
-    <div class="card sect" style="margin-top:0"><header class="ch"><span class="step" style="background:var(--blue)">R</span><div><h2>Paper Roll</h2><p>Kertas ECG gulung thermal.</p></div><span class="utag" style="color:#1D539E;background:var(--blue-soft);border-color:#C6DAF4">ROLL</span></header><div class="cb"><form class="arow" data-form="prod" data-jenis="roll"><input class="inp" placeholder="Nama produk roll baru…" aria-label="Nama produk roll"><button class="btn btn-primary btn-sm" type="submit"><span data-ic="plus" data-sz="14"></span> Tambah</button></form><div id="pRoll" class="plist"></div></div></div>
-  </div>
-  <div class="card sect" id="sysCard"><header class="ch"><span class="step" style="background:var(--ink-2)">S</span><div><h2>Sistem &amp; Data</h2><p>Khusus kepala produksi — koneksi, cadangan, pemeliharaan.</p></div></header><div class="cb" id="sysPanel"></div></div>
+<div class="hero hero-small">
+<div class="hero-top"><span>MASTER DATA · ADMIN &amp; KEPALA PRODUKSI</span><span id="mCount"></span></div>
+<h1 class="hero-title">Master <em>Produk</em></h1>
+<svg class="ecg" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true"><path id="eMb" class="base" fill="none" d="M0 32 L1200 32"/><path id="eMr" class="run" fill="none" pathLength="1000" d="M0 32 L1200 32"/></svg>
+</div>
+<div class="mgrid">
+<div class="card sect" style="margin-top:0"><header class="ch"><span class="step" style="background:var(--red-deep)">P</span><div><h2>Paper Pack</h2><p>Kertas ECG lipat dalam kemasan pack.</p></div><span class="utag">PACK</span></header><div class="cb"><form class="arow" data-form="prod" data-jenis="pack"><input class="inp" placeholder="Nama produk pack baru…" aria-label="Nama produk pack"><button class="btn btn-primary btn-sm" type="submit"><span data-ic="plus" data-sz="14"></span> Tambah</button></form><div id="pPack" class="plist"></div></div></div>
+<div class="card sect" style="margin-top:0"><header class="ch"><span class="step" style="background:var(--blue)">R</span><div><h2>Paper Roll</h2><p>Kertas ECG gulung thermal.</p></div><span class="utag" style="color:#1D539E;background:var(--blue-soft);border-color:#C6DAF4">ROLL</span></header><div class="cb"><form class="arow" data-form="prod" data-jenis="roll"><input class="inp" placeholder="Nama produk roll baru…" aria-label="Nama produk roll"><button class="btn btn-primary btn-sm" type="submit"><span data-ic="plus" data-sz="14"></span> Tambah</button></form><div id="pRoll" class="plist"></div></div></div>
+</div>
+<div class="card sect" id="sysCard"><header class="ch"><span class="step" style="background:var(--ink-2)">S</span><div><h2>Sistem &amp; Data</h2><p>Khusus kepala produksi — koneksi, cadangan, pemeliharaan.</p></div></header><div class="cb" id="sysPanel"></div></div>
 </section>
-
 <section id="view-users" class="view" aria-label="Manajemen pengguna">
-  <div class="hero hero-small">
-    <div class="hero-top"><span>MANAJEMEN PENGGUNA · HANYA KEPALA PRODUKSI</span><span id="uCount"></span></div>
-    <h1 class="hero-title">Pengguna <em>&amp; Hak Akses</em></h1>
-    <svg class="ecg" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true"><path id="eUb" class="base" fill="none" d="M0 32 L1200 32"/><path id="eUr" class="run" fill="none" pathLength="1000" d="M0 32 L1200 32"/></svg>
-  </div>
-  <div class="sgrid" id="uStats"></div>
-  <div class="card tool"><div class="tbr">
-    <div class="chips" id="uTabs">
-      <button class="chip active" data-act="utab" data-tab="pengguna">Daftar Pengguna <span class="cnt" id="uCnt">0</span></button>
-      <button class="chip" data-act="utab" data-tab="sandi"><span data-ic="key" data-sz="11"></span> Permintaan Sandi <span class="cnt" id="prCnt">0</span></button>
-      <button class="chip" data-act="utab" data-tab="akses"><span data-ic="shield" data-sz="11"></span> Matriks Hak Akses</button>
-      <button class="chip" data-act="utab" data-tab="diagnosa"><span data-ic="activity" data-sz="11"></span> Diagnosa</button>
-      <button class="chip" data-act="utab" data-tab="audit">Audit Log</button>
-    </div>
-    <span class="spc"></span>
-    <span class="pchip" id="provChip"><span data-ic="info" data-sz="11"></span> <span id="provL">MEMERIKSA…</span></span>
-    <div class="sw2" id="uSearchW" style="max-width:230px"><span data-ic="search" data-sz="15"></span><input id="u-q" class="inp" type="search" placeholder="Cari nama / kode / mesin…" aria-label="Cari pengguna"></div>
-    <button class="btn btn-primary btn-sm" data-act="user-add" id="uAdd"><span data-ic="userPlus" data-sz="14"></span> Tambah Pengguna</button>
-  </div></div>
-  <div id="uPane" class="ugrid"></div>
-  <div id="uEmpty" class="card empty" hidden></div>
-  <div id="uSandi" hidden>
-    <div class="card sect" style="margin-top:14px"><header class="ch"><span class="step" style="background:var(--amber)"><span data-ic="key" data-sz="15"></span></span><div><h2>Permintaan Reset Sandi</h2><p>Operator &amp; admin yang lupa sandi mengirim permintaan dari layar login. Kepala produksi memverifikasi, lalu menetapkan sandi baru.</p></div><button class="btn btn-ghost btn-sm" data-act="pr-clear" id="prClear" style="margin-left:auto"><span data-ic="trash" data-sz="13"></span> Bersihkan yang selesai</button></header>
-    <div class="cb"><div id="prList" class="ugrid" style="margin-top:0"></div><div id="prEmpty" class="empty" hidden style="padding:34px 20px"></div><div class="dnote2" id="prStore" style="margin-top:14px"></div></div></div>
-  </div>
-  <div id="uAkses" class="card sect" hidden><header class="ch"><span class="step" style="background:var(--red-deep)"><span data-ic="shield" data-sz="15"></span></span><div><h2>Matriks Hak Akses</h2><p>Ditegakkan di tampilan dan di lapisan data.</p></div></header><div class="cb" id="mxBody"></div></div>
-  <div id="uDiag" class="card sect" hidden><header class="ch"><span class="step" style="background:var(--plum)"><span data-ic="activity" data-sz="15"></span></span><div><h2>Diagnosa Sistem Akun</h2><p>Memeriksa direktori login, tabel permintaan sandi, Edge Function, dan policy RLS.</p></div><button class="btn btn-primary btn-sm" data-act="acct-diag" id="acctBtn" style="margin-left:auto"><span data-ic="rotate" data-sz="14"></span> Jalankan Diagnosa</button></header><div class="cb"><div class="diag-b" id="acctB" style="max-height:none;padding:0"></div></div></div>
-  <div id="uAudit" class="card sect" hidden><header class="ch"><span class="step" style="background:var(--ink-2)">A</span><div><h2>Audit Log</h2><p>Rekam jejak perubahan — siapa, kapan, dan apa.</p></div></header><div class="cb"><div id="auditB" class="alist"></div></div></div>
+<div class="hero hero-small">
+<div class="hero-top"><span>MANAJEMEN PENGGUNA · HANYA KEPALA PRODUKSI</span><span id="uCount"></span></div>
+<h1 class="hero-title">Pengguna <em>&amp; Hak Akses</em></h1>
+<svg class="ecg" viewBox="0 0 1200 64" preserveAspectRatio="none" aria-hidden="true"><path id="eUb" class="base" fill="none" d="M0 32 L1200 32"/><path id="eUr" class="run" fill="none" pathLength="1000" d="M0 32 L1200 32"/></svg>
+</div>
+<div class="sgrid" id="uStats"></div>
+<div class="card tool"><div class="tbr">
+<div class="chips" id="uTabs">
+<button class="chip active" data-act="utab" data-tab="pengguna">Daftar Pengguna <span class="cnt" id="uCnt">0</span></button>
+<button class="chip" data-act="utab" data-tab="sandi"><span data-ic="key" data-sz="11"></span> Permintaan Sandi <span class="cnt" id="prCnt">0</span></button>
+<button class="chip" data-act="utab" data-tab="akses"><span data-ic="shield" data-sz="11"></span> Matriks Hak Akses</button>
+<button class="chip" data-act="utab" data-tab="diagnosa"><span data-ic="activity" data-sz="11"></span> Diagnosa</button>
+<button class="chip" data-act="utab" data-tab="audit">Audit Log</button>
+</div>
+<span class="spc"></span>
+<span class="pchip" id="provChip"><span data-ic="info" data-sz="11"></span> <span id="provL">MEMERIKSA…</span></span>
+<div class="sw2" id="uSearchW" style="max-width:230px"><span data-ic="search" data-sz="15"></span><input id="u-q" class="inp" type="search" placeholder="Cari nama / kode / mesin…" aria-label="Cari pengguna"></div>
+<button class="btn btn-primary btn-sm" data-act="user-add" id="uAdd"><span data-ic="userPlus" data-sz="14"></span> Tambah Pengguna</button>
+</div></div>
+<div id="uPane" class="ugrid"></div>
+<div id="uEmpty" class="card empty" hidden></div>
+<div id="uSandi" hidden>
+<div class="card sect" style="margin-top:14px"><header class="ch"><span class="step" style="background:var(--amber)"><span data-ic="key" data-sz="15"></span></span><div><h2>Permintaan Reset Sandi</h2><p>Operator &amp; admin yang lupa sandi mengirim permintaan dari layar login. Kepala produksi memverifikasi, lalu menetapkan sandi baru.</p></div><button class="btn btn-ghost btn-sm" data-act="pr-clear" id="prClear" style="margin-left:auto"><span data-ic="trash" data-sz="13"></span> Bersihkan yang selesai</button></header>
+<div class="cb"><div id="prList" class="ugrid" style="margin-top:0"></div><div id="prEmpty" class="empty" hidden style="padding:34px 20px"></div><div class="dnote2" id="prStore" style="margin-top:14px"></div></div></div>
+</div>
+<div id="uAkses" class="card sect" hidden><header class="ch"><span class="step" style="background:var(--red-deep)"><span data-ic="shield" data-sz="15"></span></span><div><h2>Matriks Hak Akses</h2><p>Ditegakkan di tampilan dan di lapisan data.</p></div></header><div class="cb" id="mxBody"></div></div>
+<div id="uDiag" class="card sect" hidden><header class="ch"><span class="step" style="background:var(--plum)"><span data-ic="activity" data-sz="15"></span></span><div><h2>Diagnosa Sistem Akun</h2><p>Memeriksa direktori login, tabel permintaan sandi, Edge Function, dan policy RLS.</p></div><button class="btn btn-primary btn-sm" data-act="acct-diag" id="acctBtn" style="margin-left:auto"><span data-ic="rotate" data-sz="14"></span> Jalankan Diagnosa</button></header><div class="cb"><div class="diag-b" id="acctB" style="max-height:none;padding:0"></div></div></div>
+<div id="uAudit" class="card sect" hidden><header class="ch"><span class="step" style="background:var(--ink-2)">A</span><div><h2>Audit Log</h2><p>Rekam jejak perubahan — siapa, kapan, dan apa.</p></div></header><div class="cb"><div id="auditB" class="alist"></div></div></div>
 </section>
-
 <p class="foot">Design By Rajiv</p>
 </main>
-
 <div id="scrim"></div>
 <aside id="drawer" role="dialog" aria-modal="true" aria-label="Detail laporan">
-  <header class="dh"><div><small>DETAIL LAPORAN</small><span class="mono" id="dCode">—</span></div><button class="ib" data-act="drawer-close" aria-label="Tutup detail"><span data-ic="x" data-sz="18"></span></button></header>
-  <div class="dbody" id="dBody"></div>
-  <footer class="dfoot" id="dFoot"></footer>
+<header class="dh"><div><small>DETAIL LAPORAN</small><span class="mono" id="dCode">—</span></div><button class="ib" data-act="drawer-close" aria-label="Tutup detail"><span data-ic="x" data-sz="18"></span></button></header>
+<div class="dbody" id="dBody"></div>
+<footer class="dfoot" id="dFoot"></footer>
 </aside>
-
 <div id="toasts" aria-live="polite"></div>
-
 <div class="mw" id="modalW"><div class="modal" role="dialog" aria-modal="true" aria-labelledby="moT"><h3 id="moT"></h3><p id="moM"></p><div class="mi" id="moIW" hidden><label for="moI" id="moIL"></label><textarea id="moI" class="inp" rows="3" maxlength="300"></textarea></div><div class="mbtns"><button class="btn btn-ghost" data-act="mo-cancel">Batal</button><button class="btn btn-danger" data-act="mo-ok" id="moOk">OK</button></div></div></div>
-
 <div class="mw" id="forgotW"><div class="modal" role="dialog" aria-modal="true">
-  <h3>Lupa Kata Sandi</h3>
-  <p>Kirim permintaan reset ke <b>kepala produksi</b>. Setelah diverifikasi, kepala menetapkan sandi baru dan menyerahkannya langsung kepada Anda.</p>
-  <div class="acct" id="fgAcct"></div>
-  <div class="mi"><label for="fgNote">Catatan untuk kepala produksi <span class="opt">OPSIONAL</span></label><textarea id="fgNote" class="inp" rows="2" maxlength="180" placeholder="cth: Lupa sandi setelah ganti HP. Shift 1 hari ini."></textarea></div>
-  <div class="smsg" id="fgMsg" hidden></div>
-  <div class="mbtns"><button class="btn btn-ghost" data-act="forgot-cancel">Batal</button><button class="btn btn-primary" data-act="forgot-send" id="fgSend"><span data-ic="arrowRight" data-sz="14"></span> Kirim Permintaan</button></div>
+<h3>Lupa Kata Sandi</h3>
+<p>Kirim permintaan reset ke <b>kepala produksi</b>. Setelah diverifikasi, kepala menetapkan sandi baru dan menyerahkannya langsung kepada Anda.</p>
+<div class="acct" id="fgAcct"></div>
+<div class="mi"><label for="fgNote">Catatan untuk kepala produksi <span class="opt">OPSIONAL</span></label><textarea id="fgNote" class="inp" rows="2" maxlength="180" placeholder="cth: Lupa sandi setelah ganti HP. Shift 1 hari ini."></textarea></div>
+<div class="smsg" id="fgMsg" hidden></div>
+<div class="mbtns"><button class="btn btn-ghost" data-act="forgot-cancel">Batal</button><button class="btn btn-primary" data-act="forgot-send" id="fgSend"><span data-ic="arrowRight" data-sz="14"></span> Kirim Permintaan</button></div>
 </div></div>
-
 <div class="mw" id="apprW"><div class="modal" role="dialog" aria-modal="true">
-  <h3 id="apT">Setujui &amp; Reset Sandi</h3>
-  <p id="apS"></p>
-  <div class="acct" id="apAcct"></div>
-  <div class="mi"><label for="apNew">Kata Sandi Baru <b class="req">*</b></label><input id="apNew" class="inp mono" autocomplete="new-password"><div class="help" style="margin-top:5px">Minimal 6 karakter. Sandi ini yang akan dipakai akun tersebut untuk masuk.</div></div>
-  <div class="mi" id="apOldW" hidden><label for="apOld">Sandi Lama Akun Ini <span class="opt">TANPA EDGE FUNCTION</span></label><input id="apOld" type="password" class="inp mono" autocomplete="new-password"></div>
-  <div class="smsg" id="apMsg" hidden></div>
-  <div class="reveal" id="apReveal" hidden><label>SANDI BARU · SERAHKAN LANGSUNG KE PENGGUNA</label><div class="rv"><b id="apPass">—</b><button type="button" data-act="ap-copy">Salin</button></div><small>Sandi hanya ditampilkan sekali di sini. Setelah dialog ditutup, sandi tidak dapat dilihat lagi.</small></div>
-  <div class="mbtns"><button class="btn btn-ghost" data-act="ap-cancel" id="apCancel">Batal</button><button class="btn btn-green" data-act="ap-save" id="apSave"><span data-ic="check" data-sz="14"></span> Setujui &amp; Terapkan</button></div>
+<h3 id="apT">Setujui &amp; Reset Sandi</h3>
+<p id="apS"></p>
+<div class="acct" id="apAcct"></div>
+<div class="mi"><label for="apNew">Kata Sandi Baru <b class="req">*</b></label><input id="apNew" class="inp mono" autocomplete="new-password"><div class="help" style="margin-top:5px">Minimal 6 karakter. Sandi ini yang akan dipakai akun tersebut untuk masuk.</div></div>
+<div class="mi" id="apOldW" hidden><label for="apOld">Sandi Lama Akun Ini <span class="opt">TANPA EDGE FUNCTION</span></label><input id="apOld" type="password" class="inp mono" autocomplete="new-password"></div>
+<div class="smsg" id="apMsg" hidden></div>
+<div class="reveal" id="apReveal" hidden><label>SANDI BARU · SERAHKAN LANGSUNG KE PENGGUNA</label><div class="rv"><b id="apPass">—</b><button type="button" data-act="ap-copy">Salin</button></div><small>Sandi hanya ditampilkan sekali di sini. Setelah dialog ditutup, sandi tidak dapat dilihat lagi.</small></div>
+<div class="mbtns"><button class="btn btn-ghost" data-act="ap-cancel" id="apCancel">Batal</button><button class="btn btn-green" data-act="ap-save" id="apSave"><span data-ic="check" data-sz="14"></span> Setujui &amp; Terapkan</button></div>
 </div></div>
-
 <div class="mw" id="setupW"><div class="modal wide" role="dialog" aria-modal="true">
-  <h3>Koneksi Cloud Supabase</h3>
-  <p>Isi dari Supabase → <b>Project Settings → Data API</b> (URL) dan <b>API Keys</b> (anon public). Domain email harus sama dengan yang dipakai saat membuat user di Authentication.</p>
-  <div class="mi"><label for="suUrl">Project URL</label><input id="suUrl" class="inp mono" placeholder="https://xxxxxxxx.supabase.co"></div>
-  <div class="mi"><label for="suKey">Anon Public Key</label><textarea id="suKey" class="inp mono" rows="3" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6..."></textarea></div>
-  <div class="mi"><label for="suDom">Domain email internal</label><input id="suDom" class="inp mono" placeholder="mhi.local"><div class="help" style="margin-top:5px">Akun <b>kepala</b> akan login sebagai <b id="suPrev">kepala@mhi.local</b></div></div>
-  <div class="smsg" id="suMsg" hidden></div>
-  <div class="mbtns"><button class="btn btn-ghost" data-act="setup-local">Pakai Mode Lokal</button><button class="btn btn-ghost" data-act="setup-close">Tutup</button><button class="btn btn-primary" data-act="setup-save" id="suSave">Simpan &amp; Hubungkan</button></div>
+<h3>Koneksi Cloud Supabase</h3>
+<p>Isi dari Supabase → <b>Project Settings → Data API</b> (URL) dan <b>API Keys</b> (anon public). Domain email harus sama dengan yang dipakai saat membuat user di Authentication.</p>
+<div class="mi"><label for="suUrl">Project URL</label><input id="suUrl" class="inp mono" placeholder="https://xxxxxxxx.supabase.co"></div>
+<div class="mi"><label for="suKey">Anon Public Key</label><textarea id="suKey" class="inp mono" rows="3" placeholder="eyJhbGciOiJIUzI1NiIsInR5cCI6..."></textarea></div>
+<div class="mi"><label for="suDom">Domain email internal</label><input id="suDom" class="inp mono" placeholder="mhi.local"><div class="help" style="margin-top:5px">Akun <b>kepala</b> akan login sebagai <b id="suPrev">kepala@mhi.local</b></div></div>
+<div class="smsg" id="suMsg" hidden></div>
+<div class="mbtns"><button class="btn btn-ghost" data-act="setup-local">Pakai Mode Lokal</button><button class="btn btn-ghost" data-act="setup-close">Tutup</button><button class="btn btn-primary" data-act="setup-save" id="suSave">Simpan &amp; Hubungkan</button></div>
 </div></div>
-
 <div class="mw" id="userW"><div class="modal wide" role="dialog" aria-modal="true">
-  <h3 id="uuT">Tambah Pengguna</h3><p id="uuS">Akun baru langsung aktif dan dapat digunakan untuk masuk.</p>
-  <div class="g2 mi"><div><label for="uuKode">Kode Akun <b class="req">*</b></label><input id="uuKode" class="inp mono" placeholder="cth: ridwan" maxlength="24"></div><div><label for="uuNama">Nama Lengkap <b class="req">*</b></label><input id="uuNama" class="inp" placeholder="cth: Ridwan"></div></div>
-  <div class="mi"><label>Hak Akses <b class="req">*</b></label>
-    <div class="rpick" id="uuPick">
-      <button type="button" class="o on" data-act="pick" data-role="operator"><span class="ri"><span data-ic="package" data-sz="14"></span></span><b>Operator</b><small>LAPORAN SENDIRI</small></button>
-      <button type="button" class="a" data-act="pick" data-role="admin"><span class="ri"><span data-ic="checkCircle" data-sz="14"></span></span><b>Admin</b><small>VERIFIKASI &amp; MASTER</small></button>
-      <button type="button" class="k" data-act="pick" data-role="kepala"><span class="ri"><span data-ic="shield" data-sz="14"></span></span><b>Kepala</b><small>AKSES PENUH</small></button>
-    </div><div class="help" id="uuHint" style="margin-top:7px"></div>
-  </div>
-  <div class="g2 mi"><div><label for="uuMesin">Mesin / Area</label><input id="uuMesin" class="inp" placeholder="cth: Auto Paper"></div><div><label for="uuWarna">Warna Avatar</label><input id="uuWarna" type="color" class="inp inp-color" value="#0FA3A3"></div></div>
-  <div class="mi"><label for="uuJab">Jabatan / Posisi</label><input id="uuJab" class="inp" placeholder="cth: Operator Mesin Auto Paper"></div>
-  <div class="mi" id="uuPassW"><label for="uuPass">Kata Sandi <b class="req">*</b></label><input id="uuPass" class="inp mono" placeholder="min. 6 karakter" autocomplete="new-password"><div class="help" id="uuEmail" style="margin-top:5px"></div></div>
-  <div class="smsg" id="uuMsg" hidden></div>
-  <div class="mbtns"><button class="btn btn-ghost" data-act="user-cancel">Batal</button><button class="btn btn-primary" data-act="user-save" id="uuSave">Simpan Pengguna</button></div>
+<h3 id="uuT">Tambah Pengguna</h3><p id="uuS">Akun baru langsung aktif dan dapat digunakan untuk masuk.</p>
+<div class="g2 mi"><div><label for="uuKode">Kode Akun <b class="req">*</b></label><input id="uuKode" class="inp mono" placeholder="cth: ridwan" maxlength="24"></div><div><label for="uuNama">Nama Lengkap <b class="req">*</b></label><input id="uuNama" class="inp" placeholder="cth: Ridwan"></div></div>
+<div class="mi"><label>Hak Akses <b class="req">*</b></label>
+<div class="rpick" id="uuPick">
+<button type="button" class="o on" data-act="pick" data-role="operator"><span class="ri"><span data-ic="package" data-sz="14"></span></span><b>Operator</b><small>LAPORAN SENDIRI</small></button>
+<button type="button" class="a" data-act="pick" data-role="admin"><span class="ri"><span data-ic="checkCircle" data-sz="14"></span></span><b>Admin</b><small>VERIFIKASI &amp; MASTER</small></button>
+<button type="button" class="k" data-act="pick" data-role="kepala"><span class="ri"><span data-ic="shield" data-sz="14"></span></span><b>Kepala</b><small>AKSES PENUH</small></button>
+</div><div class="help" id="uuHint" style="margin-top:7px"></div>
+</div>
+<div class="g2 mi"><div><label for="uuMesin">Mesin / Area</label><input id="uuMesin" class="inp" placeholder="cth: Auto Paper"></div><div><label for="uuWarna">Warna Avatar</label><input id="uuWarna" type="color" class="inp inp-color" value="#0FA3A3"></div></div>
+<div class="mi"><label for="uuJab">Jabatan / Posisi</label><input id="uuJab" class="inp" placeholder="cth: Operator Mesin Auto Paper"></div>
+<div class="mi" id="uuPassW"><label for="uuPass">Kata Sandi <b class="req">*</b></label><input id="uuPass" class="inp mono" placeholder="min. 6 karakter" autocomplete="new-password"><div class="help" id="uuEmail" style="margin-top:5px"></div></div>
+<div class="smsg" id="uuMsg" hidden></div>
+<div class="mbtns"><button class="btn btn-ghost" data-act="user-cancel">Batal</button><button class="btn btn-primary" data-act="user-save" id="uuSave">Simpan Pengguna</button></div>
 </div></div>
-
 <div class="mw" id="passW"><div class="modal" role="dialog" aria-modal="true">
-  <h3 id="pwT">Reset Kata Sandi</h3><p id="pwS"></p>
-  <div class="mi" id="pwOldW" hidden><label for="pwOld">Sandi Saat Ini <span class="opt">TANPA EDGE FUNCTION</span></label><input id="pwOld" type="password" class="inp mono" placeholder="sandi lama akun ini" autocomplete="new-password"></div>
-  <div class="mi"><label for="pwNew">Kata Sandi Baru <b class="req">*</b></label><input id="pwNew" type="text" class="inp mono" placeholder="min. 6 karakter"></div>
-  <div class="smsg" id="pwMsg" hidden></div>
-  <div class="mbtns"><button class="btn btn-ghost" data-act="pass-cancel">Batal</button><button class="btn btn-primary" data-act="pass-save" id="pwSave">Simpan Sandi</button></div>
+<h3 id="pwT">Reset Kata Sandi</h3><p id="pwS"></p>
+<div class="mi" id="pwOldW" hidden><label for="pwOld">Sandi Saat Ini <span class="opt">TANPA EDGE FUNCTION</span></label><input id="pwOld" type="password" class="inp mono" placeholder="sandi lama akun ini" autocomplete="new-password"></div>
+<div class="mi"><label for="pwNew">Kata Sandi Baru <b class="req">*</b></label><input id="pwNew" type="text" class="inp mono" placeholder="min. 6 karakter"></div>
+<div class="smsg" id="pwMsg" hidden></div>
+<div class="mbtns"><button class="btn btn-ghost" data-act="pass-cancel">Batal</button><button class="btn btn-primary" data-act="pass-save" id="pwSave">Simpan Sandi</button></div>
 </div></div>
-
 <div id="printArea"></div>
-
 <script>
 'use strict';
 const CFG={URL:'https://ooqnifjwbglmpmmpinmo.supabase.co',KEY:'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6Im9vcW5pZmp3YmdsbXBtbXBpbm1vIiwicm9sZSI6ImFub24iLCJpYXQiOjE3OTUxNjA1MjgsImV4cCI6MjExMDczNjUyOH0.rbP3cyaJxSbyC-pjALn3vlxXzUB6WIphtP15aZ71ves',DOM:'mhi.local',PASS:'mhi2026'};
@@ -1356,11 +1361,11 @@ select kode, nama, role, aktif from public.profiles;
 grant select on public.login_directory to anon, authenticated;`;
 const SQL_PR=`-- Tabel permintaan reset sandi (lupa sandi) — diverifikasi kepala produksi.
 create table if not exists public.password_requests(
-  id uuid primary key default gen_random_uuid(),
-  kode text not null, nama text, note text,
-  status text not null default 'pending',
-  created_at timestamptz not null default now(),
-  resolved_at timestamptz, resolved_by text
+id uuid primary key default gen_random_uuid(),
+kode text not null, nama text, note text,
+status text not null default 'pending',
+created_at timestamptz not null default now(),
+resolved_at timestamptz, resolved_by text
 );
 alter table public.password_requests enable row level security;
 drop policy if exists pr_send on public.password_requests;
@@ -1373,37 +1378,37 @@ drop policy if exists pr_del on public.password_requests;
 create policy pr_del on public.password_requests for delete to authenticated using (public.auth_role() = 'kepala');`;
 const SQL_POL=`drop policy if exists profiles_insert on public.profiles;
 create policy profiles_insert on public.profiles
-  for insert to authenticated with check (public.auth_role() = 'kepala');
+for insert to authenticated with check (public.auth_role() = 'kepala');
 drop policy if exists profiles_update on public.profiles;
 create policy profiles_update on public.profiles
-  for update to authenticated using (public.auth_role() = 'kepala')
-  with check (public.auth_role() = 'kepala');
+for update to authenticated using (public.auth_role() = 'kepala')
+with check (public.auth_role() = 'kepala');
 drop policy if exists profiles_delete on public.profiles;
 create policy profiles_delete on public.profiles
-  for delete to authenticated using (public.auth_role() = 'kepala');`;
+for delete to authenticated using (public.auth_role() = 'kepala');`;
 const SQL_FN=`// supabase/functions/manage-user/index.ts
 import { createClient } from 'jsr:@supabase/supabase-js@2';
 const cors={'Access-Control-Allow-Origin':'*','Access-Control-Allow-Headers':'authorization, x-client-info, apikey, content-type'};
 const json=(b,s=200)=>new Response(JSON.stringify(b),{status:s,headers:{...cors,'Content-Type':'application/json'}});
 Deno.serve(async(req)=>{
-  if(req.method==='OPTIONS')return new Response('ok',{headers:cors});
-  const adm=createClient(Deno.env.get('SUPABASE_URL')!,Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!);
-  const {data:{user}}=await adm.auth.getUser((req.headers.get('Authorization')||'').replace('Bearer ',''));
-  if(!user)return json({error:'Tidak terautentikasi'},401);
-  const {data:me}=await adm.from('profiles').select('role,aktif').eq('id',user.id).single();
-  if(!me||me.role!=='kepala'||!me.aktif)return json({error:'Hanya kepala produksi'},403);
-  const p=await req.json();
-  if(p.action==='ping')return json({ok:true});
-  if(p.action==='create'){
-    const {data,error}=await adm.auth.admin.createUser({email:p.email,password:p.password,email_confirm:true});
-    if(error)return json({error:error.message},400);
-    const {error:e2}=await adm.from('profiles').insert({id:data.user.id,kode:p.kode,nama:p.nama,role:p.role,jabatan:p.jabatan,mesin:p.mesin,warna:p.warna,aktif:true});
-    if(e2){await adm.auth.admin.deleteUser(data.user.id);return json({error:e2.message},400)}
-    return json({ok:true});
-  }
-  if(p.action==='reset'){const {error}=await adm.auth.admin.updateUserById(p.id,{password:p.password});return error?json({error:error.message},400):json({ok:true})}
-  if(p.action==='delete'){const {error}=await adm.auth.admin.deleteUser(p.id);return error?json({error:error.message},400):json({ok:true})}
-  return json({error:'Aksi tidak dikenal'},400);
+if(req.method==='OPTIONS')return new Response('ok',{headers:cors});
+const adm=createClient(Deno.env.get('SUPABASE_URL')!,Deno.env.get('SUPABASE_SERVICE_ROLE_KEY')!);
+const {data:{user}}=await adm.auth.getUser((req.headers.get('Authorization')||'').replace('Bearer ',''));
+if(!user)return json({error:'Tidak terautentikasi'},401);
+const {data:me}=await adm.from('profiles').select('role,aktif').eq('id',user.id).single();
+if(!me||me.role!=='kepala'||!me.aktif)return json({error:'Hanya kepala produksi'},403);
+const p=await req.json();
+if(p.action==='ping')return json({ok:true});
+if(p.action==='create'){
+const {data,error}=await adm.auth.admin.createUser({email:p.email,password:p.password,email_confirm:true});
+if(error)return json({error:error.message},400);
+const {error:e2}=await adm.from('profiles').insert({id:data.user.id,kode:p.kode,nama:p.nama,role:p.role,jabatan:p.jabatan,mesin:p.mesin,warna:p.warna,aktif:true});
+if(e2){await adm.auth.admin.deleteUser(data.user.id);return json({error:e2.message},400)}
+return json({ok:true});
+}
+if(p.action==='reset'){const {error}=await adm.auth.admin.updateUserById(p.id,{password:p.password});return error?json({error:error.message},400):json({ok:true})}
+if(p.action==='delete'){const {error}=await adm.auth.admin.deleteUser(p.id);return error?json({error:error.message},400):json({ok:true})}
+return json({error:'Aksi tidak dikenal'},400);
 });`;
 const I={activity:'<polyline points="22 12 18 12 15 21 9 3 6 12 2 12"/>',
 package:'<path d="M16.5 9.4 7.55 4.24"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.29 7 12 12 20.71 7"/><line x1="12" y1="22" x2="12" y2="12"/>',
@@ -1514,7 +1519,7 @@ const clean=l=>l.filter(p=>p&&p.kode).map(p=>({kode:String(p.kode),nama:String(p
 function mergeDir(l,{complete=false,src='cache'}={}){const inc=clean(l);let out;if(complete)out=inc;else{const m=new Map(rdDir().map(p=>[p.kode,p]));inc.forEach(p=>m.set(p.kode,p));out=[...m.values()]}if(!out.length)return S.dir;try{localStorage.setItem(K.dir,JSON.stringify(out))}catch(e){}S.dir=out;S.dirSrc=src;return out}
 const rdRole=()=>{try{return localStorage.getItem(K.role)||''}catch(e){return''}};
 const wrRole=r=>{try{r?localStorage.setItem(K.role,r):localStorage.removeItem(K.role)}catch(e){}};
-const bItem=()=>({key:uid(),nama:'',po:'',spk:'',sn:'',lot:'',prep:'',setting:'',ops:'',hasil:'',reject:'',ket:''});
+const bItem=()=>({key:uid(),nama:'',po:'',spk:'',sn:'',lot:'',lotMerah:'',lotHitam:'',lotHijau:'',lotCore:'',prep:'',setting:'',ops:'',hasil:'',reject:'',ket:''});
 const bAg=()=>({key:uid(),kategori:'',deskripsi:'',waktu:''});
 const bEx=()=>({key:uid(),waktu:'',ket:''});
 const bForm=()=>({mode:'create',editId:null,operatorId:(S.me&&S.me.role==='operator')?S.me.kode:'',date:today(),shift:autoShift(),jenis:'pack',multi:false,items:[bItem()],hasAgenda:'ya',agenda:[bAg()],hasExtra:'tidak',extra:[bEx()]});
@@ -1539,7 +1544,14 @@ const iW=i=>num(i.prep)+num(i.setting)+num(i.ops);
 const iN=i=>num(i.hasil)-num(i.reject);
 const iK=i=>String(i.ket||'').trim();
 const iSN=i=>String(i.sn||'').trim();
-const iLOT=i=>String(i.lot||'').trim();
+const iLM=i=>String(i.lotMerah||'').trim();
+const iLH=i=>String(i.lotHitam||'').trim();
+const iLG=i=>String(i.lotHijau||'').trim();
+const iLC=i=>String(i.lotCore||'').trim();
+const iLOT=i=>{const p=[],m=iLM(i),h=iLH(i),g=iLG(i);if(m)p.push('M: '+m);if(h)p.push('H: '+h);if(g)p.push('G: '+g);return p.length?p.join(' · '):String(i.lot||'').trim()};
+const TRC=i=>{const a=[],sn=iSN(i),m=iLM(i),h=iLH(i),g=iLG(i),c=iLC(i),leg=String(i.lot||'').trim();
+if(sn)a.push(['s1','SN',sn]);if(m)a.push(['lm','M',m]);if(h)a.push(['lh','H',h]);if(g)a.push(['lg','G',g]);
+if(!m&&!h&&!g&&leg)a.push(['s2','LOT',leg]);if(c)a.push(['s3','CORE',c]);return a};
 const rH=r=>(r.items||[]).reduce((a,i)=>a+num(i.hasil),0);
 const rJ=r=>(r.items||[]).reduce((a,i)=>a+num(i.reject),0);
 const rN=r=>rH(r)-rJ(r);
@@ -1558,54 +1570,55 @@ const rB=r=>{const m=ROLES[r]||ROLES.operator;return `<span class="badge ${m.cls
 const vis=()=>!S.me?[]:S.me.role==='operator'?S.reports.filter(r=>r.operatorId===S.me.kode&&!r.deletedAt):S.reports.filter(r=>S.f.arch?!!r.deletedAt:!r.deletedAt);
 const savePref=()=>{try{localStorage.setItem(K.pref,JSON.stringify({views:S.views,sound:S.sound}))}catch(e){}};
 const loadPref=()=>{try{const d=JSON.parse(localStorage.getItem(K.pref)||'{}');S.views=d.views||[];S.sound=d.sound!==false}catch(e){}};
-
 let PR={list:[],mode:'local'};
 const prLocal=()=>{try{const d=JSON.parse(localStorage.getItem(K.pr)||'[]');return Array.isArray(d)?d:[]}catch(e){return[]}};
 const prSave=()=>{try{localStorage.setItem(K.pr,JSON.stringify(PR.list.slice(0,200)))}catch(e){}};
 const prPending=()=>PR.list.filter(r=>r.status==='pending').length;
 const prFor=k=>PR.list.filter(r=>r.kode===k).sort((a,b)=>b.at-a.at)[0]||null;
 async function prLoad(){
-  PR.list=prLocal();PR.mode='local';
-  if(S.mode==='cloud'&&DB.sb){
-    try{
-      const{data,error}=await DB.sb.from('password_requests').select('*').order('created_at',{ascending:false}).limit(200);
-      if(!error&&Array.isArray(data)){
-        PR.list=data.map(d=>({id:d.id,kode:d.kode,nama:d.nama||d.kode,note:d.note||'',status:d.status||'pending',at:new Date(d.created_at).getTime(),resolvedAt:d.resolved_at?new Date(d.resolved_at).getTime():null,by:d.resolved_by||''}));
-        PR.mode='cloud';prSave();
-      }
-    }catch(e){}
-  }
+PR.list=prLocal();PR.mode='local';
+if(S.mode==='cloud'&&DB.sb){
+try{
+const{data,error}=await DB.sb.from('password_requests').select('*').order('created_at',{ascending:false}).limit(200);
+if(!error&&Array.isArray(data)){
+PR.list=data.map(d=>({id:d.id,kode:d.kode,nama:d.nama||d.kode,note:d.note||'',status:d.status||'pending',at:new Date(d.created_at).getTime(),resolvedAt:d.resolved_at?new Date(d.resolved_at).getTime():null,by:d.resolved_by||''}));
+PR.mode='cloud';prSave();
+}
+}catch(e){}
+}
 }
 async function prAdd(r){
-  PR.list.unshift(r);prSave();
-  if(S.mode==='cloud'&&DB.sb){try{const{error}=await DB.sb.from('password_requests').insert({id:r.id,kode:r.kode,nama:r.nama,note:r.note,status:'pending'});if(!error)PR.mode='cloud'}catch(e){}}
+PR.list.unshift(r);prSave();
+if(S.mode==='cloud'&&DB.sb){try{const{error}=await DB.sb.from('password_requests').insert({id:r.id,kode:r.kode,nama:r.nama,note:r.note,status:'pending'});if(!error)PR.mode='cloud'}catch(e){}}
 }
 async function prUpd(id,patch){
-  const r=PR.list.find(x=>x.id===id);if(r)Object.assign(r,patch);prSave();
-  if(S.mode==='cloud'&&DB.sb){try{await DB.sb.from('password_requests').update({status:patch.status,resolved_at:new Date().toISOString(),resolved_by:patch.by||null}).eq('id',id)}catch(e){}}
+const r=PR.list.find(x=>x.id===id);if(r)Object.assign(r,patch);prSave();
+if(S.mode==='cloud'&&DB.sb){try{await DB.sb.from('password_requests').update({status:patch.status,resolved_at:new Date().toISOString(),resolved_by:patch.by||null}).eq('id',id)}catch(e){}}
 }
 async function prDel(ids){
-  PR.list=PR.list.filter(r=>!ids.includes(r.id));prSave();
-  if(S.mode==='cloud'&&DB.sb){try{await DB.sb.from('password_requests').delete().in('id',ids)}catch(e){}}
+PR.list=PR.list.filter(r=>!ids.includes(r.id));prSave();
+if(S.mode==='cloud'&&DB.sb){try{await DB.sb.from('password_requests').delete().in('id',ids)}catch(e){}}
 }
-
 const Local={d:null,
 load(){try{const r=localStorage.getItem(K.db);if(r){this.d=JSON.parse(r);if(this.d&&this.d.profiles&&this.d.profiles.length){
 let ch=false;
 this.d.profiles=this.d.profiles.map(p=>{const f=fixName(p);if(f!==p)ch=true;return f});
-this.d.reports=(this.d.reports||[]).map(x=>({...x,items:(x.items||[]).map(i=>({...i,sn:i.sn||'',lot:i.lot||''}))}));
+this.d.reports=(this.d.reports||[]).map(x=>({...x,items:(x.items||[]).map(i=>({...i,sn:i.sn||'',lot:i.lot||'',lotMerah:i.lotMerah||'',lotHitam:i.lotHitam||'',lotHijau:i.lotHijau||'',lotCore:i.lotCore||''}))}));
 if(ch)this.save();return}}}catch(e){}this.d=this.seed();this.save()},
 save(){try{localStorage.setItem(K.db,JSON.stringify(this.d))}catch(e){toast('Penyimpanan perangkat penuh.',{type:'error',icon:'alert'})}},
 seed(){return{profiles:PEOPLE.map(p=>({id:uid(),...p,aktif:true,password:CFG.PASS})),products:[...PACK.map(n=>({id:uid(),jenis:'pack',nama:n,aktif:true})),...ROLL.map(n=>({id:uid(),jenis:'roll',nama:n,aktif:true}))],reports:this.seedR(),audit:[],seq:{}}},
 seedR(){const T=today(),R=[],sq={};
-const it=(n,po,spk,p,s,o,h,j,k='')=>({nama:n,po,spk,sn:'',lot:'',prep:p,setting:s,ops:o,hasil:h,reject:j,ket:k});
+const it=(n,po,spk,p,s,o,h,j,k='')=>({nama:n,po,spk,sn:'',lot:'',lotMerah:'',lotHitam:'',lotHijau:'',lotCore:'',prep:p,setting:s,ops:o,hasil:h,reject:j,ket:k});
 const ag=(k,d,w)=>({kategori:k,deskripsi:d,waktu:w}),ex=(w,k)=>({waktu:w,ket:k});
 const mk=(off,op,je,sh,items,agenda,extra,st,cat)=>{const date=addDays(T,-off);sq[date]=(sq[date]||0)+1;
 const ts=new Date(date+'T00:00:00').getTime()+(sh==='L2'?20:8)*36e5+sq[date]*17*6e4;const s=st||(off>=2?'verified':'submit');
 const ym=date.replace(/-/g,'').slice(2,6);
-const its=(items||[]).map((x,ix)=>({...x,
-sn:x.sn||('JR-'+ym+'-'+pad3(sq[date]*7+ix*3+1)),
-lot:x.lot||('LT-'+ym+'-'+pad(sq[date]*2+ix+1))}));
+const its=(items||[]).map((x,ix)=>{const n=sq[date]*7+ix*3+1;return {...x,
+sn:x.sn||('JR-'+ym+'-'+pad3(n)),
+lotMerah:x.lotMerah!==undefined&&x.lotMerah!==''?x.lotMerah:(n%3!==0?'LM-'+ym+'-'+pad(n%40+1):''),
+lotHitam:x.lotHitam!==undefined&&x.lotHitam!==''?x.lotHitam:('LH-'+ym+'-'+pad(n%28+1)),
+lotHijau:x.lotHijau!==undefined&&x.lotHijau!==''?x.lotHijau:(n%5===0?'LG-'+ym+'-'+pad(n%12+1):''),
+lotCore:x.lotCore||('PC-'+ym+'-'+pad3(n%90+1))}});
 R.push({id:uid(),code:'LH-'+date.replace(/-/g,'').slice(2)+'-'+pad3(sq[date]),date,shift:sh,operatorId:op,jenis:je,items:its,agenda:agenda||[],extra:extra||[],hasAgenda:je==='lainnya'?!!(agenda&&agenda.length):null,status:s,catatan:cat||'',verifiedBy:s==='verified'?'admin':null,verifiedAt:s==='verified'?ts+36e5:null,deletedAt:null,createdBy:op,createdAt:ts,updatedAt:ts})};
 mk(0,'yanto','pack','N1',[it(PACK[0],'7100006123','00220',25,45,310,420,14,'Reject 14 pack saat 20 menit pertama: grid cetak miring karena register belum terkunci. Setelah setting ulang, produksi normal.'),it(PACK[2],'7100006124','00221',15,30,120,180,6,'Reject 6 pack lipatan tidak simetris.')],null,[ex(30,'Membantu teknisi setting ulang pisau potong Flexo')],'submit');
 mk(0,'ridwan','pack','N1',[it(PACK[1],'7100006466','00223',10,40,340,200,20,'')],null,[ex(60,'Bantu teknisi setting pisau potong Auto Paper')],'submit');
@@ -1614,6 +1627,7 @@ mk(0,'dian','lainnya','N1',null,[ag('Membantu Teknisi','Membantu teknisi menggan
 mk(1,'indra','pack','L2',[it(PACK[4],'7100006102','00216',30,50,300,360,12,'Reject 12 pack: tinta belum kering sempurna saat masuk lipat.')],null,[ex(45,'Bersih-bersih area mesin dan serah terima shift')],'verified');
 mk(1,'ridwan','roll','L1',[it(ROLL[2],'7100006098','00214',25,40,320,210,9,''),it(ROLL[1],'7100006099','00215',15,25,110,95,4,'Reject 4 roll sambungan bahan tidak rata.')],null,null,'verified');
 mk(1,'fachri','pack','N1',[it(PACK[1],'7100006105','00217',20,35,330,450,18,'')],null,null,'revisi','Reject 18 pack belum ada rincian penyebab. Mohon isi kolom Keterangan.');
+mk(1,'bodi','pack','N1',[it(PACK[6],'7100006108','00218',40,60,180,0,0,'Mesin Continuous Form berhenti total sejak jam 10.00 — kerusakan gearbox utama. Hasil produksi 0 pack; waktu terpakai untuk troubleshooting bersama teknisi.')],null,null,'submit');
 mk(2,'yoga','pack','N1',[it(PACK[5],'7100006087','00211',35,55,290,310,10,'Setting lebih lama karena ganti plat cetak.')],null,null,'verified');
 mk(2,'bodi','pack','L2',[it(PACK[6],'7100006090','00212',25,45,315,380,15,'')],null,[ex(20,'Membantu operator Flexo menyiapkan bahan baku')],'verified');
 mk(2,'dian','roll','L1',[it(ROLL[4],'7100006093','00213',20,30,340,260,7,'Reject 7 roll bagian akhir gulungan bahan.')],null,null,'verified');
@@ -1697,7 +1711,7 @@ async session(){const{data:{session}}=await this.sb.auth.getSession();if(!sessio
 async signOut(){await this.sb.auth.signOut()},
 async profiles(){const{data,error}=await this.sb.from('profiles').select('*').order('nama');if(error)throw new Error(error.message);this.map={};this.rmap={};return data.map(d=>{const p=this.pf(d);this.map[p.kode]=p.id;this.rmap[p.id]=p.kode;return p})},
 async products(){const{data,error}=await this.sb.from('products').select('*').order('nama');if(error)throw new Error(error.message);return data.map(d=>({id:d.id,jenis:d.jenis,nama:d.nama,aktif:d.aktif!==false}))},
-rF(d){return{id:d.id,code:d.code,date:d.tanggal,shift:d.shift,operatorId:this.rmap[d.operator_id]||'',jenis:d.jenis,items:(d.items||[]).map(i=>({...i,sn:i.sn||'',lot:i.lot||''})),agenda:d.agenda||[],extra:d.extra||[],hasAgenda:d.has_agenda,status:d.status,catatan:d.catatan||'',verifiedBy:d.verified_by?(this.rmap[d.verified_by]||null):null,verifiedAt:d.verified_at?new Date(d.verified_at).getTime():null,deletedAt:d.deleted_at,createdAt:new Date(d.created_at).getTime(),updatedAt:new Date(d.updated_at).getTime()}},
+rF(d){return{id:d.id,code:d.code,date:d.tanggal,shift:d.shift,operatorId:this.rmap[d.operator_id]||'',jenis:d.jenis,items:(d.items||[]).map(i=>({...i,sn:i.sn||'',lot:i.lot||'',lotMerah:i.lotMerah||'',lotHitam:i.lotHitam||'',lotHijau:i.lotHijau||'',lotCore:i.lotCore||''})),agenda:d.agenda||[],extra:d.extra||[],hasAgenda:d.has_agenda,status:d.status,catatan:d.catatan||'',verifiedBy:d.verified_by?(this.rmap[d.verified_by]||null):null,verifiedAt:d.verified_at?new Date(d.verified_at).getTime():null,deletedAt:d.deleted_at,createdAt:new Date(d.created_at).getTime(),updatedAt:new Date(d.updated_at).getTime()}},
 rT(p){return{tanggal:p.date,shift:p.shift,operator_id:this.map[p.operatorId],jenis:p.jenis,items:p.items||[],agenda:p.agenda||[],extra:p.extra||[],has_agenda:p.jenis==='lainnya'?!!p.hasAgenda:null,has_extra:(p.extra||[]).length>0}},
 async reports(){const{data,error}=await this.sb.from('reports').select('*').order('tanggal',{ascending:false}).limit(3000);if(error)throw new Error(error.message);return data.map(d=>this.rF(d))},
 async audit(){const{data,error}=await this.sb.from('audit_log').select('*').order('at',{ascending:false}).limit(200);if(error)return[];
@@ -1776,52 +1790,52 @@ function loginList(){return rdCfg()?loginDir():Local.d.profiles.map(p=>({kode:p.
 function selAcct(){const l=loginList(),k=$('#lgKode').value;return l.find(x=>x.kode===k)||null}
 function selRole(){if(S.lmode==='email')return S.lastRole||'kepala';const a=selAcct();return a?a.role:(S.lastRole||'kepala')}
 function renderResetStat(){
-  const box=$('#resetStat'),a=selAcct();
-  if(!a||S.lmode==='email'){box.hidden=true;return}
-  const r=prFor(a.kode);
-  if(!r){box.hidden=true;return}
-  box.hidden=false;box.className='rstat '+r.status;
-  if(r.status==='pending')box.innerHTML=`${icon('clock',14)}<div><b>Permintaan reset sandi terkirim</b>Menunggu verifikasi kepala produksi · ${fTS(r.at)}</div>`;
-  else if(r.status==='approved')box.innerHTML=`${icon('checkCircle',14)}<div><b>Sandi baru sudah disiapkan</b>Disetujui ${esc(r.by||'kepala')} · ${fTS(r.resolvedAt||r.at)}. Minta sandi baru langsung ke kepala produksi.</div>`;
-  else box.innerHTML=`${icon('alert',14)}<div><b>Permintaan ditolak</b>Hubungi kepala produksi untuk penjelasan lebih lanjut.</div>`;
+const box=$('#resetStat'),a=selAcct();
+if(!a||S.lmode==='email'){box.hidden=true;return}
+const r=prFor(a.kode);
+if(!r){box.hidden=true;return}
+box.hidden=false;box.className='rstat '+r.status;
+if(r.status==='pending')box.innerHTML=`${icon('clock',14)}<div><b>Permintaan reset sandi terkirim</b>Menunggu verifikasi kepala produksi · ${fTS(r.at)}</div>`;
+else if(r.status==='approved')box.innerHTML=`${icon('checkCircle',14)}<div><b>Sandi baru sudah disiapkan</b>Disetujui ${esc(r.by||'kepala')} · ${fTS(r.resolvedAt||r.at)}. Minta sandi baru langsung ke kepala produksi.</div>`;
+else box.innerHTML=`${icon('alert',14)}<div><b>Permintaan ditolak</b>Hubungi kepala produksi untuk penjelasan lebih lanjut.</div>`;
 }
 function renderLogin(){
-  const cloud=!!rdCfg();
-  $('#lgKodeF').hidden=S.lmode==='email';
-  $('#lgEmailF').hidden=S.lmode!=='email';
-  $$('#lgModes button').forEach(b=>b.classList.toggle('on',b.dataset.mode===S.lmode));
-  const list=loginList(),prev=$('#lgKode').value;
-  $('#lgKode').innerHTML=[['kepala','Kepala Produksi'],['admin','Admin'],['operator','Operator']].map(([r,l])=>{const a=list.filter(p=>p.role===r);return a.length?`<optgroup label="${l}">${a.map(p=>`<option value="${esc(p.kode)}">${esc(p.nama)}${p.aktif===false?' · nonaktif':''}</option>`).join('')}</optgroup>`:''}).join('');
-  $('#lgKode').value=(prev&&list.some(p=>p.kode===prev))?prev:(list.some(p=>p.kode==='kepala')?'kepala':(list[0]?list[0].kode:''));
-  const c=rdCfg();
-  $('#lgEmail').placeholder='nama@'+((c&&c.domain)||'mhi.local');
-  $('#lgPass').placeholder=cloud?'••••••••':'Sandi demo: '+CFG.PASS;
-  if(S.lmode==='email')$('#lgEmail').value=S.lemail||'';
-  renderResetStat();
+const cloud=!!rdCfg();
+$('#lgKodeF').hidden=S.lmode==='email';
+$('#lgEmailF').hidden=S.lmode!=='email';
+$$('#lgModes button').forEach(b=>b.classList.toggle('on',b.dataset.mode===S.lmode));
+const list=loginList(),prev=$('#lgKode').value;
+$('#lgKode').innerHTML=[['kepala','Kepala Produksi'],['admin','Admin'],['operator','Operator']].map(([r,l])=>{const a=list.filter(p=>p.role===r);return a.length?`<optgroup label="${l}">${a.map(p=>`<option value="${esc(p.kode)}">${esc(p.nama)}${p.aktif===false?' · nonaktif':''}</option>`).join('')}</optgroup>`:''}).join('');
+$('#lgKode').value=(prev&&list.some(p=>p.kode===prev))?prev:(list.some(p=>p.kode==='kepala')?'kepala':(list[0]?list[0].kode:''));
+const c=rdCfg();
+$('#lgEmail').placeholder='nama@'+((c&&c.domain)||'mhi.local');
+$('#lgPass').placeholder=cloud?'••••••••':'Sandi demo: '+CFG.PASS;
+if(S.lmode==='email')$('#lgEmail').value=S.lemail||'';
+renderResetStat();
 }
 function loginErr(e){
-  const box=$('#lgErr'),detail=selRole()==='kepala',m=$('#lgErrM');
-  if(detail){
-    const d=e&&e.diag?e.diag:{title:'Gagal masuk',msg:esc(e.message||String(e)),fix:''};
-    box.classList.remove('simple');
-    $('#lgErrT').textContent=d.title;
-    m.hidden=false;
-    m.innerHTML=d.msg+(d.fix?`<br><br><b>Perbaikan:</b> ${d.fix}`:'')+(e&&e.raw?`<span class="raw">Supabase: ${esc(e.raw)}</span>`:'');
-  }else{
-    const raw=String((e&&e.raw)||(e&&e.message)||''),k=e&&e.kind;
-    let msg='Gagal masuk. Coba lagi.';
-    if(k==='badpass'||/sandi salah/i.test(raw))msg='Sandi salah.';
-    else if(k==='empty')msg='Isi email akun terlebih dahulu.';
-    else if(k==='inactive')msg='Akun dinonaktifkan. Hubungi kepala produksi.';
-    else if(k==='notfound')msg='Akun tidak ditemukan.';
-    else if(k==='noprofile')msg='Akun belum disiapkan. Hubungi kepala produksi.';
-    else if(/not confirmed/i.test(raw))msg='Akun belum diaktifkan. Hubungi kepala produksi.';
-    else if(/failed to fetch|network|load failed/i.test(raw))msg='Koneksi bermasalah. Coba lagi.';
-    else if(/rate limit|too many|429/i.test(raw))msg='Terlalu banyak percobaan. Tunggu sebentar.';
-    box.classList.add('simple');
-    $('#lgErrT').textContent=msg;m.hidden=true;m.innerHTML='';
-  }
-  box.hidden=false;box.classList.remove('shake');void box.offsetWidth;box.classList.add('shake');sfx.err();
+const box=$('#lgErr'),detail=selRole()==='kepala',m=$('#lgErrM');
+if(detail){
+const d=e&&e.diag?e.diag:{title:'Gagal masuk',msg:esc(e.message||String(e)),fix:''};
+box.classList.remove('simple');
+$('#lgErrT').textContent=d.title;
+m.hidden=false;
+m.innerHTML=d.msg+(d.fix?`<br><br><b>Perbaikan:</b> ${d.fix}`:'')+(e&&e.raw?`<span class="raw">Supabase: ${esc(e.raw)}</span>`:'');
+}else{
+const raw=String((e&&e.raw)||(e&&e.message)||''),k=e&&e.kind;
+let msg='Gagal masuk. Coba lagi.';
+if(k==='badpass'||/sandi salah/i.test(raw))msg='Sandi salah.';
+else if(k==='empty')msg='Isi email akun terlebih dahulu.';
+else if(k==='inactive')msg='Akun dinonaktifkan. Hubungi kepala produksi.';
+else if(k==='notfound')msg='Akun tidak ditemukan.';
+else if(k==='noprofile')msg='Akun belum disiapkan. Hubungi kepala produksi.';
+else if(/not confirmed/i.test(raw))msg='Akun belum diaktifkan. Hubungi kepala produksi.';
+else if(/failed to fetch|network|load failed/i.test(raw))msg='Koneksi bermasalah. Coba lagi.';
+else if(/rate limit|too many|429/i.test(raw))msg='Terlalu banyak percobaan. Tunggu sebentar.';
+box.classList.add('simple');
+$('#lgErrT').textContent=msg;m.hidden=true;m.innerHTML='';
+}
+box.hidden=false;box.classList.remove('shake');void box.offsetWidth;box.classList.add('shake');sfx.err();
 }
 function clearLogin(){const p=$('#lgPass'),e=$('#lgEmail');const w=()=>{if(p){p.value='';p.type='password'}if(e)e.value='';S.lemail=''};
 w();try{$('#loginForm').reset()}catch(x){}w();$('#lgEye').innerHTML=icon('eye',16);
@@ -1918,8 +1932,10 @@ $('#dl-pack').innerHTML=S.products.filter(p=>p.jenis==='pack'&&p.aktif).map(p=>`
 $('#dl-roll').innerHTML=S.products.filter(p=>p.jenis==='roll'&&p.aktif).map(p=>`<option value="${esc(p.nama)}">`).join('');
 const sns=[...new Set(S.reports.flatMap(r=>(r.items||[]).map(i=>iSN(i))).filter(Boolean))].slice(0,60);
 $('#dl-sn').innerHTML=sns.map(s=>`<option value="${esc(s)}">`).join('');
-const lots=[...new Set(S.reports.flatMap(r=>(r.items||[]).map(i=>iLOT(i))).filter(Boolean))].slice(0,60);
-$('#dl-lot').innerHTML=lots.map(s=>`<option value="${esc(s)}">`).join('')}
+const lots=[...new Set(S.reports.flatMap(r=>(r.items||[]).flatMap(i=>[iLM(i),iLH(i),iLG(i),String(i.lot||'').trim()])).filter(Boolean))].slice(0,80);
+$('#dl-lot').innerHTML=lots.map(s=>`<option value="${esc(s)}">`).join('');
+const cores=[...new Set(S.reports.flatMap(r=>(r.items||[]).map(i=>iLC(i))).filter(Boolean))].slice(0,60);
+$('#dl-core').innerHTML=cores.map(s=>`<option value="${esc(s)}">`).join('')}
 function setView(v,skip){if(!S.me)return;
 if(!ACC[v]||!ACC[v].includes(S.me.role)){toast(`Menu itu hanya untuk ${v==='users'?'Kepala Produksi':'Admin & Kepala Produksi'}.`,{type:'warn',icon:'alert'});v='history'}
 S.view=v;document.body.dataset.view=v;
@@ -1955,10 +1971,17 @@ return `<article class="icard" data-key="${it.key}">
 <div class="g2"><div class="field"><label>Nomor PO <b class="req">*</b></label><input class="inp num" inputmode="numeric" data-item="${it.key}" data-f="po" placeholder="cth: 7100006123" value="${v(it.po)}"><div class="err"></div></div><div class="field"><label>Nomor SPK <b class="req">*</b></label><input class="inp num" inputmode="numeric" data-item="${it.key}" data-f="spk" placeholder="cth: 00220" value="${v(it.spk)}"><div class="err"></div></div></div>
 <div class="trace">
 <div class="field sn-field"><label for="sn-${it.key}">${icon('roll',14)} No. SN Jumbo Roll <span class="opt">OPSIONAL</span></label><input id="sn-${it.key}" class="inp mono${iSN(it)?' has':''}" data-item="${it.key}" data-f="sn" list="dl-sn" maxlength="${SNMAX}" placeholder="cth: JR-2611-0451" value="${v(it.sn)}"><div class="help">Nomor seri gulungan bahan baku yang dipakai.</div><div class="err"></div></div>
-<div class="field lot-field"><label for="lot-${it.key}">${icon('droplet',14)} No. LOT Tinta <span class="opt">OPSIONAL</span></label><input id="lot-${it.key}" class="inp mono${iLOT(it)?' has':''}" data-item="${it.key}" data-f="lot" list="dl-lot" maxlength="${LOTMAX}" placeholder="cth: LT-2611-07" value="${v(it.lot)}"><div class="help">Nomor LOT / batch tinta cetak yang dipakai.</div><div class="err"></div></div>
+<div class="lot-group"><label>${icon('droplet',14)} No. LOT Tinta <span class="opt">OPSIONAL</span></label>
+<div class="inkgrid">
+<div class="field ink im"><label for="lot-m-${it.key}"><i class="inkdot"></i>Tinta Merah</label><input id="lot-m-${it.key}" class="inp mono${iLM(it)?' has':''}" data-item="${it.key}" data-f="lotMerah" list="dl-lot" maxlength="${LOTMAX}" placeholder="cth: LM-2611-07" value="${v(it.lotMerah)}"><div class="err"></div></div>
+<div class="field ink ih"><label for="lot-h-${it.key}"><i class="inkdot"></i>Tinta Hitam</label><input id="lot-h-${it.key}" class="inp mono${iLH(it)?' has':''}" data-item="${it.key}" data-f="lotHitam" list="dl-lot" maxlength="${LOTMAX}" placeholder="cth: LH-2611-03" value="${v(it.lotHitam)}"><div class="err"></div></div>
+<div class="field ink ig"><label for="lot-g-${it.key}"><i class="inkdot"></i>Tinta Hijau</label><input id="lot-g-${it.key}" class="inp mono${iLG(it)?' has':''}" data-item="${it.key}" data-f="lotHijau" list="dl-lot" maxlength="${LOTMAX}" placeholder="cth: LG-2611-02" value="${v(it.lotHijau)}"><div class="err"></div></div>
+</div>
+<div class="help">Isi LOT sesuai warna tinta yang dipakai — boleh satu, dua, atau ketiganya.</div></div>
+<div class="field core-field"><label for="core-${it.key}">${icon('database',14)} No. LOT Pipa Core <span class="opt">OPSIONAL</span></label><input id="core-${it.key}" class="inp mono${iLC(it)?' has':''}" data-item="${it.key}" data-f="lotCore" list="dl-core" maxlength="${LOTMAX}" placeholder="cth: PC-2611-018" value="${v(it.lotCore)}"><div class="help">Nomor LOT / batch pipa core (selongsong tengah gulungan).</div><div class="err"></div></div>
 </div>
 <div class="g3"><div class="field"><label>Persiapan (mnt) <b class="req">*</b></label><input type="number" min="0" max="1440" class="inp num" data-item="${it.key}" data-f="prep" placeholder="0" value="${v(it.prep)}"><div class="help">Ambil bahan baku &amp; persiapan.</div><div class="err"></div></div><div class="field"><label>Setting (mnt) <b class="req">*</b></label><input type="number" min="0" max="1440" class="inp num" data-item="${it.key}" data-f="setting" placeholder="0" value="${v(it.setting)}"><div class="err"></div></div><div class="field"><label>Operasional (mnt) <b class="req">*</b></label><input type="number" min="0" max="1440" class="inp num" data-item="${it.key}" data-f="ops" placeholder="0" value="${v(it.ops)}"><div class="err"></div></div></div>
-<div class="g2"><div class="field"><label>Hasil Produksi (${j.unit}) <b class="req">*</b></label><div class="wu"><input type="number" min="0" class="inp num" data-item="${it.key}" data-f="hasil" placeholder="0" value="${v(it.hasil)}"><span class="u">${j.unit}</span></div><div class="err"></div></div><div class="field"><label>Reject (${j.unit}) <b class="req">*</b></label><div class="wu"><input type="number" min="0" class="inp num" data-item="${it.key}" data-f="reject" placeholder="0" value="${v(it.reject)}"><span class="u">${j.unit}</span></div><div class="err"></div></div></div>
+<div class="g2"><div class="field"><label>Hasil Produksi (${j.unit}) <b class="req">*</b></label><div class="wu"><input type="number" min="0" class="inp num" data-item="${it.key}" data-f="hasil" placeholder="0" value="${v(it.hasil)}"><span class="u">${j.unit}</span></div><div class="help">Boleh 0 — mis. shift troubleshooting tanpa output.</div><div class="err"></div></div><div class="field"><label>Reject (${j.unit}) <b class="req">*</b></label><div class="wu"><input type="number" min="0" class="inp num" data-item="${it.key}" data-f="reject" placeholder="0" value="${v(it.reject)}"><span class="u">${j.unit}</span></div><div class="err"></div></div></div>
 <div class="field kf"><label for="k-${it.key}">${icon('note',14)} Keterangan <span class="opt">OPSIONAL</span></label><textarea id="k-${it.key}" class="inp${iK(it)?' has':''}" rows="2" maxlength="${KMAX}" data-item="${it.key}" data-f="ket" placeholder="cth: Reject 14 pack karena grid miring saat setting awal; sudah dikoreksi.">${esc(it.ket||'')}</textarea><div class="kfoot"><span class="help" data-kh="${it.key}">Catatan penyebab reject, kendala mesin, atau kondisi bahan.</span><span class="kcount" data-kc="${it.key}">${String(it.ket||'').length}/${KMAX}</span></div><div class="err"></div></div>
 <div class="inet" data-inet="${it.key}"></div><div class="itime" data-itime="${it.key}"></div>
 </div></article>`}
@@ -1975,14 +1998,14 @@ function renderItems(){$('#itemList').innerHTML=S.form.items.map(itemHTML).join(
 function renderExtra(){$('#extraList').innerHTML=S.form.extra.map(exHTML).join('')}
 function renderAgenda(){$('#agendaList').innerHTML=S.form.agenda.map(agHTML).join('')}
 function calcItem(k){const it=S.form.items.find(x=>x.key===k);if(!it)return;
-const j=JENIS[S.form.jenis==='roll'?'roll':'pack'],w=iW(it),h=num(it.hasil),r=num(it.reject),rt=rate(h,r),net=h-r,kt=iK(it),sn=iSN(it),lot=iLOT(it);
-const any=['prep','setting','ops','hasil','reject'].some(x=>it[x]!=='')||kt||sn||lot;
+const j=JENIS[S.form.jenis==='roll'?'roll':'pack'],w=iW(it),h=num(it.hasil),r=num(it.reject),rt=rate(h,r),net=h-r,kt=iK(it),sn=iSN(it),m=iLM(it),hh=iLH(it),g=iLG(it),core=iLC(it),leg=String(it.lot||'').trim();
+const any=['prep','setting','ops','hasil','reject'].some(x=>it[x]!=='')||kt||sn||m||hh||g||core||leg;
 const e=$(`[data-calc="${k}"]`);
-if(e)e.innerHTML=any?`<span class="cc time">${icon('timer',11)} ${fMin(w)}</span><span class="cc">${icon(j.icon,11)} ${fNum(h)} ${j.unit}</span><span class="cc ${rCls(rt)}">${icon('alert',11)} ${rt.toFixed(1)}%</span><span class="cc net">${icon('sigma',11)} bersih ${fNum(net)}</span>${sn?`<span class="cc sn" title="SN Jumbo Roll: ${esc(sn)}">${icon('roll',11)} ${esc(clip(sn,14))}</span>`:''}${lot?`<span class="cc lot" title="LOT Tinta: ${esc(lot)}">${icon('droplet',11)} ${esc(clip(lot,14))}</span>`:''}${kt?`<span class="cc ket">${icon('note',11)} ket</span>`:''}`:'<span class="cc muted">belum diisi</span>';
+if(e)e.innerHTML=any?`<span class="cc time">${icon('timer',11)} ${fMin(w)}</span><span class="cc">${icon(j.icon,11)} ${fNum(h)} ${j.unit}</span><span class="cc ${rCls(rt)}">${icon('alert',11)} ${rt.toFixed(1)}%</span><span class="cc net">${icon('sigma',11)} bersih ${fNum(net)}</span>${sn?`<span class="cc sn" title="SN Jumbo Roll: ${esc(sn)}">${icon('roll',11)} ${esc(clip(sn,14))}</span>`:''}${m?`<span class="cc lm" title="LOT Tinta Merah: ${esc(m)}">${icon('droplet',11)} M ${esc(clip(m,12))}</span>`:''}${hh?`<span class="cc lh" title="LOT Tinta Hitam: ${esc(hh)}">${icon('droplet',11)} H ${esc(clip(hh,12))}</span>`:''}${g?`<span class="cc lg" title="LOT Tinta Hijau: ${esc(g)}">${icon('droplet',11)} G ${esc(clip(g,12))}</span>`:''}${!m&&!hh&&!g&&leg?`<span class="cc lot" title="LOT Tinta: ${esc(leg)}">${icon('droplet',11)} ${esc(clip(leg,14))}</span>`:''}${core?`<span class="cc core" title="LOT Pipa Core: ${esc(core)}">${icon('database',11)} CORE ${esc(clip(core,12))}</span>`:''}${kt?`<span class="cc ket">${icon('note',11)} ket</span>`:''}`:'<span class="cc muted">belum diisi</span>';
 const nl=$(`[data-inet="${k}"]`);if(nl)nl.innerHTML=`${icon('sigma',14)} Hasil bersih kegiatan ini <b>${fNum(net)}</b> ${j.unit}<span class="calc">${fNum(h)} − ${fNum(r)}</span>`;
 const tl=$(`[data-itime="${k}"]`);if(tl)tl.innerHTML=`${icon('timer',14)} Total waktu kegiatan ini <b>${fMin(w)}</b><span class="calc">${num(it.prep)} + ${num(it.setting)} + ${num(it.ops)} mnt</span>`;
 const si=document.getElementById('sn-'+k);if(si)si.classList.toggle('has',!!sn);
-const li=document.getElementById('lot-'+k);if(li)li.classList.toggle('has',!!lot);
+[['lot-m-',m],['lot-h-',hh],['lot-g-',g],['core-',core]].forEach(([p,val])=>{const el=document.getElementById(p+k);if(el)el.classList.toggle('has',!!val)});
 const raw=String(it.ket||''),kc=$(`[data-kc="${k}"]`),kh=$(`[data-kh="${k}"]`),ki=document.getElementById('k-'+k);
 if(kc){kc.textContent=`${raw.length}/${KMAX}`;kc.classList.toggle('near',raw.length>KMAX-40)}
 if(ki)ki.classList.toggle('has',!!kt);
@@ -2002,8 +2025,8 @@ pn.classList.toggle('zero',net===0);pn.classList.toggle('neg',net<0);
 if(lastNet!==null&&lastNet!==net){pn.classList.remove('bump');void pn.offsetWidth;pn.classList.add('bump')}lastNet=net;
 $('#sWaktu').textContent=fMin(tw);$('#sSplit').innerHTML=split(pw,xw,'kegiatan lain');
 $('#bdBar').innerHTML=bdSeg(p,s,oo,xw);$('#bdLeg').innerHTML=bdLeg(p,s,oo,xw);
-$('#sItems').innerHTML=f.items.map((i,x)=>{const sn=iSN(i),lot=iLOT(i);
-return `<div class="sir"><span class="sii">${pad(x+1)}</span><span class="sin">${esc(i.nama)||'<i>belum diisi</i>'}</span>${iK(i)?`<span class="sino">${icon('note',11)}</span>`:''}<span class="sit">${fMin(iW(i))}</span><span class="siv net">${fNum(iN(i))}</span></div>${sn||lot?`<div class="strace">${sn?`<span class="s1">SN ${esc(clip(sn,18))}</span>`:''}${lot?`<span class="s2">LOT ${esc(clip(lot,18))}</span>`:''}</div>`:''}`}).join('');
+$('#sItems').innerHTML=f.items.map((i,x)=>{const tr=TRC(i);
+return `<div class="sir"><span class="sii">${pad(x+1)}</span><span class="sin">${esc(i.nama)||'<i>belum diisi</i>'}</span>${iK(i)?`<span class="sino">${icon('note',11)}</span>`:''}<span class="sit">${fMin(iW(i))}</span><span class="siv net">${fNum(iN(i))}</span></div>${tr.length?`<div class="strace">${tr.map(([c,l,v])=>`<span class="${c}">${l} ${esc(clip(v,18))}</span>`).join('')}</div>`:''}`}).join('');
 $('#sExCount').textContent=`${ex.length} kegiatan · ${fMin(xw)}`;
 $('#sExList').innerHTML=f.hasExtra==='ya'?(ex.length?ex.map((x,i)=>`<div class="sir"><span class="sii" style="background:var(--plum);color:#fff">L${pad(i+1)}</span><span class="sin">${esc(x.ket)||'<i>belum diisi</i>'}</span><span class="siv" style="color:var(--plum)">${fMin(num(x.waktu))}</span></div>`).join(''):'<div class="sir"><span class="sin muted">Belum ada kegiatan</span></div>'):'<div class="sir"><span class="sin muted">Tidak ada kegiatan lainnya</span></div>';
 $('#mbsF').innerHTML=`bersih <b class="net">${fNum(net)}</b> ${j.unit} · waktu <b>${fMin(tw)}</b>`;
@@ -2050,12 +2073,10 @@ if(!/^\d{6,14}$/.test(String(it.po).trim()))bad(q('po'),'PO: 6–14 digit angka.
 if(!/^\d{3,10}$/.test(String(it.spk).trim()))bad(q('spk'),'SPK: 3–10 digit angka.',a);
 const sn=iSN(it);
 if(sn&&(sn.length<3||sn.length>SNMAX))bad(q('sn'),`SN Jumbo Roll: 3–${SNMAX} karakter (atau kosongkan).`,a);
-const lot=iLOT(it);
-if(lot&&(lot.length<3||lot.length>LOTMAX))bad(q('lot'),`LOT Tinta: 3–${LOTMAX} karakter (atau kosongkan).`,a);
+[['lotMerah','LOT Tinta Merah'],['lotHitam','LOT Tinta Hitam'],['lotHijau','LOT Tinta Hijau'],['lotCore','LOT Pipa Core']].forEach(([k,l])=>{const val=String(it[k]||'').trim();if(val&&(val.length<3||val.length>LOTMAX))bad(q(k),l+`: 3–${LOTMAX} karakter (atau kosongkan).`,a)});
 [['prep','Persiapan'],['setting','Setting'],['ops','Operasional']].forEach(([k,l])=>{const v=it[k];if(v===''||!Number.isInteger(Number(v))||num(v)<0||num(v)>1440)bad(q(k),l+': bulat 0–1440 menit.',a)});
 [['hasil','Hasil'],['reject','Reject']].forEach(([k,l])=>{const v=it[k];if(v===''||!Number.isInteger(Number(v))||num(v)<0)bad(q(k),l+': angka bulat ≥ 0.',a)});
-if(num(it.reject)>num(it.hasil))bad(q('reject'),'Reject melebihi hasil.',a);
-if(num(it.hasil)===0&&num(it.reject)===0&&(it.hasil!==''||it.reject!==''))bad(q('hasil'),'Hasil dan reject tidak boleh keduanya 0.',a)});
+if(num(it.reject)>num(it.hasil))bad(q('reject'),'Reject melebihi hasil.',a)});
 if(f.hasExtra==='ya')f.extra.forEach(x=>{const q=k=>$(`#extraList [data-extra="${x.key}"][data-f="${k}"]`);
 const v=x.waktu;if(v===''||!Number.isInteger(Number(v))||num(v)<1||num(v)>1440)bad(q('waktu'),'Waktu: bulat 1–1440 menit.',a);
 if(String(x.ket).trim().length<5)bad(q('ket'),'Keterangan min. 5 karakter.',a)});
@@ -2074,7 +2095,7 @@ sfx.save();S.form={...bForm(),...keep};S.hl=r.id;lastNet=null;buildSelects();syn
 setView('history');toast(msg,{icon:'checkCircle',duration:4200});setTimeout(()=>openDrawer(r.id),380)}
 async function saveProd(){if(!vProd())return;const f=S.form;
 const p={date:f.date,shift:f.shift,operatorId:f.operatorId,jenis:f.jenis,
-items:f.items.map(i=>({nama:i.nama.trim(),po:String(i.po).trim(),spk:String(i.spk).trim(),sn:iSN(i).slice(0,SNMAX),lot:iLOT(i).slice(0,LOTMAX),prep:num(i.prep),setting:num(i.setting),ops:num(i.ops),hasil:num(i.hasil),reject:num(i.reject),ket:iK(i).slice(0,KMAX)})),
+items:f.items.map(i=>({nama:i.nama.trim(),po:String(i.po).trim(),spk:String(i.spk).trim(),sn:iSN(i).slice(0,SNMAX),lot:String(i.lot||'').trim(),lotMerah:iLM(i).slice(0,LOTMAX),lotHitam:iLH(i).slice(0,LOTMAX),lotHijau:iLG(i).slice(0,LOTMAX),lotCore:iLC(i).slice(0,LOTMAX),prep:num(i.prep),setting:num(i.setting),ops:num(i.ops),hasil:num(i.hasil),reject:num(i.reject),ket:iK(i).slice(0,KMAX)})),
 agenda:[],hasAgenda:null,extra:f.hasExtra==='ya'?f.extra.map(x=>({waktu:num(x.waktu),ket:x.ket.trim()})):[]};
 const id=f.mode==='edit'?f.editId:null;lock(true);
 try{const r=await DB.saveReport(p,id);upsert(r);afterSave(r,`<b>${esc(r.code)}</b> ${id?'diperbarui':'tersimpan'} · bersih <b>${fNum(rN(r))}</b> ${JENIS[r.jenis].unit} · waktu <b>${fMin(rW(r))}</b>.`)}
@@ -2088,7 +2109,7 @@ catch(e){toast('Gagal menyimpan: '+esc(e.message),{type:'error',icon:'alert'});s
 function startEdit(id){const r=byId(id);if(!r)return;
 if(!canEdit(r)){toast(r.status==='verified'?'Laporan terverifikasi dan terkunci.':'Anda tidak berhak mengubah laporan ini.',{type:'warn',icon:'alert'});return}
 S.form={mode:'edit',editId:id,operatorId:r.operatorId,date:r.date,shift:shNorm(r.shift),jenis:r.jenis,multi:(r.items||[]).length>1,
-items:(r.items&&r.items.length)?r.items.map(i=>({...i,sn:i.sn||'',lot:i.lot||'',ket:i.ket||'',key:uid()})):[bItem()],
+items:(r.items&&r.items.length)?r.items.map(i=>({...i,sn:i.sn||'',lot:i.lot||'',lotMerah:i.lotMerah||'',lotHitam:i.lotHitam||'',lotHijau:i.lotHijau||'',lotCore:i.lotCore||'',ket:i.ket||'',key:uid()})):[bItem()],
 hasAgenda:r.hasAgenda===false?'tidak':'ya',agenda:(r.agenda&&r.agenda.length)?r.agenda.map(a=>({...a,key:uid()})):[bAg()],
 hasExtra:(r.extra&&r.extra.length)?'ya':'tidak',extra:(r.extra&&r.extra.length)?r.extra.map(e=>({...e,ket:e.ket||'',key:uid()})):[bEx()]};
 if(!isOp(S.form.operatorId))S.form.operatorId=S.me.role==='operator'?S.me.kode:'';
@@ -2096,18 +2117,18 @@ lastNet=null;buildSelects();syncIdent();closeDrawer();setView(r.jenis==='lainnya
 toast(`Mode edit aktif — <b>${esc(r.code)}</b>.`,{type:'info',icon:'pencil'});sfx.open()}
 function dup(id){const r=byId(id);if(!r)return;
 S.form={mode:'create',editId:null,operatorId:r.operatorId,date:today(),shift:shNorm(r.shift),jenis:r.jenis,multi:(r.items||[]).length>1,
-items:(r.items&&r.items.length)?r.items.map(i=>({...i,sn:i.sn||'',lot:i.lot||'',ket:i.ket||'',key:uid()})):[bItem()],
+items:(r.items&&r.items.length)?r.items.map(i=>({...i,sn:i.sn||'',lot:i.lot||'',lotMerah:i.lotMerah||'',lotHitam:i.lotHitam||'',lotHijau:i.lotHijau||'',lotCore:i.lotCore||'',ket:i.ket||'',key:uid()})):[bItem()],
 hasAgenda:r.hasAgenda===false?'tidak':'ya',agenda:(r.agenda&&r.agenda.length)?r.agenda.map(a=>({...a,key:uid()})):[bAg()],
 hasExtra:(r.extra&&r.extra.length)?'ya':'tidak',extra:(r.extra&&r.extra.length)?r.extra.map(e=>({...e,ket:e.ket||'',key:uid()})):[bEx()]};
 if(!isOp(S.form.operatorId))S.form.operatorId=S.me.role==='operator'?S.me.kode:'';
 lastNet=null;buildSelects();syncIdent();closeDrawer();setView(r.jenis==='lainnya'?'other':'detail');
-toast('Laporan disalin — periksa tanggal, SN jumbo roll, LOT tinta &amp; keterangan, lalu simpan.',{type:'info',icon:'copy',duration:4600});sfx.tick()}
-const dirty=()=>S.form.mode==='edit'||(S.me&&S.me.role!=='operator'&&!!S.form.operatorId)||S.form.items.some(i=>['nama','po','spk','sn','lot','prep','setting','ops','hasil','reject','ket'].some(k=>String(i[k]??'').trim()!==''))||S.form.agenda.some(a=>a.kategori||String(a.deskripsi).trim()||a.waktu!=='')||S.form.hasExtra==='ya';
+toast('Laporan disalin — periksa tanggal, SN jumbo roll, LOT tinta per warna, LOT pipa core &amp; keterangan, lalu simpan.',{type:'info',icon:'copy',duration:4600});sfx.tick()}
+const dirty=()=>S.form.mode==='edit'||(S.me&&S.me.role!=='operator'&&!!S.form.operatorId)||S.form.items.some(i=>['nama','po','spk','sn','lot','lotMerah','lotHitam','lotHijau','lotCore','prep','setting','ops','hasil','reject','ket'].some(k=>String(i[k]??'').trim()!==''))||S.form.agenda.some(a=>a.kategori||String(a.deskripsi).trim()||a.waktu!=='')||S.form.hasExtra==='ya';
 const CMP={dateDesc:(a,b)=>b.date.localeCompare(a.date)||b.createdAt-a.createdAt,dateAsc:(a,b)=>a.date.localeCompare(b.date)||a.createdAt-b.createdAt,
 netDesc:(a,b)=>rN(b)-rN(a),netAsc:(a,b)=>rN(a)-rN(b),hasilDesc:(a,b)=>rH(b)-rH(a),hasilAsc:(a,b)=>rH(a)-rH(b),
 rejectDesc:(a,b)=>rJ(b)-rJ(a),rejectAsc:(a,b)=>rJ(a)-rJ(b),waktuDesc:(a,b)=>rW(b)-rW(a),waktuAsc:(a,b)=>rW(a)-rW(b),
 operatorAsc:(a,b)=>opOf(a).nama.localeCompare(opOf(b).nama)};
-const hay=r=>{const o=opOf(r);return[r.code,r.date,shLabel(r.shift),o.nama,o.jabatan,(JENIS[r.jenis]||{}).label,(ST[r.status]||{}).label,r.catatan||'',...(r.items||[]).flatMap(i=>[i.nama,i.po,i.spk,i.sn||'',i.lot||'',i.ket||'']),...(r.agenda||[]).flatMap(a=>[a.kategori,a.deskripsi]),...(r.extra||[]).map(e=>e.ket)].join(' ').toLowerCase()};
+const hay=r=>{const o=opOf(r);return[r.code,r.date,shLabel(r.shift),o.nama,o.jabatan,(JENIS[r.jenis]||{}).label,(ST[r.status]||{}).label,r.catatan||'',...(r.items||[]).flatMap(i=>[i.nama,i.po,i.spk,iSN(i),iLOT(i),iLC(i),i.ket||'']),...(r.agenda||[]).flatMap(a=>[a.kategori,a.deskripsi]),...(r.extra||[]).map(e=>e.ket)].join(' ').toLowerCase()};
 function filtered(){let a=vis();const f=S.f,T=today();
 if(f.period!=='all'){const c=f.period==='today'?T:addDays(T,-(Number(f.period)-1));a=a.filter(r=>r.date>=c)}
 if(f.operator!=='all')a=a.filter(r=>r.operatorId===f.operator);
@@ -2137,12 +2158,12 @@ return `<tr data-row="${r.id}" class="${s?'selected':''}">
 <td class="ta-r"><span class="mono">${fMin(w)}</span>${x?`<br><small class="muted mono" style="font-size:9px">+${fMin(x)} lain</small>`:''}</td>
 <td class="ta-r"><div class="racts">${rowActs(r)}</div></td></tr>`}
 function cardHTML(r){const o=opOf(r),h=rH(r),j=rJ(r),n=h-j,w=rW(r),x=rXW(r)+rAW(r),rt=rate(h,j),s=S.sel.has(r.id),p=r.jenis!=='lainnya',k=rK1(r),kc=rKC(r);
-const sns=[...new Set((r.items||[]).map(i=>iSN(i)).filter(Boolean))],lots=[...new Set((r.items||[]).map(i=>iLOT(i)).filter(Boolean))];
+const tr=[...new Map((r.items||[]).flatMap(i=>TRC(i)).map(t=>[t[0]+'|'+t[2],t])).values()];
 return `<article class="rcard ${s?'selected':''}" data-row="${r.id}">
 <div class="rct"><input type="checkbox" data-chk="${r.id}" ${s?'checked':''} aria-label="Pilih ${esc(r.code)}"><div class="cd"><b>${fDate(r.date)}</b><span class="code">${esc(r.code)} · ${shShort(r.shift)}</span></div>${jB(r.jenis)}${sB(r.status)}</div>
 <div class="rcop"><span class="av sm" style="--av:${o.warna||'#999'}">${ini(o.nama)}</span><b>${esc(o.nama)}</b><small>${esc(o.mesin||'')}</small></div>
 <div class="rcsum">${sumText(r)}</div>
-${sns.length||lots.length?`<div class="rctrace">${sns.slice(0,2).map(v=>`<span class="s1">SN ${esc(clip(v,16))}</span>`).join('')}${lots.slice(0,2).map(v=>`<span class="s2">LOT ${esc(clip(v,16))}</span>`).join('')}</div>`:''}
+${tr.length?`<div class="rctrace">${tr.slice(0,5).map(([c,l,v])=>`<span class="${c}">${l} ${esc(clip(v,16))}</span>`).join('')}${tr.length>5?`<span class="s2">+${tr.length-5} lagi</span>`:''}</div>`:''}
 ${k?`<div class="rcket">${icon('note',13)}<span>${esc(clip(k,120))}${kc>1?` <b>+${kc-1} lagi</b>`:''}</span></div>`:''}
 ${p?`<div class="rcnet ${nCls(n)}"><div><label>TOTAL HASIL BERSIH</label><b>${fNum(n)} <span style="font-size:11px">${JENIS[r.jenis].unit}</span></b></div><span class="calc">${fNum(h)} − ${fNum(j)}</span></div>`:''}
 <div class="rcst"><div class="rcs"><label>HASIL</label><b>${p?fNum(h):'—'} <small>${p?JENIS[r.jenis].unit:''}</small></b></div><div class="rcs"><label>REJECT</label><b>${p?fNum(j):'—'} ${p?`<small>${rt.toFixed(1)}%</small>`:''}</b></div><div class="rcs time"><label>WAKTU TOTAL</label><b>${fMin(w)}</b></div><div class="rcs"><label>KEG. LAINNYA</label><b>${fMin(x)}</b></div></div>
@@ -2266,7 +2287,7 @@ $('#pRoll').innerHTML=r.length?r.map(row).join(''):'<p class="muted sm">Belum ad
 if(isK())$('#sysPanel').innerHTML=`<div class="sysg">
 <div class="sysc"><h4>${icon('building',15)} Koneksi Data</h4><p>${S.mode==='cloud'?'Terhubung ke Supabase — data bersama dengan RLS.':'Mode lokal — data hanya di perangkat ini.'}</p><button class="btn btn-ghost btn-sm" data-act="setup">${S.mode==='cloud'?'Ubah Koneksi':'Hubungkan Supabase'}</button></div>
 <div class="sysc"><h4>${icon('key',15)} Permintaan Sandi</h4><p>${prPending()} permintaan menunggu verifikasi kepala produksi.</p><button class="btn btn-ghost btn-sm" data-act="goto-sandi">Buka Antrean</button></div>
-<div class="sysc"><h4>${icon('sheet',15)} Export Excel</h4><p>Rekap .xlsx — SN jumbo roll &amp; LOT tinta disertakan, kolom sudah pas.</p><button class="btn btn-x btn-sm" data-act="xlsx">Export Excel Sekarang</button></div>
+<div class="sysc"><h4>${icon('sheet',15)} Export Excel</h4><p>Rekap .xlsx — SN jumbo roll, LOT tinta per warna &amp; LOT pipa core disertakan, kolom sudah pas.</p><button class="btn btn-x btn-sm" data-act="xlsx">Export Excel Sekarang</button></div>
 <div class="sysc"><h4>${icon('download',15)} Cadangan Data</h4><p>Unduh laporan, pengguna, dan produk sebagai JSON.</p><button class="btn btn-ghost btn-sm" data-act="backup">Unduh Cadangan JSON</button></div>
 <div class="sysc"><h4>${icon('activity',15)} Diagnosa Sistem Akun</h4><p>Periksa direktori login, permintaan sandi, Edge Function, dan RLS.</p><button class="btn btn-ghost btn-sm" data-act="goto-diag">Buka Diagnosa</button></div>
 ${S.mode==='cloud'?'':`<div class="sysc"><h4>${icon('alert',15)} Reset Data Demo</h4><p>Kembalikan data lokal ke contoh bawaan.</p><button class="btn btn-danger btn-sm" data-act="reset-demo">Reset Data Demo</button></div>`}</div>`}
@@ -2298,20 +2319,20 @@ else if(S.utab==='diagnosa'){if(!S.acct.length)runAcct();else acctUI()}
 else $('#auditB').innerHTML=S.audit.length?S.audit.slice(0,150).map(a=>{const w=prof(a.actor)||dirOf(a.actor)||{nama:a.actor},cl=a.aksi==='INSERT'?'ins':a.aksi==='DELETE'?'del':'upd';
 return `<div class="ar"><span class="ari ${cl}">${icon(a.aksi==='INSERT'?'plus':a.aksi==='DELETE'?'trash':'pencil',14)}</span><span class="art"><b>${esc(a.detail)}</b><small>oleh ${esc(w.nama)}</small></span><span class="artm">${fTS(a.at)}</span></div>`}).join(''):'<p class="muted sm">Belum ada aktivitas tercatat.</p>'}
 function renderPR(){
-  const l=PR.list.slice().sort((a,b)=>(a.status==='pending'?0:1)-(b.status==='pending'?0:1)||b.at-a.at);
-  $('#prList').innerHTML=l.map(prCard).join('');
-  $('#prEmpty').hidden=l.length>0;
-  if(!l.length)$('#prEmpty').innerHTML=`<svg class="flat" viewBox="0 0 320 44"><path d="M0 22 L120 22 L128 14 L136 30 L142 22 L320 22" fill="none" stroke="#BFE6D6" stroke-width="2"/></svg><h3>Belum ada permintaan reset sandi</h3><p>Bila operator atau admin menekan <b>Lupa sandi?</b> di layar login, permintaannya muncul di sini untuk Anda verifikasi.</p>`;
-  $('#prClear').hidden=!PR.list.some(r=>r.status!=='pending');
-  $('#prStore').innerHTML=S.mode==='cloud'
-    ?(PR.mode==='cloud'?`${icon('database',15)}<span><b>Tersinkron ke server.</b> Permintaan dari semua perangkat masuk ke antrean ini.</span>`:`${icon('alert',15)}<span><b>Belum tersinkron.</b> Tabel <code>password_requests</code> belum ada, jadi permintaan hanya tersimpan di perangkat ini. Jalankan SQL di tab <b>Diagnosa</b> agar antrean menyatu.</span>`)
-    :`${icon('info',15)}<span><b>Mode lokal.</b> Permintaan tersimpan di perangkat ini — cukup untuk satu komputer produksi bersama.</span>`;
+const l=PR.list.slice().sort((a,b)=>(a.status==='pending'?0:1)-(b.status==='pending'?0:1)||b.at-a.at);
+$('#prList').innerHTML=l.map(prCard).join('');
+$('#prEmpty').hidden=l.length>0;
+if(!l.length)$('#prEmpty').innerHTML=`<svg class="flat" viewBox="0 0 320 44"><path d="M0 22 L120 22 L128 14 L136 30 L142 22 L320 22" fill="none" stroke="#BFE6D6" stroke-width="2"/></svg><h3>Belum ada permintaan reset sandi</h3><p>Bila operator atau admin menekan <b>Lupa sandi?</b> di layar login, permintaannya muncul di sini untuk Anda verifikasi.</p>`;
+$('#prClear').hidden=!PR.list.some(r=>r.status!=='pending');
+$('#prStore').innerHTML=S.mode==='cloud'
+?(PR.mode==='cloud'?`${icon('database',15)}<span><b>Tersinkron ke server.</b> Permintaan dari semua perangkat masuk ke antrean ini.</span>`:`${icon('alert',15)}<span><b>Belum tersinkron.</b> Tabel <code>password_requests</code> belum ada, jadi permintaan hanya tersimpan di perangkat ini. Jalankan SQL di tab <b>Diagnosa</b> agar antrean menyatu.</span>`)
+:`${icon('info',15)}<span><b>Mode lokal.</b> Permintaan tersimpan di perangkat ini — cukup untuk satu komputer produksi bersama.</span>`;
 }
 function prCard(r){
-  const p=prof(r.kode)||dirOf(r.kode)||{nama:r.nama,kode:r.kode,warna:'#999',role:'operator',mesin:''};
-  const lbl={pending:'MENUNGGU',approved:'DISETUJUI',rejected:'DITOLAK'}[r.status]||r.status;
-  const cls={pending:'b-submit',approved:'b-verified',rejected:'b-revisi'}[r.status]||'b-arch';
-  return `<article class="prc ${r.status} ${r.status!=='pending'?'done':''}">
+const p=prof(r.kode)||dirOf(r.kode)||{nama:r.nama,kode:r.kode,warna:'#999',role:'operator',mesin:''};
+const lbl={pending:'MENUNGGU',approved:'DISETUJUI',rejected:'DITOLAK'}[r.status]||r.status;
+const cls={pending:'b-submit',approved:'b-verified',rejected:'b-revisi'}[r.status]||'b-arch';
+return `<article class="prc ${r.status} ${r.status!=='pending'?'done':''}">
 <div class="prh"><span class="av" style="--av:${p.warna||'#999'}">${ini(p.nama)}</span><div class="t"><b>${esc(p.nama)}</b><small>@${esc(r.kode)} · ${esc((ROLES[p.role]||{}).label||'Operator')}</small></div><span class="badge ${cls}">${lbl}</span></div>
 ${r.note?`<div class="prnote">${esc(r.note)}</div>`:'<div class="prnote muted">Tanpa catatan tambahan.</div>'}
 <div class="prmeta">DIKIRIM ${fTS(r.at)}${r.status!=='pending'?` · DIPROSES ${fTS(r.resolvedAt||r.at)} oleh ${esc(r.by||'kepala')}`:''}</div>
@@ -2378,56 +2399,56 @@ try{if(passId===S.me.id){if(S.mode==='cloud')await DB.myPass(np);else await DB.r
 $('#passW').classList.remove('show');toast('Kata sandi diperbarui.',{icon:'key'});sfx.ok();if(S.view==='users')renderUsers()}
 catch(e){pMsg(esc(e.message),'err',S.rawErr);S.rawErr='';sfx.err()}finally{b.disabled=false;b.textContent='Simpan Sandi'}}
 function openForgot(){
-  const a=selAcct();
-  if(S.lmode==='email'||!a){toast('Pilih akun pada tab <b>Kode Akun</b> dulu agar permintaan bisa dikirim.',{type:'info',icon:'info',duration:4600});return}
-  const ex=prFor(a.kode);
-  if(ex&&ex.status==='pending'){toast('Permintaan untuk akun ini sudah menunggu verifikasi kepala produksi.',{type:'info',icon:'clock',duration:4200});renderResetStat();return}
-  $('#fgAcct').innerHTML=`<span class="av" style="--av:${(prof(a.kode)||{}).warna||'#999'}">${ini(a.nama)}</span><div class="t"><b>${esc(a.nama)}</b><small>@${esc(a.kode)} · ${esc((ROLES[a.role]||{}).label||'Operator')}</small></div>${rB(a.role)}`;
-  $('#fgNote').value='';$('#fgMsg').hidden=true;$('#fgSend').disabled=false;
-  $('#forgotW').classList.add('show');setTimeout(()=>$('#fgNote').focus(),40);
+const a=selAcct();
+if(S.lmode==='email'||!a){toast('Pilih akun pada tab <b>Kode Akun</b> dulu agar permintaan bisa dikirim.',{type:'info',icon:'info',duration:4600});return}
+const ex=prFor(a.kode);
+if(ex&&ex.status==='pending'){toast('Permintaan untuk akun ini sudah menunggu verifikasi kepala produksi.',{type:'info',icon:'clock',duration:4200});renderResetStat();return}
+$('#fgAcct').innerHTML=`<span class="av" style="--av:${(prof(a.kode)||{}).warna||'#999'}">${ini(a.nama)}</span><div class="t"><b>${esc(a.nama)}</b><small>@${esc(a.kode)} · ${esc((ROLES[a.role]||{}).label||'Operator')}</small></div>${rB(a.role)}`;
+$('#fgNote').value='';$('#fgMsg').hidden=true;$('#fgSend').disabled=false;
+$('#forgotW').classList.add('show');setTimeout(()=>$('#fgNote').focus(),40);
 }
 function fgMsg(m,c){const e=$('#fgMsg');e.className='smsg'+(c?' '+c:'');e.innerHTML=m;e.hidden=false}
 async function sendForgot(){
-  const a=selAcct();if(!a)return fgMsg('Akun tidak dikenali.','err');
-  const b=$('#fgSend');b.disabled=true;b.textContent='Mengirim…';
-  try{
-    const r={id:uuid(),kode:a.kode,nama:a.nama,note:$('#fgNote').value.trim().slice(0,180),status:'pending',at:Date.now(),resolvedAt:null,by:''};
-    await prAdd(r);
-    $('#forgotW').classList.remove('show');renderResetStat();sfx.ok();
-    toast(`Permintaan reset sandi untuk <b>${esc(a.nama)}</b> terkirim. Kepala produksi akan memverifikasi.`,{icon:'key',duration:5200});
-  }catch(e){fgMsg('Gagal mengirim: '+esc(e.message||String(e)),'err');sfx.err()}
-  finally{b.disabled=false;b.innerHTML=icon('arrowRight',14)+' Kirim Permintaan'}
+const a=selAcct();if(!a)return fgMsg('Akun tidak dikenali.','err');
+const b=$('#fgSend');b.disabled=true;b.textContent='Mengirim…';
+try{
+const r={id:uuid(),kode:a.kode,nama:a.nama,note:$('#fgNote').value.trim().slice(0,180),status:'pending',at:Date.now(),resolvedAt:null,by:''};
+await prAdd(r);
+$('#forgotW').classList.remove('show');renderResetStat();sfx.ok();
+toast(`Permintaan reset sandi untuk <b>${esc(a.nama)}</b> terkirim. Kepala produksi akan memverifikasi.`,{icon:'key',duration:5200});
+}catch(e){fgMsg('Gagal mengirim: '+esc(e.message||String(e)),'err');sfx.err()}
+finally{b.disabled=false;b.innerHTML=icon('arrowRight',14)+' Kirim Permintaan'}
 }
 let apId=null,apKode=null;
 function openApprove(id){
-  const r=PR.list.find(x=>x.id===id);if(!r)return;
-  const p=prof(r.kode);
-  if(!p){toast('Profil akun ini tidak ditemukan di database. Tambahkan atau perbaiki dulu di Daftar Pengguna.',{type:'error',icon:'alert',duration:5200});return}
-  apId=id;apKode=r.kode;
-  $('#apT').textContent='Setujui & Reset Sandi';
-  $('#apS').innerHTML='Tetapkan sandi baru untuk akun ini, lalu serahkan langsung kepada yang bersangkutan.';
-  $('#apAcct').innerHTML=`<span class="av" style="--av:${p.warna}">${ini(p.nama)}</span><div class="t"><b>${esc(p.nama)}</b><small>@${esc(p.kode)} · ${esc((ROLES[p.role]||{}).label||'Operator')}</small></div>${rB(p.role)}`;
-  $('#apNew').value=genPass();$('#apOld').value='';
-  $('#apOldW').hidden=!(S.mode==='cloud'&&S.prov!=='fn');
-  $('#apMsg').hidden=true;$('#apReveal').hidden=true;$('#apSave').hidden=false;
-  $('#apCancel').textContent='Batal';
-  $('#apprW').classList.add('show');setTimeout(()=>$('#apNew').focus(),40);
+const r=PR.list.find(x=>x.id===id);if(!r)return;
+const p=prof(r.kode);
+if(!p){toast('Profil akun ini tidak ditemukan di database. Tambahkan atau perbaiki dulu di Daftar Pengguna.',{type:'error',icon:'alert',duration:5200});return}
+apId=id;apKode=r.kode;
+$('#apT').textContent='Setujui & Reset Sandi';
+$('#apS').innerHTML='Tetapkan sandi baru untuk akun ini, lalu serahkan langsung kepada yang bersangkutan.';
+$('#apAcct').innerHTML=`<span class="av" style="--av:${p.warna}">${ini(p.nama)}</span><div class="t"><b>${esc(p.nama)}</b><small>@${esc(p.kode)} · ${esc((ROLES[p.role]||{}).label||'Operator')}</small></div>${rB(p.role)}`;
+$('#apNew').value=genPass();$('#apOld').value='';
+$('#apOldW').hidden=!(S.mode==='cloud'&&S.prov!=='fn');
+$('#apMsg').hidden=true;$('#apReveal').hidden=true;$('#apSave').hidden=false;
+$('#apCancel').textContent='Batal';
+$('#apprW').classList.add('show');setTimeout(()=>$('#apNew').focus(),40);
 }
 function apMsg(m,c,raw){const e=$('#apMsg');e.className='smsg'+(c?' '+c:'');e.innerHTML=m+(raw?`<span class="raw">Supabase: ${esc(raw)}</span>`:'');e.hidden=false}
 async function saveApprove(){
-  const p=prof(apKode);if(!p)return apMsg('Profil tidak ditemukan.','err');
-  const np=$('#apNew').value.trim(),op=$('#apOld').value;
-  if(np.length<6)return apMsg('Kata sandi baru minimal 6 karakter.','err');
-  const b=$('#apSave');b.disabled=true;b.textContent='Menerapkan…';
-  try{
-    await DB.resetPass(p.id,np,op);
-    if(apId)await prUpd(apId,{status:'approved',resolvedAt:Date.now(),by:S.me.kode});
-    $('#apPass').textContent=np;$('#apReveal').hidden=false;$('#apSave').hidden=true;
-    $('#apCancel').textContent='Selesai';$('#apMsg').hidden=true;
-    sfx.ok();toast(`Sandi <b>${esc(p.nama)}</b> berhasil diperbarui. Serahkan sandi baru langsung ke yang bersangkutan.`,{icon:'key',duration:6000});
-    if(S.view==='users')renderUsers();roleUI();
-  }catch(e){apMsg(esc(e.message),'err',S.rawErr);S.rawErr='';sfx.err()}
-  finally{b.disabled=false;b.innerHTML=icon('check',14)+' Setujui & Terapkan'}
+const p=prof(apKode);if(!p)return apMsg('Profil tidak ditemukan.','err');
+const np=$('#apNew').value.trim(),op=$('#apOld').value;
+if(np.length<6)return apMsg('Kata sandi baru minimal 6 karakter.','err');
+const b=$('#apSave');b.disabled=true;b.textContent='Menerapkan…';
+try{
+await DB.resetPass(p.id,np,op);
+if(apId)await prUpd(apId,{status:'approved',resolvedAt:Date.now(),by:S.me.kode});
+$('#apPass').textContent=np;$('#apReveal').hidden=false;$('#apSave').hidden=true;
+$('#apCancel').textContent='Selesai';$('#apMsg').hidden=true;
+sfx.ok();toast(`Sandi <b>${esc(p.nama)}</b> berhasil diperbarui. Serahkan sandi baru langsung ke yang bersangkutan.`,{icon:'key',duration:6000});
+if(S.view==='users')renderUsers();roleUI();
+}catch(e){apMsg(esc(e.message),'err',S.rawErr);S.rawErr='';sfx.err()}
+finally{b.disabled=false;b.innerHTML=icon('check',14)+' Setujui & Terapkan'}
 }
 const mc=(l,v)=>`<div class="dmc"><label>${l}</label><div>${v}</div></div>`;
 function tlHTML(t,sh,c,seg,plum){const bar=seg?`<div class="bar">${seg}</div><div class="key"><span><i style="background:var(--amber)"></i>Persiapan</span><span><i style="background:var(--blue)"></i>Setting</span><span><i style="background:var(--green)"></i>Operasional</span></div>`:'';
@@ -2444,10 +2465,13 @@ else s+=`<div class="dnote2">${icon('info',15)}<span>Operator melaporkan <b>tida
 s+=`<div class="dtot"><div class="dtime" style="margin-bottom:0"><label>TOTAL WAKTU · DI LUAR JOBDESK</label><div class="dttime">${fMin(w)}</div><div class="dtsplit">${ags.length} agenda terjumlah</div></div>${ags.length?`<div class="dbrk">${ags.map((a,i)=>`<div class="br"><i style="background:var(--plum)"></i><span class="nm">A${pad(i+1)} · ${esc(a.kategori)}</span><b>${fMin(num(a.waktu))}</b></div>`).join('')}</div>`:''}</div>`}
 else{const items=r.items||[];
 s+=`<div class="dl">ITEM PRODUKSI (${items.length})<span class="lt">${icon('timer',10)} total ${fMin(pw)}</span>${rKC(r)?`<span class="lt plum">${icon('note',10)} ${rKC(r)} keterangan</span>`:''}</div>`;
-s+=items.map((it,i)=>{const ih=num(it.hasil),ir=num(it.reject),rt=rate(ih,ir),iw=iW(it),k=iK(it),sn=iSN(it),lot=iLOT(it);
+s+=items.map((it,i)=>{const ih=num(it.hasil),ir=num(it.reject),rt=rate(ih,ir),iw=iW(it),k=iK(it),sn=iSN(it),m=iLM(it),ihh=iLH(it),ig=iLG(it),core=iLC(it),leg=String(it.lot||'').trim();
 return `<div class="di"><div class="dih"><span class="iidx">ITEM ${pad(i+1)}</span><span class="cc ${rCls(rt)}">${rt.toFixed(1)}% reject</span></div><div class="dnm">${esc(it.nama)}</div>
 <div class="dg2 two"><div class="dc"><label>NO. PO</label><b>${esc(it.po)}</b></div><div class="dc"><label>NO. SPK</label><b>${esc(it.spk)}</b></div></div>
-<div class="dg2 two"><div class="dc sn"><label>NO. SN JUMBO ROLL</label><b>${sn?esc(sn):'—'}</b></div><div class="dc lot"><label>NO. LOT TINTA</label><b>${lot?esc(lot):'—'}</b></div></div>
+<div class="dc sn tr" style="margin-top:7px"><label>NO. SN JUMBO ROLL</label><b>${sn?esc(sn):'—'}</b></div>
+<div class="dg2 ink3"><div class="dc im tr"><label>LOT TINTA MERAH</label><b>${m?esc(m):'—'}</b></div><div class="dc ih tr"><label>LOT TINTA HITAM</label><b>${ihh?esc(ihh):'—'}</b></div><div class="dc ig tr"><label>LOT TINTA HIJAU</label><b>${ig?esc(ig):'—'}</b></div></div>
+${leg&&!m&&!ihh&&!ig?`<div class="dc lot tr" style="margin-top:7px"><label>NO. LOT TINTA</label><b>${esc(leg)}</b></div>`:''}
+<div class="dc core tr" style="margin-top:7px"><label>NO. LOT PIPA CORE</label><b>${core?esc(core):'—'}</b></div>
 <div class="dg2"><div class="dc"><label>PERSIAPAN</label><b>${num(it.prep)}′</b></div><div class="dc"><label>SETTING</label><b>${num(it.setting)}′</b></div><div class="dc"><label>OPERASIONAL</label><b>${num(it.ops)}′</b></div></div>
 <div class="dg2 two"><div class="dc hl"><label>HASIL</label><b>${fNum(ih)} <small>${j.unit}</small></b></div><div class="dc warn"><label>REJECT</label><b>${fNum(ir)} <small>${j.unit}</small></b></div></div>
 ${k?`<div class="dket">${icon('note',13)}<div><label>KETERANGAN</label><p>${esc(k)}</p></div></div>`:(ir>0?`<div class="dket" style="border-left-color:var(--amber)">${icon('alert',13)}<div><label>KETERANGAN</label><p style="color:#B26F05">Belum diisi — ada ${fNum(ir)} ${j.unit} reject tanpa penjelasan.</p></div></div>`:'')}
@@ -2485,12 +2509,12 @@ a.href=URL.createObjectURL(b);a.download=name;document.body.appendChild(a);a.cli
 catch(e){toast('Unduhan gagal di perangkat ini.',{type:'error',icon:'alert'})}}
 function csvExport(rows){if(!canE()){toast('Export tidak tersedia untuk operator.',{type:'warn',icon:'alert'});return}
 if(!rows.length){toast('Tidak ada data.',{type:'warn',icon:'alert'});return}
-const head=['Kode','Tanggal','Shift','Operator','Jabatan','Jenis','Status','Verifikator','Item / Kegiatan','PO','SPK','SN Jumbo Roll','LOT Tinta','Persiapan','Setting','Operasional','Total Waktu Kegiatan','Waktu Lain','Total Waktu Laporan','Hasil','Satuan','Reject','Bersih','Keterangan'];
+const head=['Kode','Tanggal','Shift','Operator','Jabatan','Jenis','Status','Verifikator','Item / Kegiatan','PO','SPK','SN Jumbo Roll','LOT Tinta Merah','LOT Tinta Hitam','LOT Tinta Hijau','LOT Pipa Core','Persiapan','Setting','Operasional','Total Waktu Kegiatan','Waktu Lain','Total Waktu Laporan','Hasil','Satuan','Reject','Bersih','Keterangan'];
 const L=[head];rows.forEach(r=>{const o=opOf(r),vb=r.verifiedBy?(prof(r.verifiedBy)||dirOf(r.verifiedBy)||{nama:r.verifiedBy}).nama:'';
 const b=[r.code,r.date,shLabel(r.shift),o.nama,o.jabatan||'',JENIS[r.jenis].label,(ST[r.status]||{}).label,vb],t=rW(r);
-if(r.jenis==='lainnya'){if(r.agenda&&r.agenda.length)r.agenda.forEach(a=>L.push([...b,a.kategori,'','','','','','','',num(a.waktu),'',t,'','','','',a.deskripsi]));else L.push([...b,'','','','','','','','','','',t,'','','','','Tanpa agenda'])}
-else{const u=JENIS[r.jenis].unit;r.items.forEach(i=>L.push([...b,i.nama,i.po,i.spk,iSN(i),iLOT(i),num(i.prep),num(i.setting),num(i.ops),iW(i),'',t,num(i.hasil),u,num(i.reject),iN(i),iK(i)]));
-(r.extra||[]).forEach(x=>L.push([...b,'Kegiatan Lainnya','','','','','','','','',num(x.waktu),t,'','','','',x.ket]))}});
+if(r.jenis==='lainnya'){if(r.agenda&&r.agenda.length)r.agenda.forEach(a=>L.push([...b,a.kategori,'','','','','','','','','',num(a.waktu),t,'','','','',a.deskripsi]));else L.push([...b,'Tanpa agenda di luar jobdesk','','','','','','','','','','',t,'','','','',''])}
+else{const u=JENIS[r.jenis].unit;r.items.forEach(i=>L.push([...b,i.nama,i.po,i.spk,iSN(i),iLM(i),iLH(i),iLG(i),iLC(i),num(i.prep),num(i.setting),num(i.ops),iW(i),'',t,num(i.hasil),u,num(i.reject),iN(i),iK(i)]));
+(r.extra||[]).forEach(x=>L.push([...b,'Kegiatan Lainnya','','','','','','','','','','',num(x.waktu),t,'','','','',x.ket]))}});
 dl('\uFEFF'+L.map(l=>l.map(c=>'"'+String(c??'').replace(/"/g,'""')+'"').join(';')).join('\r\n'),'text/csv;charset=utf-8','laporan-produksi_'+today()+'.csv');
 toast(`${rows.length} laporan diexport CSV.`,{icon:'download'});sfx.tick()}
 const CT=(()=>{const t=new Uint32Array(256);for(let n=0;n<256;n++){let c=n;for(let k=0;k<8;k++)c=c&1?0xEDB88320^(c>>>1):c>>>1;t[n]=c>>>0}return t})();
@@ -2541,25 +2565,26 @@ return zip([{name:'[Content_Types].xml',data:ct},{name:'_rels/.rels',data:rels},
 const vName=r=>r.verifiedBy?(prof(r.verifiedBy)||dirOf(r.verifiedBy)||{nama:r.verifiedBy}).nama:'';
 function xlsxExport(rows,label){if(!canE()){toast('Export Excel hanya untuk kepala produksi & admin.',{type:'warn',icon:'alert'});return}
 if(!rows||!rows.length){toast('Tidak ada data untuk diexport.',{type:'warn',icon:'alert'});return}
-try{const dc=[{l:'Kode Laporan',w:15,t:'code'},{l:'Tanggal',w:13,t:'center'},{l:'Shift',w:11,t:'center'},{l:'Operator',w:15},{l:'Jabatan / Mesin',w:24,wrap:1},{l:'Jenis Kegiatan',w:16,wrap:1},{l:'Status',w:17,wrap:1},{l:'Item / Kegiatan',w:44,wrap:1},{l:'No. PO',w:14,t:'code'},{l:'No. SPK',w:11,t:'code'},{l:'No. SN Jumbo Roll',w:19,t:'code'},{l:'No. LOT Tinta',w:18,t:'code'},{l:'Persiapan (mnt)',w:12,t:'int'},{l:'Setting (mnt)',w:11,t:'int'},{l:'Operasional (mnt)',w:13,t:'int'},{l:'Total Waktu (mnt)',w:13,t:'int'},{l:'Hasil',w:10,t:'int'},{l:'Satuan',w:9,t:'center'},{l:'Reject',w:9,t:'reject'},{l:'Hasil Bersih',w:12,t:'net'},{l:'Reject %',w:10,t:'pct'},{l:'Keterangan',w:50,wrap:1},{l:'Verifikator',w:15}];
+try{const dc=[{l:'Kode Laporan',w:15,t:'code'},{l:'Tanggal',w:13,t:'center'},{l:'Shift',w:11,t:'center'},{l:'Operator',w:15},{l:'Jabatan / Mesin',w:24,wrap:1},{l:'Jenis Kegiatan',w:16,wrap:1},{l:'Status',w:17,wrap:1},{l:'Item / Kegiatan',w:44,wrap:1},{l:'No. PO',w:14,t:'code'},{l:'No. SPK',w:11,t:'code'},{l:'No. SN Jumbo Roll',w:19,t:'code'},{l:'LOT Tinta Merah',w:16,t:'code'},{l:'LOT Tinta Hitam',w:16,t:'code'},{l:'LOT Tinta Hijau',w:16,t:'code'},{l:'No. LOT Pipa Core',w:17,t:'code'},{l:'Persiapan (mnt)',w:12,t:'int'},{l:'Setting (mnt)',w:11,t:'int'},{l:'Operasional (mnt)',w:13,t:'int'},{l:'Total Waktu (mnt)',w:13,t:'int'},{l:'Hasil',w:10,t:'int'},{l:'Satuan',w:9,t:'center'},{l:'Reject',w:9,t:'reject'},{l:'Hasil Bersih',w:12,t:'net'},{l:'Reject %',w:10,t:'pct'},{l:'Keterangan',w:50,wrap:1},{l:'Verifikator',w:15}];
 const det=[];rows.forEach(r=>{const o=opOf(r),b=[r.code,r.date,shShort(r.shift),o.nama,o.jabatan||o.mesin||'',JENIS[r.jenis].label,(ST[r.status]||{}).label],vb=vName(r);
-if(r.jenis==='lainnya'){const a=r.agenda||[];if(a.length)a.forEach(x=>det.push([...b,`${x.kategori} — ${x.deskripsi}`,'','','','',0,0,0,num(x.waktu),0,'',0,0,0,x.deskripsi,vb]));else det.push([...b,'Tanpa agenda di luar jobdesk','','','','',0,0,0,0,0,'',0,0,0,'',vb])}
-else{const u=JENIS[r.jenis].unit;(r.items||[]).forEach(i=>{const h=num(i.hasil),j=num(i.reject);det.push([...b,i.nama,i.po,i.spk,iSN(i),iLOT(i),num(i.prep),num(i.setting),num(i.ops),iW(i),h,u,j,h-j,Number(rate(h,j).toFixed(1)),iK(i),vb])});
-(r.extra||[]).forEach(x=>det.push([...b,'Kegiatan Lainnya: '+x.ket,'','','','',0,0,0,num(x.waktu),0,'',0,0,0,x.ket,vb]))}});
-const rc=[{l:'Kode Laporan',w:15,t:'code'},{l:'Tanggal',w:13,t:'center'},{l:'Shift',w:24,wrap:1},{l:'Operator',w:15},{l:'Jenis',w:16,wrap:1},{l:'Status',w:17,wrap:1},{l:'Jml Item / Agenda',w:12,t:'int'},{l:'Hasil',w:10,t:'int'},{l:'Satuan',w:9,t:'center'},{l:'Reject',w:9,t:'reject'},{l:'Hasil Bersih',w:12,t:'net'},{l:'Reject %',w:10,t:'pct'},{l:'Waktu Produksi (mnt)',w:14,t:'int'},{l:'Waktu Lain (mnt)',w:13,t:'int'},{l:'Total Waktu (mnt)',w:13,t:'int'},{l:'Verifikator',w:15},{l:'SN Jumbo Roll terpakai',w:32,wrap:1},{l:'LOT Tinta terpakai',w:28,wrap:1},{l:'Catatan / Keterangan',w:52,wrap:1}];
+if(r.jenis==='lainnya'){const a=r.agenda||[];if(a.length)a.forEach(x=>det.push([...b,`${x.kategori} — ${x.deskripsi}`,'','','','','','','',0,0,0,num(x.waktu),0,'',0,0,0,x.deskripsi,vb]));else det.push([...b,'Tanpa agenda di luar jobdesk','','','','','','','',0,0,0,0,0,'',0,0,0,'',vb])}
+else{const u=JENIS[r.jenis].unit;(r.items||[]).forEach(i=>{const h=num(i.hasil),j=num(i.reject);det.push([...b,i.nama,i.po,i.spk,iSN(i),iLM(i),iLH(i),iLG(i),iLC(i),num(i.prep),num(i.setting),num(i.ops),iW(i),h,u,j,h-j,Number(rate(h,j).toFixed(1)),iK(i),vb])});
+(r.extra||[]).forEach(x=>det.push([...b,'Kegiatan Lainnya: '+x.ket,'','','','','','','',0,0,0,num(x.waktu),0,'',0,0,0,x.ket,vb]))}});
+const rc=[{l:'Kode Laporan',w:15,t:'code'},{l:'Tanggal',w:13,t:'center'},{l:'Shift',w:24,wrap:1},{l:'Operator',w:15},{l:'Jenis',w:16,wrap:1},{l:'Status',w:17,wrap:1},{l:'Jml Item / Agenda',w:12,t:'int'},{l:'Hasil',w:10,t:'int'},{l:'Satuan',w:9,t:'center'},{l:'Reject',w:9,t:'reject'},{l:'Hasil Bersih',w:12,t:'net'},{l:'Reject %',w:10,t:'pct'},{l:'Waktu Produksi (mnt)',w:14,t:'int'},{l:'Waktu Lain (mnt)',w:13,t:'int'},{l:'Total Waktu (mnt)',w:13,t:'int'},{l:'Verifikator',w:15},{l:'SN Jumbo Roll terpakai',w:32,wrap:1},{l:'LOT Tinta terpakai',w:34,wrap:1},{l:'LOT Pipa Core terpakai',w:26,wrap:1},{l:'Catatan / Keterangan',w:52,wrap:1}];
 const rec=rows.map(r=>{const o=opOf(r),p=r.jenis!=='lainnya',h=rH(r),j=rJ(r),k=[rK1(r),r.catatan||''].filter(Boolean).join(' · ');
 const sns=[...new Set((r.items||[]).map(i=>iSN(i)).filter(Boolean))].join(', ');
-const lots=[...new Set((r.items||[]).map(i=>iLOT(i)).filter(Boolean))].join(', ');
-return[r.code,r.date,shLabel(r.shift),o.nama,JENIS[r.jenis].label,(ST[r.status]||{}).label,p?(r.items||[]).length:(r.agenda||[]).length,h,p?JENIS[r.jenis].unit:'—',j,h-j,Number(rate(h,j).toFixed(1)),rPW(r),rXW(r)+rAW(r),rW(r),vName(r),sns,lots,k]});
+const lots=[...new Set((r.items||[]).map(i=>iLOT(i)).filter(Boolean))].join('; ');
+const cores=[...new Set((r.items||[]).map(i=>iLC(i)).filter(Boolean))].join(', ');
+return[r.code,r.date,shLabel(r.shift),o.nama,JENIS[r.jenis].label,(ST[r.status]||{}).label,p?(r.items||[]).length:(r.agenda||[]).length,h,p?JENIS[r.jenis].unit:'—',j,h-j,Number(rate(h,j).toFixed(1)),rPW(r),rXW(r)+rAW(r),rW(r),vName(r),sns,lots,cores,k]});
 const th=rows.reduce((a,r)=>a+rH(r),0),tj=rows.reduce((a,r)=>a+rJ(r),0),tw=rows.reduce((a,r)=>a+rW(r),0);
-rec.push(['TOTAL','','','',rows.length+' laporan','',rows.reduce((a,r)=>a+(r.jenis==='lainnya'?(r.agenda||[]).length:(r.items||[]).length),0),th,'unit',tj,th-tj,Number(rate(th,tj).toFixed(1)),rows.reduce((a,r)=>a+rPW(r),0),rows.reduce((a,r)=>a+rXW(r)+rAW(r),0),tw,'','','','']);
+rec.push(['TOTAL','','','',rows.length+' laporan','',rows.reduce((a,r)=>a+(r.jenis==='lainnya'?(r.agenda||[]).length:(r.items||[]).length),0),th,'unit',tj,th-tj,Number(rate(th,tj).toFixed(1)),rows.reduce((a,r)=>a+rPW(r),0),rows.reduce((a,r)=>a+rXW(r)+rAW(r),0),tw,'','','','','']);
 const scope=label||(S.f.arch?'Arsip':({all:'Semua Periode',today:'Hari Ini','7':'7 Hari Terakhir','30':'30 Hari Terakhir'}[S.f.period]||'Semua Periode'));
 const sub=`${scope} · ${rows.length} laporan · ${det.length} baris rincian · diekspor ${new Date().toLocaleString('id-ID')} oleh ${S.me.nama} (${ROLES[S.me.role].label})`;
 const bytes=buildXlsx([{name:'Detail Produksi',title:'MHI PAPER — DETAIL LAPORAN HARIAN PRODUKSI',sub,cols:dc,rows:det},{name:'Rekap Laporan',title:'MHI PAPER — REKAP PER LAPORAN',sub:sub+' · bersih = hasil − reject',cols:rc,rows:rec}],'MHI PAPER — Laporan Harian Produksi');
 dl(bytes,'application/vnd.openxmlformats-officedocument.spreadsheetml.sheet',`MHI-PAPER_Laporan_${today()}.xlsx`);sfx.save();
-toast(`<b>${rows.length} laporan</b> diexport ke Excel — SN Jumbo Roll &amp; LOT Tinta disertakan.`,{icon:'sheet',duration:5200})}
+toast(`<b>${rows.length} laporan</b> diexport ke Excel — SN, LOT tinta per warna &amp; LOT pipa core disertakan.`,{icon:'sheet',duration:5200})}
 catch(e){toast('Export Excel gagal: '+esc(e.message||String(e)),{type:'error',icon:'alert',duration:6000});sfx.err()}}
-const pHead=(t,s)=>`<div class="p-head"><div class="p-brand"><div class="p-logo">M</div><div><b>MHI PAPER</b><small>Produksi Kertas ECG/EKG dan Plain</small></div></div><div class="p-doc">FORM LH-ECG-01<br>REV. 21</div></div><div class="p-title">${t}</div><p class="p-sub">${s}</p>`;
+const pHead=(t,s)=>`<div class="p-head"><div class="p-brand"><div class="p-logo">M</div><div><b>MHI PAPER</b><small>Produksi Kertas ECG/EKG dan Plain</small></div></div><div class="p-doc">FORM LH-ECG-01<br>REV. 22</div></div><div class="p-title">${t}</div><p class="p-sub">${s}</p>`;
 const pFoot=()=>`<div class="p-foot">Dicetak: ${new Date().toLocaleString('id-ID')} · ${S.me?esc(S.me.nama)+' ('+ROLES[S.me.role].label+')':''} · Bersih = hasil − reject · MHI PAPER.</div>`;
 const sign=(o,v)=>`<table class="p-sign"><tr><td>Dibuat oleh,<br><br><br><br><u>&nbsp;&nbsp;${esc(o||'________________')}&nbsp;&nbsp;</u><br><small>Operator</small></td><td>Diperiksa oleh,<br><br><br><br><u>&nbsp;&nbsp;${esc(v||'________________')}&nbsp;&nbsp;</u><br><small>Admin Produksi</small></td><td>Disetujui oleh,<br><br><br><br><u>&nbsp;&nbsp;________________&nbsp;&nbsp;</u><br><small>Kepala Produksi</small></td></tr></table>`;
 function printRecap(){if(!canE()){toast('Cetak rekap tidak tersedia untuk operator.',{type:'warn',icon:'alert'});return}
@@ -2570,13 +2595,14 @@ const trs=rows.map(r=>{const o=opOf(r),j=JENIS[r.jenis],h=rH(r),rej=rJ(r),n=h-re
 const p=r.jenis!=='lainnya';
 const xd=(r.extra&&r.extra.length)?'<br><b>Kegiatan Lainnya ('+fMin(rXW(r))+'):</b><br>'+r.extra.map(v=>`${esc(v.ket)} — <b>${fMin(num(v.waktu))}</b>`).join('<br>'):'';
 const d=p?r.items.map(i=>`${esc(i.nama)} — <b>${fNum(num(i.hasil))} ${j.unit}</b>${num(i.reject)?`, reject ${fNum(num(i.reject))}`:''}<br><small>Bersih ${fNum(iN(i))} ${j.unit} · Waktu ${fMin(iW(i))}</small>${iK(i)?`<br><small><i>Ket: ${esc(iK(i))}</i></small>`:''}`).join('<br>')+xd:(r.agenda.length?r.agenda.map(a=>`${esc(a.kategori)}: ${esc(a.deskripsi)}<br><small>Waktu ${fMin(num(a.waktu))}</small>`).join('<br>'):'Tanpa agenda');
-const rf=p?r.items.map(i=>`PO ${esc(i.po)} / SPK ${esc(i.spk)}${iSN(i)?`<br>SN ${esc(iSN(i))}`:''}${iLOT(i)?`<br>LOT ${esc(iLOT(i))}`:''}`).join('<br>'):'—';
+const rf=p?r.items.map(i=>{const m=iLM(i),h2=iLH(i),g=iLG(i),leg=String(i.lot||'').trim();
+return `PO ${esc(i.po)} / SPK ${esc(i.spk)}${iSN(i)?`<br>SN ${esc(iSN(i))}`:''}${m?`<br><span style="color:#B22F2C">M ${esc(m)}</span>`:''}${h2?`<br><span style="color:#232733">H ${esc(h2)}</span>`:''}${g?`<br><span style="color:#0B6E50">G ${esc(g)}</span>`:''}${!m&&!h2&&!g&&leg?`<br>LOT ${esc(leg)}`:''}${iLC(i)?`<br><span style="color:#0A7373">CORE ${esc(iLC(i))}</span>`:''}`}).join('<br>'):'—';
 const pt=p?[...r.items.map(i=>fMin(iW(i))),...(r.extra||[]).map(v=>fMin(num(v.waktu)))].join('<br>'):(r.agenda||[]).map(a=>fMin(num(a.waktu))).join('<br>')||'—';
 return `<tr><td>${fDate(r.date)}<br><small>${shShort(r.shift)} · ${esc(r.code)}</small></td><td>${esc(o.nama)}<br><small>${esc(o.jabatan||'')}</small></td><td>${j.short}<br><small>${(ST[r.status]||{}).short}</small></td><td>${d}</td><td><small>${rf}</small></td><td class="r tc"><small>${pt}</small></td><td class="r">${p?fNum(h)+' '+j.unit:'—'}</td><td class="r">${p?fNum(rej):'—'}</td><td class="r nc">${p?fNum(n):'—'}</td><td class="r">${fMin(w)}${x?`<br><small>incl. ${fMin(x)} lain</small>`:''}</td></tr>`}).join('');
 $('#printArea').innerHTML=pHead('Rekap Laporan Harian Produksi Kertas ECG/EKG',per+' · '+rows.length+' laporan')+
 `<div class="p-net"><label>TOTAL HASIL PRODUKSI BERSIH · HASIL − REJECT</label><b>${fNum(tn)} unit</b><span>${fNum(th)} hasil − ${fNum(tj)} reject = ${fNum(tn)} bersih</span></div>
 <div class="p-time"><label>TOTAL WAKTU · PRODUKSI + KEGIATAN LAINNYA</label><b>${fMin(tw)}</b><span>${rows.length} laporan terjumlah</span></div>
-<table class="p-tbl"><thead><tr><th>Tanggal</th><th>Operator</th><th>Jenis / Status</th><th>Item · Bersih · Waktu · Keterangan</th><th>PO / SPK / SN / LOT</th><th class="r">Waktu / Kegiatan</th><th class="r">Hasil</th><th class="r">Reject</th><th class="r">Bersih</th><th class="r">Waktu Total</th></tr></thead><tbody>${trs}</tbody><tfoot><tr><td colspan="6"><b>TOTAL</b></td><td class="r"><b>${fNum(th)}</b></td><td class="r"><b>${fNum(tj)}</b></td><td class="r nc"><b>${fNum(tn)}</b></td><td class="r"><b>${fMin(tw)}</b></td></tr></tfoot></table>`+sign('','')+pFoot();
+<table class="p-tbl"><thead><tr><th>Tanggal</th><th>Operator</th><th>Jenis / Status</th><th>Item · Bersih · Waktu · Keterangan</th><th>PO / SPK / SN / LOT / CORE</th><th class="r">Waktu / Kegiatan</th><th class="r">Hasil</th><th class="r">Reject</th><th class="r">Bersih</th><th class="r">Waktu Total</th></tr></thead><tbody>${trs}</tbody><tfoot><tr><td colspan="6"><b>TOTAL</b></td><td class="r"><b>${fNum(th)}</b></td><td class="r"><b>${fNum(tj)}</b></td><td class="r nc"><b>${fNum(tn)}</b></td><td class="r"><b>${fMin(tw)}</b></td></tr></tfoot></table>`+sign('','')+pFoot();
 doPrint()}
 function printOne(id){const r=byId(id);if(!r)return;const o=opOf(r),j=JENIS[r.jenis],p=r.jenis!=='lainnya';
 const h=rH(r),rej=rJ(r),n=h-rej,w=rW(r),pw=rPW(r),xw=rXW(r),vb=r.verifiedBy?(prof(r.verifiedBy)||dirOf(r.verifiedBy)||{nama:r.verifiedBy}):null;
@@ -2584,8 +2610,8 @@ let s=pHead('Laporan Harian Produksi — '+esc(r.code),fDate(r.date)+' · '+esc(
 s+=`<table class="p-id"><tr><td>Nama Operator</td><td>${esc(o.nama)}</td></tr><tr><td>Jabatan / Posisi</td><td>${esc(o.jabatan||'—')}</td></tr><tr><td>Tanggal / Shift</td><td>${fDate(r.date)} — ${esc(shLabel(r.shift))}</td></tr><tr><td>Jenis Kegiatan</td><td>${j.label}</td></tr><tr><td>Status</td><td>${ST[r.status].label}${vb?' oleh '+esc(vb.nama)+' · '+fTS(r.verifiedAt):''}${r.catatan?' — '+esc(r.catatan):''}</td></tr></table>`;
 if(p){s+=`<div class="p-net"><label>TOTAL HASIL BERSIH · HASIL − REJECT</label><b>${fNum(n)} ${j.unit}</b><span>${fNum(h)} hasil − ${fNum(rej)} reject · rate ${rate(h,rej).toFixed(1)}%</span></div>
 <div class="p-time"><label>TOTAL WAKTU · PRODUKSI + KEGIATAN LAINNYA</label><b>${fMin(w)}</b><span>produksi ${fMin(pw)}${xw?` + lainnya ${fMin(xw)}`:''}</span></div>`;
-s+=r.items.map((i,x)=>{const ih=num(i.hasil),ir=num(i.reject),iw=iW(i),k=iK(i);
-return `<div class="p-sec">Item ${x+1} — ${esc(i.nama)}</div><table class="p-tbl"><thead><tr><th>PO</th><th>SPK</th><th>SN Jumbo Roll</th><th>LOT Tinta</th><th>Persiapan</th><th>Setting</th><th>Operasional</th><th class="r">Total Waktu</th><th class="r">Hasil</th><th class="r">Reject</th><th class="r">Bersih</th><th class="r">Rate</th></tr></thead><tbody><tr><td>${esc(i.po)}</td><td>${esc(i.spk)}</td><td class="sc">${iSN(i)?esc(iSN(i)):'—'}</td><td class="lc">${iLOT(i)?esc(iLOT(i)):'—'}</td><td>${num(i.prep)} mnt</td><td>${num(i.setting)} mnt</td><td>${num(i.ops)} mnt</td><td class="r tc">${iw} mnt<br><small>${fMin(iw)} · ${pct(iw,w)}%</small></td><td class="r"><b>${fNum(ih)}</b></td><td class="r">${fNum(ir)}</td><td class="r nc">${fNum(ih-ir)}</td><td class="r">${rate(ih,ir).toFixed(1)}%</td></tr></tbody></table><div class="p-line">Bersih ${fNum(ih-ir)} ${j.unit} · Waktu ${fMin(iw)} (${num(i.prep)} + ${num(i.setting)} + ${num(i.ops)} mnt)</div>${k?`<div class="p-ket"><b>Keterangan:</b> ${esc(k)}</div>`:''}`}).join('');
+s+=r.items.map((i,x)=>{const ih=num(i.hasil),ir=num(i.reject),iw=iW(i),k=iK(i),m=iLM(i),hh=iLH(i),g=iLG(i),leg=String(i.lot||'').trim();
+return `<div class="p-sec">Item ${x+1} — ${esc(i.nama)}</div><table class="p-tbl"><thead><tr><th>PO</th><th>SPK</th><th>SN Jumbo Roll</th><th>LOT Merah</th><th>LOT Hitam</th><th>LOT Hijau</th><th>LOT Pipa Core</th><th>Persiapan</th><th>Setting</th><th>Operasional</th><th class="r">Total Waktu</th><th class="r">Hasil</th><th class="r">Reject</th><th class="r">Bersih</th><th class="r">Rate</th></tr></thead><tbody><tr><td>${esc(i.po)}</td><td>${esc(i.spk)}</td><td class="sc">${iSN(i)?esc(iSN(i)):'—'}</td><td class="mc">${m?esc(m):'—'}</td><td class="hc">${hh?esc(hh):'—'}</td><td class="gc">${g?esc(g):'—'}</td><td class="pc">${iLC(i)?esc(iLC(i)):'—'}</td><td>${num(i.prep)} mnt</td><td>${num(i.setting)} mnt</td><td>${num(i.ops)} mnt</td><td class="r tc">${iw} mnt<br><small>${fMin(iw)} · ${pct(iw,w)}%</small></td><td class="r"><b>${fNum(ih)}</b></td><td class="r">${fNum(ir)}</td><td class="r nc">${fNum(ih-ir)}</td><td class="r">${rate(ih,ir).toFixed(1)}%</td></tr></tbody></table><div class="p-line">Bersih ${fNum(ih-ir)} ${j.unit} · Waktu ${fMin(iw)} (${num(i.prep)} + ${num(i.setting)} + ${num(i.ops)} mnt)</div>${leg&&!m&&!hh&&!g?`<div class="p-line">LOT Tinta: ${esc(leg)}</div>`:''}${k?`<div class="p-ket"><b>Keterangan:</b> ${esc(k)}</div>`:''}`}).join('');
 s+=`<table class="p-tbl"><tbody><tr><td><b>TOTAL — ${r.items.length} item</b></td><td class="r"><b>Hasil ${fNum(h)} ${j.unit}</b></td><td class="r"><b>Reject ${fNum(rej)}</b></td><td class="r nc"><b>Bersih ${fNum(n)} ${j.unit}</b></td><td class="r tc"><b>Waktu ${fMin(w)}</b></td></tr></tbody></table>`;
 if(r.extra&&r.extra.length)s+=`<div class="p-sec">Kegiatan Lainnya — ${r.extra.length} · ${fMin(xw)}</div><table class="p-tbl"><thead><tr><th>No</th><th>Kegiatan</th><th class="r">Waktu</th><th class="r">Porsi</th></tr></thead><tbody>${r.extra.map((v,i)=>`<tr><td>${i+1}</td><td>${esc(v.ket)}</td><td class="r tc">${num(v.waktu)} mnt</td><td class="r">${pct(num(v.waktu),w)}%</td></tr>`).join('')}</tbody></table>`}
 else{s+=`<div class="p-time"><label>TOTAL WAKTU · DI LUAR JOBDESK</label><b>${fMin(w)}</b><span>${(r.agenda||[]).length} agenda</span></div>`;
@@ -2594,7 +2620,7 @@ else s+='<p class="p-sub"><b>Tidak ada agenda di luar jobdesk.</b></p>'}
 s+=sign(o.nama,vb?vb.nama:'')+pFoot();$('#printArea').innerHTML=s;doPrint()}
 function doPrint(){toast('Menyiapkan halaman cetak…',{type:'info',icon:'printer',duration:2200});setTimeout(()=>{try{window.print()}catch(e){}},80)}
 function backup(){if(!isK()){toast('Hanya kepala produksi.',{type:'warn',icon:'alert'});return}
-dl(JSON.stringify({app:'MHI PAPER',version:21,mode:S.mode,exportedAt:new Date().toISOString(),passwordRequests:PR.list,...DB.all()},null,2),'application/json','mhi-paper-backup_'+today()+'.json');
+dl(JSON.stringify({app:'MHI PAPER',version:22,mode:S.mode,exportedAt:new Date().toISOString(),passwordRequests:PR.list,...DB.all()},null,2),'application/json','mhi-paper-backup_'+today()+'.json');
 toast('Cadangan JSON diunduh.',{icon:'download'});sfx.tick()}
 function openSetup(){if(!connOK()){toast('Pengaturan koneksi hanya untuk kepala produksi.',{type:'warn',icon:'alert',duration:4200});return}
 const c=rdCfg();$('#suUrl').value=c?c.url:'';$('#suKey').value=c?c.key:'';$('#suDom').value=c?c.domain:'mhi.local';
